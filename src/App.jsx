@@ -440,33 +440,29 @@ export default function App() {
 
             {error && <div style={{ background: "#1a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
 
-            {/* Main CTA */}
-            <div style={{ marginBottom: 28 }}>
-              <button
-                style={{ width: "100%", padding: "15px 32px", background: generating ? BLUE_MID + "66" : `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 10, fontSize: 16, fontWeight: 700, cursor: generating ? "not-allowed" : "pointer", fontFamily: "Georgia, serif", transition: "all 0.2s", animation: generating ? "pulse 2s infinite" : "none" }}
-                onClick={generateAll}
-                disabled={!!generating}
-              >
-                {generating ? `⏳ Mining ${REPORTS.find(r => r.id === generating)?.name || ""}...` : "🪙 Mine All 5 Free Reports"}
-              </button>
-            </div>
+            <div style={{ height: 1, background: `linear-gradient(90deg, transparent, ${BORDER}, transparent)`, margin: "0 0 24px 0" }} />
 
-            <div style={{ height: 1, background: `linear-gradient(90deg, transparent, ${BORDER}, transparent)`, margin: "28px 0" }} />
-
-            {/* Report Cards */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 14 }}>
               {REPORTS.map((r) => (
-                <div
-                  key={r.id}
-                  style={{ background: DARK_CARD, border: `1px solid ${r.free ? BORDER : BORDER}`, borderRadius: 12, padding: 20, cursor: r.free ? "pointer" : "default", opacity: r.free ? 1 : 0.5, transition: "all 0.2s", position: "relative", borderTop: `3px solid ${r.free ? BLUE_MID : BORDER}` }}
-                  onClick={() => r.free && generateReport(r.id)}
-                >
+                <div key={r.id} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: 20, opacity: r.free ? 1 : 0.5, position: "relative", borderTop: `3px solid ${r.free ? BLUE_MID : BORDER}`, display: "flex", flexDirection: "column" }}>
                   {!r.free && <span style={{ position: "absolute", top: 14, right: 14, fontSize: 15, color: MUTED }}>🔒</span>}
                   <div style={{ display: "inline-block", padding: "2px 8px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: r.free ? BLUE_MID + "33" : "#2a1a00", color: r.free ? BLUE_BRIGHT : "#E8A000", marginBottom: 8 }}>{r.tag}</div>
                   <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, marginBottom: 3, fontFamily: "Georgia, serif" }}>{r.name}</div>
                   <div style={{ fontSize: 11, color: MUTED, marginBottom: 7, textTransform: "uppercase", letterSpacing: "0.05em" }}>{r.subtitle}</div>
-                  <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.5 }}>{r.description}</div>
-                  {reports[r.id] && <div style={{ marginTop: 10, fontSize: 11, color: BLUE_BRIGHT, fontWeight: 600 }}>✓ Ready to view</div>}
+                  <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.5, marginBottom: 14, flex: 1 }}>{r.description}</div>
+                  {r.free ? (
+                    reports[r.id] ? (
+                      <button style={{ padding: "8px 16px", background: BLUE_MID + "33", border: `1px solid ${BLUE_BRIGHT}`, color: BLUE_BRIGHT, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer", width: "100%" }}
+                        onClick={() => { setActiveReport(r.id); setStep("reports"); }}>✓ View Report</button>
+                    ) : (
+                      <button style={{ padding: "8px 16px", background: generating === r.id ? BLUE_MID + "44" : `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: generating ? "not-allowed" : "pointer", width: "100%" }}
+                        onClick={() => generateReport(r.id)} disabled={!!generating}>
+                        {generating === r.id ? "⏳ Mining..." : "🪙 Generate Report"}
+                      </button>
+                    )
+                  ) : (
+                    <button style={{ padding: "8px 16px", background: "transparent", border: `1px solid ${BORDER}`, color: MUTED, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "default", width: "100%" }}>🔒 Upgrade to unlock</button>
+                  )}
                 </div>
               ))}
             </div>
