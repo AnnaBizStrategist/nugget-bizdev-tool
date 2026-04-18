@@ -1,13 +1,15 @@
 import { useState, useCallback, useRef } from "react";
 import Papa from "papaparse";
 
-const GOLD = "#C8960C";
-const GOLD_LIGHT = "#E8B84B";
-const DARK = "#13100A";
-const DARK_CARD = "#1E1810";
-const CREAM = "#F2E8D0";
-const MUTED = "#9A8A6A";
-const BORDER = "#3A2E1A";
+const BLUE_DEEP = "#0d2d6b";
+const BLUE_MID = "#1149ac";
+const BLUE_BRIGHT = "#41a1e8";
+const BLUE_LIGHT = "#7ec8f5";
+const DARK = "#061022";
+const DARK_CARD = "#0a1a3a";
+const WHITE = "#ffffff";
+const MUTED = "#7aa8cc";
+const BORDER = "#1a3a6a";
 
 const REPORTS = [
   {
@@ -18,7 +20,6 @@ const REPORTS = [
     description: "Survey your land — who's actually in your network, how many match your ICP, and your top 10 untapped connections.",
     files: ["Connections"],
     free: true,
-    icon: "🗺️",
   },
   {
     id: "warm",
@@ -28,7 +29,6 @@ const REPORTS = [
     description: "Hot, warm, cool, cold — every connection scored by actual interaction data. Find who to call first.",
     files: ["Connections", "Messages"],
     free: true,
-    icon: "🌡️",
   },
   {
     id: "hidden",
@@ -38,7 +38,6 @@ const REPORTS = [
     description: "The people already in your corner who you're not leveraging. Ranked by likely value and best ask type.",
     files: ["Recommendations", "Messages"],
     free: true,
-    icon: "💎",
   },
   {
     id: "inbound",
@@ -48,7 +47,6 @@ const REPORTS = [
     description: "If a perfect prospect landed on your profile right now — would they stay or bounce?",
     files: ["Profile", "Skills", "Endorsements"],
     free: true,
-    icon: "🚪",
   },
   {
     id: "outbound",
@@ -58,7 +56,6 @@ const REPORTS = [
     description: "What your LinkedIn activity broadcasts to potential clients when you're not paying attention.",
     files: ["Comments", "Shares"],
     free: true,
-    icon: "📡",
   },
   {
     id: "gold",
@@ -68,7 +65,6 @@ const REPORTS = [
     description: "Your complete pipeline — prioritized targets, warm paths, missed conversations, outreach sequences. The treasure map.",
     files: ["Connections", "Messages"],
     free: false,
-    icon: "🏆",
   },
 ];
 
@@ -178,7 +174,6 @@ Are they showing up as a credible expert or as background noise? Who is noticing
 Focus on what needs to change. Speak directly to the founder. No praise for what's working fine.`,
 };
 
-// Parse LinkedIn CSV files — handles Connections.csv which has 3 skip rows
 function parseLinkedInCSV(file, onComplete) {
   const isConnections = file.name.toLowerCase().includes("connection");
   if (isConnections) {
@@ -186,29 +181,12 @@ function parseLinkedInCSV(file, onComplete) {
     reader.onload = (e) => {
       const text = e.target.result;
       const lines = text.split("\n");
-      // LinkedIn Connections.csv has 3 header lines before the real CSV
       const csvText = lines.slice(3).join("\n");
-      Papa.parse(csvText, {
-        header: true,
-        skipEmptyLines: true,
-        complete: onComplete,
-      });
+      Papa.parse(csvText, { header: true, skipEmptyLines: true, complete: onComplete });
     };
     reader.readAsText(file);
   } else {
-    Papa.parse(file, {
-      header: true,
-      skipEmptyLines: true,
-      error: () => {
-        Papa.parse(file, {
-          header: true,
-          skipEmptyLines: true,
-          error: console.error,
-          complete: onComplete,
-        });
-      },
-      complete: onComplete,
-    });
+    Papa.parse(file, { header: true, skipEmptyLines: true, complete: onComplete });
   }
 }
 
@@ -241,12 +219,7 @@ async function callClaude(systemPrompt, data) {
       model: "claude-sonnet-4-20250514",
       max_tokens: 1500,
       system: systemPrompt,
-      messages: [
-        {
-          role: "user",
-          content: `Here is the LinkedIn export data to analyze:\n\n${JSON.stringify(data, null, 2)}\n\nGenerate the report now. Be specific, use real names from the data, and make every insight immediately actionable.`,
-        },
-      ],
+      messages: [{ role: "user", content: `Here is the LinkedIn export data to analyze:\n\n${JSON.stringify(data, null, 2)}\n\nGenerate the report now. Be specific, use real names from the data, and make every insight immediately actionable.` }],
     }),
   });
   if (!response.ok) {
@@ -261,8 +234,7 @@ function prepareData(parsedData, fileKeys) {
   const out = {};
   fileKeys.forEach((k) => {
     if (parsedData[k]) {
-      // Send up to 200 rows for connections/messages, 100 for others
-      const limit = ["Connections", "Messages"].includes(k) ? 200 : 100;
+      const limit = k === "Messages" ? 100 : k === "Connections" ? 150 : 75;
       out[k] = parsedData[k].slice(0, limit);
     }
   });
@@ -278,38 +250,27 @@ function ReportContent({ text }) {
     <div style={{ lineHeight: 1.75 }}>
       {lines.map((line, i) => {
         if (line.startsWith("## ")) {
-          return (
-            <h3 key={i} style={{ color: GOLD_LIGHT, fontSize: 14, fontWeight: 600, marginTop: 28, marginBottom: 10, letterSpacing: "0.04em", textTransform: "uppercase" }}>
-              {line.replace("## ", "")}
-            </h3>
-          );
+          return <h3 key={i} style={{ color: BLUE_BRIGHT, fontSize: 13, fontWeight: 700, marginTop: 28, marginBottom: 10, letterSpacing: "0.08em", textTransform: "uppercase", borderBottom: `1px solid ${BORDER}`, paddingBottom: 6 }}>{line.replace("## ", "")}</h3>;
         }
-        if (line.startsWith("**") && line.endsWith("**") && line.length > 4) {
-          return (
-            <p key={i} style={{ color: CREAM, fontWeight: 600, fontSize: 14, margin: "12px 0 4px" }}>
-              {line.replace(/\*\*/g, "")}
-            </p>
-          );
-        }
-        const boldParsed = line.replace(/\*\*(.*?)\*\*/g, '<strong style="color:#E8B84B">$1</strong>');
+        const boldParsed = line.replace(/\*\*(.*?)\*\*/g, `<strong style="color:${BLUE_LIGHT}">${"$1"}</strong>`);
         if (line.match(/^\d+\./)) {
           return (
             <div key={i} style={{ display: "flex", gap: 12, margin: "8px 0", paddingLeft: 8 }}>
-              <span style={{ color: GOLD, fontWeight: 700, minWidth: 20, fontSize: 13 }}>{line.match(/^\d+/)[0]}.</span>
-              <p style={{ color: CREAM, margin: 0, fontSize: 14, flex: 1 }} dangerouslySetInnerHTML={{ __html: boldParsed.replace(/^\d+\./, "") }} />
+              <span style={{ color: BLUE_BRIGHT, fontWeight: 700, minWidth: 20, fontSize: 13 }}>{line.match(/^\d+/)[0]}.</span>
+              <p style={{ color: WHITE, margin: 0, fontSize: 14, flex: 1 }} dangerouslySetInnerHTML={{ __html: boldParsed.replace(/^\d+\./, "") }} />
             </div>
           );
         }
         if (line.startsWith("- ") || line.startsWith("• ")) {
           return (
             <div key={i} style={{ display: "flex", gap: 10, margin: "6px 0", paddingLeft: 8 }}>
-              <span style={{ color: GOLD, marginTop: 6, width: 6, height: 6, borderRadius: "50%", background: GOLD, flexShrink: 0, display: "block" }} />
-              <p style={{ color: CREAM, margin: 0, fontSize: 14 }} dangerouslySetInnerHTML={{ __html: boldParsed.replace(/^[-•]\s/, "") }} />
+              <span style={{ color: BLUE_BRIGHT, marginTop: 8, width: 5, height: 5, borderRadius: "50%", background: BLUE_BRIGHT, flexShrink: 0, display: "block" }} />
+              <p style={{ color: WHITE, margin: 0, fontSize: 14 }} dangerouslySetInnerHTML={{ __html: boldParsed.replace(/^[-•]\s/, "") }} />
             </div>
           );
         }
         if (line.trim() === "") return <div key={i} style={{ height: 6 }} />;
-        return <p key={i} style={{ color: CREAM, margin: "5px 0", fontSize: 14 }} dangerouslySetInnerHTML={{ __html: boldParsed }} />;
+        return <p key={i} style={{ color: WHITE, margin: "5px 0", fontSize: 14 }} dangerouslySetInnerHTML={{ __html: boldParsed }} />;
       })}
     </div>
   );
@@ -323,6 +284,7 @@ export default function App() {
   const [generating, setGenerating] = useState(null);
   const [activeReport, setActiveReport] = useState("field");
   const [dragOver, setDragOver] = useState(false);
+  const [countdown, setCountdown] = useState(0);
   const [error, setError] = useState(null);
   const fileInputRef = useRef(null);
 
@@ -364,7 +326,9 @@ export default function App() {
   const generateAll = async () => {
     setStep("reports");
     setActiveReport("field");
-    for (const report of REPORTS.filter((r) => r.free)) {
+    const freeReports = REPORTS.filter((r) => r.free);
+    for (let i = 0; i < freeReports.length; i++) {
+      const report = freeReports[i];
       setGenerating(report.id);
       setActiveReport(report.id);
       setError(null);
@@ -376,6 +340,13 @@ export default function App() {
         setReports((prev) => ({ ...prev, [report.id]: `⚠️ Error: ${err.message}` }));
       }
       setGenerating(null);
+      if (i < freeReports.length - 1) {
+        for (let s = 15; s > 0; s--) {
+          setCountdown(s);
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+        }
+        setCountdown(0);
+      }
     }
   };
 
@@ -385,97 +356,117 @@ export default function App() {
   const reportsReady = Object.keys(reports).length;
   const activeReportMeta = REPORTS.find((r) => r.id === activeReport);
 
-  const s = {
-    app: { minHeight: "100vh", background: DARK, fontFamily: "'DM Sans', -apple-system, sans-serif", color: CREAM },
-    header: { borderBottom: `1px solid ${BORDER}`, padding: "18px 40px", display: "flex", alignItems: "center", gap: 16, background: DARK_CARD },
-    logo: { fontSize: 26, fontFamily: "Georgia, serif", fontWeight: 700, color: GOLD_LIGHT, letterSpacing: "-0.5px" },
-    tagline: { fontSize: 11, color: MUTED, letterSpacing: "0.1em", textTransform: "uppercase", marginTop: 3 },
-    navBtn: (a) => ({ padding: "6px 16px", borderRadius: 6, border: `1px solid ${a ? GOLD : BORDER}`, background: a ? GOLD + "22" : "transparent", color: a ? GOLD_LIGHT : MUTED, cursor: "pointer", fontSize: 13, fontWeight: 500 }),
-    main: { maxWidth: 980, margin: "0 auto", padding: "44px 24px" },
-    heroTitle: { fontSize: 40, fontFamily: "Georgia, serif", fontWeight: 700, color: CREAM, marginBottom: 12, lineHeight: 1.2, textAlign: "center" },
-    heroSub: { fontSize: 15, color: MUTED, maxWidth: 460, margin: "0 auto 36px", lineHeight: 1.65, textAlign: "center" },
-    uploadZone: (over) => ({ border: `2px dashed ${over ? GOLD : BORDER}`, borderRadius: 16, padding: "44px 32px", textAlign: "center", cursor: "pointer", background: over ? GOLD + "08" : DARK_CARD, transition: "all 0.2s", marginBottom: 28 }),
-    fileTag: { padding: "4px 12px", background: GOLD + "22", border: `1px solid ${GOLD}44`, borderRadius: 20, fontSize: 12, color: GOLD_LIGHT, display: "inline-block" },
-    statCard: { flex: 1, background: GOLD + "0f", border: `1px solid ${GOLD}33`, borderRadius: 10, padding: "14px 20px", textAlign: "center" },
-    statNum: { fontSize: 26, fontWeight: 700, color: GOLD_LIGHT, fontFamily: "Georgia, serif" },
-    statLabel: { fontSize: 11, color: MUTED, textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 4 },
-    primaryBtn: (dis) => ({ width: "100%", padding: "14px 32px", background: dis ? GOLD + "44" : GOLD, color: dis ? GOLD_LIGHT : DARK, border: "none", borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: dis ? "not-allowed" : "pointer", fontFamily: "Georgia, serif", transition: "all 0.2s" }),
-    reportCard: (active) => ({ background: active ? GOLD + "12" : DARK_CARD, border: `1px solid ${active ? GOLD : BORDER}`, borderRadius: 12, padding: 18, cursor: "pointer", transition: "all 0.2s", position: "relative" }),
-    sidebar: { background: DARK_CARD, borderRadius: 12, border: `1px solid ${BORDER}`, overflow: "hidden", position: "sticky", top: 24 },
-    sidebarItem: (a) => ({ padding: "13px 16px", borderBottom: `1px solid ${BORDER}`, cursor: "pointer", background: a ? GOLD + "12" : "transparent", borderLeft: `3px solid ${a ? GOLD : "transparent"}`, transition: "all 0.15s" }),
-    panel: { background: DARK_CARD, borderRadius: 12, border: `1px solid ${BORDER}`, padding: 32, minHeight: 420 },
-    spinner: { width: 36, height: 36, border: `3px solid ${BORDER}`, borderTop: `3px solid ${GOLD}`, borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto 16px" },
-  };
-
   return (
-    <div style={s.app}>
+    <div style={{ minHeight: "100vh", background: DARK, fontFamily: "'DM Sans', -apple-system, sans-serif", color: WHITE }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
         @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background: ${DARK}; }
-        button:hover { opacity: 0.9; }
       `}</style>
 
-      <header style={s.header}>
+      {/* Header */}
+      <header style={{ borderBottom: `1px solid ${BORDER}`, padding: "16px 40px", display: "flex", alignItems: "center", background: DARK_CARD }}>
         <div>
-          <div style={s.logo}>🐔 Nugget</div>
-          <div style={s.tagline}>The BizDev Tool for Founders</div>
+          <div style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, letterSpacing: "-0.5px" }}>
+            🐔 <span style={{ background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Nugget</span>
+          </div>
+          <div style={{ fontSize: 10, color: MUTED, letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 2 }}>The BizDev Tool for Founders</div>
         </div>
         <nav style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
-          <button style={s.navBtn(step === "upload")} onClick={() => setStep("upload")}>Upload</button>
-          <button style={s.navBtn(step === "reports")} onClick={() => reportsReady > 0 && setStep("reports")}>Reports {reportsReady > 0 && `(${reportsReady})`}</button>
+          <button style={{ padding: "6px 16px", borderRadius: 6, border: `1px solid ${step === "upload" ? BLUE_BRIGHT : BORDER}`, background: step === "upload" ? BLUE_MID + "44" : "transparent", color: step === "upload" ? BLUE_BRIGHT : MUTED, cursor: "pointer", fontSize: 13 }} onClick={() => setStep("upload")}>Upload</button>
+          <button style={{ padding: "6px 16px", borderRadius: 6, border: `1px solid ${step === "reports" ? BLUE_BRIGHT : BORDER}`, background: step === "reports" ? BLUE_MID + "44" : "transparent", color: step === "reports" ? BLUE_BRIGHT : MUTED, cursor: "pointer", fontSize: 13 }} onClick={() => reportsReady > 0 && setStep("reports")}>
+            Reports {reportsReady > 0 && `(${reportsReady})`}
+          </button>
         </nav>
       </header>
 
-      <main style={s.main}>
+      <main style={{ maxWidth: 980, margin: "0 auto", padding: "48px 24px" }}>
         {step === "upload" && (
           <>
-            <div style={{ marginBottom: 40 }}>
-              <h1 style={s.heroTitle}>Your next client is already<br /><span style={{ color: GOLD_LIGHT }}>in your network.</span></h1>
-              <p style={s.heroSub}>Upload your LinkedIn data export and Nugget finds the BD gold hiding in your own backyard. No scraping. No cold outreach. Just insight from data you already own.</p>
+            {/* Hero */}
+            <div style={{ textAlign: "center", marginBottom: 44 }}>
+              <h1 style={{ fontSize: 42, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 12, lineHeight: 1.2 }}>
+                Your next client is already<br />
+                <span style={{ background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>in your network.</span>
+              </h1>
+              <p style={{ fontSize: 15, color: MUTED, maxWidth: 460, margin: "0 auto 36px", lineHeight: 1.65 }}>
+                Upload your LinkedIn data export and Nugget finds the BD gold hiding in your own backyard. No scraping. No cold outreach. Just insight from data you already own.
+              </p>
             </div>
 
-            <div style={s.uploadZone(dragOver)} onDragOver={(e) => { e.preventDefault(); setDragOver(true); }} onDragLeave={() => setDragOver(false)} onDrop={handleDrop} onClick={() => fileInputRef.current?.click()}>
+            {/* Upload Zone */}
+            <div
+              style={{ border: `2px dashed ${dragOver ? BLUE_BRIGHT : BORDER}`, borderRadius: 16, padding: "44px 32px", textAlign: "center", cursor: "pointer", background: dragOver ? BLUE_MID + "11" : DARK_CARD, transition: "all 0.2s", marginBottom: 28 }}
+              onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+              onDragLeave={() => setDragOver(false)}
+              onDrop={handleDrop}
+              onClick={() => fileInputRef.current?.click()}
+            >
               <div style={{ fontSize: 36, marginBottom: 14 }}>📂</div>
-              <div style={{ fontSize: 17, color: CREAM, fontWeight: 600, marginBottom: 8 }}>Drop your LinkedIn CSV files here</div>
-              <div style={{ fontSize: 13, color: MUTED, marginBottom: 18, lineHeight: 1.5 }}>Upload Connections.csv, messages.csv, Recommendations_Received.csv,<br />Profile.csv, Skills.csv, Comments.csv, and Shares.csv</div>
-              <button style={{ padding: "10px 24px", background: GOLD, color: DARK, border: "none", borderRadius: 8, fontWeight: 700, fontSize: 13, cursor: "pointer" }} onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}>Choose Files</button>
+              <div style={{ fontSize: 17, color: WHITE, fontWeight: 600, marginBottom: 8 }}>Drop your LinkedIn CSV files here</div>
+              <div style={{ fontSize: 13, color: MUTED, marginBottom: 18, lineHeight: 1.5 }}>
+                Upload Connections.csv, messages.csv, Recommendations_Received.csv,<br />Profile.csv, Skills.csv, Comments.csv, and Shares.csv
+              </div>
+              <button style={{ padding: "10px 28px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: "pointer" }} onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}>
+                Choose Files
+              </button>
               <input ref={fileInputRef} type="file" multiple accept=".csv" style={{ display: "none" }} onChange={(e) => handleFiles(e.target.files)} />
               {hasFiles && (
                 <div style={{ marginTop: 20, display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center" }}>
-                  {Object.keys(uploadedFiles).map((k) => <span key={k} style={s.fileTag}>✓ {k}</span>)}
+                  {Object.keys(uploadedFiles).map((k) => (
+                    <span key={k} style={{ padding: "4px 12px", background: BLUE_MID + "33", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 20, fontSize: 12, color: BLUE_BRIGHT }}>✓ {k}</span>
+                  ))}
                 </div>
               )}
             </div>
 
+            {/* Stats */}
             {connCount > 0 && (
               <div style={{ display: "flex", gap: 14, marginBottom: 24 }}>
-                <div style={s.statCard}><div style={s.statNum}>{connCount.toLocaleString()}</div><div style={s.statLabel}>Connections loaded</div></div>
-                <div style={s.statCard}><div style={s.statNum}>{msgCount.toLocaleString()}</div><div style={s.statLabel}>Messages loaded</div></div>
-                <div style={s.statCard}><div style={s.statNum}>{Object.keys(uploadedFiles).length}</div><div style={s.statLabel}>Files ready</div></div>
+                {[
+                  { num: connCount.toLocaleString(), label: "Connections loaded" },
+                  { num: msgCount.toLocaleString(), label: "Messages loaded" },
+                  { num: Object.keys(uploadedFiles).length, label: "Files ready" },
+                ].map((s, i) => (
+                  <div key={i} style={{ flex: 1, background: `linear-gradient(135deg, ${BLUE_DEEP}, ${DARK_CARD})`, border: `1px solid ${BORDER}`, borderRadius: 10, padding: "16px 20px", textAlign: "center" }}>
+                    <div style={{ fontSize: 26, fontWeight: 700, color: BLUE_BRIGHT, fontFamily: "Georgia, serif" }}>{s.num}</div>
+                    <div style={{ fontSize: 11, color: MUTED, textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 4 }}>{s.label}</div>
+                  </div>
+                ))}
               </div>
             )}
 
-            {error && <div style={{ background: "#3a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
+            {error && <div style={{ background: "#1a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
 
+            {/* Main CTA */}
             <div style={{ marginBottom: 28 }}>
-              <button style={s.primaryBtn(!!generating)} onClick={generateAll} disabled={!!generating}>
+              <button
+                style={{ width: "100%", padding: "15px 32px", background: generating ? BLUE_MID + "66" : `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 10, fontSize: 16, fontWeight: 700, cursor: generating ? "not-allowed" : "pointer", fontFamily: "Georgia, serif", transition: "all 0.2s", animation: generating ? "pulse 2s infinite" : "none" }}
+                onClick={generateAll}
+                disabled={!!generating}
+              >
                 {generating ? `⏳ Mining ${REPORTS.find(r => r.id === generating)?.name || ""}...` : "🪙 Mine All 5 Free Reports"}
               </button>
             </div>
 
-            <div style={{ height: 1, background: BORDER, margin: "28px 0" }} />
+            <div style={{ height: 1, background: `linear-gradient(90deg, transparent, ${BORDER}, transparent)`, margin: "28px 0" }} />
 
+            {/* Report Cards */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 14 }}>
               {REPORTS.map((r) => (
-                <div key={r.id} style={{ ...s.reportCard(false), opacity: r.free ? 1 : 0.55, cursor: r.free ? "pointer" : "default" }} onClick={() => r.free && generateReport(r.id)}>
+                <div
+                  key={r.id}
+                  style={{ background: DARK_CARD, border: `1px solid ${r.free ? BORDER : BORDER}`, borderRadius: 12, padding: 20, cursor: r.free ? "pointer" : "default", opacity: r.free ? 1 : 0.5, transition: "all 0.2s", position: "relative", borderTop: `3px solid ${r.free ? BLUE_MID : BORDER}` }}
+                  onClick={() => r.free && generateReport(r.id)}
+                >
                   {!r.free && <span style={{ position: "absolute", top: 14, right: 14, fontSize: 15, color: MUTED }}>🔒</span>}
-                  <div style={{ display: "inline-block", padding: "2px 8px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: r.free ? GOLD + "22" : "#3a1a00", color: r.free ? GOLD_LIGHT : "#E8A000", marginBottom: 8 }}>{r.tag}</div>
-                  <div style={{ fontSize: 15, fontWeight: 700, color: CREAM, marginBottom: 3, fontFamily: "Georgia, serif" }}>{r.name}</div>
+                  <div style={{ display: "inline-block", padding: "2px 8px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: r.free ? BLUE_MID + "33" : "#2a1a00", color: r.free ? BLUE_BRIGHT : "#E8A000", marginBottom: 8 }}>{r.tag}</div>
+                  <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, marginBottom: 3, fontFamily: "Georgia, serif" }}>{r.name}</div>
                   <div style={{ fontSize: 11, color: MUTED, marginBottom: 7, textTransform: "uppercase", letterSpacing: "0.05em" }}>{r.subtitle}</div>
                   <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.5 }}>{r.description}</div>
-                  {reports[r.id] && <div style={{ marginTop: 10, fontSize: 11, color: GOLD, fontWeight: 600 }}>✓ Ready to view</div>}
+                  {reports[r.id] && <div style={{ marginTop: 10, fontSize: 11, color: BLUE_BRIGHT, fontWeight: 600 }}>✓ Ready to view</div>}
                 </div>
               ))}
             </div>
@@ -484,42 +475,48 @@ export default function App() {
 
         {step === "reports" && (
           <div style={{ display: "grid", gridTemplateColumns: "210px 1fr", gap: 22, alignItems: "start" }}>
-            <div style={s.sidebar}>
+            {/* Sidebar */}
+            <div style={{ background: DARK_CARD, borderRadius: 12, border: `1px solid ${BORDER}`, overflow: "hidden", position: "sticky", top: 24 }}>
               {REPORTS.map((r) => (
-                <div key={r.id} style={s.sidebarItem(activeReport === r.id)} onClick={() => setActiveReport(r.id)}>
-                  <div style={{ fontSize: 13, fontWeight: 600, color: activeReport === r.id ? GOLD_LIGHT : CREAM, marginBottom: 2 }}>{r.name}</div>
-                  <div style={{ fontSize: 11, color: !r.free ? MUTED : reports[r.id] ? GOLD : generating === r.id ? GOLD_LIGHT : MUTED }}>
-                    {!r.free ? "🔒 Upgrade to unlock" : generating === r.id ? "⏳ Generating..." : reports[r.id] ? "✓ Complete" : "Not yet generated"}
+                <div
+                  key={r.id}
+                  style={{ padding: "13px 16px", borderBottom: `1px solid ${BORDER}`, cursor: "pointer", background: activeReport === r.id ? BLUE_MID + "33" : "transparent", borderLeft: `3px solid ${activeReport === r.id ? BLUE_BRIGHT : "transparent"}`, transition: "all 0.15s" }}
+                  onClick={() => setActiveReport(r.id)}
+                >
+                  <div style={{ fontSize: 13, fontWeight: 600, color: activeReport === r.id ? BLUE_BRIGHT : WHITE, marginBottom: 2 }}>{r.name}</div>
+                  <div style={{ fontSize: 11, color: !r.free ? MUTED : reports[r.id] ? BLUE_BRIGHT : generating === r.id ? BLUE_LIGHT : MUTED }}>
+                    {!r.free ? "🔒 Upgrade to unlock" : generating === r.id ? `⏳ ${countdown > 0 ? `Next in ${countdown}s...` : "Generating..."}` : reports[r.id] ? "✓ Complete" : "Not yet generated"}
                   </div>
                 </div>
               ))}
               <div style={{ padding: "14px 16px" }}>
-                <button style={{ ...s.primaryBtn(false), fontSize: 13, padding: "10px 16px" }} onClick={() => setStep("upload")}>← Back to Upload</button>
+                <button style={{ width: "100%", padding: "10px 16px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 13, fontWeight: 700, cursor: "pointer" }} onClick={() => setStep("upload")}>← Back to Upload</button>
               </div>
             </div>
 
-            <div style={s.panel}>
-              {error && <div style={{ background: "#3a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
+            {/* Report Panel */}
+            <div style={{ background: DARK_CARD, borderRadius: 12, border: `1px solid ${BORDER}`, padding: 32, minHeight: 420 }}>
+              {error && <div style={{ background: "#1a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
 
               <div style={{ marginBottom: 22, paddingBottom: 16, borderBottom: `1px solid ${BORDER}` }}>
-                <div style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, color: GOLD_LIGHT, marginBottom: 4 }}>{activeReportMeta?.name}</div>
-                <div style={{ fontSize: 12, color: MUTED, textTransform: "uppercase", letterSpacing: "0.06em" }}>{activeReportMeta?.subtitle}</div>
+                <div style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", marginBottom: 4 }}>{activeReportMeta?.name}</div>
+                <div style={{ fontSize: 11, color: MUTED, textTransform: "uppercase", letterSpacing: "0.08em" }}>{activeReportMeta?.subtitle}</div>
               </div>
 
               {!activeReportMeta?.free ? (
                 <div style={{ textAlign: "center", padding: "48px 32px" }}>
                   <div style={{ fontSize: 44, marginBottom: 16 }}>🏆</div>
-                  <div style={{ fontSize: 22, fontFamily: "Georgia, serif", color: GOLD_LIGHT, marginBottom: 10 }}>The Gold Nugget</div>
+                  <div style={{ fontSize: 22, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", marginBottom: 10 }}>The Gold Nugget</div>
                   <p style={{ fontSize: 14, color: MUTED, marginBottom: 28, lineHeight: 1.7, maxWidth: 400, margin: "0 auto 28px" }}>
                     Your complete BD action plan — prioritized targets, warm paths into companies, missed conversations that are still warm, and outreach sequences ready to go.<br /><br />
                     The free reports show you where the opportunity is. The Gold Nugget hands you a map to go get it.
                   </p>
-                  <button style={{ padding: "12px 32px", background: "transparent", border: `2px solid ${GOLD}`, color: GOLD_LIGHT, borderRadius: 8, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "Georgia, serif" }}>Upgrade to Gold Nugget →</button>
+                  <button style={{ padding: "12px 32px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "Georgia, serif" }}>Upgrade to Gold Nugget →</button>
                 </div>
               ) : generating === activeReport ? (
                 <div style={{ textAlign: "center", padding: "60px 32px" }}>
-                  <div style={s.spinner} />
-                  <div style={{ color: MUTED, fontSize: 14 }}>Mining your data for gold...</div>
+                  <div style={{ width: 36, height: 36, border: `3px solid ${BORDER}`, borderTop: `3px solid ${BLUE_BRIGHT}`, borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto 16px" }} />
+                  <div style={{ color: MUTED, fontSize: 14 }}>{countdown > 0 ? `⏱️ Next report in ${countdown}s...` : "Mining your data for gold..."}</div>
                 </div>
               ) : reports[activeReport] ? (
                 <ReportContent text={reports[activeReport]} />
@@ -527,7 +524,11 @@ export default function App() {
                 <div style={{ textAlign: "center", padding: "60px 32px" }}>
                   <div style={{ fontSize: 38, marginBottom: 14 }}>🪙</div>
                   <div style={{ color: MUTED, fontSize: 14, marginBottom: 20 }}>This report hasn't been generated yet.</div>
-                  <button style={{ ...s.primaryBtn(!!generating), width: "auto", padding: "10px 24px", fontSize: 14 }} onClick={() => generateReport(activeReport)} disabled={!!generating}>
+                  <button
+                    style={{ padding: "10px 24px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: generating ? "not-allowed" : "pointer" }}
+                    onClick={() => generateReport(activeReport)}
+                    disabled={!!generating}
+                  >
                     Generate {activeReportMeta?.name}
                   </button>
                 </div>
