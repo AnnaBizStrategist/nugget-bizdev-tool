@@ -5,11 +5,11 @@ const BLUE_DEEP = "#0d2d6b";
 const BLUE_MID = "#1149ac";
 const BLUE_BRIGHT = "#41a1e8";
 const BLUE_LIGHT = "#7ec8f5";
-const DARK = "#061022";
-const DARK_CARD = "#0a1a3a";
-const WHITE = "#ffffff";
-const MUTED = "#7aa8cc";
-const BORDER = "#1a3a6a";
+const DARK = "#0a1628";
+const DARK_CARD = "#0f2040";
+const WHITE = "#e8f0fe";
+const MUTED = "#9fc4e8";
+const BORDER = "#1e4080";
 
 const REPORTS = [
   {
@@ -247,10 +247,10 @@ function prepareData(parsedData, fileKeys) {
 function ReportContent({ text }) {
   const lines = text.split("\n");
   return (
-    <div style={{ lineHeight: 1.75 }}>
+    <div style={{ lineHeight: 1.85 }}>
       {lines.map((line, i) => {
         if (line.startsWith("## ")) {
-          return <h3 key={i} style={{ color: BLUE_BRIGHT, fontSize: 13, fontWeight: 700, marginTop: 28, marginBottom: 10, letterSpacing: "0.08em", textTransform: "uppercase", borderBottom: `1px solid ${BORDER}`, paddingBottom: 6 }}>{line.replace("## ", "")}</h3>;
+          return <h3 key={i} style={{ color: BLUE_BRIGHT, fontSize: 13, fontWeight: 700, marginTop: 28, marginBottom: 10, letterSpacing: "0.08em", textTransform: "uppercase", borderLeft: "3px solid #41a1e8", paddingLeft: 10, paddingBottom: 4 }}>{line.replace("## ", "")}</h3>;
         }
         const boldParsed = line.replace(/\*\*(.*?)\*\*/g, `<strong style="color:${BLUE_LIGHT}">${"$1"}</strong>`);
         if (line.match(/^\d+\./)) {
@@ -270,7 +270,7 @@ function ReportContent({ text }) {
           );
         }
         if (line.trim() === "") return <div key={i} style={{ height: 6 }} />;
-        return <p key={i} style={{ color: WHITE, margin: "5px 0", fontSize: 14 }} dangerouslySetInnerHTML={{ __html: boldParsed }} />;
+        return <p key={i} style={{ color: WHITE, margin: "5px 0", fontSize: 14 }} dangerouslySetInnerHTML={{ __html: boldParsed }} style={{ fontSize: 15, margin: "6px 0", color: "#e8f0fe", lineHeight: 1.85 }} />;
       })}
     </div>
   );
@@ -386,12 +386,12 @@ export default function App() {
         {step === "upload" && (
           <>
             {/* Hero */}
-            <div style={{ textAlign: "center", marginBottom: 44 }}>
-              <h1 style={{ fontSize: 42, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 12, lineHeight: 1.2 }}>
+            <div style={{ textAlign: "center", marginBottom: 44, background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, margin: "-48px -24px 44px -24px", padding: "64px 24px 56px", borderRadius: "0 0 24px 24px" }}>
+              <h1 style={{ fontSize: 42, fontFamily: "Georgia, serif", fontWeight: 700, color: "#ffffff", marginBottom: 12, lineHeight: 1.2 }}>
                 Your next client is already<br />
                 <span style={{ background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>in your network.</span>
               </h1>
-              <p style={{ fontSize: 15, color: MUTED, maxWidth: 460, margin: "0 auto 36px", lineHeight: 1.65 }}>
+              <p style={{ fontSize: 15, color: "rgba(255,255,255,0.85)", maxWidth: 460, margin: "0 auto 36px", lineHeight: 1.65 }}>
                 Upload your LinkedIn data export and Nugget finds the BD gold hiding in your own backyard. No scraping. No cold outreach. Just insight from data you already own.
               </p>
             </div>
@@ -444,7 +444,7 @@ export default function App() {
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 14 }}>
               {REPORTS.map((r) => (
-                <div key={r.id} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: 20, opacity: r.free ? 1 : 0.5, position: "relative", borderTop: `3px solid ${r.free ? BLUE_MID : BORDER}`, display: "flex", flexDirection: "column" }}>
+                <div key={r.id} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: 20, opacity: r.free ? 1 : 0.5, position: "relative", borderTop: `3px solid transparent`, backgroundImage: `linear-gradient(${DARK_CARD}, ${DARK_CARD}), linear-gradient(90deg, ${r.free ? BLUE_BRIGHT : BORDER}, ${r.free ? BLUE_MID : BORDER})`, backgroundOrigin: "border-box", backgroundClip: "padding-box, border-box", display: "flex", flexDirection: "column" }}>
                   {!r.free && <span style={{ position: "absolute", top: 14, right: 14, fontSize: 15, color: MUTED }}>🔒</span>}
                   <div style={{ display: "inline-block", padding: "2px 8px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: r.free ? BLUE_MID + "33" : "#2a1a00", color: r.free ? BLUE_BRIGHT : "#E8A000", marginBottom: 8 }}>{r.tag}</div>
                   <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, marginBottom: 3, fontFamily: "Georgia, serif" }}>{r.name}</div>
