@@ -17,7 +17,7 @@ const REPORTS = [
     id: "field",
     name: "The Field Report",
     tag: "FREE",
-    subtitle: "Network composition & ICP match",
+    subtitle: "What your network is really made of",
     description: "Survey your land — who's actually in your network, how many match your ICP, and your top 10 untapped connections.",
     files: ["Connections"],
     free: true,
@@ -26,7 +26,7 @@ const REPORTS = [
     id: "warm",
     name: "The Warm List",
     tag: "FREE",
-    subtitle: "Relationship heat mapping",
+    subtitle: "Who's warm, who's not — and what to do about it",
     description: "Hot, warm, cool, cold — every connection scored by actual interaction data. Find who to call first.",
     files: ["Connections", "Messages"],
     free: true,
@@ -35,7 +35,7 @@ const REPORTS = [
     id: "hidden",
     name: "The Hidden Nuggets Report",
     tag: "FREE",
-    subtitle: "Hidden advocates finder",
+    subtitle: "Who's already in your corner",
     description: "The people already in your corner who you're not leveraging. Ranked by likely value and best ask type.",
     files: ["Recommendations", "Messages"],
     free: true,
@@ -44,7 +44,7 @@ const REPORTS = [
     id: "inbound",
     name: "The Inbound Report",
     tag: "FREE",
-    subtitle: "Profile BD readiness",
+    subtitle: "Is your profile ready to convert?",
     description: "If a perfect prospect landed on your profile right now — would they stay or bounce?",
     files: ["Profile", "Skills", "Endorsements"],
     free: true,
@@ -53,7 +53,7 @@ const REPORTS = [
     id: "outbound",
     name: "The Outbound Report",
     tag: "FREE",
-    subtitle: "Market signal analysis",
+    subtitle: "What the market thinks of you right now",
     description: "What your LinkedIn activity broadcasts to potential clients when you're not paying attention.",
     files: ["Comments", "Shares"],
     free: true,
@@ -437,7 +437,7 @@ export default function App() {
               </p>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1px 1fr 1px 1fr", gap: 0, alignItems: "start" }}>
                 {[
-                  { step: "01", title: "Request your data", desc: "Go to LinkedIn → Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select all and click Request archive." },
+                  { step: "01", title: "Request your data", desc: "On LinkedIn go to Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select all and click Request archive." },
                   { step: "02", title: "Download the file", desc: "LinkedIn will email you within 24 hours. Click the link in that email and download the file to your computer." },
                   { step: "03", title: "Drop it in below", desc: "Drag and drop the file directly into Nugget. That's it — Nugget does the rest automatically." },
                 ].reduce((acc, s, i) => {
@@ -553,7 +553,7 @@ export default function App() {
 
               <div style={{ marginBottom: 22, paddingBottom: 16, borderBottom: `1px solid ${BORDER}` }}>
                 <div style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", marginBottom: 4 }}>{activeReportMeta?.name}</div>
-                <div style={{ fontSize: 11, color: MUTED, textTransform: "uppercase", letterSpacing: "0.08em" }}>{activeReportMeta?.subtitle}</div>
+                <div style={{ fontSize: 12, color: MUTED, letterSpacing: "0.02em" }}>{activeReportMeta?.subtitle}</div>
               </div>
 
               {!activeReportMeta?.free ? (
