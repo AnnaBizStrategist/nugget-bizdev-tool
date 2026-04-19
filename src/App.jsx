@@ -277,17 +277,16 @@ function ReportContent({ text }) {
       {showEmailModal && (
         <div style={{
           position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
-          background: "rgba(6, 16, 34, 0.85)",
-          backdropFilter: "blur(8px)",
-          WebkitBackdropFilter: "blur(8px)",
+          background: "rgba(4, 10, 20, 0.96)",
           display: "flex", alignItems: "center", justifyContent: "center",
           zIndex: 1000, padding: 24
         }}>
           <div style={{
-            background: `linear-gradient(135deg, #0f2040, #0a1628)`,
-            border: `1px solid ${BLUE_BRIGHT}44`,
+            background: `linear-gradient(160deg, #0f2040 0%, #0a1628 100%)`,
+            border: `1px solid ${BLUE_BRIGHT}66`,
             borderRadius: 20, padding: "40px 48px", maxWidth: 480, width: "100%",
-            boxShadow: `0 24px 80px rgba(0,0,0,0.6)`
+            boxShadow: `0 0 80px rgba(65, 161, 232, 0.15), 0 24px 60px rgba(0,0,0,0.8)`,
+            animation: "fadeIn 0.2s ease-out"
           }}>
             <div style={{ fontSize: 36, textAlign: "center", marginBottom: 12 }}>🪙</div>
             <h2 style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, textAlign: "center", marginBottom: 8, lineHeight: 1.3 }}>
@@ -483,7 +482,9 @@ export default function App() {
     <div style={{ minHeight: "100vh", background: DARK, fontFamily: "'DM Sans', -apple-system, sans-serif", color: WHITE }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+        html, body { margin: 0; padding: 0; background: #0a1628; }
         @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
         @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background: ${DARK}; }
@@ -690,17 +691,16 @@ export default function App() {
       {showEmailModal && (
         <div style={{
           position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
-          background: "rgba(6, 16, 34, 0.85)",
-          backdropFilter: "blur(8px)",
-          WebkitBackdropFilter: "blur(8px)",
+          background: "rgba(4, 10, 20, 0.96)",
           display: "flex", alignItems: "center", justifyContent: "center",
           zIndex: 1000, padding: 24
         }}>
           <div style={{
-            background: `linear-gradient(135deg, #0f2040, #0a1628)`,
-            border: `1px solid ${BLUE_BRIGHT}44`,
+            background: `linear-gradient(160deg, #0f2040 0%, #0a1628 100%)`,
+            border: `1px solid ${BLUE_BRIGHT}66`,
             borderRadius: 20, padding: "40px 48px", maxWidth: 480, width: "100%",
-            boxShadow: `0 24px 80px rgba(0,0,0,0.6)`
+            boxShadow: `0 0 80px rgba(65, 161, 232, 0.15), 0 24px 60px rgba(0,0,0,0.8)`,
+            animation: "fadeIn 0.2s ease-out"
           }}>
             <div style={{ fontSize: 36, textAlign: "center", marginBottom: 12 }}>🪙</div>
             <h2 style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, textAlign: "center", marginBottom: 8, lineHeight: 1.3 }}>
