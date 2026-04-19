@@ -26,7 +26,7 @@ const REPORTS = [
     id: "warm",
     name: "The Warm List",
     tag: "FREE",
-    subtitle: "Who's warm, who's not — and what to do about it",
+    subtitle: "Who's warm, who's not",
     description: "Hot, warm, cool, cold — every connection scored by actual interaction data. Find who to call first.",
     files: ["Connections", "Messages"],
     free: true,
@@ -438,12 +438,12 @@ export default function App() {
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1px 1fr 1px 1fr", gap: 0, alignItems: "start" }}>
                 {[
                   { step: "01", title: "Request your data", desc: "On LinkedIn go to Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select all and click Request archive." },
-                  { step: "02", title: "Download the file", desc: "LinkedIn will email you within 24 hours. Click the link in that email and download the file to your computer." },
-                  { step: "03", title: "Drop it in below", desc: "Drag and drop the file directly into Nugget. That's it — Nugget does the rest automatically." },
+                  { step: "02", title: "Download the file", desc: "Next, wait for LinkedIn to email your data file — usually within 24 hours. Click the link in that email and download the file to your computer." },
+                  { step: "03", title: "Drop it in below", desc: "Then drag and drop the file into Nugget below. That's it! Nugget works its magic and does the rest automatically." },
                 ].reduce((acc, s, i) => {
                   acc.push(
                     <div key={s.step} style={{ display: "flex", flexDirection: "column", gap: 8, padding: "0 20px" }}>
-                      <div style={{ fontSize: 20, fontWeight: 700, color: BLUE_BRIGHT, fontFamily: "Georgia, serif", opacity: 0.5, lineHeight: 1, marginBottom: 4 }}>{s.step}</div>
+                      <div style={{ fontSize: 20, fontWeight: 700, color: BLUE_BRIGHT, fontFamily: "Georgia, serif", opacity: 0.5, lineHeight: 1, marginBottom: 4 }}>Step {s.step}</div>
                       <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, marginBottom: 4 }}>{s.title}</div>
                       <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.7 }}>{s.desc}</div>
                     </div>
@@ -464,7 +464,7 @@ export default function App() {
               <div style={{ fontSize: 36, marginBottom: 14 }}>📂</div>
               <div style={{ fontSize: 17, color: WHITE, fontWeight: 600, marginBottom: 8 }}>Drop your LinkedIn file here</div>
               <div style={{ fontSize: 13, color: MUTED, marginBottom: 18, lineHeight: 1.5 }}>
-                Drop the file LinkedIn emailed you — Nugget unzips and reads it automatically.<br />Or drag individual CSV files if you prefer.
+                Drop the file LinkedIn sent you here — Nugget takes it from there.<br />Or upload individual files if you prefer.
               </div>
               <button style={{ padding: "10px 28px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: "pointer" }} onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}>
                 Choose Files
