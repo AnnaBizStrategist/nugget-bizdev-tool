@@ -273,6 +273,65 @@ function ReportContent({ text }) {
         if (line.trim() === "") return <div key={i} style={{ height: 6 }} />;
         return <p key={i} style={{ color: WHITE, margin: "5px 0", fontSize: 14 }} dangerouslySetInnerHTML={{ __html: boldParsed }} style={{ fontSize: 15, margin: "6px 0", color: "#e8f0fe", lineHeight: 1.85 }} />;
       })}
+      {/* Email Capture Modal with Frosted Blur */}
+      {showEmailModal && (
+        <div style={{
+          position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+          background: "rgba(6, 16, 34, 0.85)",
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          zIndex: 1000, padding: 24
+        }}>
+          <div style={{
+            background: `linear-gradient(135deg, #0f2040, #0a1628)`,
+            border: `1px solid ${BLUE_BRIGHT}44`,
+            borderRadius: 20, padding: "40px 48px", maxWidth: 480, width: "100%",
+            boxShadow: `0 24px 80px rgba(0,0,0,0.6)`
+          }}>
+            <div style={{ fontSize: 36, textAlign: "center", marginBottom: 12 }}>🪙</div>
+            <h2 style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, textAlign: "center", marginBottom: 8, lineHeight: 1.3 }}>
+              Where should we send your personalized Nugget reports?
+            </h2>
+            <p style={{ fontSize: 14, color: MUTED, textAlign: "center", marginBottom: 28, lineHeight: 1.6 }}>
+              Your reports are ready to generate. Enter your details and we'll deliver them straight to your inbox.
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 20 }}>
+              <div>
+                <label style={{ fontSize: 12, color: MUTED, display: "block", marginBottom: 6, letterSpacing: "0.06em", textTransform: "uppercase" }}>First Name</label>
+                <input
+                  type="text"
+                  placeholder="Your first name"
+                  value={emailName}
+                  onChange={(e) => setEmailName(e.target.value)}
+                  style={{ width: "100%", padding: "12px 16px", background: "#0a1628", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 8, color: WHITE, fontSize: 15, outline: "none" }}
+                />
+              </div>
+              <div>
+                <label style={{ fontSize: 12, color: MUTED, display: "block", marginBottom: 6, letterSpacing: "0.06em", textTransform: "uppercase" }}>Email Address</label>
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  value={emailAddress}
+                  onChange={(e) => setEmailAddress(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && submitEmail()}
+                  style={{ width: "100%", padding: "12px 16px", background: "#0a1628", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 8, color: WHITE, fontSize: 15, outline: "none" }}
+                />
+              </div>
+            </div>
+            <button
+              onClick={submitEmail}
+              disabled={emailSubmitting || !emailName.trim() || !emailAddress.trim()}
+              style={{ width: "100%", padding: "14px 24px", background: emailSubmitting || !emailName.trim() || !emailAddress.trim() ? BLUE_MID + "66" : `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", borderRadius: 10, color: WHITE, fontSize: 16, fontWeight: 700, cursor: emailSubmitting || !emailName.trim() || !emailAddress.trim() ? "not-allowed" : "pointer", fontFamily: "Georgia, serif", marginBottom: 12 }}
+            >
+              {emailSubmitting ? "Getting your Nuggets ready..." : "Get My Reports →"}
+            </button>
+            <p style={{ fontSize: 11, color: MUTED, textAlign: "center", lineHeight: 1.5 }}>
+              No spam. No sharing. Just your personalized Nugget reports.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -287,6 +346,12 @@ export default function App() {
   const [dragOver, setDragOver] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const [error, setError] = useState(null);
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [pendingReportId, setPendingReportId] = useState(null);
+  const [emailName, setEmailName] = useState("");
+  const [emailAddress, setEmailAddress] = useState("");
+  const [emailSubmitting, setEmailSubmitting] = useState(false);
   const fileInputRef = useRef(null);
 
   const handleFiles = useCallback((fileList) => {
@@ -335,18 +400,49 @@ export default function App() {
   const generateReport = async (reportId) => {
     const report = REPORTS.find((r) => r.id === reportId);
     if (!report?.free || generating) return;
+    if (!emailSubmitted) {
+      setPendingReportId(reportId);
+      setShowEmailModal(true);
+      return;
+    }
     setGenerating(reportId);
     setActiveReport(reportId);
+    setStep("reports");
     setError(null);
     try {
       const data = prepareData(parsedData, report.files);
       const result = await callClaude(PROMPTS[reportId], data);
       setReports((prev) => ({ ...prev, [reportId]: result }));
-      setStep("reports");
     } catch (err) {
       setError(err.message);
     } finally {
       setGenerating(null);
+    }
+  };
+
+  const submitEmail = async () => {
+    if (!emailName.trim() || !emailAddress.trim()) return;
+    setEmailSubmitting(true);
+    try {
+      await fetch("https://hook.us2.make.com/xu7d06pva2t2hhyccr86ddar7msqm4zl", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: emailName.trim(),
+          email: emailAddress.trim(),
+          source: "nugget-free-user",
+        }),
+      });
+    } catch (err) {
+      console.log("Webhook error:", err);
+    } finally {
+      setEmailSubmitted(true);
+      setEmailSubmitting(false);
+      setShowEmailModal(false);
+      if (pendingReportId) {
+        setTimeout(() => generateReport(pendingReportId), 100);
+        setPendingReportId(null);
+      }
     }
   };
 
@@ -590,6 +686,65 @@ export default function App() {
           </div>
         )}
       </main>
+      {/* Email Capture Modal with Frosted Blur */}
+      {showEmailModal && (
+        <div style={{
+          position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+          background: "rgba(6, 16, 34, 0.85)",
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          zIndex: 1000, padding: 24
+        }}>
+          <div style={{
+            background: `linear-gradient(135deg, #0f2040, #0a1628)`,
+            border: `1px solid ${BLUE_BRIGHT}44`,
+            borderRadius: 20, padding: "40px 48px", maxWidth: 480, width: "100%",
+            boxShadow: `0 24px 80px rgba(0,0,0,0.6)`
+          }}>
+            <div style={{ fontSize: 36, textAlign: "center", marginBottom: 12 }}>🪙</div>
+            <h2 style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, textAlign: "center", marginBottom: 8, lineHeight: 1.3 }}>
+              Where should we send your personalized Nugget reports?
+            </h2>
+            <p style={{ fontSize: 14, color: MUTED, textAlign: "center", marginBottom: 28, lineHeight: 1.6 }}>
+              Your reports are ready to generate. Enter your details and we'll deliver them straight to your inbox.
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 20 }}>
+              <div>
+                <label style={{ fontSize: 12, color: MUTED, display: "block", marginBottom: 6, letterSpacing: "0.06em", textTransform: "uppercase" }}>First Name</label>
+                <input
+                  type="text"
+                  placeholder="Your first name"
+                  value={emailName}
+                  onChange={(e) => setEmailName(e.target.value)}
+                  style={{ width: "100%", padding: "12px 16px", background: "#0a1628", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 8, color: WHITE, fontSize: 15, outline: "none" }}
+                />
+              </div>
+              <div>
+                <label style={{ fontSize: 12, color: MUTED, display: "block", marginBottom: 6, letterSpacing: "0.06em", textTransform: "uppercase" }}>Email Address</label>
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  value={emailAddress}
+                  onChange={(e) => setEmailAddress(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && submitEmail()}
+                  style={{ width: "100%", padding: "12px 16px", background: "#0a1628", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 8, color: WHITE, fontSize: 15, outline: "none" }}
+                />
+              </div>
+            </div>
+            <button
+              onClick={submitEmail}
+              disabled={emailSubmitting || !emailName.trim() || !emailAddress.trim()}
+              style={{ width: "100%", padding: "14px 24px", background: emailSubmitting || !emailName.trim() || !emailAddress.trim() ? BLUE_MID + "66" : `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", borderRadius: 10, color: WHITE, fontSize: 16, fontWeight: 700, cursor: emailSubmitting || !emailName.trim() || !emailAddress.trim() ? "not-allowed" : "pointer", fontFamily: "Georgia, serif", marginBottom: 12 }}
+            >
+              {emailSubmitting ? "Getting your Nuggets ready..." : "Get My Reports →"}
+            </button>
+            <p style={{ fontSize: 11, color: MUTED, textAlign: "center", lineHeight: 1.5 }}>
+              No spam. No sharing. Just your personalized Nugget reports.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
