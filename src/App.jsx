@@ -397,7 +397,7 @@ export default function App() {
       <header style={{ borderBottom: `1px solid ${BORDER}`, padding: "16px 40px", display: "flex", alignItems: "center", background: DARK_CARD }}>
         <div>
           <div style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, letterSpacing: "-0.5px" }}>
-            🐔 <span style={{ background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Nugget</span>
+            🐔 <span style={{ background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Nugget™</span>
           </div>
           <div style={{ fontSize: 10, color: MUTED, letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 2 }}>The BizDev Tool for Founders</div>
         </div>
@@ -433,13 +433,13 @@ export default function App() {
             {/* Onboarding Steps */}
             <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "28px 32px", marginBottom: 24 }}>
               <p style={{ fontSize: 20, color: "#ffffff", fontWeight: 700, textAlign: "center", marginBottom: 28, fontFamily: "Georgia, serif", letterSpacing: "-0.3px" }}>
-                Your Nuggets are waiting... Just 3 easy steps to find them.
+                Your Nuggets are waiting — Just 3 easy steps to find them...
               </p>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1px 1fr 1px 1fr", gap: 0, alignItems: "start" }}>
                 {[
-                  { step: "01", title: "Request your export", desc: "Go to LinkedIn → Me → Settings & Privacy → Data Privacy → Get a copy of your data. Select Connections, Messages, Recommendations, Profile, Skills, Comments and Shares. Click Request archive." },
+                  { step: "01", title: "Request your data", desc: "Go to LinkedIn → Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select all and click Request archive." },
                   { step: "02", title: "Download the file", desc: "LinkedIn will email you within 24 hours. Click the link in that email and download the file to your computer." },
-                  { step: "03", title: "Drop it in below", desc: "Drag and drop the file you downloaded directly into Nugget. That's it — Nugget does the rest automatically." },
+                  { step: "03", title: "Drop it in below", desc: "Drag and drop the file directly into Nugget. That's it — Nugget does the rest automatically." },
                 ].reduce((acc, s, i) => {
                   acc.push(
                     <div key={s.step} style={{ display: "flex", flexDirection: "column", gap: 8, padding: "0 20px" }}>
