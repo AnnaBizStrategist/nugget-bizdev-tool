@@ -53,7 +53,7 @@ const REPORTS = [
     id: "outbound",
     name: "The Outbound Report",
     tag: "FREE",
-    subtitle: "What the market thinks of you right now",
+    subtitle: "What the market thinks of you",
     description: "What your LinkedIn activity broadcasts to potential clients when you're not paying attention.",
     files: ["Comments", "Shares"],
     free: true,
@@ -439,7 +439,7 @@ export default function App() {
                 {[
                   { step: "01", title: "Request your data", desc: "On LinkedIn go to Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select all and click Request archive." },
                   { step: "02", title: "Download the file", desc: "Next, wait for LinkedIn to email your data file — usually within 24 hours. Click the link in that email and download the file to your computer." },
-                  { step: "03", title: "Drop it in below", desc: "Then drag and drop the file into Nugget below. That's it! Nugget works its magic and does the rest automatically." },
+                  { step: "03", title: "Drop it in below", desc: "Then drag and drop the file into Nugget below. That's it! Nugget works its magic and does the rest automatically. Let's get your Nuggets..." },
                 ].reduce((acc, s, i) => {
                   acc.push(
                     <div key={s.step} style={{ display: "flex", flexDirection: "column", gap: 8, padding: "0 20px" }}>
