@@ -414,17 +414,17 @@ export default function App() {
           <>
             {/* Hero */}
             <div style={{ textAlign: "center", marginBottom: 44, background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, margin: "0 0 44px 0", padding: "56px 24px 48px", borderRadius: 16 }}>
-              <p style={{ fontSize: 15, color: "rgba(255,255,255,0.9)", maxWidth: 520, margin: "0 auto 16px", lineHeight: 1.65 }}>
+              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.75)", maxWidth: 520, margin: "0 auto 20px", lineHeight: 1.65, letterSpacing: "0.01em" }}>
                 Nugget is a powerful Business Development tool that reads your own LinkedIn data and shows you the gold hiding inside it.
               </p>
-              <h1 style={{ fontSize: 42, fontFamily: "Georgia, serif", fontWeight: 700, color: "#ffffff", marginBottom: 16, lineHeight: 1.2 }}>
+              <h1 style={{ fontSize: 44, fontFamily: "Georgia, serif", fontWeight: 700, color: "#ffffff", marginBottom: 24, lineHeight: 1.15 }}>
                 Your next client is already<br />
                 <span style={{ background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>in your network.</span>
               </h1>
-              <p style={{ fontSize: 18, color: "#ffffff", fontWeight: 700, marginBottom: 12, letterSpacing: "0.02em" }}>
-                NO scraping.&nbsp;&nbsp;NO cold outreach.&nbsp;&nbsp;NO guessing.
+              <p style={{ fontSize: 19, color: "#ffffff", fontWeight: 800, marginBottom: 20, letterSpacing: "0.04em" }}>
+                NO scraping.&nbsp;&nbsp;&nbsp;NO cold outreach.&nbsp;&nbsp;&nbsp;NO guessing.
               </p>
-              <p style={{ fontSize: 15, color: "rgba(255,255,255,0.85)", maxWidth: 420, margin: "0 auto 36px", lineHeight: 1.65 }}>
+              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.75)", maxWidth: 380, margin: "0 auto 0", lineHeight: 1.65 }}>
                 Just intelligence from data you already own.
               </p>
             </div>
@@ -432,21 +432,25 @@ export default function App() {
             {/* Upload Zone */}
             {/* Onboarding Steps */}
             <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "28px 32px", marginBottom: 24 }}>
-              <p style={{ fontSize: 16, color: BLUE_BRIGHT, fontWeight: 700, textAlign: "center", marginBottom: 24, fontFamily: "Georgia, serif" }}>
-                Your Nuggets are waiting. Just 3 easy steps to find them.
+              <p style={{ fontSize: 20, color: "#ffffff", fontWeight: 700, textAlign: "center", marginBottom: 28, fontFamily: "Georgia, serif", letterSpacing: "-0.3px" }}>
+                Your Nuggets are waiting... Just 3 easy steps to find them.
               </p>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1px 1fr 1px 1fr", gap: 0, alignItems: "start" }}>
                 {[
                   { step: "01", title: "Request your export", desc: "Go to LinkedIn → Me → Settings & Privacy → Data Privacy → Get a copy of your data. Select Connections, Messages, Recommendations, Profile, Skills, Comments and Shares. Click Request archive." },
                   { step: "02", title: "Download the file", desc: "LinkedIn will email you within 24 hours. Click the link in that email and download the file to your computer." },
                   { step: "03", title: "Drop it in below", desc: "Drag and drop the file you downloaded directly into Nugget. That's it — Nugget does the rest automatically." },
-                ].map((s) => (
-                  <div key={s.step} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                    <div style={{ fontSize: 28, fontWeight: 700, color: BLUE_BRIGHT, fontFamily: "Georgia, serif", opacity: 0.4 }}>{s.step}</div>
-                    <div style={{ fontSize: 14, fontWeight: 700, color: WHITE }}>{s.title}</div>
-                    <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.6 }}>{s.desc}</div>
-                  </div>
-                ))}
+                ].reduce((acc, s, i) => {
+                  acc.push(
+                    <div key={s.step} style={{ display: "flex", flexDirection: "column", gap: 8, padding: "0 20px" }}>
+                      <div style={{ fontSize: 20, fontWeight: 700, color: BLUE_BRIGHT, fontFamily: "Georgia, serif", opacity: 0.5, lineHeight: 1, marginBottom: 4 }}>{s.step}</div>
+                      <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, marginBottom: 4 }}>{s.title}</div>
+                      <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.7 }}>{s.desc}</div>
+                    </div>
+                  );
+                  if (i < 2) acc.push(<div key={`divider-${i}`} style={{ width: 1, background: BORDER, alignSelf: "stretch" }} />);
+                  return acc;
+                }, [])}
               </div>
             </div>
 
