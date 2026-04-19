@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef } from "react";
 import Papa from "papaparse";
+import JSZip from "jszip";
 
 const BLUE_DEEP = "#0d2d6b";
 const BLUE_MID = "#1149ac";
@@ -290,12 +291,38 @@ export default function App() {
 
   const handleFiles = useCallback((fileList) => {
     Array.from(fileList).forEach((file) => {
-      if (!file.name.endsWith(".csv")) return;
-      const key = getFileKey(file.name);
-      setUploadedFiles((prev) => ({ ...prev, [key]: file.name }));
-      parseLinkedInCSV(file, (results) => {
-        setParsedData((prev) => ({ ...prev, [key]: results.data }));
-      });
+      if (file.name.endsWith(".zip")) {
+        // Auto-unzip LinkedIn export
+        JSZip.loadAsync(file).then((zip) => {
+          zip.forEach((relativePath, zipEntry) => {
+            const fileName = relativePath.split("/").pop();
+            if (!fileName.endsWith(".csv")) return;
+            const key = getFileKey(fileName);
+            zipEntry.async("string").then((csvText) => {
+              const isConnections = fileName.toLowerCase().includes("connection");
+              const processText = isConnections
+                ? csvText.split("\n").slice(3).join("\n")
+                : csvText;
+              Papa.parse(processText, {
+                header: true,
+                skipEmptyLines: true,
+                complete: (results) => {
+                  if (results.data.length > 0) {
+                    setUploadedFiles((prev) => ({ ...prev, [key]: fileName }));
+                    setParsedData((prev) => ({ ...prev, [key]: results.data }));
+                  }
+                },
+              });
+            });
+          });
+        });
+      } else if (file.name.endsWith(".csv")) {
+        const key = getFileKey(file.name);
+        setUploadedFiles((prev) => ({ ...prev, [key]: file.name }));
+        parseLinkedInCSV(file, (results) => {
+          setParsedData((prev) => ({ ...prev, [key]: results.data }));
+        });
+      }
     });
   }, []);
 
@@ -386,17 +413,43 @@ export default function App() {
         {step === "upload" && (
           <>
             {/* Hero */}
-            <div style={{ textAlign: "center", marginBottom: 44, background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, margin: "-48px -24px 44px -24px", padding: "64px 24px 56px", borderRadius: "0 0 24px 24px" }}>
-              <h1 style={{ fontSize: 42, fontFamily: "Georgia, serif", fontWeight: 700, color: "#ffffff", marginBottom: 12, lineHeight: 1.2 }}>
+            <div style={{ textAlign: "center", marginBottom: 44, background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, margin: "0 0 44px 0", padding: "56px 24px 48px", borderRadius: 16 }}>
+              <p style={{ fontSize: 15, color: "rgba(255,255,255,0.9)", maxWidth: 520, margin: "0 auto 16px", lineHeight: 1.65 }}>
+                Nugget is a powerful Business Development tool that reads your own LinkedIn data and shows you the gold hiding inside it.
+              </p>
+              <h1 style={{ fontSize: 42, fontFamily: "Georgia, serif", fontWeight: 700, color: "#ffffff", marginBottom: 16, lineHeight: 1.2 }}>
                 Your next client is already<br />
                 <span style={{ background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>in your network.</span>
               </h1>
-              <p style={{ fontSize: 15, color: "rgba(255,255,255,0.85)", maxWidth: 460, margin: "0 auto 36px", lineHeight: 1.65 }}>
-                Upload your LinkedIn data export and Nugget finds the BD gold hiding in your own backyard. No scraping. No cold outreach. Just insight from data you already own.
+              <p style={{ fontSize: 18, color: "#ffffff", fontWeight: 700, marginBottom: 12, letterSpacing: "0.02em" }}>
+                NO scraping.&nbsp;&nbsp;NO cold outreach.&nbsp;&nbsp;NO guessing.
+              </p>
+              <p style={{ fontSize: 15, color: "rgba(255,255,255,0.85)", maxWidth: 420, margin: "0 auto 36px", lineHeight: 1.65 }}>
+                Just intelligence from data you already own.
               </p>
             </div>
 
             {/* Upload Zone */}
+            {/* Onboarding Steps */}
+            <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "28px 32px", marginBottom: 24 }}>
+              <p style={{ fontSize: 16, color: BLUE_BRIGHT, fontWeight: 700, textAlign: "center", marginBottom: 24, fontFamily: "Georgia, serif" }}>
+                Your Nuggets are waiting. Just 3 easy steps to find them.
+              </p>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+                {[
+                  { step: "01", title: "Request your export", desc: "Go to LinkedIn → Me → Settings & Privacy → Data Privacy → Get a copy of your data. Select Connections, Messages, Recommendations, Profile, Skills, Comments and Shares. Click Request archive." },
+                  { step: "02", title: "Download the file", desc: "LinkedIn will email you within 24 hours. Click the link in that email and download the file to your computer." },
+                  { step: "03", title: "Drop it in below", desc: "Drag and drop the file you downloaded directly into Nugget. That's it — Nugget does the rest automatically." },
+                ].map((s) => (
+                  <div key={s.step} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                    <div style={{ fontSize: 28, fontWeight: 700, color: BLUE_BRIGHT, fontFamily: "Georgia, serif", opacity: 0.4 }}>{s.step}</div>
+                    <div style={{ fontSize: 14, fontWeight: 700, color: WHITE }}>{s.title}</div>
+                    <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.6 }}>{s.desc}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <div
               style={{ border: `2px dashed ${dragOver ? BLUE_BRIGHT : BORDER}`, borderRadius: 16, padding: "44px 32px", textAlign: "center", cursor: "pointer", background: dragOver ? BLUE_MID + "11" : DARK_CARD, transition: "all 0.2s", marginBottom: 28 }}
               onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
@@ -405,14 +458,14 @@ export default function App() {
               onClick={() => fileInputRef.current?.click()}
             >
               <div style={{ fontSize: 36, marginBottom: 14 }}>📂</div>
-              <div style={{ fontSize: 17, color: WHITE, fontWeight: 600, marginBottom: 8 }}>Drop your LinkedIn CSV files here</div>
+              <div style={{ fontSize: 17, color: WHITE, fontWeight: 600, marginBottom: 8 }}>Drop your LinkedIn file here</div>
               <div style={{ fontSize: 13, color: MUTED, marginBottom: 18, lineHeight: 1.5 }}>
-                Upload Connections.csv, messages.csv, Recommendations_Received.csv,<br />Profile.csv, Skills.csv, Comments.csv, and Shares.csv
+                Drop the file LinkedIn emailed you — Nugget unzips and reads it automatically.<br />Or drag individual CSV files if you prefer.
               </div>
               <button style={{ padding: "10px 28px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: "pointer" }} onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}>
                 Choose Files
               </button>
-              <input ref={fileInputRef} type="file" multiple accept=".csv" style={{ display: "none" }} onChange={(e) => handleFiles(e.target.files)} />
+              <input ref={fileInputRef} type="file" multiple accept=".csv,.zip" style={{ display: "none" }} onChange={(e) => handleFiles(e.target.files)} />
               {hasFiles && (
                 <div style={{ marginTop: 20, display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center" }}>
                   {Object.keys(uploadedFiles).map((k) => (
