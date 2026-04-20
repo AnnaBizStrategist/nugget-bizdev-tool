@@ -271,11 +271,13 @@ function ReportContent({ text }) {
           );
         }
         if (line.trim() === "") return <div key={i} style={{ height: 6 }} />;
-        return <p key={i} style={{ color: WHITE, margin: "5px 0", fontSize: 14 }} dangerouslySetInnerHTML={{ __html: boldParsed }} style={{ fontSize: 15, margin: "6px 0", color: "#e8f0fe", lineHeight: 1.85 }} />;
+        return <p key={i} style={{ fontSize: 15, margin: "6px 0", color: "#e8f0fe", lineHeight: 1.85 }} dangerouslySetInnerHTML={{ __html: boldParsed }} />;
       })}
     </div>
   );
 }
+
+
 
 export default function App() {
   const [step, setStep] = useState("upload");
@@ -298,7 +300,6 @@ export default function App() {
   const handleFiles = useCallback((fileList) => {
     Array.from(fileList).forEach((file) => {
       if (file.name.endsWith(".zip")) {
-        // Auto-unzip LinkedIn export
         JSZip.loadAsync(file).then((zip) => {
           zip.forEach((relativePath, zipEntry) => {
             const fileName = relativePath.split("/").pop();
@@ -363,7 +364,6 @@ export default function App() {
 
   const submitEmail = async () => {
     if (!emailName.trim() || !emailAddress.trim()) return;
-    // Close modal immediately for snappy UX
     setEmailSubmitted(true);
     setShowEmailModal(false);
     const pending = pendingReportId;
@@ -371,7 +371,6 @@ export default function App() {
     if (pending) {
       setTimeout(() => generateReport(pending), 50);
     }
-    // Fire webhook in background - don't wait
     fetch("https://hook.us2.make.com/xu7d06pva2t2hhyccr86ddar7msqm4zl", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -397,7 +396,7 @@ export default function App() {
         const result = await callClaude(PROMPTS[report.id], data);
         setReports((prev) => ({ ...prev, [report.id]: result }));
       } catch (err) {
-        setReports((prev) => ({ ...prev, [report.id]: `⚠️ Error: ${err.message}` }));
+        setReports((prev) => ({ ...prev, [report.id]: `Error: ${err.message}` }));
       }
       setGenerating(null);
       if (i < freeReports.length - 1) {
@@ -436,8 +435,9 @@ export default function App() {
       {/* Header */}
       <header style={{ borderBottom: `1px solid ${BORDER}`, padding: "16px 40px", display: "flex", alignItems: "center", background: DARK_CARD }}>
         <div>
-          <div style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, letterSpacing: "-0.5px" }}>
-            🐔 <span style={{ background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Nugget™</span>
+          <div style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, letterSpacing: "-0.5px", display: "flex", alignItems: "center", gap: 10 }}>
+            <img src="/nugget-chicken-white-flipped.png" alt="Nugget" style={{ height: 36, width: "auto", display: "block" }} />
+            <span style={{ background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Nugget™</span>
           </div>
           <div style={{ fontSize: 10, color: MUTED, letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 2 }}>The BizDev Tool for Founders</div>
         </div>
@@ -469,7 +469,6 @@ export default function App() {
               </p>
             </div>
 
-            {/* Upload Zone */}
             {/* Onboarding Steps */}
             <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "28px 32px", marginBottom: 24 }}>
               <p style={{ fontSize: 20, color: "#ffffff", fontWeight: 700, textAlign: "center", marginBottom: 28, fontFamily: "Georgia, serif", letterSpacing: "-0.3px" }}>
@@ -494,6 +493,7 @@ export default function App() {
               </div>
             </div>
 
+            {/* Upload Zone */}
             <div
               style={{ border: `2px dashed ${dragOver ? BLUE_BRIGHT : BORDER}`, borderRadius: 16, padding: "44px 32px", textAlign: "center", cursor: "pointer", background: dragOver ? BLUE_MID + "11" : DARK_CARD, transition: "all 0.2s", marginBottom: 28 }}
               onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
@@ -554,7 +554,7 @@ export default function App() {
                     ) : (
                       <button style={{ padding: "8px 16px", background: generating === r.id ? BLUE_MID + "44" : `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: generating ? "not-allowed" : "pointer", width: "100%" }}
                         onClick={() => generateReport(r.id)} disabled={!!generating}>
-                        {generating === r.id ? "⏳ Mining..." : "🪙 Generate Report"}
+                        {generating === r.id ? "⏳ Mining..." : "Generate Report"}
                       </button>
                     )
                   ) : (
@@ -609,7 +609,7 @@ export default function App() {
               ) : generating === activeReport ? (
                 <div style={{ textAlign: "center", padding: "60px 32px" }}>
                   <div style={{ width: 36, height: 36, border: `3px solid ${BORDER}`, borderTop: `3px solid ${BLUE_BRIGHT}`, borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto 16px" }} />
-                  <div style={{ color: MUTED, fontSize: 14 }}>{countdown > 0 ? `⏱️ Next report in ${countdown}s...` : "Mining your data for gold..."}</div>
+                  <div style={{ color: MUTED, fontSize: 14 }}>{countdown > 0 ? `Next report in ${countdown}s...` : "Mining your data for gold..."}</div>
                 </div>
               ) : reports[activeReport] ? (
                 <ReportContent text={reports[activeReport]} />
@@ -630,7 +630,8 @@ export default function App() {
           </div>
         )}
       </main>
-      {/* Email Capture Modal with Frosted Blur */}
+
+      {/* Email Capture Modal */}
       {showEmailModal && (
         <div style={{
           position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
@@ -645,7 +646,7 @@ export default function App() {
             boxShadow: `0 0 80px rgba(65, 161, 232, 0.15), 0 24px 60px rgba(0,0,0,0.8)`,
             animation: "fadeIn 0.2s ease-out"
           }}>
-            <div style={{ fontSize: 36, textAlign: "center", marginBottom: 12, lineHeight: 1, background: "none", border: "none" }}>🪙</div>
+            <img src="/nugget-chicken-white-flipped.png" alt="Nugget" style={{ height: 56, width: "auto", display: "block", margin: "0 auto 12px" }} />
             <h2 style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, textAlign: "center", marginBottom: 8, lineHeight: 1.3 }}>
               Where should we send your personalized Nugget reports?
             </h2>
