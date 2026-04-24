@@ -58,7 +58,7 @@ const REPORTS = [
     name: "The Outbound Report",
     tag: "FREE",
     subtitle: "What the market thinks of you",
-    description: "What your LinkedIn activity broadcasts to potential clients when you're not paying attention.",
+    description: "What your LinkedIn activity broadcasts to potential Clients when you're not paying attention.",
     files: ["Comments", "Shares"],
     free: true,
   },
@@ -82,7 +82,7 @@ Do not include a title or heading at the start of your response. Begin directly 
 Format your response with these exact sections:
 
 ## Network Overview
-State total connections and highlight what % and how many are founders/owners/CEOs (ICP). Include an observation about connection growth rate and trajectory — is it accelerating, steady, or stagnating? Be specific with numbers. Write 2-3 sentences.
+State total connections and highlight what % and how many are Founders/owners/CEOs (ICP). Include an observation about connection growth rate and trajectory — is it accelerating, steady, or stagnating? Be specific with numbers. Write 2-3 sentences.
 
 ## Network Strengths & Gaps  
 Where is this network dense by industry/function? Where are the notable blind spots for BD purposes?
@@ -198,7 +198,7 @@ Key principle: honour their personal brand. Memorable quirks are competitive adv
 Analyze the comments and shares/posts to understand their market signal and social selling effectiveness.
 
 ## Signal Strength: X/10
-What does their LinkedIn activity communicate to potential clients right now? Include a social selling assessment — are they showing up as a trusted advisor or just a broadcaster?
+What does their LinkedIn activity communicate to potential Clients right now? Include a social selling assessment — are they showing up as a trusted advisor or just a broadcaster?
 
 ## What Potential Clients Actually See
 Based on content themes and engagement patterns — what impression does a potential client form observing your LinkedIn behavior over 30 days? Be specific about what's working and what isn't.
@@ -323,7 +323,7 @@ At the very end of your response, on its own line, output exactly this block and
 {"networkStrength": 0, "profileStrength": 0, "contentStrength": 0, "relationshipStrength": 0, "advocateStrength": 0}
 </SCORES>
 
-Replace the 0s with honest scores from 0-100 based on the data. Most founders score 45-72 overall. Score each: Network Strength = ICP match % and network quality. Profile Strength = profile BD readiness. Content Strength = posting consistency and ICP alignment. Relationship Strength = warm relationship depth and messaging activity. Advocate Strength = hidden nuggets count and referral potential.`,
+Replace the 0s with honest scores from 0-100 based on the data. Most Founders score 45-72 overall. Score each: Network Strength = ICP match % and network quality. Profile Strength = profile BD readiness. Content Strength = posting consistency and ICP alignment. Relationship Strength = warm relationship depth and messaging activity. Advocate Strength = hidden nuggets count and referral potential.`,
 };
 
 // ── Score utilities ───────────────────────────────────────────────────────────
@@ -687,29 +687,25 @@ export default function App() {
         {step === "upload" && (
           <>
             {/* ── Hero ── */}
-            <div style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, padding: "72px 24px 64px", borderRadius: "0 0 24px 24px", textAlign: "center", marginBottom: 0 }}>
-              <h1 style={{ fontSize: 48, fontFamily: "Georgia, serif", fontWeight: 700, color: "#ffffff", marginBottom: 20, lineHeight: 1.1 }}>
+            <div style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, padding: "80px 24px 72px", borderRadius: "0 0 24px 24px", textAlign: "center", marginBottom: 0 }}>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 600, marginBottom: 28 }}>
+                Built for Founders, Owners, and Solopreneurs who are their own best salesperson.
+              </p>
+              <h1 style={{ fontSize: 48, fontFamily: "Georgia, serif", fontWeight: 700, color: "#ffffff", marginBottom: 28, lineHeight: 1.1 }}>
                 Your next client is already<br />
                 <span style={{ background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>in your network.</span>
               </h1>
-              <p style={{ fontSize: 18, color: "rgba(255,255,255,0.85)", maxWidth: 540, margin: "0 auto 12px", lineHeight: 1.65 }}>
+              <p style={{ fontSize: 18, color: "rgba(255,255,255,0.85)", maxWidth: 540, margin: "0 auto 20px", lineHeight: 1.75 }}>
                 You just don't know who they are yet. NUGGET does.
               </p>
-              <p style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", maxWidth: 480, margin: "0 auto 36px", lineHeight: 1.65 }}>
+              <p style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", maxWidth: 480, margin: "0 auto 44px", lineHeight: 1.75 }}>
                 Find out who to call, what to say, and where your next opportunity is hiding — free.
               </p>
-              <div style={{ display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap", marginBottom: 28 }}>
+              <div style={{ display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap", marginBottom: 32 }}>
                 <button style={{ ...primaryBtn, fontSize: 16, padding: "14px 36px" }} onClick={scrollToUpload}>Get My Free Reports →</button>
               </div>
-              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)" }}>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)" }}>
                 NO scraping.&nbsp;&nbsp;NO cold outreach.&nbsp;&nbsp;NO guessing.
-              </p>
-            </div>
-
-            {/* ── Who It's For ── */}
-            <div style={{ background: BLUE_MID, padding: "18px 32px", textAlign: "center" }}>
-              <p style={{ fontSize: 15, color: WHITE, fontWeight: 600, letterSpacing: "0.02em" }}>
-                Built for founders, owners, and solopreneurs who are their own best salesperson.
               </p>
             </div>
 
@@ -810,7 +806,7 @@ export default function App() {
                   <div style={{ fontSize: 11, color: BLUE_BRIGHT, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 700, marginBottom: 14 }}>Nugget's Signature Metric</div>
                   <h2 style={{ fontSize: 34, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 16, lineHeight: 1.2 }}>Meet Your BizDev Readiness Score.</h2>
                   <p style={{ fontSize: 16, color: MUTED, maxWidth: 600, margin: "0 auto 24px", lineHeight: 1.75 }}>
-                    Most founders have no idea where they actually stand when it comes to business development. Not a gut feeling — an actual number. NUGGET changes that.
+                    Most Founders have no idea where they actually stand when it comes to business development. Not a gut feeling — an actual number. NUGGET changes that.
                   </p>
                   <p style={{ fontSize: 15, color: WHITE, maxWidth: 640, margin: "0 auto 32px", lineHeight: 1.75 }}>
                     Every time you run NUGGET, you get a score out of 100 across five dimensions. Each one tied directly to a report. Each one telling you exactly where to focus.
@@ -914,7 +910,7 @@ export default function App() {
                     I'm a founder with 33 years of business experience — and I've lived every bizdev challenge in this tool personally. The cold leads. The missed opportunities. The warm network sitting right there, completely untouched.
                   </p>
                   <p style={{ fontSize: 15, color: MUTED, lineHeight: 1.8, marginBottom: 16 }}>
-                    I still see it today with my clients as a Business Strategist. Smart, capable founders leaving money behind not because they don't know how to sell — but because they don't know how to use the data they already have.
+                    I still see it today with my Clients as a Business Strategist. Smart, capable Founders leaving money behind not because they don't know how to sell — but because they don't know how to use the data they already have.
                   </p>
                   <p style={{ fontSize: 15, color: WHITE, lineHeight: 1.8, fontWeight: 600 }}>
                     NUGGET is your unfair advantage on LinkedIn. No fluff, no jargon — just a clear picture of what's in your network and exactly what to do with it.
