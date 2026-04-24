@@ -878,79 +878,6 @@ export default function App() {
                 </LaptopFrame>
               </div>
 
-              <Divider />
-
-              {/* ── How It Works ── */}
-              <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "64px 40px", marginBottom: 0 }}>
-                <p style={{ fontSize: 22, color: WHITE, fontWeight: 700, textAlign: "center", marginBottom: 32, fontFamily: "Georgia, serif", letterSpacing: "-0.3px" }}>
-                  Your Nuggets are waiting — Just 3 easy steps to find them...
-                </p>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1px 1fr 1px 1fr", gap: 0, alignItems: "start" }}>
-                  {[
-                    { step: "01", title: "Request your data", desc: "On LinkedIn go to Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select all and click Request archive." },
-                    { step: "02", title: "Download the file", desc: "Wait for LinkedIn to email your data file — usually within 24 hours. Click the link in that email and download the file to your computer." },
-                    { step: "03", title: "Drop it in below", desc: "Drag and drop the file into Nugget below. That's it! Nugget works its magic and does the rest automatically. Let's get your Nuggets..." },
-                  ].reduce((acc, s, i) => {
-                    acc.push(
-                      <div key={s.step} style={{ display: "flex", flexDirection: "column", gap: 8, padding: "0 24px" }}>
-                        <div style={{ fontSize: 20, fontWeight: 700, color: BLUE_BRIGHT, fontFamily: "Georgia, serif", opacity: 0.5, lineHeight: 1, marginBottom: 4 }}>Step {s.step}</div>
-                        <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, marginBottom: 4 }}>{s.title}</div>
-                        <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.7 }}>{s.desc}</div>
-                      </div>
-                    );
-                    if (i < 2) acc.push(<div key={`div-${i}`} style={{ width: 1, background: BORDER, alignSelf: "stretch" }} />);
-                    return acc;
-                  }, [])}
-                </div>
-              </div>
-
-              {/* ── Upload Zone ── */}
-              <div ref={uploadRef}>
-                <div
-                  style={{ border: `2px dashed ${dragOver ? BLUE_BRIGHT : BORDER}`, borderRadius: 16, padding: "44px 32px", textAlign: "center", cursor: "pointer", background: dragOver ? BLUE_MID + "11" : DARK_CARD, transition: "all 0.2s", marginBottom: 28 }}
-                  onDragOver={e => { e.preventDefault(); setDragOver(true); }}
-                  onDragLeave={() => setDragOver(false)}
-                  onDrop={handleDrop}
-                  onClick={() => fileInputRef.current?.click()}
-                >
-                  <div style={{ fontSize: 36, marginBottom: 14 }}>📂</div>
-                  <div style={{ fontSize: 17, color: WHITE, fontWeight: 600, marginBottom: 8 }}>Drop your LinkedIn file here</div>
-                  <div style={{ fontSize: 13, color: MUTED, marginBottom: 18, lineHeight: 1.5 }}>
-                    Drop the file LinkedIn sent you here — Nugget takes it from there.<br />Or upload individual files if you prefer.
-                  </div>
-                  <button style={{ padding: "10px 28px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: "pointer" }}
-                    onClick={e => { e.stopPropagation(); fileInputRef.current?.click(); }}>Choose Files</button>
-                  <input ref={fileInputRef} type="file" multiple accept=".csv,.zip" style={{ display: "none" }} onChange={e => handleFiles(e.target.files)} />
-                  {hasFiles && (
-                    <div style={{ marginTop: 20, display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center" }}>
-                      {Object.keys(uploadedFiles).map(k => (
-                        <span key={k} style={{ padding: "4px 12px", background: BLUE_MID + "33", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 20, fontSize: 12, color: BLUE_BRIGHT }}>✓ {k}</span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* Stats */}
-                {connCount > 0 && (
-                  <div style={{ display: "flex", gap: 14, marginBottom: 24 }}>
-                    {[
-                      { num: connCount.toLocaleString(), label: "Connections loaded" },
-                      { num: msgCount.toLocaleString(),  label: "Messages loaded" },
-                      { num: Object.keys(uploadedFiles).length, label: "Files ready" },
-                    ].map((s, i) => (
-                      <div key={i} style={{ flex: 1, background: `linear-gradient(135deg, ${BLUE_DEEP}, ${DARK_CARD})`, border: `1px solid ${BORDER}`, borderRadius: 10, padding: "16px 20px", textAlign: "center" }}>
-                        <div style={{ fontSize: 26, fontWeight: 700, color: BLUE_BRIGHT, fontFamily: "Georgia, serif" }}>{s.num}</div>
-                        <div style={{ fontSize: 11, color: MUTED, textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 4 }}>{s.label}</div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {error && <div style={{ background: "#1a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
-
-              <Divider />
-
               {/* ── BizDev Readiness Score ── */}
               <div style={{ marginBottom: 0 }}>
                 <div style={{ textAlign: "center", marginBottom: 48 }}>
@@ -1045,6 +972,79 @@ export default function App() {
                   ))}
                 </div>
               </div>
+
+              <Divider />
+
+              {/* ── How It Works ── */}
+              <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "64px 40px", marginBottom: 0 }}>
+                <p style={{ fontSize: 22, color: WHITE, fontWeight: 700, textAlign: "center", marginBottom: 32, fontFamily: "Georgia, serif", letterSpacing: "-0.3px" }}>
+                  Your Nuggets are waiting — Just 3 easy steps to find them...
+                </p>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1px 1fr 1px 1fr", gap: 0, alignItems: "start" }}>
+                  {[
+                    { step: "01", title: "Request your data", desc: "On LinkedIn go to Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select all and click Request archive." },
+                    { step: "02", title: "Download the file", desc: "Wait for LinkedIn to email your data file — usually within 24 hours. Click the link in that email and download the file to your computer." },
+                    { step: "03", title: "Drop it in below", desc: "Drag and drop the file into Nugget below. That's it! Nugget works its magic and does the rest automatically. Let's get your Nuggets..." },
+                  ].reduce((acc, s, i) => {
+                    acc.push(
+                      <div key={s.step} style={{ display: "flex", flexDirection: "column", gap: 8, padding: "0 24px" }}>
+                        <div style={{ fontSize: 20, fontWeight: 700, color: BLUE_BRIGHT, fontFamily: "Georgia, serif", opacity: 0.5, lineHeight: 1, marginBottom: 4 }}>Step {s.step}</div>
+                        <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, marginBottom: 4 }}>{s.title}</div>
+                        <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.7 }}>{s.desc}</div>
+                      </div>
+                    );
+                    if (i < 2) acc.push(<div key={`div-${i}`} style={{ width: 1, background: BORDER, alignSelf: "stretch" }} />);
+                    return acc;
+                  }, [])}
+                </div>
+              </div>
+
+              {/* ── Upload Zone ── */}
+              <div ref={uploadRef}>
+                <div
+                  style={{ border: `2px dashed ${dragOver ? BLUE_BRIGHT : BORDER}`, borderRadius: 16, padding: "44px 32px", textAlign: "center", cursor: "pointer", background: dragOver ? BLUE_MID + "11" : DARK_CARD, transition: "all 0.2s", marginBottom: 28 }}
+                  onDragOver={e => { e.preventDefault(); setDragOver(true); }}
+                  onDragLeave={() => setDragOver(false)}
+                  onDrop={handleDrop}
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  <div style={{ fontSize: 36, marginBottom: 14 }}>📂</div>
+                  <div style={{ fontSize: 17, color: WHITE, fontWeight: 600, marginBottom: 8 }}>Drop your LinkedIn file here</div>
+                  <div style={{ fontSize: 13, color: MUTED, marginBottom: 18, lineHeight: 1.5 }}>
+                    Drop the file LinkedIn sent you here — Nugget takes it from there.<br />Or upload individual files if you prefer.
+                  </div>
+                  <button style={{ padding: "10px 28px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: "pointer" }}
+                    onClick={e => { e.stopPropagation(); fileInputRef.current?.click(); }}>Choose Files</button>
+                  <input ref={fileInputRef} type="file" multiple accept=".csv,.zip" style={{ display: "none" }} onChange={e => handleFiles(e.target.files)} />
+                  {hasFiles && (
+                    <div style={{ marginTop: 20, display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center" }}>
+                      {Object.keys(uploadedFiles).map(k => (
+                        <span key={k} style={{ padding: "4px 12px", background: BLUE_MID + "33", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 20, fontSize: 12, color: BLUE_BRIGHT }}>✓ {k}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Stats */}
+                {connCount > 0 && (
+                  <div style={{ display: "flex", gap: 14, marginBottom: 24 }}>
+                    {[
+                      { num: connCount.toLocaleString(), label: "Connections loaded" },
+                      { num: msgCount.toLocaleString(),  label: "Messages loaded" },
+                      { num: Object.keys(uploadedFiles).length, label: "Files ready" },
+                    ].map((s, i) => (
+                      <div key={i} style={{ flex: 1, background: `linear-gradient(135deg, ${BLUE_DEEP}, ${DARK_CARD})`, border: `1px solid ${BORDER}`, borderRadius: 10, padding: "16px 20px", textAlign: "center" }}>
+                        <div style={{ fontSize: 26, fontWeight: 700, color: BLUE_BRIGHT, fontFamily: "Georgia, serif" }}>{s.num}</div>
+                        <div style={{ fontSize: 11, color: MUTED, textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 4 }}>{s.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {error && <div style={{ background: "#1a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
+
+              <Divider />
 
               <Divider />
 
