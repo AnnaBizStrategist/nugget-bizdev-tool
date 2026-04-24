@@ -13,7 +13,7 @@ const WHITE       = "#e8f0fe";
 const MUTED       = "#9fc4e8";
 const BORDER      = "#1e4080";
 
-const LOGO_BASE64 = "/nugget-chicken-white-flipped.png";
+const LOGO_BASE64 = "../nugget-chicken-white-flipped.png";
 
 // ── Report definitions ────────────────────────────────────────────────────────
 const REPORTS = [
