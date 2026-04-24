@@ -13,10 +13,7 @@ const WHITE       = "#e8f0fe";
 const MUTED       = "#9fc4e8";
 const BORDER      = "#1e4080";
 
-// ── PASTE YOUR EXISTING BASE64 LOGO STRING HERE ───────────────────────────────
-// Replace LOGO_BASE64 below with the data:image/png;base64,... string
-// from your current App.jsx (it starts with "data:image/png;base64,iVBOR...")
-const LOGO_BASE64 = "PASTE_YOUR_LOGO_BASE64_HERE";
+const LOGO_BASE64 = "/nugget-chicken-white-flipped.png";
 
 // ── Report definitions ────────────────────────────────────────────────────────
 const REPORTS = [
