@@ -743,10 +743,10 @@ export default function App() {
               <p style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", maxWidth: 480, margin: "0 auto 44px", lineHeight: 1.75, animation: "fadeSlideUp 0.7s ease-out 0.3s both" }}>
                 Find out who to call, what to say, and where your next opportunity is hiding — free.
               </p>
-              <div style={{ display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap", marginBottom: 32, animation: "fadeSlideUp 0.7s ease-out 0.4s both" }}>
+              <div style={{ display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap", marginBottom: 44, animation: "fadeSlideUp 0.7s ease-out 0.4s both" }}>
                 <button style={{ ...primaryBtn, fontSize: 16, padding: "14px 36px" }} onClick={scrollToUpload}>Get My Free Reports →</button>
               </div>
-              <p style={{ fontSize: 30, fontFamily: "Georgia, serif", fontWeight: 700, color: "rgba(255,255,255,0.85)", letterSpacing: "-0.3px", marginTop: 8, animation: "fadeSlideUp 0.7s ease-out 0.5s both" }}>
+              <p style={{ fontSize: 30, fontFamily: "Georgia, serif", fontWeight: 700, color: "rgba(255,255,255,0.85)", letterSpacing: "-0.3px", marginTop: 20, animation: "fadeSlideUp 0.7s ease-out 0.5s both" }}>
                 NO scraping.&nbsp;&nbsp;NO cold outreach.&nbsp;&nbsp;NO guessing.
               </p>
             </div>
@@ -754,7 +754,7 @@ export default function App() {
             <div style={{ padding: "56px 0 0" }}>
 
               {/* ── The Problem ── */}
-              <div className="scroll-reveal" style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "40px 48px", marginBottom: 16, textAlign: "center" }}>
+              <div className="scroll-reveal" style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "56px 48px", marginBottom: 0, textAlign: "center" }}>
                 <div style={{ fontSize: 14, color: MUTED, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 20 }}>Sound familiar?</div>
                 <p style={{ fontSize: 19, color: WHITE, lineHeight: 1.8, maxWidth: 660, margin: "0 auto", fontFamily: "Georgia, serif" }}>
                   Your LinkedIn network is full of people who could refer you, hire you, or open a door. But LinkedIn doesn't show you who they are, how warm they are, or what to say. So you either throw spaghetti and hope something sticks — or you do nothing and wonder why business development feels so hard. Either way you're leaving money behind.
@@ -762,7 +762,7 @@ export default function App() {
               </div>
 
               {/* ── The Solution ── */}
-              <div className="scroll-reveal" style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 16, padding: "40px 48px", marginBottom: 40, textAlign: "center" }}>
+              <div className="scroll-reveal" style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 16, padding: "56px 48px", marginBottom: 40, marginTop: 32, textAlign: "center" }}>
                 <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 20 }}>Enter Nugget™</div>
                 <p style={{ fontSize: 19, color: WHITE, lineHeight: 1.8, maxWidth: 660, margin: "0 auto", fontFamily: "Georgia, serif" }}>
                   NUGGET changes that. Upload your LinkedIn data once and we'll show you exactly what's hiding in your network — who's warm, who's ready, and where your next client is most likely coming from.
@@ -881,7 +881,7 @@ export default function App() {
               <Divider />
 
               {/* ── How It Works ── */}
-              <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "36px 40px", marginBottom: 40 }}>
+              <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "52px 40px", marginBottom: 40 }}>
                 <p style={{ fontSize: 22, color: WHITE, fontWeight: 700, textAlign: "center", marginBottom: 32, fontFamily: "Georgia, serif", letterSpacing: "-0.3px" }}>
                   Your Nuggets are waiting — Just 3 easy steps to find them...
                 </p>
@@ -952,8 +952,8 @@ export default function App() {
               <Divider />
 
               {/* ── BizDev Readiness Score ── */}
-              <div style={{ marginBottom: 40 }}>
-                <div style={{ textAlign: "center", marginBottom: 40 }}>
+              <div style={{ marginBottom: 40, paddingTop: 24 }}>
+                <div style={{ textAlign: "center", marginBottom: 48 }}>
                   <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>Nugget's Signature Metric</div>
                   <h2 style={{ fontSize: 34, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 16, lineHeight: 1.2 }}>Meet Your BizDev Readiness Score.</h2>
                   <p style={{ fontSize: 16, color: MUTED, maxWidth: 600, margin: "0 auto 24px", lineHeight: 1.75 }}>
@@ -1010,8 +1010,8 @@ export default function App() {
               <Divider />
 
               {/* ── Report cards ── */}
-              <div style={{ marginBottom: 40 }}>
-                <div style={{ textAlign: "center", marginBottom: 32 }}>
+              <div style={{ marginBottom: 40, paddingTop: 24 }}>
+                <div style={{ textAlign: "center", marginBottom: 40 }}>
                   <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>What You Get</div>
                   <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 12 }}>Five free reports. One Gold Nugget.</h2>
                   <p style={{ fontSize: 14, color: MUTED, maxWidth: 500, margin: "0 auto" }}>
@@ -1049,7 +1049,7 @@ export default function App() {
               <Divider />
 
               {/* ── Anna section ── */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 48, alignItems: "center", marginBottom: 40 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 48, alignItems: "start", marginBottom: 40 }}>
                 <div style={{ borderRadius: 16, overflow: "hidden", position: "relative", border: `1px solid ${BORDER}` }}>
                   <img src={ANNA_PHOTO} alt="Anna Ludwinowski" style={{ width: "100%", display: "block" }} />
                   <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "linear-gradient(transparent, rgba(10,22,40,0.92))", padding: "32px 16px 18px", textAlign: "center" }}>
