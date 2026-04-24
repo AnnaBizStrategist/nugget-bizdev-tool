@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import Papa from "papaparse";
 import JSZip from "jszip";
 
@@ -536,7 +536,7 @@ function LaptopFrame({ children }) {
 
 // ── Divider ───────────────────────────────────────────────────────────────────
 function Divider() {
-  return <div style={{ height: 1, background: `linear-gradient(90deg, transparent, ${BORDER}, transparent)`, margin: "48px 0" }} />;
+  return <div style={{ height: 1, background: `linear-gradient(90deg, transparent, ${BORDER}, transparent)`, margin: "56px 0" }} />;
 }
 
 // ── Main App ──────────────────────────────────────────────────────────────────
@@ -649,7 +649,7 @@ export default function App() {
 
   // Scroll reveal observer
   const observerRef = useRef(null);
-  useState(() => {
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); }),
       { threshold: 0.12 }
@@ -754,7 +754,7 @@ export default function App() {
             <div style={{ padding: "56px 0 0" }}>
 
               {/* ── The Problem ── */}
-              <div className="scroll-reveal" style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "56px 48px", marginBottom: 0, textAlign: "center" }}>
+              <div className="scroll-reveal" style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "64px 48px", marginBottom: 0, textAlign: "center" }}>
                 <div style={{ fontSize: 14, color: MUTED, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 20 }}>Sound familiar?</div>
                 <p style={{ fontSize: 19, color: WHITE, lineHeight: 1.8, maxWidth: 660, margin: "0 auto", fontFamily: "Georgia, serif" }}>
                   Your LinkedIn network is full of people who could refer you, hire you, or open a door. But LinkedIn doesn't show you who they are, how warm they are, or what to say. So you either throw spaghetti and hope something sticks — or you do nothing and wonder why business development feels so hard. Either way you're leaving money behind.
@@ -762,7 +762,7 @@ export default function App() {
               </div>
 
               {/* ── The Solution ── */}
-              <div className="scroll-reveal" style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 16, padding: "56px 48px", marginBottom: 40, marginTop: 32, textAlign: "center" }}>
+              <div className="scroll-reveal" style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 16, padding: "64px 48px", marginBottom: 0, marginTop: 40, textAlign: "center" }}>
                 <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 20 }}>Enter Nugget™</div>
                 <p style={{ fontSize: 19, color: WHITE, lineHeight: 1.8, maxWidth: 660, margin: "0 auto", fontFamily: "Georgia, serif" }}>
                   NUGGET changes that. Upload your LinkedIn data once and we'll show you exactly what's hiding in your network — who's warm, who's ready, and where your next client is most likely coming from.
@@ -881,7 +881,7 @@ export default function App() {
               <Divider />
 
               {/* ── How It Works ── */}
-              <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "52px 40px", marginBottom: 40 }}>
+              <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "64px 40px", marginBottom: 0 }}>
                 <p style={{ fontSize: 22, color: WHITE, fontWeight: 700, textAlign: "center", marginBottom: 32, fontFamily: "Georgia, serif", letterSpacing: "-0.3px" }}>
                   Your Nuggets are waiting — Just 3 easy steps to find them...
                 </p>
@@ -952,10 +952,10 @@ export default function App() {
               <Divider />
 
               {/* ── BizDev Readiness Score ── */}
-              <div style={{ marginBottom: 40, paddingTop: 24 }}>
+              <div style={{ marginBottom: 0 }}>
                 <div style={{ textAlign: "center", marginBottom: 48 }}>
                   <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>Nugget's Signature Metric</div>
-                  <h2 style={{ fontSize: 34, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 16, lineHeight: 1.2 }}>Meet Your BizDev Readiness Score.</h2>
+                  <h2 style={{ fontSize: 34, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 28, lineHeight: 1.2 }}>Meet Your BizDev Readiness Score.</h2>
                   <p style={{ fontSize: 16, color: MUTED, maxWidth: 600, margin: "0 auto 24px", lineHeight: 1.75 }}>
                     Most Founders have no idea where they actually stand when it comes to business development. Not a gut feeling — an actual number. NUGGET changes that.
                   </p>
@@ -1010,15 +1010,15 @@ export default function App() {
               <Divider />
 
               {/* ── Report cards ── */}
-              <div style={{ marginBottom: 40, paddingTop: 24 }}>
+              <div style={{ marginBottom: 0 }}>
                 <div style={{ textAlign: "center", marginBottom: 40 }}>
                   <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>What You Get</div>
-                  <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 12 }}>Five free reports. One Gold Nugget.</h2>
+                  <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 24 }}>Five free reports. One Gold Nugget.</h2>
                   <p style={{ fontSize: 14, color: MUTED, maxWidth: 500, margin: "0 auto" }}>
                     Every insight, every name, and every next step is unique to you.<br />This is your data. These are your people. This is your plan.
                   </p>
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 14 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 14, marginBottom: 24 }}>
                   {REPORTS.map(r => (
                     <div key={r.id} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: 20, opacity: (r.free || isBeta) ? 1 : 0.5, position: "relative", borderTop: "3px solid transparent", backgroundImage: `linear-gradient(${DARK_CARD}, ${DARK_CARD}), linear-gradient(90deg, ${(r.free || isBeta) ? BLUE_BRIGHT : BORDER}, ${(r.free || isBeta) ? BLUE_MID : BORDER})`, backgroundOrigin: "border-box", backgroundClip: "padding-box, border-box", display: "flex", flexDirection: "column" }}>
                       {!r.free && !isBeta && <span style={{ position: "absolute", top: 14, right: 14, fontSize: 15, color: MUTED }}>🔒</span>}
