@@ -451,20 +451,20 @@ function ScoreReveal({ scores, onContinue }) {
     { key: "advocateStrength",     label: "Advocate Strength" },
   ].map(d => ({ ...d, score: scores[d.key] || 0 }));
 
-  const avg     = Math.round(dims.reduce((s, d) => s + d.score, 0) / dims.length);
-  const lowest  = dims.reduce((a, b) => a.score < b.score ? a : b);
+  const avg    = Math.round(dims.reduce((s, d) => s + d.score, 0) / dims.length);
+  const lowest = dims.reduce((a, b) => a.score < b.score ? a : b);
 
   const getTier = s => {
-    if (s >= 86) return { label: "BD Ready 🎯",             color: "#4ade80" };
-    if (s >= 66) return { label: "Getting Warm 🔥",          color: BLUE_BRIGHT };
-    if (s >= 41) return { label: "Building Momentum ⚡",     color: "#E8A000" };
-    return         { label: "Just Getting Started 🌱",       color: MUTED };
+    if (s >= 86) return { label: "BD Ready 🎯",          color: "#4ade80" };
+    if (s >= 66) return { label: "Getting Warm 🔥",       color: BLUE_BRIGHT };
+    if (s >= 41) return { label: "Building Momentum ⚡",  color: "#E8A000" };
+    return         { label: "Just Getting Started 🌱",    color: MUTED };
   };
 
   const getBar = s => {
-    if (s >= 75) return { label: "Strong",         color: "#4ade80" };
-    if (s >= 50) return { label: "Building",        color: BLUE_BRIGHT };
-    return         { label: "Needs Attention",      color: "#f87171" };
+    if (s >= 75) return { label: "Strong",        color: "#4ade80" };
+    if (s >= 50) return { label: "Building",       color: BLUE_BRIGHT };
+    return         { label: "Needs Attention",     color: "#f87171" };
   };
 
   const tier = getTier(avg);
@@ -477,7 +477,6 @@ function ScoreReveal({ scores, onContinue }) {
         <div style={{ fontSize: 24, fontWeight: 700, color: tier.color, marginBottom: 10 }}>{tier.label}</div>
         <div style={{ fontSize: 14, color: MUTED, lineHeight: 1.65 }}>Your LinkedIn foundation is taking shape. Here's where you stand.</div>
       </div>
-
       <div style={{ background: DARK, borderRadius: 14, padding: "28px 32px", marginBottom: 24, border: `1px solid ${BORDER}` }}>
         <div style={{ fontSize: 11, color: MUTED, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 700, marginBottom: 24 }}>Your Foundation Breakdown</div>
         {dims.map(d => {
@@ -495,14 +494,12 @@ function ScoreReveal({ scores, onContinue }) {
           );
         })}
       </div>
-
       <div style={{ background: BLUE_MID + "22", border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 12, padding: "18px 24px", marginBottom: 36 }}>
         <div style={{ fontSize: 11, color: MUTED, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 700, marginBottom: 8 }}>Your Biggest Opportunity</div>
         <div style={{ fontSize: 14, color: WHITE, lineHeight: 1.65 }}>
           <strong style={{ color: BLUE_BRIGHT }}>{lowest.label}</strong> is where your foundation needs the most attention — and it's the fastest to move.
         </div>
       </div>
-
       <div style={{ textAlign: "center" }}>
         <button onClick={onContinue} style={{ padding: "14px 36px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "Georgia, serif", marginBottom: 10 }}>
           Read Your Full Reports →
@@ -513,34 +510,40 @@ function ScoreReveal({ scores, onContinue }) {
   );
 }
 
+// ── Divider ───────────────────────────────────────────────────────────────────
+function Divider() {
+  return <div style={{ height: 1, background: `linear-gradient(90deg, transparent, ${BORDER}, transparent)`, margin: "48px 0" }} />;
+}
+
 // ── Main App ──────────────────────────────────────────────────────────────────
 export default function App() {
   const isBeta = new URLSearchParams(window.location.search).get("beta") === "true";
 
-  const [step,           setStep]           = useState("upload");
-  const [uploadedFiles,  setUploadedFiles]  = useState({});
-  const [parsedData,     setParsedData]     = useState({});
-  const [reports,        setReports]        = useState({});
-  const [scores,         setScores]         = useState(null);
-  const [generating,     setGenerating]     = useState(null);
-  const [activeReport,   setActiveReport]   = useState("field");
-  const [dragOver,       setDragOver]       = useState(false);
-  const [countdown,      setCountdown]      = useState(0);
-  const [error,          setError]          = useState(null);
-  const [showEmailModal, setShowEmailModal] = useState(false);
-  const [emailSubmitted, setEmailSubmitted] = useState(false);
-  const [pendingReportId,setPendingReportId]= useState(null);
-  const [emailName,      setEmailName]      = useState("");
-  const [emailAddress,   setEmailAddress]   = useState("");
-  const [emailSubmitting,setEmailSubmitting]= useState(false);
+  const [step,            setStep]           = useState("upload");
+  const [uploadedFiles,   setUploadedFiles]  = useState({});
+  const [parsedData,      setParsedData]     = useState({});
+  const [reports,         setReports]        = useState({});
+  const [scores,          setScores]         = useState(null);
+  const [generating,      setGenerating]     = useState(null);
+  const [activeReport,    setActiveReport]   = useState("field");
+  const [dragOver,        setDragOver]       = useState(false);
+  const [countdown,       setCountdown]      = useState(0);
+  const [error,           setError]          = useState(null);
+  const [showEmailModal,  setShowEmailModal] = useState(false);
+  const [emailSubmitted,  setEmailSubmitted] = useState(false);
+  const [pendingReportId, setPendingReportId]= useState(null);
+  const [emailName,       setEmailName]      = useState("");
+  const [emailAddress,    setEmailAddress]   = useState("");
+  const [emailSubmitting, setEmailSubmitting]= useState(false);
   const fileInputRef = useRef(null);
+  const uploadRef    = useRef(null);
 
-  const hasFiles           = Object.keys(uploadedFiles).length > 0;
-  const connCount          = parsedData["Connections"]?.length || 0;
-  const msgCount           = parsedData["Messages"]?.length || 0;
-  const reportsReady       = Object.keys(reports).length;
-  const activeReportMeta   = REPORTS.find(r => r.id === activeReport);
-  const freeReportsComplete= REPORTS.filter(r => r.free).every(r => reports[r.id]);
+  const hasFiles            = Object.keys(uploadedFiles).length > 0;
+  const connCount           = parsedData["Connections"]?.length || 0;
+  const msgCount            = parsedData["Messages"]?.length || 0;
+  const reportsReady        = Object.keys(reports).length;
+  const activeReportMeta    = REPORTS.find(r => r.id === activeReport);
+  const freeReportsComplete = REPORTS.filter(r => r.free).every(r => reports[r.id]);
 
   const handleFiles = useCallback((fileList) => {
     Array.from(fileList).forEach((file) => {
@@ -620,22 +623,22 @@ export default function App() {
     }).catch(err => console.log("Webhook error:", err));
   };
 
-  const generateAll = async () => {
-    setStep("reports"); setActiveReport("field");
-    const freeReports = REPORTS.filter(r => r.free);
-    for (let i = 0; i < freeReports.length; i++) {
-      const report = freeReports[i];
-      setGenerating(report.id); setActiveReport(report.id); setError(null);
-      try {
-        const result = await callClaude(PROMPTS[report.id], prepareData(parsedData, report.files));
-        setReports(prev => ({ ...prev, [report.id]: result }));
-      } catch (err) { setReports(prev => ({ ...prev, [report.id]: `Error: ${err.message}` })); }
-      setGenerating(null);
-      if (i < freeReports.length - 1) {
-        for (let s = 15; s > 0; s--) { setCountdown(s); await new Promise(res => setTimeout(res, 1000)); }
-        setCountdown(0);
-      }
-    }
+  const scrollToUpload = () => {
+    uploadRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  // ── Shared button styles ──
+  const primaryBtn = {
+    padding: "13px 32px",
+    background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`,
+    color: WHITE,
+    border: "none",
+    borderRadius: 9,
+    fontWeight: 700,
+    fontSize: 15,
+    cursor: "pointer",
+    fontFamily: "Georgia, serif",
+    letterSpacing: "0.02em",
   };
 
   return (
@@ -648,14 +651,14 @@ export default function App() {
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0a1628; }
         ::-webkit-scrollbar-thumb { background: #1e4080; border-radius: 3px; }
-        @keyframes spin    { to { transform: rotate(360deg); } }
-        @keyframes fadeIn  { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
-        @keyframes pulse   { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
+        @keyframes spin   { to { transform: rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+        @keyframes pulse  { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
         * { box-sizing: border-box; margin: 0; padding: 0; }
       `}</style>
 
       {/* ── Header ── */}
-      <header style={{ borderBottom: `1px solid ${BORDER}`, padding: "16px 40px", display: "flex", alignItems: "center", background: DARK_CARD }}>
+      <header style={{ borderBottom: `1px solid ${BORDER}`, padding: "16px 40px", display: "flex", alignItems: "center", background: DARK_CARD, position: "sticky", top: 0, zIndex: 100 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
           <div>
             <div style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, letterSpacing: "-0.5px", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Nugget<span style={{ fontSize: 13, verticalAlign: "super", marginLeft: 1 }}>™</span></div>
@@ -663,134 +666,298 @@ export default function App() {
           </div>
         </div>
         <nav style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
-          <button style={{ padding: "6px 16px", borderRadius: 6, border: `1px solid ${step === "upload" ? BLUE_BRIGHT : BORDER}`, background: step === "upload" ? BLUE_MID + "44" : "transparent", color: step === "upload" ? BLUE_BRIGHT : MUTED, cursor: "pointer", fontSize: 13 }} onClick={() => setStep("upload")}>Upload</button>
-          <button style={{ padding: "6px 16px", borderRadius: 6, border: `1px solid ${step === "reports" ? BLUE_BRIGHT : BORDER}`, background: step === "reports" ? BLUE_MID + "44" : "transparent", color: step === "reports" ? BLUE_BRIGHT : MUTED, cursor: "pointer", fontSize: 13 }} onClick={() => reportsReady > 0 && setStep("reports")}>
-            Reports {reportsReady > 0 && `(${reportsReady})`}
-          </button>
+          {step === "upload" ? (
+            <button style={{ ...primaryBtn, padding: "8px 20px", fontSize: 13 }} onClick={scrollToUpload}>Get My Free Reports →</button>
+          ) : (
+            <>
+              <button style={{ padding: "6px 16px", borderRadius: 6, border: `1px solid ${BORDER}`, background: "transparent", color: MUTED, cursor: "pointer", fontSize: 13 }} onClick={() => setStep("upload")}>Home</button>
+              <button style={{ padding: "6px 16px", borderRadius: 6, border: `1px solid ${step === "reports" ? BLUE_BRIGHT : BORDER}`, background: step === "reports" ? BLUE_MID + "44" : "transparent", color: step === "reports" ? BLUE_BRIGHT : MUTED, cursor: "pointer", fontSize: 13 }} onClick={() => reportsReady > 0 && setStep("reports")}>
+                Reports {reportsReady > 0 && `(${reportsReady})`}
+              </button>
+            </>
+          )}
         </nav>
       </header>
 
-      <main style={{ maxWidth: 980, margin: "0 auto", padding: "48px 24px" }}>
+      <main style={{ maxWidth: 980, margin: "0 auto", padding: "0 24px 80px" }}>
 
+        {/* ══════════════════════════════════════════════════════════════════
+            UPLOAD / HOME STEP
+        ══════════════════════════════════════════════════════════════════ */}
         {step === "upload" && (
           <>
-            <div style={{ textAlign: "center", marginBottom: 44, background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, margin: "0 0 44px 0", padding: "56px 24px 48px", borderRadius: 16 }}>
-              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.75)", maxWidth: 520, margin: "0 auto 20px", lineHeight: 1.65 }}>
-                Nugget is a powerful Business Development tool that reads your own LinkedIn data and shows you the gold hiding inside it.
-              </p>
-              <h1 style={{ fontSize: 44, fontFamily: "Georgia, serif", fontWeight: 700, color: "#ffffff", marginBottom: 24, lineHeight: 1.15 }}>
+            {/* ── Hero ── */}
+            <div style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, padding: "72px 24px 64px", borderRadius: "0 0 24px 24px", textAlign: "center", marginBottom: 0 }}>
+              <h1 style={{ fontSize: 48, fontFamily: "Georgia, serif", fontWeight: 700, color: "#ffffff", marginBottom: 20, lineHeight: 1.1 }}>
                 Your next client is already<br />
                 <span style={{ background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>in your network.</span>
               </h1>
-              <p style={{ fontSize: 19, color: "#ffffff", fontWeight: 800, marginBottom: 20, letterSpacing: "0.04em" }}>
-                NO scraping.&nbsp;&nbsp;&nbsp;NO cold outreach.&nbsp;&nbsp;&nbsp;NO guessing.
+              <p style={{ fontSize: 18, color: "rgba(255,255,255,0.85)", maxWidth: 540, margin: "0 auto 12px", lineHeight: 1.65 }}>
+                You just don't know who they are yet. NUGGET does.
               </p>
-              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.75)", maxWidth: 380, margin: "0 auto" }}>Just intelligence from data you already own.</p>
+              <p style={{ fontSize: 15, color: "rgba(255,255,255,0.6)", maxWidth: 480, margin: "0 auto 36px", lineHeight: 1.65 }}>
+                Find out who to call, what to say, and where your next opportunity is hiding — free.
+              </p>
+              <div style={{ display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap", marginBottom: 28 }}>
+                <button style={{ ...primaryBtn, fontSize: 16, padding: "14px 36px" }} onClick={scrollToUpload}>Get My Free Reports →</button>
+              </div>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)" }}>
+                NO scraping.&nbsp;&nbsp;NO cold outreach.&nbsp;&nbsp;NO guessing.
+              </p>
             </div>
 
-            <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "28px 32px", marginBottom: 24 }}>
-              <p style={{ fontSize: 20, color: WHITE, fontWeight: 700, textAlign: "center", marginBottom: 28, fontFamily: "Georgia, serif", letterSpacing: "-0.3px" }}>
-                Your Nuggets are waiting — Just 3 easy steps to find them...
+            {/* ── Who It's For ── */}
+            <div style={{ background: BLUE_MID, padding: "18px 32px", textAlign: "center" }}>
+              <p style={{ fontSize: 15, color: WHITE, fontWeight: 600, letterSpacing: "0.02em" }}>
+                Built for founders, owners, and solopreneurs who are their own best salesperson.
               </p>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1px 1fr 1px 1fr", gap: 0, alignItems: "start" }}>
-                {[
-                  { step: "01", title: "Request your data", desc: "On LinkedIn go to Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select all and click Request archive." },
-                  { step: "02", title: "Download the file", desc: "Wait for LinkedIn to email your data file — usually within 24 hours. Click the link in that email and download the file to your computer." },
-                  { step: "03", title: "Drop it in below", desc: "Drag and drop the file into Nugget below. That's it! Nugget works its magic and does the rest automatically. Let's get your Nuggets..." },
-                ].reduce((acc, s, i) => {
-                  acc.push(
-                    <div key={s.step} style={{ display: "flex", flexDirection: "column", gap: 8, padding: "0 20px" }}>
-                      <div style={{ fontSize: 20, fontWeight: 700, color: BLUE_BRIGHT, fontFamily: "Georgia, serif", opacity: 0.5, lineHeight: 1, marginBottom: 4 }}>Step {s.step}</div>
-                      <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, marginBottom: 4 }}>{s.title}</div>
-                      <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.7 }}>{s.desc}</div>
-                    </div>
-                  );
-                  if (i < 2) acc.push(<div key={`div-${i}`} style={{ width: 1, background: BORDER, alignSelf: "stretch" }} />);
-                  return acc;
-                }, [])}
-              </div>
             </div>
 
-            <div
-              style={{ border: `2px dashed ${dragOver ? BLUE_BRIGHT : BORDER}`, borderRadius: 16, padding: "44px 32px", textAlign: "center", cursor: "pointer", background: dragOver ? BLUE_MID + "11" : DARK_CARD, transition: "all 0.2s", marginBottom: 28 }}
-              onDragOver={e => { e.preventDefault(); setDragOver(true); }}
-              onDragLeave={() => setDragOver(false)}
-              onDrop={handleDrop}
-              onClick={() => fileInputRef.current?.click()}
-            >
-              <div style={{ fontSize: 36, marginBottom: 14 }}>📂</div>
-              <div style={{ fontSize: 17, color: WHITE, fontWeight: 600, marginBottom: 8 }}>Drop your LinkedIn file here</div>
-              <div style={{ fontSize: 13, color: MUTED, marginBottom: 18, lineHeight: 1.5 }}>
-                Drop the file LinkedIn sent you here — Nugget takes it from there.<br />Or upload individual files if you prefer.
+            <div style={{ padding: "56px 0 0" }}>
+
+              {/* ── The Problem ── */}
+              <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "40px 48px", marginBottom: 16, textAlign: "center" }}>
+                <div style={{ fontSize: 11, color: MUTED, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 700, marginBottom: 20 }}>Sound familiar?</div>
+                <p style={{ fontSize: 19, color: WHITE, lineHeight: 1.8, maxWidth: 660, margin: "0 auto", fontFamily: "Georgia, serif" }}>
+                  Your LinkedIn network is full of people who could refer you, hire you, or open a door. But LinkedIn doesn't show you who they are, how warm they are, or what to say. So you either throw spaghetti and hope something sticks — or you do nothing and wonder why business development feels so hard. Either way you're leaving money behind.
+                </p>
               </div>
-              <button style={{ padding: "10px 28px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: "pointer" }}
-                onClick={e => { e.stopPropagation(); fileInputRef.current?.click(); }}>Choose Files</button>
-              <input ref={fileInputRef} type="file" multiple accept=".csv,.zip" style={{ display: "none" }} onChange={e => handleFiles(e.target.files)} />
-              {hasFiles && (
-                <div style={{ marginTop: 20, display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center" }}>
-                  {Object.keys(uploadedFiles).map(k => (
-                    <span key={k} style={{ padding: "4px 12px", background: BLUE_MID + "33", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 20, fontSize: 12, color: BLUE_BRIGHT }}>✓ {k}</span>
-                  ))}
+
+              {/* ── The Solution ── */}
+              <div style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 16, padding: "40px 48px", marginBottom: 40, textAlign: "center" }}>
+                <div style={{ fontSize: 11, color: BLUE_BRIGHT, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 700, marginBottom: 20 }}>Enter Nugget™</div>
+                <p style={{ fontSize: 19, color: WHITE, lineHeight: 1.8, maxWidth: 660, margin: "0 auto", fontFamily: "Georgia, serif" }}>
+                  NUGGET changes that. Upload your LinkedIn data once and we'll show you exactly what's hiding in your network — who's warm, who's ready, and where your next client is most likely coming from.
+                </p>
+              </div>
+
+              <Divider />
+
+              {/* ── How It Works ── */}
+              <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "36px 40px", marginBottom: 40 }}>
+                <p style={{ fontSize: 22, color: WHITE, fontWeight: 700, textAlign: "center", marginBottom: 32, fontFamily: "Georgia, serif", letterSpacing: "-0.3px" }}>
+                  Your Nuggets are waiting — Just 3 easy steps to find them...
+                </p>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1px 1fr 1px 1fr", gap: 0, alignItems: "start" }}>
+                  {[
+                    { step: "01", title: "Request your data", desc: "On LinkedIn go to Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select all and click Request archive." },
+                    { step: "02", title: "Download the file", desc: "Wait for LinkedIn to email your data file — usually within 24 hours. Click the link in that email and download the file to your computer." },
+                    { step: "03", title: "Drop it in below", desc: "Drag and drop the file into Nugget below. That's it! Nugget works its magic and does the rest automatically. Let's get your Nuggets..." },
+                  ].reduce((acc, s, i) => {
+                    acc.push(
+                      <div key={s.step} style={{ display: "flex", flexDirection: "column", gap: 8, padding: "0 24px" }}>
+                        <div style={{ fontSize: 20, fontWeight: 700, color: BLUE_BRIGHT, fontFamily: "Georgia, serif", opacity: 0.5, lineHeight: 1, marginBottom: 4 }}>Step {s.step}</div>
+                        <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, marginBottom: 4 }}>{s.title}</div>
+                        <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.7 }}>{s.desc}</div>
+                      </div>
+                    );
+                    if (i < 2) acc.push(<div key={`div-${i}`} style={{ width: 1, background: BORDER, alignSelf: "stretch" }} />);
+                    return acc;
+                  }, [])}
                 </div>
-              )}
-            </div>
-
-            {connCount > 0 && (
-              <div style={{ display: "flex", gap: 14, marginBottom: 24 }}>
-                {[
-                  { num: connCount.toLocaleString(), label: "Connections loaded" },
-                  { num: msgCount.toLocaleString(),  label: "Messages loaded" },
-                  { num: Object.keys(uploadedFiles).length, label: "Files ready" },
-                ].map((s, i) => (
-                  <div key={i} style={{ flex: 1, background: `linear-gradient(135deg, ${BLUE_DEEP}, ${DARK_CARD})`, border: `1px solid ${BORDER}`, borderRadius: 10, padding: "16px 20px", textAlign: "center" }}>
-                    <div style={{ fontSize: 26, fontWeight: 700, color: BLUE_BRIGHT, fontFamily: "Georgia, serif" }}>{s.num}</div>
-                    <div style={{ fontSize: 11, color: MUTED, textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 4 }}>{s.label}</div>
-                  </div>
-                ))}
               </div>
-            )}
 
-            {error && <div style={{ background: "#1a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
-            <div style={{ height: 1, background: `linear-gradient(90deg, transparent, ${BORDER}, transparent)`, margin: "0 0 24px 0" }} />
-
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 14 }}>
-              {REPORTS.map(r => (
-                <div key={r.id} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: 20, opacity: (r.free || isBeta) ? 1 : 0.5, position: "relative", borderTop: "3px solid transparent", backgroundImage: `linear-gradient(${DARK_CARD}, ${DARK_CARD}), linear-gradient(90deg, ${(r.free || isBeta) ? BLUE_BRIGHT : BORDER}, ${(r.free || isBeta) ? BLUE_MID : BORDER})`, backgroundOrigin: "border-box", backgroundClip: "padding-box, border-box", display: "flex", flexDirection: "column" }}>
-                  {!r.free && !isBeta && <span style={{ position: "absolute", top: 14, right: 14, fontSize: 15, color: MUTED }}>🔒</span>}
-                  <div style={{ display: "inline-block", padding: "2px 8px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: r.free ? BLUE_MID + "33" : isBeta ? BLUE_MID + "33" : "#2a1a00", color: r.free ? BLUE_BRIGHT : isBeta ? BLUE_BRIGHT : "#E8A000", marginBottom: 8 }}>
-                    {isBeta && !r.free ? "BETA" : r.tag}
+              {/* ── Upload Zone ── */}
+              <div ref={uploadRef}>
+                <div
+                  style={{ border: `2px dashed ${dragOver ? BLUE_BRIGHT : BORDER}`, borderRadius: 16, padding: "44px 32px", textAlign: "center", cursor: "pointer", background: dragOver ? BLUE_MID + "11" : DARK_CARD, transition: "all 0.2s", marginBottom: 28 }}
+                  onDragOver={e => { e.preventDefault(); setDragOver(true); }}
+                  onDragLeave={() => setDragOver(false)}
+                  onDrop={handleDrop}
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  <div style={{ fontSize: 36, marginBottom: 14 }}>📂</div>
+                  <div style={{ fontSize: 17, color: WHITE, fontWeight: 600, marginBottom: 8 }}>Drop your LinkedIn file here</div>
+                  <div style={{ fontSize: 13, color: MUTED, marginBottom: 18, lineHeight: 1.5 }}>
+                    Drop the file LinkedIn sent you here — Nugget takes it from there.<br />Or upload individual files if you prefer.
                   </div>
-                  <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, marginBottom: 3, fontFamily: "Georgia, serif" }}>{r.name}</div>
-                  <div style={{ fontSize: 11, color: MUTED, marginBottom: 7, textTransform: "uppercase", letterSpacing: "0.05em" }}>{r.subtitle}</div>
-                  <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.5, marginBottom: 14, flex: 1 }}>{r.description}</div>
-
-                  {r.free ? (
-                    reports[r.id]
-                      ? <button style={{ padding: "8px 16px", background: BLUE_MID + "33", border: `1px solid ${BLUE_BRIGHT}`, color: BLUE_BRIGHT, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { setActiveReport(r.id); setStep("reports"); }}>✓ View Report</button>
-                      : <button style={{ padding: "8px 16px", background: generating === r.id ? BLUE_MID + "44" : `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: generating ? "not-allowed" : "pointer", width: "100%" }} onClick={() => generateReport(r.id)} disabled={!!generating}>
-                          {generating === r.id ? "⏳ Mining..." : "Generate Report"}
-                        </button>
-                  ) : isBeta ? (
-                    <button style={{ padding: "8px 16px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { setActiveReport("gold"); setStep("reports"); }}>
-                      {reports.gold ? "✓ View Gold Nugget" : "View Gold Nugget →"}
-                    </button>
-                  ) : (
-                    <button style={{ padding: "8px 16px", background: "transparent", border: `1px solid ${BORDER}`, color: MUTED, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "default", width: "100%" }}>🔒 Upgrade to unlock</button>
+                  <button style={{ padding: "10px 28px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: "pointer" }}
+                    onClick={e => { e.stopPropagation(); fileInputRef.current?.click(); }}>Choose Files</button>
+                  <input ref={fileInputRef} type="file" multiple accept=".csv,.zip" style={{ display: "none" }} onChange={e => handleFiles(e.target.files)} />
+                  {hasFiles && (
+                    <div style={{ marginTop: 20, display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center" }}>
+                      {Object.keys(uploadedFiles).map(k => (
+                        <span key={k} style={{ padding: "4px 12px", background: BLUE_MID + "33", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 20, fontSize: 12, color: BLUE_BRIGHT }}>✓ {k}</span>
+                      ))}
+                    </div>
                   )}
                 </div>
-              ))}
+
+                {/* Stats */}
+                {connCount > 0 && (
+                  <div style={{ display: "flex", gap: 14, marginBottom: 24 }}>
+                    {[
+                      { num: connCount.toLocaleString(), label: "Connections loaded" },
+                      { num: msgCount.toLocaleString(),  label: "Messages loaded" },
+                      { num: Object.keys(uploadedFiles).length, label: "Files ready" },
+                    ].map((s, i) => (
+                      <div key={i} style={{ flex: 1, background: `linear-gradient(135deg, ${BLUE_DEEP}, ${DARK_CARD})`, border: `1px solid ${BORDER}`, borderRadius: 10, padding: "16px 20px", textAlign: "center" }}>
+                        <div style={{ fontSize: 26, fontWeight: 700, color: BLUE_BRIGHT, fontFamily: "Georgia, serif" }}>{s.num}</div>
+                        <div style={{ fontSize: 11, color: MUTED, textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 4 }}>{s.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {error && <div style={{ background: "#1a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
+
+              <Divider />
+
+              {/* ── BizDev Readiness Score ── */}
+              <div style={{ marginBottom: 40 }}>
+                <div style={{ textAlign: "center", marginBottom: 40 }}>
+                  <div style={{ fontSize: 11, color: BLUE_BRIGHT, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 700, marginBottom: 14 }}>Nugget's Signature Metric</div>
+                  <h2 style={{ fontSize: 34, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 16, lineHeight: 1.2 }}>Meet Your BizDev Readiness Score.</h2>
+                  <p style={{ fontSize: 16, color: MUTED, maxWidth: 600, margin: "0 auto 24px", lineHeight: 1.75 }}>
+                    Most founders have no idea where they actually stand when it comes to business development. Not a gut feeling — an actual number. NUGGET changes that.
+                  </p>
+                  <p style={{ fontSize: 15, color: WHITE, maxWidth: 640, margin: "0 auto 32px", lineHeight: 1.75 }}>
+                    Every time you run NUGGET, you get a score out of 100 across five dimensions. Each one tied directly to a report. Each one telling you exactly where to focus.
+                  </p>
+                </div>
+
+                {/* Five dimensions */}
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 12, marginBottom: 36 }}>
+                  {[
+                    { label: "The Right People", icon: "🎯", desc: "Who's in your network and how ICP-aligned they are" },
+                    { label: "Your Front Door", icon: "🚪", desc: "How ready your profile is to convert a visitor into a client" },
+                    { label: "Showing Up", icon: "📣", desc: "What your content says about you when you're not in the room" },
+                    { label: "Your Pulse", icon: "💬", desc: "The warmth and depth of your active relationships" },
+                    { label: "Your Referral Engine", icon: "🤝", desc: "How many advocates are ready to go to bat for you" },
+                  ].map((d, i) => (
+                    <div key={i} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: "20px 16px", textAlign: "center" }}>
+                      <div style={{ fontSize: 28, marginBottom: 10 }}>{d.icon}</div>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: WHITE, marginBottom: 8, lineHeight: 1.3 }}>{d.label}</div>
+                      <div style={{ fontSize: 11, color: MUTED, lineHeight: 1.6 }}>{d.desc}</div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Tiers */}
+                <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "28px 36px", marginBottom: 24, textAlign: "center" }}>
+                  <div style={{ fontSize: 11, color: MUTED, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 700, marginBottom: 20 }}>Your Milestones</div>
+                  <div style={{ display: "flex", justifyContent: "center", gap: 8, flexWrap: "wrap", marginBottom: 20 }}>
+                    {[
+                      { label: "Just Getting Started", color: MUTED },
+                      { label: "Building Momentum ⚡", color: "#E8A000" },
+                      { label: "Getting Warm 🔥", color: BLUE_BRIGHT },
+                      { label: "BD Ready 🎯", color: "#4ade80" },
+                    ].map((t, i) => (
+                      <span key={i} style={{ padding: "6px 16px", borderRadius: 20, background: t.color + "22", border: `1px solid ${t.color}44`, color: t.color, fontSize: 13, fontWeight: 600 }}>{t.label}</span>
+                    ))}
+                  </div>
+                  <p style={{ fontSize: 14, color: MUTED, fontStyle: "italic" }}>
+                    BD Ready. You have everything in place to go get it. Now go. 🎯
+                  </p>
+                </div>
+
+                <div style={{ background: BLUE_MID + "22", border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 12, padding: "20px 28px", textAlign: "center" }}>
+                  <p style={{ fontSize: 15, color: WHITE, lineHeight: 1.7 }}>
+                    Watch your score climb every quarter. Share your milestone. Show your work.<br />
+                    <span style={{ color: MUTED, fontSize: 13, fontStyle: "italic" }}>"My score went from 42 to 78 in 90 days." — that's not a coincidence. That's NUGGET working.</span>
+                  </p>
+                </div>
+              </div>
+
+              <Divider />
+
+              {/* ── Report cards ── */}
+              <div style={{ marginBottom: 40 }}>
+                <div style={{ textAlign: "center", marginBottom: 32 }}>
+                  <div style={{ fontSize: 11, color: BLUE_BRIGHT, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 700, marginBottom: 14 }}>What You Get</div>
+                  <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 12 }}>Five free reports. One Gold Nugget.</h2>
+                  <p style={{ fontSize: 14, color: MUTED, maxWidth: 500, margin: "0 auto" }}>
+                    Every insight, every name, and every next step is unique to you.<br />This is your data. These are your people. This is your plan.
+                  </p>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 14 }}>
+                  {REPORTS.map(r => (
+                    <div key={r.id} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: 20, opacity: (r.free || isBeta) ? 1 : 0.5, position: "relative", borderTop: "3px solid transparent", backgroundImage: `linear-gradient(${DARK_CARD}, ${DARK_CARD}), linear-gradient(90deg, ${(r.free || isBeta) ? BLUE_BRIGHT : BORDER}, ${(r.free || isBeta) ? BLUE_MID : BORDER})`, backgroundOrigin: "border-box", backgroundClip: "padding-box, border-box", display: "flex", flexDirection: "column" }}>
+                      {!r.free && !isBeta && <span style={{ position: "absolute", top: 14, right: 14, fontSize: 15, color: MUTED }}>🔒</span>}
+                      <div style={{ display: "inline-block", padding: "2px 8px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: r.free ? BLUE_MID + "33" : isBeta ? BLUE_MID + "33" : "#2a1a00", color: r.free ? BLUE_BRIGHT : isBeta ? BLUE_BRIGHT : "#E8A000", marginBottom: 8 }}>
+                        {isBeta && !r.free ? "BETA" : r.tag}
+                      </div>
+                      <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, marginBottom: 3, fontFamily: "Georgia, serif" }}>{r.name}</div>
+                      <div style={{ fontSize: 11, color: MUTED, marginBottom: 7, textTransform: "uppercase", letterSpacing: "0.05em" }}>{r.subtitle}</div>
+                      <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.5, marginBottom: 14, flex: 1 }}>{r.description}</div>
+                      {r.free ? (
+                        reports[r.id]
+                          ? <button style={{ padding: "8px 16px", background: BLUE_MID + "33", border: `1px solid ${BLUE_BRIGHT}`, color: BLUE_BRIGHT, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { setActiveReport(r.id); setStep("reports"); }}>✓ View Report</button>
+                          : <button style={{ padding: "8px 16px", background: generating === r.id ? BLUE_MID + "44" : `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: generating ? "not-allowed" : "pointer", width: "100%" }} onClick={() => generateReport(r.id)} disabled={!!generating}>
+                              {generating === r.id ? "⏳ Mining..." : "Generate Report"}
+                            </button>
+                      ) : isBeta ? (
+                        <button style={{ padding: "8px 16px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { setActiveReport("gold"); setStep("reports"); }}>
+                          {reports.gold ? "✓ View Gold Nugget" : "View Gold Nugget →"}
+                        </button>
+                      ) : (
+                        <button style={{ padding: "8px 16px", background: "transparent", border: `1px solid ${BORDER}`, color: MUTED, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "default", width: "100%" }}>🔒 Upgrade to unlock</button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <Divider />
+
+              {/* ── Anna section ── */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 48, alignItems: "center", marginBottom: 40 }}>
+                <div style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}, ${DARK_CARD})`, border: `1px solid ${BORDER}`, borderRadius: 16, aspectRatio: "1", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 12 }}>
+                  <div style={{ fontSize: 56 }}>🐔</div>
+                  <div style={{ fontSize: 12, color: MUTED, textAlign: "center", letterSpacing: "0.06em", textTransform: "uppercase" }}>Anna Ludwinowski<br />Founder, Nugget™</div>
+                </div>
+                <div>
+                  <div style={{ fontSize: 11, color: BLUE_BRIGHT, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 700, marginBottom: 16 }}>The human behind it</div>
+                  <h2 style={{ fontSize: 28, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 20, lineHeight: 1.2 }}>Hi, I'm Anna.</h2>
+                  <p style={{ fontSize: 15, color: MUTED, lineHeight: 1.8, marginBottom: 16 }}>
+                    I'm a founder with 33 years of business experience — and I've lived every bizdev challenge in this tool personally. The cold leads. The missed opportunities. The warm network sitting right there, completely untouched.
+                  </p>
+                  <p style={{ fontSize: 15, color: MUTED, lineHeight: 1.8, marginBottom: 16 }}>
+                    I still see it today with my clients as a Business Strategist. Smart, capable founders leaving money behind not because they don't know how to sell — but because they don't know how to use the data they already have.
+                  </p>
+                  <p style={{ fontSize: 15, color: WHITE, lineHeight: 1.8, fontWeight: 600 }}>
+                    NUGGET is your unfair advantage on LinkedIn. No fluff, no jargon — just a clear picture of what's in your network and exactly what to do with it.
+                  </p>
+                </div>
+              </div>
+
+              <Divider />
+
+              {/* ── Final CTA ── */}
+              <div style={{ textAlign: "center", padding: "40px 24px" }}>
+                <h2 style={{ fontSize: 36, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 16, lineHeight: 1.2 }}>
+                  Your next client is already<br />in your network.
+                </h2>
+                <p style={{ fontSize: 17, color: MUTED, marginBottom: 32, fontStyle: "italic" }}>
+                  You just don't know who they are yet. NUGGET does.
+                </p>
+                <button style={{ ...primaryBtn, fontSize: 17, padding: "16px 44px" }} onClick={scrollToUpload}>
+                  Get My Free Reports →
+                </button>
+              </div>
+
             </div>
           </>
         )}
 
+        {/* ══════════════════════════════════════════════════════════════════
+            SCORE REVEAL STEP
+        ══════════════════════════════════════════════════════════════════ */}
         {step === "score" && scores && (
-          <ScoreReveal scores={scores} onContinue={() => { setActiveReport("gold"); setStep("reports"); }} />
+          <div style={{ paddingTop: 48 }}>
+            <ScoreReveal scores={scores} onContinue={() => { setActiveReport("gold"); setStep("reports"); }} />
+          </div>
         )}
 
+        {/* ══════════════════════════════════════════════════════════════════
+            REPORTS STEP
+        ══════════════════════════════════════════════════════════════════ */}
         {step === "reports" && (
-          <div style={{ display: "grid", gridTemplateColumns: "210px 1fr", gap: 22, alignItems: "start" }}>
+          <div style={{ paddingTop: 32, display: "grid", gridTemplateColumns: "210px 1fr", gap: 22, alignItems: "start" }}>
 
-            <div style={{ background: DARK_CARD, borderRadius: 12, border: `1px solid ${BORDER}`, overflow: "hidden", position: "sticky", top: 24 }}>
+            {/* Sidebar */}
+            <div style={{ background: DARK_CARD, borderRadius: 12, border: `1px solid ${BORDER}`, overflow: "hidden", position: "sticky", top: 80 }}>
               {REPORTS.map(r => {
                 let statusText;
                 if (!r.free && !isBeta) {
@@ -801,11 +968,10 @@ export default function App() {
                   else if (freeReportsComplete) statusText = "Ready to generate";
                   else                          statusText = "Complete your reports first";
                 } else {
-                  if (generating === r.id)     statusText = `⏳ ${countdown > 0 ? `Next in ${countdown}s...` : "Generating..."}`;
-                  else if (reports[r.id])      statusText = "✓ Complete";
-                  else                         statusText = "Unmined";
+                  if (generating === r.id)  statusText = `⏳ ${countdown > 0 ? `Next in ${countdown}s...` : "Generating..."}`;
+                  else if (reports[r.id])   statusText = "✓ Complete";
+                  else                      statusText = "Unmined";
                 }
-
                 return (
                   <div key={r.id} style={{ padding: "13px 16px", borderBottom: `1px solid ${BORDER}`, cursor: "pointer", background: activeReport === r.id ? BLUE_MID + "33" : "transparent", borderLeft: `3px solid ${activeReport === r.id ? BLUE_BRIGHT : "transparent"}`, transition: "all 0.15s" }} onClick={() => setActiveReport(r.id)}>
                     <div style={{ fontSize: 13, fontWeight: 600, color: activeReport === r.id ? BLUE_BRIGHT : WHITE, marginBottom: 2 }}>{r.name}</div>
@@ -814,10 +980,11 @@ export default function App() {
                 );
               })}
               <div style={{ padding: "14px 16px" }}>
-                <button style={{ width: "100%", padding: "10px 16px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 13, fontWeight: 700, cursor: "pointer" }} onClick={() => setStep("upload")}>← Back to Upload</button>
+                <button style={{ width: "100%", padding: "10px 16px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 13, fontWeight: 700, cursor: "pointer" }} onClick={() => setStep("upload")}>← Back to Home</button>
               </div>
             </div>
 
+            {/* Report panel */}
             <div style={{ background: DARK_CARD, borderRadius: 12, border: `1px solid ${BORDER}`, padding: 32, minHeight: 420 }}>
               {error && <div style={{ background: "#1a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
 
@@ -826,6 +993,7 @@ export default function App() {
                 <div style={{ fontSize: 12, color: MUTED }}>{activeReportMeta?.subtitle}</div>
               </div>
 
+              {/* Gold Nugget panel */}
               {activeReport === "gold" && (
                 <>
                   {!isBeta ? (
@@ -850,7 +1018,7 @@ export default function App() {
                       <div style={{ fontSize: 44, marginBottom: 16 }}>🪙</div>
                       <div style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 10 }}>You've mined all 5 reports.</div>
                       <p style={{ fontSize: 14, color: MUTED, lineHeight: 1.7, maxWidth: 380, margin: "0 auto 28px" }}>Ready to see how it all adds up?</p>
-                      <button style={{ padding: "12px 32px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "Georgia, serif", marginBottom: 10 }} onClick={generateGoldNugget}>
+                      <button style={{ padding: "12px 32px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "Georgia, serif" }} onClick={generateGoldNugget}>
                         Unlock Your BizDev Readiness Score →
                       </button>
                     </div>
@@ -864,6 +1032,7 @@ export default function App() {
                 </>
               )}
 
+              {/* Free report panels */}
               {activeReport !== "gold" && (
                 <>
                   {generating === activeReport ? (
@@ -889,6 +1058,7 @@ export default function App() {
         )}
       </main>
 
+      {/* ── Email capture modal ── */}
       {showEmailModal && (
         <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(2,8,18,0.97)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: 24 }}>
           <div style={{ background: `linear-gradient(160deg, #0f2040 0%, #0a1628 100%)`, border: `1px solid ${BLUE_BRIGHT}66`, borderRadius: 20, padding: "40px 48px", maxWidth: 480, width: "100%", boxShadow: `0 0 80px rgba(65,161,232,0.15), 0 24px 60px rgba(0,0,0,0.8)`, animation: "fadeIn 0.2s ease-out" }}>
