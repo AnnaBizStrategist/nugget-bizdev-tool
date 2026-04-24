@@ -788,7 +788,7 @@ export default function App() {
                 } else {
                   if (generating === r.id)     statusText = `⏳ ${countdown > 0 ? `Next in ${countdown}s...` : "Generating..."}`;
                   else if (reports[r.id])      statusText = "✓ Complete";
-                  else                         statusText = "Not yet generated";
+                  else                         statusText = "Unmined";
                 }
 
                 return (
