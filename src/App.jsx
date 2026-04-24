@@ -511,6 +511,29 @@ function ScoreReveal({ scores, onContinue }) {
   );
 }
 
+// ── Laptop Frame ─────────────────────────────────────────────────────────────
+function LaptopFrame({ children }) {
+  return (
+    <div className="scroll-reveal" style={{ marginBottom: 20 }}>
+      <div style={{ background: "#1a1a2e", borderRadius: "12px 12px 0 0", padding: "10px 10px 0", border: "2px solid #2a2a4a", borderBottom: "none" }}>
+        <div style={{ background: "#0f0f1e", borderRadius: "8px 8px 0 0", padding: "8px 12px", display: "flex", alignItems: "center", gap: 8 }}>
+          <div style={{ display: "flex", gap: 5 }}>
+            <div style={{ width: 10, height: 10, borderRadius: "50%", background: "#ff5f57" }} />
+            <div style={{ width: 10, height: 10, borderRadius: "50%", background: "#febc2e" }} />
+            <div style={{ width: 10, height: 10, borderRadius: "50%", background: "#28c840" }} />
+          </div>
+          <div style={{ flex: 1, background: "#1a1a2e", borderRadius: 4, padding: "3px 10px", fontSize: 10, color: "#4a6a8a", textAlign: "center" }}>getnugget.ca</div>
+        </div>
+        <div style={{ borderRadius: "0 0 4px 4px", overflow: "hidden", maxHeight: 480, overflowY: "hidden" }}>
+          {children}
+        </div>
+      </div>
+      <div style={{ background: "#2a2a4a", height: 14, borderRadius: "0 0 4px 4px", border: "2px solid #2a2a4a", borderTop: "none" }} />
+      <div style={{ background: "#1e1e3a", height: 8, width: "60%", margin: "0 auto", borderRadius: "0 0 8px 8px" }} />
+    </div>
+  );
+}
+
 // ── Divider ───────────────────────────────────────────────────────────────────
 function Divider() {
   return <div style={{ height: 1, background: `linear-gradient(90deg, transparent, ${BORDER}, transparent)`, margin: "48px 0" }} />;
