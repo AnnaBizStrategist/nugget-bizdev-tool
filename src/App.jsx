@@ -73,9 +73,11 @@ const REPORTS = [
   },
 ];
 
-// ── AI Prompts (updated) ──────────────────────────────────────────────────────
+// ── AI Prompts ──────────────────────────────────────────────────────────────
 const PROMPTS = {
   field: `You are a senior LinkedIn BD strategist analyzing a founder's professional network. Generate "The Field Report" — a sharp, specific BD intelligence briefing.
+
+Do not include a title or heading at the start of your response. Begin directly with the first section.
 
 Format your response with these exact sections:
 
@@ -97,6 +99,8 @@ List 10 strategically valuable people not yet leveraged for BD. Use real names f
 Speak directly to the founder. Use real names and specific numbers. No corporate language. No fluff.`,
 
   warm: `You are a relationship intelligence analyst. Generate "The Warm List" — a heat map of this founder's actual relationship strength.
+
+Do not include a title or heading at the start of your response. Begin directly with the first section.
 
 Use message frequency and recency to score relationships. Focus on BD relevance. Keep each section to top 5 people maximum.
 
@@ -125,6 +129,8 @@ Use real names. Be direct. Make every recommendation immediately actionable.`,
 
   hidden: `You are an advocacy analyst. Generate "The Hidden Nuggets Report" — uncovering overlooked champions.
 
+Do not include a title or heading at the start of your response. Begin directly with the first section.
+
 Look for: people who wrote recommendations, consistent high-volume messagers, patterns of support and responsiveness. Limit to 5-10 advocates maximum with richer insight per person.
 
 ## Your Hidden Advocates
@@ -151,15 +157,17 @@ Be specific. Use names. Every line should be immediately usable.`,
 
   inbound: `You are a LinkedIn profile strategist specializing in founder BD readiness. Generate "The Inbound Report."
 
+Do not include a title or heading at the start of your response. Begin directly with the first section.
+
 Analyze the headline, summary, skills, and endorsements for BD effectiveness. Consider their diverse background as a potential credibility asset, not a liability.
 
 ## Profile Scorecard
-Rate each dimension: Critical Crack 🔴 | Needs Attention 🟡 | Locked In ✅
+Rate each dimension using only these text labels — no emojis or colored dots:
 
-**Headline:** [rating] — [one sentence on why]
-**About/Summary:** [rating] — [one sentence on why]
-**Skills & Endorsements:** [rating] — [one sentence on why]
-**Overall BD Readiness:** [rating] — [one sentence verdict]
+**Headline:** Critical Crack / Needs Attention / Locked In — [one sentence on why]
+**About/Summary:** Critical Crack / Needs Attention / Locked In — [one sentence on why]
+**Skills & Endorsements:** Critical Crack / Needs Attention / Locked In — [one sentence on why]
+**Overall BD Readiness:** Critical Crack / Needs Attention / Locked In — [one sentence verdict]
 
 ## What a Perfect Prospect Sees
 Walk through the first impression for their specific ICP. What does an ideal client feel when they land here? Do they stay or bounce? Why? Be honest.
@@ -181,6 +189,10 @@ Be direct. Specific edits only. No flattery.`,
 
   outbound: `You are a market signal analyst who understands personal branding. Generate "The Outbound Report" — what this founder's LinkedIn activity is broadcasting.
 
+Do not include a title or heading at the start of your response. Begin directly with the first section.
+
+Speak directly to the founder throughout — use "you" and "your" at all times. Never refer to them in the third person.
+
 Key principle: honour their personal brand. Memorable quirks are competitive advantages, not liabilities. Human connection IS a content strategy. Evaluate everything through the lens of "does this attract my ICP?"
 
 Analyze the comments and shares/posts to understand their market signal and social selling effectiveness.
@@ -189,23 +201,23 @@ Analyze the comments and shares/posts to understand their market signal and soci
 What does their LinkedIn activity communicate to potential clients right now? Include a social selling assessment — are they showing up as a trusted advisor or just a broadcaster?
 
 ## What Potential Clients Actually See
-Based on content themes and engagement patterns — what impression does a potential client form observing this person's LinkedIn behavior over 30 days? Be specific about what's working and what isn't.
+Based on content themes and engagement patterns — what impression does a potential client form observing your LinkedIn behavior over 30 days? Be specific about what's working and what isn't.
 
 ## Topic Alignment Check
-What topics dominate their engagement? Do they align with what they sell? Where's the disconnect? Does their content attract their ICP or a different audience?
+What topics dominate your engagement? Do they align with what you sell? Where's the disconnect? Does your content attract your ICP or a different audience?
 
 ## The 3 Shifts — Ranked by BD Impact
 Specific, immediately actionable content changes:
 
-1. **[Most impactful]:** [specific change and why it matters for BD]
-2. **[Second]:** [specific change and why it matters for BD]  
-3. **[Third]:** [specific change and why it matters for BD]
+1. **Most impactful:** [specific change and why it matters for BD]
+2. **Second:** [specific change and why it matters for BD]  
+3. **Third:** [specific change and why it matters for BD]
 
 ## This Week's 3 Posts
-Content ideas tailored to their voice and ICP:
-1. [Post idea with angle and why it attracts their ICP]
-2. [Post idea with angle and why it attracts their ICP]
-3. [Post idea with angle and why it attracts their ICP]
+Content ideas tailored to your voice and ICP:
+1. [Post idea with angle and why it attracts your ICP]
+2. [Post idea with angle and why it attracts your ICP]
+3. [Post idea with angle and why it attracts your ICP]
 
 ## Next Steps
 3 specific actions this week. Make them concrete.
@@ -213,6 +225,8 @@ Content ideas tailored to their voice and ICP:
 Speak directly to the founder. Honour what's uniquely theirs.`,
 
   gold: `You are Anna Ludwinowski, Business Foundation Strategist and LinkedIn BD expert. Generate "The Gold Nugget" — a complete, personalized BD action plan that feels like a blueprint, not a report.
+
+Do not include a title or heading at the start of your response. Begin directly with the Welcome Note.
 
 Anna's voice: warm, direct, witty. Zero fluff. Treat the founder like a smart adult who can handle the truth and act on it.
 
@@ -265,6 +279,39 @@ The 25 people they should be talking to right now. Pull from Warm List and Hidde
 
 **Worth Reviving — Still Valuable (10 people)**
 [10 people who went quiet but still represent real BD opportunity]
+
+## Conversations You Haven't Finished
+Identify 5 people where a promising conversation went quiet — someone who expressed interest, asked a question, or engaged meaningfully but never converted to a real BD conversation. For each: **Name** | What was said | How to re-open it naturally
+
+## Your Outreach Sequences
+3 ready-to-send outreach sequences tailored to their actual relationships and voice. Not templates — real messages they can send today.
+
+**Sequence 1 — Reactivating a warm contact:**
+[Personalized opening message using real context from the data]
+
+**Sequence 2 — Asking for a referral:**
+[Personalized ask using a real advocate from the data]
+
+**Sequence 3 — Starting a new BD conversation:**
+[Personalized opener to someone from the Next 25 list]
+
+## Your 30-Day Action Plan
+A realistic, prioritized plan broken into three phases.
+
+**Week 1 — Fix the foundation:**
+- [Action]
+- [Action]
+- [Action]
+
+**Weeks 2–3 — Activate your people:**
+- [Action]
+- [Action]
+- [Action]
+
+**Week 4 — Build the habit:**
+- [Action]
+- [Action]
+- [Action]
 
 ## Next Steps
 Their prioritized action list. No timeline — their cadence. Max 7 items, ranked by impact.
@@ -354,7 +401,7 @@ async function callClaudeGN(systemPrompt, data, reportsContext) {
     },
     body: JSON.stringify({
       model: "claude-sonnet-4-20250514",
-      max_tokens: 2500,
+      max_tokens: 3500,
       system: systemPrompt,
       messages: [{
         role: "user",
@@ -424,7 +471,6 @@ function ScoreReveal({ scores, onContinue }) {
 
   return (
     <div style={{ maxWidth: 580, margin: "0 auto", padding: "48px 24px", animation: "fadeIn 0.4s ease-out" }}>
-      {/* Score number */}
       <div style={{ textAlign: "center", marginBottom: 40 }}>
         <div style={{ fontSize: 13, color: MUTED, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 12 }}>Your BizDev Readiness Score</div>
         <div style={{ fontSize: 96, fontWeight: 700, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", lineHeight: 1, marginBottom: 14 }}>{avg}</div>
@@ -432,7 +478,6 @@ function ScoreReveal({ scores, onContinue }) {
         <div style={{ fontSize: 14, color: MUTED, lineHeight: 1.65 }}>Your LinkedIn foundation is taking shape. Here's where you stand.</div>
       </div>
 
-      {/* Foundation breakdown bars */}
       <div style={{ background: DARK, borderRadius: 14, padding: "28px 32px", marginBottom: 24, border: `1px solid ${BORDER}` }}>
         <div style={{ fontSize: 11, color: MUTED, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 700, marginBottom: 24 }}>Your Foundation Breakdown</div>
         {dims.map(d => {
@@ -451,7 +496,6 @@ function ScoreReveal({ scores, onContinue }) {
         })}
       </div>
 
-      {/* Biggest opportunity */}
       <div style={{ background: BLUE_MID + "22", border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 12, padding: "18px 24px", marginBottom: 36 }}>
         <div style={{ fontSize: 11, color: MUTED, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 700, marginBottom: 8 }}>Your Biggest Opportunity</div>
         <div style={{ fontSize: 14, color: WHITE, lineHeight: 1.65 }}>
@@ -459,7 +503,6 @@ function ScoreReveal({ scores, onContinue }) {
         </div>
       </div>
 
-      {/* CTA */}
       <div style={{ textAlign: "center" }}>
         <button onClick={onContinue} style={{ padding: "14px 36px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 10, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "Georgia, serif", marginBottom: 10 }}>
           Read Your Full Reports →
@@ -472,7 +515,6 @@ function ScoreReveal({ scores, onContinue }) {
 
 // ── Main App ──────────────────────────────────────────────────────────────────
 export default function App() {
-  // ── Beta unlock: add ?beta=true to the URL ──
   const isBeta = new URLSearchParams(window.location.search).get("beta") === "true";
 
   const [step,           setStep]           = useState("upload");
@@ -493,7 +535,6 @@ export default function App() {
   const [emailSubmitting,setEmailSubmitting]= useState(false);
   const fileInputRef = useRef(null);
 
-  // ── Derived ──
   const hasFiles           = Object.keys(uploadedFiles).length > 0;
   const connCount          = parsedData["Connections"]?.length || 0;
   const msgCount           = parsedData["Messages"]?.length || 0;
@@ -501,7 +542,6 @@ export default function App() {
   const activeReportMeta   = REPORTS.find(r => r.id === activeReport);
   const freeReportsComplete= REPORTS.filter(r => r.free).every(r => reports[r.id]);
 
-  // ── File handling ──
   const handleFiles = useCallback((fileList) => {
     Array.from(fileList).forEach((file) => {
       if (file.name.endsWith(".zip")) {
@@ -534,7 +574,6 @@ export default function App() {
     e.preventDefault(); setDragOver(false); handleFiles(e.dataTransfer.files);
   }, [handleFiles]);
 
-  // ── Free report generation ──
   const runReport = async (reportId) => {
     const report = REPORTS.find(r => r.id === reportId);
     if (!report?.free || generating) return;
@@ -553,7 +592,6 @@ export default function App() {
     runReport(reportId);
   };
 
-  // ── Gold Nugget generation (beta only) ──
   const generateGoldNugget = async () => {
     if (generating) return;
     setGenerating("gold"); setActiveReport("gold"); setStep("reports"); setError(null);
@@ -571,7 +609,6 @@ export default function App() {
     finally { setGenerating(null); }
   };
 
-  // ── Email capture ──
   const submitEmail = async () => {
     if (!emailName.trim() || !emailAddress.trim()) return;
     setEmailSubmitted(true); setShowEmailModal(false);
@@ -583,7 +620,6 @@ export default function App() {
     }).catch(err => console.log("Webhook error:", err));
   };
 
-  // ── Generate all (sequential) ──
   const generateAll = async () => {
     setStep("reports"); setActiveReport("field");
     const freeReports = REPORTS.filter(r => r.free);
@@ -602,9 +638,6 @@ export default function App() {
     }
   };
 
-  // ─────────────────────────────────────────────────────────────────────────────
-  // RENDER
-  // ─────────────────────────────────────────────────────────────────────────────
   return (
     <div style={{ minHeight: "100vh", background: DARK, fontFamily: "'DM Sans', -apple-system, sans-serif", color: WHITE }}>
       <style>{`
@@ -624,7 +657,6 @@ export default function App() {
       {/* ── Header ── */}
       <header style={{ borderBottom: `1px solid ${BORDER}`, padding: "16px 40px", display: "flex", alignItems: "center", background: DARK_CARD }}>
         <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
-          <img src={LOGO_BASE64} alt="Nugget" style={{ height: 48, width: "auto", display: "block" }} />
           <div>
             <div style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, letterSpacing: "-0.5px", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Nugget<span style={{ fontSize: 13, verticalAlign: "super", marginLeft: 1 }}>™</span></div>
             <div style={{ fontSize: 10, color: MUTED, letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 3 }}>The BizDev Tool for Founders</div>
@@ -640,12 +672,8 @@ export default function App() {
 
       <main style={{ maxWidth: 980, margin: "0 auto", padding: "48px 24px" }}>
 
-        {/* ══════════════════════════════════════════════════════════════════
-            UPLOAD STEP
-        ══════════════════════════════════════════════════════════════════ */}
         {step === "upload" && (
           <>
-            {/* Hero */}
             <div style={{ textAlign: "center", marginBottom: 44, background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, margin: "0 0 44px 0", padding: "56px 24px 48px", borderRadius: 16 }}>
               <p style={{ fontSize: 14, color: "rgba(255,255,255,0.75)", maxWidth: 520, margin: "0 auto 20px", lineHeight: 1.65 }}>
                 Nugget is a powerful Business Development tool that reads your own LinkedIn data and shows you the gold hiding inside it.
@@ -660,7 +688,6 @@ export default function App() {
               <p style={{ fontSize: 14, color: "rgba(255,255,255,0.75)", maxWidth: 380, margin: "0 auto" }}>Just intelligence from data you already own.</p>
             </div>
 
-            {/* How it works */}
             <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "28px 32px", marginBottom: 24 }}>
               <p style={{ fontSize: 20, color: WHITE, fontWeight: 700, textAlign: "center", marginBottom: 28, fontFamily: "Georgia, serif", letterSpacing: "-0.3px" }}>
                 Your Nuggets are waiting — Just 3 easy steps to find them...
@@ -684,7 +711,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Upload zone */}
             <div
               style={{ border: `2px dashed ${dragOver ? BLUE_BRIGHT : BORDER}`, borderRadius: 16, padding: "44px 32px", textAlign: "center", cursor: "pointer", background: dragOver ? BLUE_MID + "11" : DARK_CARD, transition: "all 0.2s", marginBottom: 28 }}
               onDragOver={e => { e.preventDefault(); setDragOver(true); }}
@@ -709,7 +735,6 @@ export default function App() {
               )}
             </div>
 
-            {/* Stats */}
             {connCount > 0 && (
               <div style={{ display: "flex", gap: 14, marginBottom: 24 }}>
                 {[
@@ -728,7 +753,6 @@ export default function App() {
             {error && <div style={{ background: "#1a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
             <div style={{ height: 1, background: `linear-gradient(90deg, transparent, ${BORDER}, transparent)`, margin: "0 0 24px 0" }} />
 
-            {/* Report cards */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 14 }}>
               {REPORTS.map(r => (
                 <div key={r.id} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: 20, opacity: (r.free || isBeta) ? 1 : 0.5, position: "relative", borderTop: "3px solid transparent", backgroundImage: `linear-gradient(${DARK_CARD}, ${DARK_CARD}), linear-gradient(90deg, ${(r.free || isBeta) ? BLUE_BRIGHT : BORDER}, ${(r.free || isBeta) ? BLUE_MID : BORDER})`, backgroundOrigin: "border-box", backgroundClip: "padding-box, border-box", display: "flex", flexDirection: "column" }}>
@@ -747,7 +771,6 @@ export default function App() {
                           {generating === r.id ? "⏳ Mining..." : "Generate Report"}
                         </button>
                   ) : isBeta ? (
-                    // Beta: GN card navigates to reports panel
                     <button style={{ padding: "8px 16px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { setActiveReport("gold"); setStep("reports"); }}>
                       {reports.gold ? "✓ View Gold Nugget" : "View Gold Nugget →"}
                     </button>
@@ -760,30 +783,22 @@ export default function App() {
           </>
         )}
 
-        {/* ══════════════════════════════════════════════════════════════════
-            SCORE REVEAL STEP
-        ══════════════════════════════════════════════════════════════════ */}
         {step === "score" && scores && (
           <ScoreReveal scores={scores} onContinue={() => { setActiveReport("gold"); setStep("reports"); }} />
         )}
 
-        {/* ══════════════════════════════════════════════════════════════════
-            REPORTS STEP
-        ══════════════════════════════════════════════════════════════════ */}
         {step === "reports" && (
           <div style={{ display: "grid", gridTemplateColumns: "210px 1fr", gap: 22, alignItems: "start" }}>
 
-            {/* Sidebar */}
             <div style={{ background: DARK_CARD, borderRadius: 12, border: `1px solid ${BORDER}`, overflow: "hidden", position: "sticky", top: 24 }}>
               {REPORTS.map(r => {
-                // Determine sidebar status text
                 let statusText;
                 if (!r.free && !isBeta) {
                   statusText = "🔒 Upgrade to unlock";
                 } else if (r.id === "gold" && isBeta) {
                   if (generating === "gold")   statusText = "⏳ Generating...";
                   else if (reports.gold)        statusText = "✓ Complete";
-                  else if (freeReportsComplete) statusText = "🪙 Ready to generate";
+                  else if (freeReportsComplete) statusText = "Ready to generate";
                   else                          statusText = "Complete your reports first";
                 } else {
                   if (generating === r.id)     statusText = `⏳ ${countdown > 0 ? `Next in ${countdown}s...` : "Generating..."}`;
@@ -803,7 +818,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Report panel */}
             <div style={{ background: DARK_CARD, borderRadius: 12, border: `1px solid ${BORDER}`, padding: 32, minHeight: 420 }}>
               {error && <div style={{ background: "#1a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
 
@@ -812,11 +826,9 @@ export default function App() {
                 <div style={{ fontSize: 12, color: MUTED }}>{activeReportMeta?.subtitle}</div>
               </div>
 
-              {/* Gold Nugget panel */}
               {activeReport === "gold" && (
                 <>
                   {!isBeta ? (
-                    // Non-beta: upgrade screen
                     <div style={{ textAlign: "center", padding: "48px 32px" }}>
                       <div style={{ fontSize: 44, marginBottom: 16 }}>🏆</div>
                       <div style={{ fontSize: 22, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", marginBottom: 10 }}>The Gold Nugget</div>
@@ -827,16 +839,13 @@ export default function App() {
                       <button style={{ padding: "12px 32px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "Georgia, serif" }}>Upgrade to Gold Nugget →</button>
                     </div>
                   ) : generating === "gold" ? (
-                    // Generating spinner
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
                       <div style={{ width: 36, height: 36, border: `3px solid ${BORDER}`, borderTop: `3px solid ${BLUE_BRIGHT}`, borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto 16px" }} />
                       <div style={{ color: MUTED, fontSize: 14 }}>Mining your data for gold...</div>
                     </div>
                   ) : reports.gold ? (
-                    // Report ready
                     <ReportContent text={reports.gold} />
                   ) : freeReportsComplete ? (
-                    // ── All 5 done → completion prompt ──
                     <div style={{ textAlign: "center", padding: "48px 32px" }}>
                       <div style={{ fontSize: 44, marginBottom: 16 }}>🪙</div>
                       <div style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 10 }}>You've mined all 5 reports.</div>
@@ -844,10 +853,8 @@ export default function App() {
                       <button style={{ padding: "12px 32px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "Georgia, serif", marginBottom: 10 }} onClick={generateGoldNugget}>
                         Unlock Your BizDev Readiness Score →
                       </button>
-                      <div style={{ fontSize: 12, color: MUTED }}>Available in The Gold Nugget</div>
                     </div>
                   ) : (
-                    // Some free reports still missing
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
                       <div style={{ fontSize: 38, marginBottom: 14 }}>🪙</div>
                       <div style={{ fontSize: 16, color: WHITE, fontWeight: 600, marginBottom: 8 }}>Complete your 5 free reports first</div>
@@ -857,7 +864,6 @@ export default function App() {
                 </>
               )}
 
-              {/* Free report panels */}
               {activeReport !== "gold" && (
                 <>
                   {generating === activeReport ? (
@@ -883,11 +889,9 @@ export default function App() {
         )}
       </main>
 
-      {/* ── Email capture modal ── */}
       {showEmailModal && (
         <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(2,8,18,0.97)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: 24 }}>
           <div style={{ background: `linear-gradient(160deg, #0f2040 0%, #0a1628 100%)`, border: `1px solid ${BLUE_BRIGHT}66`, borderRadius: 20, padding: "40px 48px", maxWidth: 480, width: "100%", boxShadow: `0 0 80px rgba(65,161,232,0.15), 0 24px 60px rgba(0,0,0,0.8)`, animation: "fadeIn 0.2s ease-out" }}>
-            <img src={LOGO_BASE64} alt="Nugget" style={{ height: 56, width: "auto", display: "block", margin: "0 auto 12px" }} />
             <h2 style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, textAlign: "center", marginBottom: 8, lineHeight: 1.3 }}>Where should we send your personalized Nugget reports?</h2>
             <p style={{ fontSize: 14, color: MUTED, textAlign: "center", marginBottom: 28, lineHeight: 1.6 }}>Your reports are ready to generate. Enter your details and we'll deliver them straight to your inbox.</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 20 }}>
