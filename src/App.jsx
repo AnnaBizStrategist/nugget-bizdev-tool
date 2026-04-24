@@ -729,6 +729,111 @@ export default function App() {
 
               <Divider />
 
+              {/* ── Report Mockups ── */}
+              <div style={{ marginBottom: 40 }}>
+                <div style={{ textAlign: "center", marginBottom: 40 }}>
+                  <div style={{ fontSize: 11, color: BLUE_BRIGHT, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 700, marginBottom: 14 }}>See It In Action</div>
+                  <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 12 }}>Real intelligence. Real names. Real next steps.</h2>
+                  <p style={{ fontSize: 15, color: MUTED, maxWidth: 500, margin: "0 auto" }}>Here's a sample of what your reports actually look like.</p>
+                </div>
+
+                {/* Mockup 1 — Field Report */}
+                <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "28px 32px", marginBottom: 20, position: "relative", overflow: "hidden" }}>
+                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_MID})` }} />
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
+                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: BLUE_MID + "33", color: BLUE_BRIGHT, padding: "3px 10px", borderRadius: 4 }}>FREE</div>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: WHITE, fontFamily: "Georgia, serif" }}>The Field Report</div>
+                    <div style={{ fontSize: 11, color: MUTED, textTransform: "uppercase", letterSpacing: "0.05em" }}>— What your network is really made of</div>
+                  </div>
+                  <div style={{ borderLeft: `3px solid ${BLUE_BRIGHT}`, paddingLeft: 12, marginBottom: 20 }}>
+                    <div style={{ fontSize: 11, color: BLUE_BRIGHT, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 10 }}>Top 10 Untapped Connections</div>
+                  </div>
+                  {[
+                    { name: "David Mercer", title: "CEO", company: "Mercer Growth Partners", reason: "Built 3 companies from $0 to exit — prime referral source for Founders needing financial infrastructure" },
+                    { name: "Lisa Thornton", title: "Founder & MD", company: "Thornton Capital Advisory", reason: "Runs a boutique M&A firm — her Clients are exactly who needs a Fractional CFO pre-transaction" },
+                    { name: "Ray Okonkwo", title: "Managing Partner", company: "Okonkwo Ventures", reason: "Invests in early-stage SaaS — portfolio companies consistently underserved on financial ops" },
+                    { name: "Priya Nair", title: "Co-Founder", company: "Scalepath Inc.", reason: "Scaling from $2M to $10M ARR — the exact moment Fractional CFO engagement becomes critical" },
+                    { name: "Tom Castellano", title: "President", company: "Castellano Business Group", reason: "SMB advisory practice with 40+ active business Owner Clients — strong referral multiplier" },
+                  ].map((p, i) => (
+                    <div key={i} style={{ display: "flex", gap: 14, padding: "12px 0", borderBottom: i < 4 ? `1px solid ${BORDER}` : "none" }}>
+                      <div style={{ width: 36, height: 36, borderRadius: "50%", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 700, color: WHITE, flexShrink: 0 }}>{p.name.split(" ").map(n => n[0]).join("")}</div>
+                      <div style={{ flex: 1 }}>
+                        <div style={{ display: "flex", gap: 8, alignItems: "baseline", marginBottom: 3, flexWrap: "wrap" }}>
+                          <span style={{ fontSize: 13, fontWeight: 700, color: BLUE_BRIGHT }}>{p.name}</span>
+                          <span style={{ fontSize: 11, color: MUTED }}>| {p.title} | {p.company}</span>
+                        </div>
+                        <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.6 }}>{p.reason}</div>
+                      </div>
+                    </div>
+                  ))}
+                  <div style={{ marginTop: 16, fontSize: 12, color: MUTED, fontStyle: "italic", textAlign: "center" }}>+ 5 more connections in your full report</div>
+                </div>
+
+                {/* Mockup 2 — BizDev Readiness Score */}
+                <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "36px 40px", marginBottom: 20 }}>
+                  <div style={{ textAlign: "center", marginBottom: 32 }}>
+                    <div style={{ fontSize: 11, color: MUTED, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 10 }}>BizDev Readiness Score</div>
+                    <div style={{ fontSize: 88, fontWeight: 700, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", lineHeight: 1, marginBottom: 10 }}>74</div>
+                    <div style={{ fontSize: 22, fontWeight: 700, color: BLUE_BRIGHT, marginBottom: 8 }}>Getting Warm 🔥</div>
+                    <div style={{ fontSize: 13, color: MUTED }}>Your LinkedIn foundation is taking shape. Here's where you stand.</div>
+                  </div>
+                  <div style={{ background: DARK, borderRadius: 12, padding: "24px 28px", marginBottom: 20, border: `1px solid ${BORDER}` }}>
+                    <div style={{ fontSize: 11, color: MUTED, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 700, marginBottom: 20 }}>Your Foundation Breakdown</div>
+                    {[
+                      { label: "Network Strength",      score: 82, status: "Strong",         color: "#4ade80" },
+                      { label: "Profile Strength",      score: 58, status: "Building",        color: BLUE_BRIGHT },
+                      { label: "Content Strength",      score: 71, status: "Strong",          color: "#4ade80" },
+                      { label: "Relationship Strength", score: 79, status: "Strong",          color: "#4ade80" },
+                      { label: "Advocate Strength",     score: 44, status: "Needs Attention", color: "#f87171" },
+                    ].map((d, i) => (
+                      <div key={i} style={{ marginBottom: 18 }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
+                          <span style={{ fontSize: 13, color: WHITE, fontWeight: 600 }}>{d.label}</span>
+                          <span style={{ fontSize: 12, color: d.color, fontWeight: 700 }}>{d.status}</span>
+                        </div>
+                        <div style={{ height: 7, background: BORDER, borderRadius: 4, overflow: "hidden" }}>
+                          <div style={{ height: "100%", width: `${d.score}%`, background: `linear-gradient(90deg, ${d.color}88, ${d.color})`, borderRadius: 4 }} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{ background: BLUE_MID + "22", border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 10, padding: "14px 20px", textAlign: "center" }}>
+                    <div style={{ fontSize: 13, color: WHITE }}>
+                      <strong style={{ color: BLUE_BRIGHT }}>Advocate Strength</strong> is where your foundation needs the most attention — and it's the fastest to move.
+                    </div>
+                  </div>
+                </div>
+
+                {/* Mockup 3 — Gold Nugget */}
+                <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "28px 32px", position: "relative", overflow: "hidden" }}>
+                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg, #E8A000, #f5c842)` }} />
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
+                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: "#2a1a00", color: "#E8A000", padding: "3px 10px", borderRadius: 4 }}>PAID</div>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: WHITE, fontFamily: "Georgia, serif" }}>The Gold Nugget</div>
+                    <div style={{ fontSize: 11, color: MUTED, textTransform: "uppercase", letterSpacing: "0.05em" }}>— Full BD action plan</div>
+                  </div>
+                  <div style={{ borderLeft: `3px solid #E8A000`, paddingLeft: 12, marginBottom: 20 }}>
+                    <div style={{ fontSize: 11, color: "#E8A000", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 10 }}>Your People — Move Now (Hot)</div>
+                  </div>
+                  {[
+                    { name: "Lisa Thornton", why: "Connected 3 months ago, exchanged 6 messages about exit planning challenges — she went quiet after you shared your CFO framework", move: "Reply to her last message: 'Lisa — I've been working with two Founders navigating exactly the kind of pre-exit complexity you mentioned. Worth a 15-minute call?'" },
+                    { name: "David Mercer", why: "Most engaged connection — reacted to 4 posts this month, replied to your comment on his scaling article last week", move: "DM him today: 'David — your point about financial ops being the silent killer in scaling resonated. That's exactly what I help Founders fix. Coffee chat?'" },
+                    { name: "Priya Nair", why: "Liked your last 3 posts, asked a question in comments about runway modeling — never got a private follow-up", move: "Send a voice note: 'Priya — loved your question about runway modeling. I've got a framework that might help as you scale. Happy to walk you through it.'" },
+                  ].map((p, i) => (
+                    <div key={i} style={{ background: DARK, borderRadius: 10, padding: "16px 18px", marginBottom: 12, border: `1px solid ${BORDER}` }}>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: BLUE_BRIGHT, marginBottom: 6 }}>{p.name}</div>
+                      <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.65, marginBottom: 10 }}>{p.why}</div>
+                      <div style={{ fontSize: 12, color: WHITE, lineHeight: 1.65, background: BLUE_MID + "22", padding: "10px 14px", borderRadius: 8, borderLeft: `3px solid ${BLUE_BRIGHT}` }}>
+                        <span style={{ color: BLUE_BRIGHT, fontWeight: 700 }}>Best move: </span>{p.move}
+                      </div>
+                    </div>
+                  ))}
+                  <div style={{ marginTop: 16, fontSize: 12, color: MUTED, fontStyle: "italic", textAlign: "center" }}>+ 22 more connections in your full Gold Nugget report</div>
+                </div>
+              </div>
+
+              <Divider />
+
               {/* ── How It Works ── */}
               <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "36px 40px", marginBottom: 40 }}>
                 <p style={{ fontSize: 22, color: WHITE, fontWeight: 700, textAlign: "center", marginBottom: 32, fontFamily: "Georgia, serif", letterSpacing: "-0.3px" }}>
