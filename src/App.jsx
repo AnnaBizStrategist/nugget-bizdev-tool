@@ -426,6 +426,19 @@ function prepareData(parsedData, fileKeys) {
   return out;
 }
 
+// ── Intro Block ──────────────────────────────────────────────────────────────
+function IntroBlock({ reportId }) {
+  const text = INTROS[reportId];
+  if (!text) return null;
+  return (
+    <div style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}88, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 10, padding: "20px 24px", marginBottom: 28 }}>
+      {text.split("\n\n").map((para, i) => (
+        <p key={i} style={{ fontSize: 14, color: MUTED, lineHeight: 1.8, margin: i > 0 ? "12px 0 0" : 0 }}>{para}</p>
+      ))}
+    </div>
+  );
+}
+
 // ── Report content renderer ───────────────────────────────────────────────────
 function ReportContent({ text }) {
   return (
@@ -447,7 +460,7 @@ function ScoreReveal({ scores, onContinue }) {
   // Confetti on mount
   useEffect(() => {
     const colors = ["#41a1e8", "#7ec8f5", "#4ade80", "#E8A000", "#f5c842", "#e8f0fe"];
-    const pieces = Array.from({ length: 80 }, () => {
+    const pieces = Array.from({ length: 180 }, () => {
       const el = document.createElement("div");
       el.style.cssText = `
         position: fixed; top: -10px; z-index: 9999; pointer-events: none;
@@ -727,7 +740,7 @@ export default function App() {
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <div style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, letterSpacing: "-0.5px", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", whiteSpace: "nowrap" }}>Nugget<span style={{ fontSize: 13, verticalAlign: "super", marginLeft: 1 }}>™</span></div>
           <div style={{ width: 1, height: 28, background: BORDER, flexShrink: 0 }} />
-          <div style={{ fontSize: 11, color: MUTED, letterSpacing: "0.03em", lineHeight: 1.4 }}>The BizDev Tool for Founders done with the ick of cold outreach.</div>
+          <div style={{ fontSize: 13, color: MUTED, letterSpacing: "0.03em", lineHeight: 1.4 }}>The BizDev Tool for Founders done with the ick of cold outreach.</div>
         </div>
         <nav style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
           {step === "upload" ? (
@@ -1177,7 +1190,7 @@ export default function App() {
                       <div style={{ color: MUTED, fontSize: 14 }}>Mining your data for gold...</div>
                     </div>
                   ) : reports.gold ? (
-                    <ReportContent text={reports.gold} />
+                    <><IntroBlock reportId="gold" /><ReportContent text={reports.gold} /></>
                   ) : freeReportsComplete ? (
                     <div style={{ textAlign: "center", padding: "48px 32px" }}>
                       <div style={{ fontSize: 44, marginBottom: 16, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, #E8A000, #f5c842)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontWeight: 700 }}>GN</div>
@@ -1206,7 +1219,7 @@ export default function App() {
                       <div style={{ color: MUTED, fontSize: 14 }}>{countdown > 0 ? `Next report in ${countdown}s...` : "Mining your data for gold..."}</div>
                     </div>
                   ) : reports[activeReport] ? (
-                    <ReportContent text={reports[activeReport]} />
+                    <><IntroBlock reportId={activeReport} /><ReportContent text={reports[activeReport]} /></>
                   ) : (
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
                       <div style={{ fontSize: 38, marginBottom: 14, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, #E8A000, #f5c842)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontWeight: 700 }}>GN</div>
