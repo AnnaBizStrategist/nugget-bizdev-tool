@@ -327,6 +327,21 @@ At the very end of your response, on its own line, output exactly this block and
 Replace the 0s with honest scores from 0-100 based on the data. Most Founders score 45-72 overall. Score each: Network Strength = ICP match % and network quality. Profile Strength = profile BD readiness. Content Strength = posting consistency and ICP alignment. Relationship Strength = warm relationship depth and messaging activity. Advocate Strength = hidden nuggets count and referral potential.`,
 };
 
+// ── Report Intros ─────────────────────────────────────────────────────────────
+const INTROS = {
+  field: `Your network is bigger than you think — and more strategic than you're treating it.\n\nThis report gives you a bird's-eye view of who's in your corner: how your connections break down by role, where your ICP density actually sits, and where the gaps are that you might not see yet.\n\nIt ends with your Top 10 Untapped Connections — specific people worth moving on, with context on why. Before you prospect outward, know what you're already sitting on.`,
+
+  warm: `The Warm List isn't just a roster — it's a ranked action plan.\n\nYou'll see who's hot right now and needs your attention this week, who's warm and ready to activate, and — here's the part most people skip — a Reality Check on the patterns quietly working against you.\n\nYou'll also get conversation starters you can actually use, not just names and good luck. Read those carefully. The goal isn't more connections. It's more conversations with the right people, at the right time.`,
+
+  hidden: `These aren't just quiet connections — these are people who've already shown up for you. A recommendation written, a conversation started, a genuine thank you sent. They're already in your corner. You just haven't activated them yet.\n\nThis report tells you who your strongest advocates are, what to ask each one for, and gives you the exact words to do it. The Referral Ask Framework alone is worth the read.\n\nBefore you reach out, check if they've posted in the last 7 days. Comment first, then make your ask. Timing matters more than you think.`,
+
+  inbound: `People are landing on your profile right now. The question isn't whether inbound is happening — it's whether your profile is doing anything useful with it.\n\nThis report audits your profile the way a perfect prospect would: your headline, your summary, your skills, your keywords. It tells you exactly what they see, where they lose interest, and the three fixes — ranked by impact — that will change that.\n\nThe next steps are timed. This isn't a someday list — a profile that's bleeding opportunity doesn't get better by waiting.`,
+
+  outbound: `Your LinkedIn activity is saying something about you right now — whether you're managing the message or not.\n\nThis report looks at what potential Clients actually see when they scroll your last 30 days: your Signal Strength score, what's building trust, what's quietly undermining it, and where the gap is between how you show up and how you want to be known.\n\nYou'll get three ranked shifts to make, plus three ready-to-post content ideas tailored to your positioning. Not generic tips. Yours.`,
+
+  gold: `You've seen where the opportunities are. This is where you go get them.\n\nThe Gold Nugget pulls everything together into one complete bizdev action plan — your BizDev Readiness Score, an honest look at what's working and what's quietly costing you, and your Next 25 people prioritized by who needs your attention right now.\n\nYou'll also find the conversations you started but never finished, outreach sequences written and ready to send, and a 30-day plan broken down week by week so nothing stays on a "someday" list.\n\nRun this every quarter. Watch your score move. That's not motivation — that's bizdev in action.`,
+};
+
 // ── Score utilities ───────────────────────────────────────────────────────────
 function parseScores(text) {
   const match = text.match(/<SCORES>([\s\S]*?)<\/SCORES>/);
