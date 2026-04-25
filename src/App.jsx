@@ -444,6 +444,32 @@ function ReportContent({ text }) {
 
 // ── Score Reveal screen ───────────────────────────────────────────────────────
 function ScoreReveal({ scores, onContinue }) {
+  // Confetti on mount
+  useEffect(() => {
+    const colors = ["#41a1e8", "#7ec8f5", "#4ade80", "#E8A000", "#f5c842", "#e8f0fe"];
+    const pieces = Array.from({ length: 80 }, () => {
+      const el = document.createElement("div");
+      el.style.cssText = `
+        position: fixed; top: -10px; z-index: 9999; pointer-events: none;
+        width: ${Math.random() * 8 + 4}px; height: ${Math.random() * 8 + 4}px;
+        background: ${colors[Math.floor(Math.random() * colors.length)]};
+        left: ${Math.random() * 100}vw;
+        border-radius: ${Math.random() > 0.5 ? "50%" : "2px"};
+        animation: confettiFall ${Math.random() * 2 + 2}s ease-in ${Math.random() * 1}s forwards;
+      `;
+      document.body.appendChild(el);
+      return el;
+    });
+    const style = document.createElement("style");
+    style.textContent = \`@keyframes confettiFall {
+      0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }\`;
+    document.head.appendChild(style);
+    const cleanup = setTimeout(() => { pieces.forEach(el => el.remove()); style.remove(); }, 5000);
+    return () => { clearTimeout(cleanup); pieces.forEach(el => el.remove()); style.remove(); };
+  }, []);
+
   const dims = [
     { key: "networkStrength",      label: "Network Strength" },
     { key: "profileStrength",      label: "Profile Strength" },
@@ -975,6 +1001,45 @@ export default function App() {
 
               <Divider />
 
+              {/* ── Report cards ── */}
+              <div style={{ marginBottom: 0 }}>
+                <div style={{ textAlign: "center", marginBottom: 40 }}>
+                  <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>What You Get</div>
+                  <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 24 }}>Five free reports. One Gold Nugget.</h2>
+                  <p style={{ fontSize: 14, color: MUTED, maxWidth: 500, margin: "0 auto" }}>
+                    Every insight, every name, and every next step is unique to you.<br />This is your data. These are your people. This is your plan.
+                  </p>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 14, marginBottom: 24 }}>
+                  {REPORTS.map(r => (
+                    <div key={r.id} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: 20, opacity: (r.free || isBeta) ? 1 : 0.5, position: "relative", borderTop: "3px solid transparent", backgroundImage: `linear-gradient(${DARK_CARD}, ${DARK_CARD}), linear-gradient(90deg, ${(r.free || isBeta) ? BLUE_BRIGHT : BORDER}, ${(r.free || isBeta) ? BLUE_MID : BORDER})`, backgroundOrigin: "border-box", backgroundClip: "padding-box, border-box", display: "flex", flexDirection: "column" }}>
+                      {!r.free && !isBeta && <span style={{ position: "absolute", top: 14, right: 14, fontSize: 15, color: MUTED }}>🔒</span>}
+                      <div style={{ display: "inline-block", padding: "2px 8px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: r.free ? BLUE_MID + "33" : isBeta ? BLUE_MID + "33" : "#2a1a00", color: r.free ? BLUE_BRIGHT : isBeta ? BLUE_BRIGHT : "#E8A000", marginBottom: 8 }}>
+                        {isBeta && !r.free ? "BETA" : r.tag}
+                      </div>
+                      <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, marginBottom: 3, fontFamily: "Georgia, serif" }}>{r.name}</div>
+                      <div style={{ fontSize: 11, color: MUTED, marginBottom: 7, textTransform: "uppercase", letterSpacing: "0.05em" }}>{r.subtitle}</div>
+                      <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.5, marginBottom: 14, flex: 1 }}>{r.description}</div>
+                      {r.free ? (
+                        reports[r.id]
+                          ? <button style={{ padding: "8px 16px", background: BLUE_MID + "33", border: `1px solid ${BLUE_BRIGHT}`, color: BLUE_BRIGHT, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { setActiveReport(r.id); setStep("reports"); }}>✓ View Report</button>
+                          : <button style={{ padding: "8px 16px", background: generating === r.id ? BLUE_MID + "44" : `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: generating ? "not-allowed" : "pointer", width: "100%" }} onClick={() => generateReport(r.id)} disabled={!!generating}>
+                              {generating === r.id ? "⏳ Mining..." : "Generate Report"}
+                            </button>
+                      ) : isBeta ? (
+                        <button style={{ padding: "8px 16px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { setActiveReport("gold"); setStep("reports"); }}>
+                          {reports.gold ? "✓ View Gold Nugget" : "View Gold Nugget →"}
+                        </button>
+                      ) : (
+                        <button style={{ padding: "8px 16px", background: "transparent", border: `1px solid ${BORDER}`, color: MUTED, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "default", width: "100%" }}>🔒 Upgrade to unlock</button>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <Divider />
+
               {/* ── How It Works ── */}
               <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "64px 40px", marginBottom: 0 }}>
                 <p style={{ fontSize: 22, color: WHITE, fontWeight: 700, textAlign: "center", marginBottom: 32, fontFamily: "Georgia, serif", letterSpacing: "-0.3px" }}>
@@ -1115,7 +1180,7 @@ export default function App() {
                 } else if (r.id === "gold" && isBeta) {
                   if (generating === "gold")   statusText = "⏳ Generating...";
                   else if (reports.gold)        statusText = "✓ Complete";
-                  else if (freeReportsComplete) statusText = "Ready to generate";
+                  else if (freeReportsComplete) statusText = "✦ Ready to generate";
                   else                          statusText = "Complete your reports first";
                 } else {
                   if (generating === r.id)  statusText = `⏳ ${countdown > 0 ? `Next in ${countdown}s...` : "Generating..."}`;
@@ -1165,7 +1230,7 @@ export default function App() {
                     <ReportContent text={reports.gold} />
                   ) : freeReportsComplete ? (
                     <div style={{ textAlign: "center", padding: "48px 32px" }}>
-                      <div style={{ fontSize: 44, marginBottom: 16 }}>🪙</div>
+                      <div style={{ fontSize: 44, marginBottom: 16, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, #E8A000, #f5c842)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontWeight: 700 }}>GN</div>
                       <div style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 10 }}>You've mined all 5 reports.</div>
                       <p style={{ fontSize: 14, color: MUTED, lineHeight: 1.7, maxWidth: 380, margin: "0 auto 28px" }}>Ready to see how it all adds up?</p>
                       <button style={{ padding: "12px 32px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "Georgia, serif" }} onClick={generateGoldNugget}>
@@ -1174,7 +1239,7 @@ export default function App() {
                     </div>
                   ) : (
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
-                      <div style={{ fontSize: 38, marginBottom: 14 }}>🪙</div>
+                      <div style={{ fontSize: 38, marginBottom: 14, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, #E8A000, #f5c842)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontWeight: 700 }}>GN</div>
                       <div style={{ fontSize: 16, color: WHITE, fontWeight: 600, marginBottom: 8 }}>Complete your 5 free reports first</div>
                       <p style={{ fontSize: 13, color: MUTED, lineHeight: 1.7 }}>Generate all 5 reports to unlock your BizDev Readiness Score.</p>
                     </div>
@@ -1194,7 +1259,7 @@ export default function App() {
                     <ReportContent text={reports[activeReport]} />
                   ) : (
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
-                      <div style={{ fontSize: 38, marginBottom: 14 }}>🪙</div>
+                      <div style={{ fontSize: 38, marginBottom: 14, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, #E8A000, #f5c842)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontWeight: 700 }}>GN</div>
                       <div style={{ color: MUTED, fontSize: 14, marginBottom: 20 }}>This report hasn't been generated yet.</div>
                       <button style={{ padding: "10px 24px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: generating ? "not-allowed" : "pointer" }} onClick={() => generateReport(activeReport)} disabled={!!generating}>
                         Generate {activeReportMeta?.name}
