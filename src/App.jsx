@@ -754,7 +754,7 @@ export default function App() {
               {/* ── Hero ── */}
             <div style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, padding: "80px 24px 72px", borderRadius: "0 0 24px 24px", textAlign: "center", marginBottom: 0 }}>
               <p style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 600, marginBottom: 28, animation: "fadeSlideUp 0.6s ease-out both" }}>
-                The BizDev Tool for Founders who are done with the ick of cold outreach.
+                The BizDev Tool for Founders done with the ick of cold outreach.
               </p>
               <h1 style={{ fontSize: 48, fontFamily: "Georgia, serif", fontWeight: 700, color: "#ffffff", marginBottom: 28, lineHeight: 1.1, animation: "fadeSlideUp 0.7s ease-out 0.1s both" }}>
                 Your next client is already<br />
@@ -785,7 +785,7 @@ export default function App() {
               <div className="scroll-reveal" style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 16, padding: "64px 48px", marginBottom: 0, marginTop: 40, textAlign: "center" }}>
                 <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 20 }}>Enter Nugget™</div>
                 <p style={{ fontSize: 19, color: WHITE, lineHeight: 1.8, maxWidth: 660, margin: "0 auto", fontFamily: "Georgia, serif" }}>
-                  NUGGET changes that. Upload your LinkedIn data once and we'll show you exactly what's hiding in your network — who's warm, who's ready, and where your next client is most likely coming from.
+                  Upload your LinkedIn data once and we'll show you exactly who's warm, who's ready, and where your next Client is most likely coming from.
                 </p>
               </div>
 
@@ -1024,12 +1024,8 @@ export default function App() {
               </div>
 
               {error && <div style={{ background: "#1a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
-
               <Divider />
-
-              <Divider />
-
-              {/* ── Report cards ── */}
+{/* ── Report cards ── */}
               <div style={{ marginBottom: 0 }}>
                 <div style={{ textAlign: "center", marginBottom: 40 }}>
                   <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>What You Get</div>
@@ -1081,7 +1077,7 @@ export default function App() {
                   <div style={{ fontSize: 11, color: BLUE_BRIGHT, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 700, marginBottom: 16 }}>The human behind it</div>
                   <h2 style={{ fontSize: 28, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 20, lineHeight: 1.2 }}>Hi, I'm Anna.</h2>
                   <p style={{ fontSize: 15, color: MUTED, lineHeight: 1.8, marginBottom: 16 }}>
-                    I'm a founder with 33 years of business experience — and I've lived every bizdev challenge in this tool personally. The cold leads. The missed opportunities. The warm network sitting right there, completely untouched.
+                    I'm a founder with 33 years of business experience — and I've lived every bizdev challenge in my career personally. The cold leads. The missed opportunities. The warm network sitting right there, completely untouched.
                   </p>
                   <p style={{ fontSize: 15, color: MUTED, lineHeight: 1.8, marginBottom: 16 }}>
                     I still see it today with my Clients as a Business Strategist. Smart, capable Founders leaving money behind not because they don't know how to sell — but because they don't know how to use the data they already have.
