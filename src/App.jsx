@@ -1237,7 +1237,7 @@ export default function App() {
                     <><IntroBlock reportId={activeReport} /><ReportContent text={reports[activeReport]} /></>
                   ) : (
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
-                      <div style={{ fontSize: 38, marginBottom: 14, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, #E8A000, #f5c842)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontWeight: 700 }}>GN</div>
+                      <div style={{ fontSize: 38, marginBottom: 14 }}>📊</div>
                       <div style={{ color: MUTED, fontSize: 14, marginBottom: 20 }}>This report hasn't been generated yet.</div>
                       <button style={{ padding: "10px 24px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: generating ? "not-allowed" : "pointer" }} onClick={() => generateReport(activeReport)} disabled={!!generating}>
                         Generate {activeReportMeta?.name}
