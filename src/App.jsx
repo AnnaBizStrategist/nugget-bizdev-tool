@@ -724,11 +724,10 @@ export default function App() {
 
       {/* ── Header ── */}
       <header style={{ borderBottom: `1px solid ${BORDER}`, padding: "16px 40px", display: "flex", alignItems: "center", background: DARK_CARD, position: "sticky", top: 0, zIndex: 100 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
-          <div>
-            <div style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, letterSpacing: "-0.5px", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Nugget<span style={{ fontSize: 13, verticalAlign: "super", marginLeft: 1 }}>™</span></div>
-            <div style={{ fontSize: 9, color: MUTED, letterSpacing: "0.08em", textTransform: "uppercase", marginTop: 3, lineHeight: 1.5 }}>The BizDev Tool for Founders<br />who are done with the ick of cold outreach.</div>
-          </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <div style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, letterSpacing: "-0.5px", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", whiteSpace: "nowrap" }}>Nugget<span style={{ fontSize: 13, verticalAlign: "super", marginLeft: 1 }}>™</span></div>
+          <div style={{ width: 1, height: 28, background: BORDER, flexShrink: 0 }} />
+          <div style={{ fontSize: 11, color: MUTED, letterSpacing: "0.03em", lineHeight: 1.4 }}>The BizDev Tool for Founders done with the ick of cold outreach.</div>
         </div>
         <nav style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
           {step === "upload" ? (
