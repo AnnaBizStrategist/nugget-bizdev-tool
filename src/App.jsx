@@ -162,6 +162,12 @@ Do not include a title or heading at the start of your response. Begin directly 
 
 Analyze the headline, summary, skills, and endorsements for BD effectiveness. Consider their diverse background as a potential credibility asset, not a liability.
 
+DATA STRUCTURE — use these exact column names:
+- Profile.csv: one row with columns Headline, Summary, Industry
+- Skills.csv: one column "Name" — each row is a skill
+- Endorsement_Received_Info.csv: columns Skill Name, Endorser First Name, Endorser Last Name, Endorsement Status (count ACCEPTED only)
+If Headline or Summary exist but are empty, flag as a critical gap.
+
 ## Profile Scorecard
 Rate each dimension using only these text labels — no emojis or colored dots:
 
@@ -431,13 +437,22 @@ async function callClaudeGN(systemPrompt, data, reportsContext) {
 
 function prepareData(parsedData, fileKeys) {
   const out = {};
+  const meta = {};
   fileKeys.forEach((k) => {
     if (parsedData[k]) {
+      const total = parsedData[k].length;
       const limit = k === "Messages" ? 100 : k === "Connections" ? 150 : 75;
       out[k] = parsedData[k].slice(0, limit);
+      meta[`${k}_total`] = total;
+    } else {
+      const criticalFiles = ["Comments", "Shares", "Connections", "Messages", "Recommendations"];
+      if (criticalFiles.includes(k)) {
+        meta[`${k}_missing`] = `${k} data was not found. User likely uploaded Basic export instead of Complete. Do not fabricate analysis — acknowledge this gap.`;
+      }
     }
   });
-  if (Object.keys(out).length === 0) out["_note"] = "No matching files uploaded. Provide analysis based on typical founder LinkedIn patterns.";
+  if (Object.keys(out).length === 0) out["_note"] = "No matching files found. User may have uploaded Basic export.";
+  if (Object.keys(meta).length > 0) out["_meta"] = meta;
   return out;
 }
 
@@ -619,6 +634,7 @@ export default function App() {
   const reportsReady        = Object.keys(reports).length;
   const activeReportMeta    = REPORTS.find(r => r.id === activeReport);
   const freeReportsComplete = REPORTS.filter(r => r.free).every(r => reports[r.id]);
+  const isMissingCriticalFiles = hasFiles && (!parsedData["Connections"] || !parsedData["Comments"] || !parsedData["Shares"]);
 
   const handleFiles = useCallback((fileList) => {
     Array.from(fileList).forEach((file) => {
@@ -990,7 +1006,7 @@ export default function App() {
                 </p>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1px 1fr 1px 1fr", gap: 0, alignItems: "start" }}>
                   {[
-                    { step: "01", title: "Request your data", desc: "On LinkedIn go to Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select all and click Request archive." },
+                    { step: "01", title: "Request your data", desc: "On LinkedIn go to Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select Complete — not Basic — and click Request archive. Basic won't include the data Nugget needs for most reports." },
                     { step: "02", title: "Download the file", desc: "Wait for LinkedIn to email your data file — usually within 24 hours. Click the link in that email and download the file to your computer." },
                     { step: "03", title: "Drop it in below", desc: "Drag and drop the file into Nugget below. That's it! Nugget works its magic and does the rest automatically. Let's get your Nuggets..." },
                   ].reduce((acc, s, i) => {
@@ -1033,6 +1049,15 @@ export default function App() {
                   )}
                 </div>
 
+                {isMissingCriticalFiles && (
+  <div style={{ background: "#1a0e00", border: "1px solid #E8A000", borderRadius: 10, padding: "16px 20px", marginBottom: 20, display: "flex", gap: 14, alignItems: "flex-start" }}>
+    <div style={{ fontSize: 20, flexShrink: 0 }}>⚠️</div>
+    <div>
+      <div style={{ fontSize: 14, fontWeight: 700, color: "#E8A000", marginBottom: 6 }}>Looks like you uploaded the Basic export</div>
+      <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.65 }}>Nugget needs your <strong style={{ color: WHITE }}>Complete</strong> LinkedIn export. On LinkedIn: <strong style={{ color: WHITE }}>Me → Settings & Privacy → Data Privacy → Request a copy → select Complete → Request archive.</strong> LinkedIn emails it within 24 hours.</div>
+    </div>
+  </div>
+)}
                 {/* Stats */}
                 {connCount > 0 && (
                   <div style={{ display: "flex", gap: 14, marginBottom: 24 }}>
