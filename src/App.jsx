@@ -1006,7 +1006,7 @@ export default function App() {
                 </p>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1px 1fr 1px 1fr", gap: 0, alignItems: "start" }}>
                   {[
-                    { step: "01", title: "Request your data", desc: "On LinkedIn go to Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select Complete — not Basic — and click Request archive. Basic won't include the data Nugget needs for most reports. The exact menu wording may vary - if you get stuck, <ahref="https://www.linkedin/answer/a1339364" target="_blank" style="color:#41a1e8">LinkedIn's help guide</a> ahs the latest steps." },
+                    { step: "01", title: "Request your data", desc: "On LinkedIn: Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select Complete — not Basic — and click Request archive. Basic won't include the data Nugget needs for most reports. If you get stuck, search LinkedIn Help for 'download your data'." },
                     { step: "02", title: "Download the file", desc: "Wait for LinkedIn to email your data file — usually within 24 hours. Click the link in that email and download the file to your computer." },
                     { step: "03", title: "Drop it in below", desc: "Drag and drop the file into Nugget below. That's it! Nugget works its magic and does the rest automatically. Let's get your Nuggets..." },
                   ].reduce((acc, s, i) => {
