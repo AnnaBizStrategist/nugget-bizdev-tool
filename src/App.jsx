@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import Papa from "papaparse";
 import JSZip from "jszip";
+import { Analytics } from "@vercel/analytics/react";
 
 // ── Design tokens ─────────────────────────────────────────────────────────────
 const BLUE_DEEP   = "#0d2d6b";
@@ -1274,6 +1275,7 @@ export default function App() {
           </div>
         </div>
       )}
+      <Analytics />
     </div>
   );
 }
