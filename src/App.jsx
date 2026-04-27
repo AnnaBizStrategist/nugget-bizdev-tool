@@ -390,49 +390,69 @@ function getFileKey(name) {
 }
 
 // ── API calls ─────────────────────────────────────────────────────────────────
-async function callClaude(systemPrompt, data) {
+async function callClaude(systemPrompt, data, retries = 3, onRetry = null) {
   const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY;
-  const response = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": apiKey,
-      "anthropic-version": "2023-06-01",
-      "anthropic-dangerous-direct-browser-access": "true",
-    },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1500,
-      system: systemPrompt,
-      messages: [{ role: "user", content: `Here is the LinkedIn export data to analyze:\n\n${JSON.stringify(data, null, 2)}\n\nGenerate the report now. Be specific, use real names from the data, and make every insight immediately actionable.` }],
-    }),
+  const body = JSON.stringify({
+    model: "claude-sonnet-4-20250514",
+    max_tokens: 1500,
+    system: systemPrompt,
+    messages: [{ role: "user", content: `Here is the LinkedIn export data to analyze:\n\n${JSON.stringify(data, null, 2)}\n\nGenerate the report now. Be specific, use real names from the data, and make every insight immediately actionable.` }],
   });
-  if (!response.ok) { const err = await response.json(); throw new Error(err.error?.message || `API error ${response.status}`); }
-  return (await response.json()).content[0].text;
+  for (let attempt = 0; attempt < retries; attempt++) {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01",
+        "anthropic-dangerous-direct-browser-access": "true",
+      },
+      body,
+    });
+    if (response.ok) return (await response.json()).content[0].text;
+    const err = await response.json();
+    if (response.status === 429 && attempt < retries - 1) {
+      const waitMs = Math.pow(2, attempt + 1) * 10000;
+      if (onRetry) onRetry(waitMs / 1000);
+      await new Promise((res) => setTimeout(res, waitMs));
+      continue;
+    }
+    throw new Error(err.error?.message || `API error ${response.status}`);
+  }
 }
 
-async function callClaudeGN(systemPrompt, data, reportsContext) {
+async function callClaudeGN(systemPrompt, data, reportsContext, retries = 3, onRetry = null) {
   const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY;
-  const response = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": apiKey,
-      "anthropic-version": "2023-06-01",
-      "anthropic-dangerous-direct-browser-access": "true",
-    },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 3500,
-      system: systemPrompt,
-      messages: [{
-        role: "user",
-        content: `Here is the LinkedIn export data:\n\n${JSON.stringify(data, null, 2)}\n\n---\n\nHere are the 5 free reports already generated for this founder:\n\n${reportsContext}\n\nGenerate the Gold Nugget report now. Use these reports as your primary source. Use real names and make every recommendation immediately actionable.`,
-      }],
-    }),
+  const body = JSON.stringify({
+    model: "claude-sonnet-4-20250514",
+    max_tokens: 3500,
+    system: systemPrompt,
+    messages: [{
+      role: "user",
+      content: `Here is the LinkedIn export data:\n\n${JSON.stringify(data, null, 2)}\n\n---\n\nHere are the 5 free reports already generated for this founder:\n\n${reportsContext}\n\nGenerate the Gold Nugget report now. Use these reports as your primary source. Use real names and make every recommendation immediately actionable.`,
+    }],
   });
-  if (!response.ok) { const err = await response.json(); throw new Error(err.error?.message || `API error ${response.status}`); }
-  return (await response.json()).content[0].text;
+  for (let attempt = 0; attempt < retries; attempt++) {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": apiKey,
+        "anthropic-version": "2023-06-01",
+        "anthropic-dangerous-direct-browser-access": "true",
+      },
+      body,
+    });
+    if (response.ok) return (await response.json()).content[0].text;
+    const err = await response.json();
+    if (response.status === 429 && attempt < retries - 1) {
+      const waitMs = Math.pow(2, attempt + 1) * 10000;
+      if (onRetry) onRetry(waitMs / 1000);
+      await new Promise((res) => setTimeout(res, waitMs));
+      continue;
+    }
+    throw new Error(err.error?.message || `API error ${response.status}`);
+  }
 }
 
 function categorizeRole(title = "") {
@@ -456,23 +476,60 @@ function slimConnection(c) {
   };
 }
 function prepareData(parsedData, fileKeys) {
-  const out = {};
+  const out  = {};
   const meta = {};
+  const ICP_RE = /founder|owner|co-founder|ceo|president|partner|principal|entrepreneur|solopreneur/i;
+
   fileKeys.forEach((k) => {
-    if (parsedData[k]) {
-      const total = parsedData[k].length;
-      const limit = k === "Messages" ? 100 : k === "Connections" ? 150 : 75;
-      out[k] = parsedData[k].slice(0, limit);
-      meta[`${k}_total`] = total;
-    } else {
+    if (!parsedData[k]) {
       const criticalFiles = ["Comments", "Shares", "Connections", "Messages", "Recommendations"];
       if (criticalFiles.includes(k)) {
-        meta[`${k}_missing`] = `${k} data was not found. User likely uploaded Basic export instead of Complete. Do not fabricate analysis — acknowledge this gap.`;
+        meta[`${k}_missing`] =
+          `${k} data was not found. User likely uploaded Basic export instead of Complete. Do not fabricate analysis — acknowledge this gap.`;
       }
+      return;
+    }
+
+    const total = parsedData[k].length;
+    meta[`${k}_total`] = total;
+
+    if (k === "Connections") {
+      const roleDist = {};
+      parsedData[k].forEach((c) => {
+        const role = categorizeRole(c["Position"] || "");
+        roleDist[role] = (roleDist[role] || 0) + 1;
+      });
+      const icpConns   = parsedData[k].filter((c) => ICP_RE.test(c["Position"] || "")).slice(0, 60).map(slimConnection);
+      const otherConns = parsedData[k].filter((c) => !ICP_RE.test(c["Position"] || "")).slice(0, 15).map(slimConnection);
+      out[k] = {
+        _summary: { total, icp_count: icpConns.length, role_distribution: roleDist },
+        icp_connections: icpConns,
+        other_sample: otherConns,
+      };
+    } else if (k === "Messages") {
+      out[k] = parsedData[k].slice(0, 60).map((m) => ({
+        FROM:    m.FROM    || m.From    || "",
+        TO:      m.TO      || m.To      || "",
+        DATE:    m.DATE    || m.Date    || "",
+        SUBJECT: (m.SUBJECT || m.Subject || "").substring(0, 80),
+        CONTENT: (m.CONTENT || m.Content || "").substring(0, 180),
+      }));
+      meta[`${k}_shown`] = Math.min(60, total);
+    } else if (k === "Comments") {
+      out[k] = parsedData[k].slice(0, 40).map((c) => ({
+        Date:    c.Date    || c.date    || "",
+        Message: (c.Message || c.message || c.Comment || "").substring(0, 200),
+        Link:    c.Link    || c.link    || "",
+      }));
+      meta[`${k}_shown`] = Math.min(40, total);
+    } else {
+      out[k] = parsedData[k].slice(0, 50);
+      meta[`${k}_shown`] = Math.min(50, total);
     }
   });
+
   if (Object.keys(out).length === 0) out["_note"] = "No matching files found. User may have uploaded Basic export.";
-  if (Object.keys(meta).length > 0) out["_meta"] = meta;
+  if (Object.keys(meta).length > 0)  out["_meta"] = meta;
   return out;
 }
 
