@@ -435,6 +435,26 @@ async function callClaudeGN(systemPrompt, data, reportsContext) {
   return (await response.json()).content[0].text;
 }
 
+function categorizeRole(title = "") {
+  const t = title.toLowerCase();
+  if (/founder|co-founder|owner|solopreneur|entrepreneur/.test(t)) return "Founder/Owner";
+  if (/ceo|chief executive|president|managing director/.test(t))   return "CEO/Executive";
+  if (/coo|cfo|cto|cmo|cso|chief/.test(t))                        return "C-Suite";
+  if (/vp|vice president|svp|evp/.test(t))                        return "VP";
+  if (/director|head of/.test(t))                                  return "Director";
+  if (/consultant|advisor|strategist|coach/.test(t))               return "Consultant/Advisor";
+  if (/manager|lead/.test(t))                                      return "Manager";
+  return "Other";
+}
+
+function slimConnection(c) {
+  return {
+    name: `${c["First Name"] || ""} ${c["Last Name"] || ""}`.trim(),
+    company: c["Company"] || "",
+    position: c["Position"] || "",
+    connected: c["Connected On"] || "",
+  };
+}
 function prepareData(parsedData, fileKeys) {
   const out = {};
   const meta = {};
