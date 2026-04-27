@@ -1312,8 +1312,7 @@ export default function App() {
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
                       <div style={{ width: 36, height: 36, border: `3px solid ${BORDER}`, borderTop: `3px solid ${BLUE_BRIGHT}`, borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto 16px" }} />
                       <div style={{ color: MUTED, fontSize: 14 }}>
-  <div style={{ color: MUTED, fontSize: 14 }}>
-  {retryMessage || "Mining your data for gold..."}
+    {retryMessage || "Mining your data for gold..."}
 </div>
                     </div>
                   ) : reports.gold ? (
@@ -1344,8 +1343,7 @@ export default function App() {
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
                       <div style={{ width: 36, height: 36, border: `3px solid ${BORDER}`, borderTop: `3px solid ${BLUE_BRIGHT}`, borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto 16px" }} />
                       <div style={{ color: MUTED, fontSize: 14 }}>
-  <div style={{ color: MUTED, fontSize: 14 }}>
-  {retryMessage || "Mining your data for gold..."}
+    {retryMessage || "Mining your data for gold..."}
 </div>
                     </div>
                   ) : reports[activeReport] ? (
