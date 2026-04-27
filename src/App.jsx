@@ -694,8 +694,8 @@ export default function App() {
   const [generating,      setGenerating]     = useState(null);
   const [activeReport,    setActiveReport]   = useState("field");
   const [dragOver,        setDragOver]       = useState(false);
-  const [countdown,       setCountdown]      = useState(0);
   const [error,           setError]          = useState(null);
+  const [retryMessage,    setRetryMessage]   = useState(null);
   const [showEmailModal,  setShowEmailModal] = useState(false);
   const [emailSubmitted,  setEmailSubmitted] = useState(false);
   const [pendingReportId, setPendingReportId]= useState(null);
@@ -746,50 +746,57 @@ export default function App() {
   }, [handleFiles]);
 
   const runReport = async (reportId) => {
-    const report = REPORTS.find(r => r.id === reportId);
-    if (!report?.free || generating) return;
-    setGenerating(reportId); setActiveReport(reportId); setStep("reports"); setError(null);
-    try {
-      const result = await callClaude(PROMPTS[reportId], prepareData(parsedData, report.files));
-      setReports(prev => ({ ...prev, [reportId]: result }));
-    } catch (err) { setError(err.message); }
-    finally { setGenerating(null); }
-  };
-
-  const generateReport = (reportId) => {
-    const report = REPORTS.find(r => r.id === reportId);
-    if (!report?.free || generating) return;
-    if (!emailSubmitted) { setPendingReportId(reportId); setShowEmailModal(true); return; }
-    runReport(reportId);
-  };
+  const report = REPORTS.find(r => r.id === reportId);
+  if (!report?.free || generating) return;
+  setGenerating(reportId); setActiveReport(reportId); setStep("reports"); setError(null); setRetryMessage(null);
+  try {
+    const result = await callClaude(
+      PROMPTS[reportId],
+      prepareData(parsedData, report.files),
+      3,
+      (secs) => setRetryMessage(`The hamster's catching its breath — back in ~${Math.round(secs)}s! 🐹`)
+    );
+    setReports(prev => ({ ...prev, [reportId]: result }));
+  } catch (err) { setError(err.message); }
+  finally { setGenerating(null); setRetryMessage(null); }
+};
 
   const generateGoldNugget = async () => {
     if (generating) return;
-    setGenerating("gold"); setActiveReport("gold"); setStep("reports"); setError(null);
+    setGenerating("gold"); setActiveReport("gold"); setStep("reports"); setError(null); setRetryMessage(null);
     try {
       const data = prepareData(parsedData, ["Connections", "Messages"]);
       const reportsContext = Object.entries(reports)
         .map(([id, text]) => `=== ${REPORTS.find(r => r.id === id)?.name?.toUpperCase() || id.toUpperCase()} ===\n${text}`)
         .join("\n\n---\n\n");
-      const fullText     = await callClaudeGN(PROMPTS.gold, data, reportsContext);
+      const fullText = await callClaudeGN(
+  PROMPTS.gold,
+  data,
+  reportsContext,
+  3,
+  (secs) => setRetryMessage(`The hamster's catching its breath — back in ~${Math.round(secs)}s! 🐹`)
+);
       const parsedScores = parseScores(fullText);
       const cleanText    = stripScores(fullText);
       setReports(prev => ({ ...prev, gold: cleanText }));
       if (parsedScores) { setScores(parsedScores); setStep("score"); }
     } catch (err) { setError(err.message); }
-    finally { setGenerating(null); }
+    finally { setGenerating(null); setRetryMessage(null); }
   };
 
   const submitEmail = async () => {
-    if (!emailName.trim() || !emailAddress.trim()) return;
-    setEmailSubmitted(true); setShowEmailModal(false);
-    const pending = pendingReportId; setPendingReportId(null);
-    if (pending) runReport(pending);
-    fetch("https://hook.us2.make.com/xu7d06pva2t2hhyccr86ddar7msqm4zl", {
-      method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: emailName.trim(), email: emailAddress.trim(), source: "nugget-free-user" }),
-    }).catch(err => console.log("Webhook error:", err));
-  };
+  if (!emailName.trim() || !emailAddress.trim()) return;
+  setEmailSubmitting(true);
+  const pending = pendingReportId; setPendingReportId(null);
+  fetch("https://hook.us2.make.com/xu7d06pva2t2hhyccr86ddar7msqm4zl", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name: emailName.trim(), email: emailAddress.trim(), source: "nugget-free-user" }),
+  }).catch(err => console.log("Webhook error:", err));
+  setEmailSubmitted(true);
+  setEmailSubmitting(false);
+  setShowEmailModal(false);
+  if (pending) runReport(pending);
+};
 
   // Scroll reveal observer
   const observerRef = useRef(null);
@@ -1263,7 +1270,7 @@ export default function App() {
                   else if (freeReportsComplete) statusText = "✦ Ready to generate";
                   else                          statusText = "Complete your reports first";
                 } else {
-                  if (generating === r.id)  statusText = `⏳ ${countdown > 0 ? `Next in ${countdown}s...` : "Generating..."}`;
+                  if (generating === r.id)  statusText = `⏳ Generating...`;
                   else if (reports[r.id])   statusText = "✓ Complete";
                   else                      statusText = "Unmined";
                 }
@@ -1304,7 +1311,10 @@ export default function App() {
                   ) : generating === "gold" ? (
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
                       <div style={{ width: 36, height: 36, border: `3px solid ${BORDER}`, borderTop: `3px solid ${BLUE_BRIGHT}`, borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto 16px" }} />
-                      <div style={{ color: MUTED, fontSize: 14 }}>Mining your data for gold...</div>
+                      <div style={{ color: MUTED, fontSize: 14 }}>
+  <div style={{ color: MUTED, fontSize: 14 }}>
+  {retryMessage || "Mining your data for gold..."}
+</div>
                     </div>
                   ) : reports.gold ? (
                     <><IntroBlock reportId="gold" /><ReportContent text={reports.gold} /></>
@@ -1333,7 +1343,10 @@ export default function App() {
                   {generating === activeReport ? (
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
                       <div style={{ width: 36, height: 36, border: `3px solid ${BORDER}`, borderTop: `3px solid ${BLUE_BRIGHT}`, borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto 16px" }} />
-                      <div style={{ color: MUTED, fontSize: 14 }}>{countdown > 0 ? `Next report in ${countdown}s...` : "Mining your data for gold..."}</div>
+                      <div style={{ color: MUTED, fontSize: 14 }}>
+  <div style={{ color: MUTED, fontSize: 14 }}>
+  {retryMessage || "Mining your data for gold..."}
+</div>
                     </div>
                   ) : reports[activeReport] ? (
                     <><IntroBlock reportId={activeReport} /><ReportContent text={reports[activeReport]} /></>
