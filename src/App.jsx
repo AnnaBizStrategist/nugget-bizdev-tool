@@ -1387,6 +1387,13 @@ export default function App() {
           </div>
         </div>
       )}
+      <footer style={{ borderTop: `1px solid ${BORDER}`, background: DARK_CARD, padding: "20px 40px", textAlign: "center", marginTop: 40 }}>
+  <p style={{ fontSize: 12, color: MUTED, margin: 0 }}>
+    © 2025 Nugget™ &nbsp;·&nbsp;
+    <a href="/privacy.html" style={{ color: BLUE_BRIGHT, textDecoration: "none" }}>Privacy Policy</a> &nbsp;·&nbsp;
+    <a href="mailto:hello@annaludwinowski.com" style={{ color: BLUE_BRIGHT, textDecoration: "none" }}>hello@annaludwinowski.com</a>
+  </p>
+</footer>
     </div>
   );
 }
