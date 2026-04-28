@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Nugget™</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue-deep:   #0d2d6b;
+      --blue-mid:    #1149ac;
+      --blue-bright: #41a1e8;
+      --blue-light:  #7ec8f5;
+      --dark:        #0a1628;
+      --dark-card:   #0f2040;
+      --white:       #e8f0fe;
+      --muted:       #9fc4e8;
+      --border:      #1e4080;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--white);
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark-card);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      font-family: Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--blue-bright), var(--blue-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+
+    .logo sup { font-size: 11px; }
+
+    .divider-v {
+      width: 1px;
+      height: 24px;
+      background: var(--border);
+    }
+
+    .header-label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    header nav {
+      margin-left: auto;
+    }
+
+    header nav a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    header nav a:hover {
+      color: var(--blue-bright);
+      border-color: var(--blue-bright);
+    }
+
+    /* ── Hero band ── */
+    .hero-band {
+      background: linear-gradient(135deg, var(--blue-deep) 0%, #0a1e50 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 56px 40px 48px;
+      text-align: center;
+    }
+
+    .hero-band .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue-bright);
+      margin-bottom: 14px;
+    }
+
+    .hero-band h1 {
+      font-family: Georgia, serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .hero-band .meta {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Trust callout ── */
+    .trust-box {
+      max-width: 720px;
+      margin: -1px auto 0;
+      padding: 0 24px;
+    }
+
+    .trust-inner {
+      background: linear-gradient(135deg, rgba(65,161,232,0.12), rgba(17,73,172,0.08));
+      border: 1px solid rgba(65,161,232,0.3);
+      border-radius: 0 0 14px 14px;
+      padding: 20px 28px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .trust-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+
+    .trust-inner p {
+      font-size: 14px;
+      color: var(--white);
+      line-height: 1.7;
+    }
+
+    .trust-inner strong { color: var(--blue-bright); }
+
+    /* ── Main layout ── */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 56px 24px 96px;
+    }
+
+    /* ── TOC ── */
+    .toc {
+      background: var(--dark-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 52px;
+    }
+
+    .toc-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .toc ol {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 24px;
+    }
+
+    .toc ol li a {
+      font-size: 13px;
+      color: var(--blue-bright);
+      text-decoration: none;
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+      transition: color 0.15s;
+    }
+
+    .toc ol li a:hover { color: var(--blue-light); }
+
+    .toc ol li a .num {
+      font-size: 11px;
+      color: var(--muted);
+      min-width: 18px;
+    }
+
+    /* ── Sections ── */
+    section {
+      margin-bottom: 52px;
+      scroll-margin-top: 90px;
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--blue-bright);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    h2 .section-num {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 400;
+      font-family: Georgia, serif;
+    }
+
+    p { margin-bottom: 14px; color: var(--white); }
+    p:last-child { margin-bottom: 0; }
+
+    ul, ol {
+      padding-left: 0;
+      list-style: none;
+      margin-bottom: 14px;
+    }
+
+    ul li, ol li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: var(--white);
+    }
+
+    ul li::before {
+      content: "•";
+      color: var(--blue-bright);
+      font-size: 14px;
+      line-height: 1.8;
+      flex-shrink: 0;
+    }
+
+    /* ── Sub-blocks ── */
+    .sub-block {
+      background: rgba(255,255,255,0.03);
+      border-left: 3px solid var(--blue-mid);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+
+    .sub-block h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--blue-light);
+      margin-bottom: 8px;
+    }
+
+    .sub-block p {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* ── Highlight box ── */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(65,161,232,0.1), rgba(17,73,172,0.06));
+      border: 1px solid rgba(65,161,232,0.25);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin: 20px 0;
+      font-size: 14px;
+      color: var(--white);
+      line-height: 1.7;
+    }
+
+    .highlight-box strong { color: var(--blue-bright); }
+
+    /* ── Contact block ── */
+    .contact-block {
+      background: var(--dark-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-top: 16px;
+    }
+
+    .contact-block p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .contact-block a {
+      color: var(--blue-bright);
+      text-decoration: none;
+    }
+
+    .contact-block a:hover { text-decoration: underline; }
+
+    /* ── Divider ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 52px 0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--dark-card);
+      padding: 28px 40px;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    footer a {
+      color: var(--blue-bright);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      header { padding: 14px 20px; }
+      .hero-band { padding: 40px 20px 36px; }
+      .hero-band h1 { font-size: 26px; }
+      main { padding: 40px 20px 72px; }
+      .toc ol { grid-template-columns: 1fr; }
+      footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="logo">Nugget<sup>™</sup></a>
+    <div class="divider-v"></div>
+    <span class="header-label">Privacy Policy</span>
+    <nav><a href="/">← Back to Nugget</a></nav>
+  </header>
+
+  <!-- Hero -->
+  <div class="hero-band">
+    <div class="eyebrow">Legal &amp; Privacy</div>
+    <h1>Privacy Policy</h1>
+    <p class="meta">Effective Date: May 1, 2025 &nbsp;|&nbsp; Last Updated: May 1, 2025 &nbsp;|&nbsp; Jurisdiction: Canada (PIPEDA)</p>
+  </div>
+
+  <!-- Trust callout -->
+  <div class="trust-box">
+    <div class="trust-inner">
+      <div class="trust-icon">🔒</div>
+      <p><strong>The short version:</strong> Your LinkedIn data never touches our servers. It's processed entirely in your browser. A summarized version is sent to Anthropic's API to generate your reports — then it's gone. We store your name and email only.</p>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- Intro -->
+    <p style="color: var(--muted); font-size: 14px; margin-bottom: 40px; margin-top: 8px;">
+      We built Nugget to be genuinely useful — and genuinely trustworthy. This policy explains exactly what data we collect, how we use it, and why your LinkedIn data is safer here than you might expect.
+    </p>
+
+    <!-- TOC -->
+    <div class="toc">
+      <div class="toc-label">Contents</div>
+      <ol>
+        <li><a href="#who-we-are"><span class="num">1.</span> Who We Are</a></li>
+        <li><a href="#data-we-collect"><span class="num">2.</span> What Data We Collect</a></li>
+        <li><a href="#how-we-use"><span class="num">3.</span> How We Use Your Data</a></li>
+        <li><a href="#third-parties"><span class="num">4.</span> Third Parties We Work With</a></li>
+        <li><a href="#retention"><span class="num">5.</span> Data Retention</a></li>
+        <li><a href="#your-rights"><span class="num">6.</span> Your Rights (PIPEDA)</a></li>
+        <li><a href="#security"><span class="num">7.</span> Security</a></li>
+        <li><a href="#cookies"><span class="num">8.</span> Cookies &amp; Analytics</a></li>
+        <li><a href="#children"><span class="num">9.</span> Children's Privacy</a></li>
+        <li><a href="#changes"><span class="num">10.</span> Changes to This Policy</a></li>
+        <li><a href="#contact"><span class="num">11.</span> Contact Us</a></li>
+      </ol>
+    </div>
+
+    <!-- 1. Who We Are -->
+    <section id="who-we-are">
+      <h2><span class="section-num">01</span> Who We Are</h2>
+      <p>Nugget™ is operated by Anna Ludwinowski, based in Surrey, British Columbia, Canada.</p>
+      <p>If you have any questions about this policy or how your data is handled, you can reach us at <a href="mailto:hello@annaludwinowski.com" style="color: var(--blue-bright);">hello@annaludwinowski.com</a>. We respond to all privacy inquiries within 30 days.</p>
+    </section>
+
+    <!-- 2. What Data We Collect -->
+    <section id="data-we-collect">
+      <h2><span class="section-num">02</span> What Data We Collect</h2>
+      <p>We collect two categories of data:</p>
+
+      <div class="sub-block">
+        <h3>A. LinkedIn Export Data — temporary</h3>
+        <p>When you upload your LinkedIn data file, it is parsed and processed entirely in your browser using client-side JavaScript. This data is never uploaded to our servers. A condensed summary is sent to Anthropic's API solely to generate your reports. Once your session ends or you close the tab, this data is gone.</p>
+      </div>
+
+      <div class="sub-block">
+        <h3>B. Personal Contact Information — stored</h3>
+        <p>When you request your free reports, we collect your first name and email address. This is used to deliver your reports, send product updates, and notify you of new features.</p>
+      </div>
+    </section>
+
+    <!-- 3. How We Use Your Data -->
+    <section id="how-we-use">
+      <h2><span class="section-num">03</span> How We Use Your Data</h2>
+      <p>We use the data we collect for the following purposes only:</p>
+      <ul>
+        <li>To generate your personalized Nugget reports</li>
+        <li>To communicate with you about your reports and the product</li>
+        <li>To improve Nugget using aggregated, anonymous usage patterns only</li>
+        <li>To send our quarterly newsletter (you can unsubscribe any time)</li>
+      </ul>
+      <div class="highlight-box">
+        <strong>We do not sell your data.</strong> We do not share it with third parties for marketing purposes. Ever.
+      </div>
+    </section>
+
+    <!-- 4. Third Parties -->
+    <section id="third-parties">
+      <h2><span class="section-num">04</span> Third Parties We Work With</h2>
+      <p>Running Nugget requires a small number of trusted third-party services. Here's who they are and what they touch:</p>
+
+      <div class="sub-block">
+        <h3>Anthropic (Claude API)</h3>
+        <p>Your LinkedIn data summary is processed by Anthropic's Claude API to generate your reports. Anthropic does not use API inputs to train their models by default. <a href="https://anthropic.com/privacy" target="_blank" rel="noopener" style="color: var(--blue-bright);">Learn more at anthropic.com/privacy</a>.</p>
+      </div>
+
+      <div class="sub-block">
+        <h3>Kit (formerly ConvertKit)</h3>
+        <p>Your name and email address are stored in Kit, our email platform, used solely to deliver your reports and communications from Nugget.</p>
+      </div>
+
+      <div class="sub-block">
+        <h3>Vercel</h3>
+        <p>Nugget is hosted on Vercel. Vercel collects standard server logs and anonymized analytics (page views, performance data). No personal data beyond standard hosting is shared with Vercel.</p>
+      </div>
+
+      <div class="sub-block">
+        <h3>Make.com</h3>
+        <p>We use Make.com to route your name and email from the sign-up form to Kit. Only your name and email pass through this webhook — no LinkedIn data.</p>
+      </div>
+    </section>
+
+    <!-- 5. Data Retention -->
+    <section id="retention">
+      <h2><span class="section-num">05</span> Data Retention</h2>
+      <ul>
+        <li><strong style="color: var(--blue-light);">LinkedIn export data:</strong> Not retained. Processed in-browser only and discarded at session end.</li>
+        <li><strong style="color: var(--blue-light);">Name and email:</strong> Retained for as long as you are an active user or subscriber. You may request deletion at any time.</li>
+        <li><strong style="color: var(--blue-light);">Analytics data:</strong> Aggregated and anonymized. Retained by Vercel per their standard data practices.</li>
+      </ul>
+    </section>
+
+    <!-- 6. Your Rights -->
+    <section id="your-rights">
+      <h2><span class="section-num">06</span> Your Rights (PIPEDA)</h2>
+      <p>As a Canadian business, we are governed by the Personal Information Protection and Electronic Documents Act (PIPEDA). Under PIPEDA, you have the right to:</p>
+      <ul>
+        <li>Know what personal information we hold about you</li>
+        <li>Request access to your personal information</li>
+        <li>Request correction of inaccurate information</li>
+        <li>Withdraw consent and request deletion of your information</li>
+        <li>File a complaint with the Office of the Privacy Commissioner of Canada</li>
+      </ul>
+      <div class="highlight-box">
+        <strong>Note for international users:</strong> If you are located in the European Economic Area (EEA), you may have additional rights under GDPR. We handle all data access and deletion requests regardless of your location.
+      </div>
+    </section>
+
+    <!-- 7. Security -->
+    <section id="security">
+      <h2><span class="section-num">07</span> Security</h2>
+      <ul>
+        <li>All data is transmitted over HTTPS (TLS encryption in transit)</li>
+        <li>Your LinkedIn data is never written to disk or stored on any server</li>
+        <li>Access to email marketing data is restricted to authorized personnel only</li>
+        <li>We use reputable, security-audited third-party services</li>
+      </ul>
+      <p style="color: var(--muted); font-size: 14px;">No system is perfectly secure, and we cannot guarantee absolute security. If you have concerns about a specific data handling practice, please contact us.</p>
+    </section>
+
+    <!-- 8. Cookies -->
+    <section id="cookies">
+      <h2><span class="section-num">08</span> Cookies &amp; Analytics</h2>
+      <p>Nugget uses Vercel Analytics for basic, anonymized usage data — pages visited, load times, and general traffic patterns. This does not include personal identifiers. We do not use tracking cookies or third-party advertising pixels.</p>
+    </section>
+
+    <!-- 9. Children -->
+    <section id="children">
+      <h2><span class="section-num">09</span> Children's Privacy</h2>
+      <p>Nugget is designed for founders, business owners, and professionals. We do not knowingly collect data from anyone under the age of 16. If you believe a minor has provided us with personal information, please contact us and we will delete it promptly.</p>
+    </section>
+
+    <!-- 10. Changes -->
+    <section id="changes">
+      <h2><span class="section-num">10</span> Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. When we do, we'll update the "Last Updated" date at the top of this page. If changes are material, we'll notify you by email. Continuing to use Nugget after changes are posted constitutes your acceptance of the updated policy.</p>
+    </section>
+
+    <!-- 11. Contact -->
+    <section id="contact">
+      <h2><span class="section-num">11</span> Contact Us</h2>
+      <p>Questions? Concerns? Requests? We're real people and we respond.</p>
+      <div class="contact-block">
+        <p>Anna Ludwinowski</p>
+        <p>Surrey, British Columbia, Canada</p>
+        <p>📧 <a href="mailto:hello@annaludwinowski.com">hello@annaludwinowski.com</a></p>
+      </div>
+    </section>
+
+    <hr />
+
+    <p style="font-size: 12px; color: var(--muted); text-align: center;">
+      This Privacy Policy was last reviewed and updated on May 1, 2025.<br />
+      Nugget™ is a product of Anna Ludwinowski. All rights reserved.
+    </p>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      © 2025 Nugget™ &nbsp;·&nbsp;
+      <a href="/privacy.html">Privacy Policy</a> &nbsp;·&nbsp;
+      <a href="/terms.html">Terms of Service</a> &nbsp;·&nbsp;
+      <a href="mailto:hello@annaludwinowski.com">hello@annaludwinowski.com</a>
+    </p>
+  </footer>
+
+</body>
+</html>
