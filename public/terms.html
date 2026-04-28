@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — Nugget™</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue-deep:   #0d2d6b;
+      --blue-mid:    #1149ac;
+      --blue-bright: #41a1e8;
+      --blue-light:  #7ec8f5;
+      --dark:        #0a1628;
+      --dark-card:   #0f2040;
+      --white:       #e8f0fe;
+      --muted:       #9fc4e8;
+      --border:      #1e4080;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--white);
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--dark-card);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      font-family: Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--blue-bright), var(--blue-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      letter-spacing: -0.3px;
+    }
+
+    .logo sup { font-size: 11px; }
+
+    .divider-v {
+      width: 1px;
+      height: 24px;
+      background: var(--border);
+    }
+
+    .header-label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    header nav { margin-left: auto; }
+
+    header nav a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    header nav a:hover {
+      color: var(--blue-bright);
+      border-color: var(--blue-bright);
+    }
+
+    .hero-band {
+      background: linear-gradient(135deg, var(--blue-deep) 0%, #0a1e50 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 56px 40px 48px;
+      text-align: center;
+    }
+
+    .hero-band .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue-bright);
+      margin-bottom: 14px;
+    }
+
+    .hero-band h1 {
+      font-family: Georgia, serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .hero-band .meta {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .trust-box {
+      max-width: 720px;
+      margin: -1px auto 0;
+      padding: 0 24px;
+    }
+
+    .trust-inner {
+      background: linear-gradient(135deg, rgba(65,161,232,0.12), rgba(17,73,172,0.08));
+      border: 1px solid rgba(65,161,232,0.3);
+      border-radius: 0 0 14px 14px;
+      padding: 20px 28px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .trust-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+
+    .trust-inner p {
+      font-size: 14px;
+      color: var(--white);
+      line-height: 1.7;
+    }
+
+    .trust-inner strong { color: var(--blue-bright); }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 56px 24px 96px;
+    }
+
+    .toc {
+      background: var(--dark-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 52px;
+    }
+
+    .toc-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .toc ol {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 24px;
+    }
+
+    .toc ol li a {
+      font-size: 13px;
+      color: var(--blue-bright);
+      text-decoration: none;
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+      transition: color 0.15s;
+    }
+
+    .toc ol li a:hover { color: var(--blue-light); }
+
+    .toc ol li a .num {
+      font-size: 11px;
+      color: var(--muted);
+      min-width: 18px;
+    }
+
+    section {
+      margin-bottom: 52px;
+      scroll-margin-top: 90px;
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--blue-bright);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    h2 .section-num {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 400;
+      font-family: Georgia, serif;
+    }
+
+    p { margin-bottom: 14px; color: var(--white); }
+    p:last-child { margin-bottom: 0; }
+
+    ul {
+      padding-left: 0;
+      list-style: none;
+      margin-bottom: 14px;
+    }
+
+    ul li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: var(--white);
+    }
+
+    ul li::before {
+      content: "•";
+      color: var(--blue-bright);
+      font-size: 14px;
+      line-height: 1.8;
+      flex-shrink: 0;
+    }
+
+    .sub-block {
+      background: rgba(255,255,255,0.03);
+      border-left: 3px solid var(--blue-mid);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+
+    .sub-block h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--blue-light);
+      margin-bottom: 8px;
+    }
+
+    .sub-block p {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(65,161,232,0.1), rgba(17,73,172,0.06));
+      border: 1px solid rgba(65,161,232,0.25);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin: 20px 0;
+      font-size: 14px;
+      color: var(--white);
+      line-height: 1.7;
+    }
+
+    .highlight-box strong { color: var(--blue-bright); }
+
+    .contact-block {
+      background: var(--dark-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-top: 16px;
+    }
+
+    .contact-block p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .contact-block a {
+      color: var(--blue-bright);
+      text-decoration: none;
+    }
+
+    .contact-block a:hover { text-decoration: underline; }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 52px 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--dark-card);
+      padding: 28px 40px;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    footer a {
+      color: var(--blue-bright);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      header { padding: 14px 20px; }
+      .hero-band { padding: 40px 20px 36px; }
+      .hero-band h1 { font-size: 26px; }
+      main { padding: 40px 20px 72px; }
+      .toc ol { grid-template-columns: 1fr; }
+      footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/" class="logo">Nugget<sup>™</sup></a>
+    <div class="divider-v"></div>
+    <span class="header-label">Terms of Service</span>
+    <nav><a href="/">← Back to Nugget</a></nav>
+  </header>
+
+  <div class="hero-band">
+    <div class="eyebrow">Legal</div>
+    <h1>Terms of Service</h1>
+    <p class="meta">Effective Date: May 1, 2025 &nbsp;|&nbsp; Last Updated: May 1, 2025 &nbsp;|&nbsp; Governing Law: British Columbia, Canada</p>
+  </div>
+
+  <div class="trust-box">
+    <div class="trust-inner">
+      <div class="trust-icon">📋</div>
+      <p>Nugget was created to help you with business development, using your own LinkedIn data. We strive to deliver the best product we can and to be transparent in the process. That's why we have our Terms &amp; Conditions.</p>
+    </div>
+  </div>
+
+  <main>
+
+    <p style="color: var(--muted); font-size: 14px; margin-bottom: 40px; margin-top: 8px;">
+      By using Nugget™, you agree to these terms. They're written to be clear, not to bury the important stuff.
+    </p>
+
+    <div class="toc">
+      <div class="toc-label">Contents</div>
+      <ol>
+        <li><a href="#who-we-are"><span class="num">1.</span> Who We Are</a></li>
+        <li><a href="#what-nugget-is"><span class="num">2.</span> What Nugget Is</a></li>
+        <li><a href="#your-account"><span class="num">3.</span> Your Account &amp; Eligibility</a></li>
+        <li><a href="#your-data"><span class="num">4.</span> Your LinkedIn Data</a></li>
+        <li><a href="#data-handling"><span class="num">5.</span> How Your Data Is Handled</a></li>
+        <li><a href="#free-reports"><span class="num">6.</span> Free Reports</a></li>
+        <li><a href="#gold-nugget"><span class="num">7.</span> The Gold Nugget</a></li>
+        <li><a href="#ip"><span class="num">8.</span> Intellectual Property</a></li>
+        <li><a href="#acceptable-use"><span class="num">9.</span> Acceptable Use</a></li>
+        <li><a href="#disclaimer"><span class="num">10.</span> Disclaimer of Warranties</a></li>
+        <li><a href="#liability"><span class="num">11.</span> Limitation of Liability</a></li>
+        <li><a href="#termination"><span class="num">12.</span> Termination</a></li>
+        <li><a href="#changes"><span class="num">13.</span> Changes to These Terms</a></li>
+        <li><a href="#governing-law"><span class="num">14.</span> Governing Law</a></li>
+        <li><a href="#contact"><span class="num">15.</span> Contact Us</a></li>
+      </ol>
+    </div>
+
+    <section id="who-we-are">
+      <h2><span class="section-num">01</span> Who We Are</h2>
+      <p>Nugget™ is operated by Anna Ludwinowski, based in Surrey, British Columbia, Canada. References to "we", "us", or "Nugget" in these terms refer to Anna Ludwinowski. You can reach us at <a href="mailto:hello@annaludwinowski.com" style="color: var(--blue-bright);">hello@annaludwinowski.com</a>.</p>
+    </section>
+
+    <section id="what-nugget-is">
+      <h2><span class="section-num">02</span> What Nugget Is</h2>
+      <p>Nugget is a LinkedIn data intelligence tool that analyzes your personal LinkedIn data export and generates reports to help you identify business development opportunities within your existing network.</p>
+      <div class="highlight-box">
+        <strong>Important:</strong> Nugget reports are informational only. They are AI-generated based on the data you provide and are intended to support your own judgment — not replace it. We make no guarantees about specific business outcomes, revenue, or results from using Nugget. How you act on the insights is entirely up to you.
+      </div>
+    </section>
+
+    <section id="your-account">
+      <h2><span class="section-num">03</span> Your Account &amp; Eligibility</h2>
+      <ul>
+        <li>You must be 16 years of age or older to use Nugget</li>
+        <li>You are responsible for maintaining the confidentiality of your account credentials</li>
+        <li>One account per person — accounts are non-transferable</li>
+        <li>You agree to provide accurate information when creating your account</li>
+      </ul>
+    </section>
+
+    <section id="your-data">
+      <h2><span class="section-num">04</span> Your LinkedIn Data</h2>
+      <p>Nugget processes LinkedIn data exports that you provide. By uploading your data, you confirm that:</p>
+      <ul>
+        <li>You are the owner of the LinkedIn account from which the data was exported</li>
+        <li>You have the right to use and upload this data</li>
+        <li>You are responsible for ensuring your use of LinkedIn's data export feature complies with LinkedIn's own Terms of Service</li>
+      </ul>
+      <p style="color: var(--muted); font-size: 14px; margin-top: 16px;">We do not scrape, access, or interact with LinkedIn directly. We only process data files that you choose to upload.</p>
+    </section>
+
+    <section id="data-handling">
+      <h2><span class="section-num">05</span> How Your Data Is Handled</h2>
+      <p>Your LinkedIn export data is processed entirely in your browser and is never stored on our servers. A condensed summary is sent to Anthropic's API to generate your reports. When you close your session, that data is gone.</p>
+      <p>Your name and email address are stored securely for the purpose of delivering your reports and product communications. For full details, see our <a href="/privacy.html" style="color: var(--blue-bright);">Privacy Policy</a>.</p>
+    </section>
+
+    <section id="free-reports">
+      <h2><span class="section-num">06</span> Free Reports</h2>
+      <p>Nugget offers five free reports generated from your LinkedIn data export. These reports are available to any user who provides their name and email address. Free reports are for personal business development use only and may not be resold or redistributed.</p>
+    </section>
+
+    <section id="gold-nugget">
+      <h2><span class="section-num">07</span> The Gold Nugget — Paid Report</h2>
+      <p>The Gold Nugget is a comprehensive business development action plan generated from your LinkedIn data. During the beta period, the Gold Nugget is included at no charge. Pricing will be announced prior to general availability.</p>
+
+      <div class="sub-block">
+        <h3>Payment &amp; Refund Policy</h3>
+        <p>All sales are final. If your report didn't generate or something went wrong on our end, reach out within 48 hours and we'll fix it — we stand behind the product. What we won't refund: AI outputs that didn't meet your expectations, or a change of mind.</p>
+      </div>
+
+      <div class="sub-block">
+        <h3>Beta Pricing</h3>
+        <p>Current pricing is introductory beta pricing and is subject to change. Existing purchases are honoured at the price paid at time of purchase.</p>
+      </div>
+    </section>
+
+    <section id="ip">
+      <h2><span class="section-num">08</span> Intellectual Property</h2>
+      <p>Nugget, including its name, logo, report formats, prompts, and underlying technology, is the intellectual property of Anna Ludwinowski. All rights reserved.</p>
+      <p>Your LinkedIn data remains yours. We claim no ownership over any data you upload. The reports generated from your data are yours to use for your own business development purposes.</p>
+      <p>You may not copy, reproduce, reverse-engineer, or resell any part of the Nugget product or its outputs without written permission.</p>
+    </section>
+
+    <section id="acceptable-use">
+      <h2><span class="section-num">09</span> Acceptable Use</h2>
+      <p>You agree not to:</p>
+      <ul>
+        <li>Use Nugget for any unlawful purpose</li>
+        <li>Upload data that does not belong to you</li>
+        <li>Attempt to reverse-engineer, scrape, or replicate Nugget's technology or prompts</li>
+        <li>Resell, redistribute, or commercialize Nugget reports without written permission</li>
+        <li>Interfere with or disrupt the operation of Nugget or its infrastructure</li>
+      </ul>
+    </section>
+
+    <section id="disclaimer">
+      <h2><span class="section-num">10</span> Disclaimer of Warranties</h2>
+      <p>Nugget is provided "as is" and "as available" without warranties of any kind, express or implied. We do not warrant that:</p>
+      <ul>
+        <li>The service will be uninterrupted or error-free</li>
+        <li>Reports will be accurate, complete, or suitable for any particular purpose</li>
+        <li>Any specific business outcome will result from using Nugget</li>
+      </ul>
+      <p style="color: var(--muted); font-size: 14px; margin-top: 16px;">AI-generated content is inherently probabilistic. Reports reflect patterns in your data and should be treated as one input to your decision-making, not as definitive advice.</p>
+    </section>
+
+    <section id="liability">
+      <h2><span class="section-num">11</span> Limitation of Liability</h2>
+      <p>To the fullest extent permitted by law, Anna Ludwinowski shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of Nugget — including but not limited to lost revenue, lost clients, or business decisions made based on report outputs.</p>
+    </section>
+
+    <section id="termination">
+      <h2><span class="section-num">12</span> Termination</h2>
+      <p>We reserve the right to suspend or terminate your access to Nugget at any time if you violate these Terms of Service. You may stop using Nugget at any time. Sections relating to intellectual property, limitation of liability, and governing law survive termination.</p>
+    </section>
+
+    <section id="changes">
+      <h2><span class="section-num">13</span> Changes to These Terms</h2>
+      <p>We may update these Terms from time to time. When we do, we'll update the "Last Updated" date at the top of this page. If changes are material, we'll notify you by email. Continuing to use Nugget after changes are posted means you accept the updated terms.</p>
+    </section>
+
+    <section id="governing-law">
+      <h2><span class="section-num">14</span> Governing Law</h2>
+      <p>These Terms are governed by the laws of the Province of British Columbia and the federal laws of Canada applicable therein. Any disputes arising from these Terms or your use of Nugget will be subject to the exclusive jurisdiction of the courts of British Columbia.</p>
+    </section>
+
+    <section id="contact">
+      <h2><span class="section-num">15</span> Contact Us</h2>
+      <p>Questions about these terms? Reach out — we're real people.</p>
+      <div class="contact-block">
+        <p>Anna Ludwinowski</p>
+        <p>Surrey, British Columbia, Canada</p>
+        <p>📧 <a href="mailto:hello@annaludwinowski.com">hello@annaludwinowski.com</a></p>
+      </div>
+    </section>
+
+    <hr />
+
+    <p style="font-size: 12px; color: var(--muted); text-align: center;">
+      These Terms of Service were last reviewed and updated on May 1, 2025.<br />
+      Nugget™ is a product of Anna Ludwinowski. All rights reserved.
+    </p>
+
+  </main>
+
+  <footer>
+    <p>
+      © 2025 Nugget™ &nbsp;·&nbsp;
+      <a href="/privacy.html">Privacy Policy</a> &nbsp;·&nbsp;
+      <a href="/terms.html">Terms of Service</a> &nbsp;·&nbsp;
+      <a href="mailto:hello@annaludwinowski.com">hello@annaludwinowski.com</a>
+    </p>
+  </footer>
+
+</body>
+</html>
