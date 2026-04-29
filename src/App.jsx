@@ -1391,7 +1391,8 @@ export default function App() {
   <p style={{ fontSize: 12, color: MUTED, margin: 0 }}>
     © 2025 Nugget™ &nbsp;·&nbsp;
     <a href="/privacy.html" style={{ color: BLUE_BRIGHT, textDecoration: "none" }}>Privacy Policy</a> &nbsp;·&nbsp;
-    <a href="mailto:hello@annaludwinowski.com" style={{ color: BLUE_BRIGHT, textDecoration: "none" }}>hello@annaludwinowski.com</a>
+<a href="/terms.html" style={{ color: BLUE_BRIGHT, textDecoration: "none" }}>Terms of Service</a> &nbsp;·&nbsp;
+<a href="mailto:hello@annaludwinowski.com" style={{ color: BLUE_BRIGHT, textDecoration: "none" }}>hello@annaludwinowski.com</a>
   </p>
 </footer>
     </div>
