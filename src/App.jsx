@@ -1119,7 +1119,7 @@ export default function App() {
                   <div style={{ fontSize: 36, marginBottom: 14 }}>📂</div>
                   <div style={{ fontSize: 17, color: WHITE, fontWeight: 600, marginBottom: 8 }}>Drop your LinkedIn file here</div>
                   <div style={{ fontSize: 13, color: MUTED, marginBottom: 18, lineHeight: 1.5 }}>
-                    Drop the file LinkedIn sent you here — Nugget takes it from there.<br />Or upload individual files if you prefer.
+                    Drop the zip file LinkedIn sent you here — don't unzip it. Nugget handles everything inside automatically.<br />Or upload individual files if you prefer.
                   </div>
                   <button style={{ padding: "10px 28px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: "pointer" }}
                     onClick={e => { e.stopPropagation(); fileInputRef.current?.click(); }}>Choose Files</button>
