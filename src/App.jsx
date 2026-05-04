@@ -711,7 +711,7 @@ export default function App() {
   const reportsReady        = Object.keys(reports).length;
   const activeReportMeta    = REPORTS.find(r => r.id === activeReport);
   const freeReportsComplete = REPORTS.filter(r => r.free).every(r => reports[r.id]);
-  const isMissingCriticalFiles = hasFiles && (!parsedData["Connections"] || !parsedData["Comments"] || !parsedData["Shares"]);
+  const isMissingCriticalFiles = hasFiles && !parsedData["Connections"];
 
   const handleFiles = useCallback((fileList) => {
     Array.from(fileList).forEach((file) => {
