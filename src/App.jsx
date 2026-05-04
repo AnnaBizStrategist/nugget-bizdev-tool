@@ -1092,7 +1092,7 @@ export default function App() {
                   {[
                     { step: "01", title: "Request your data", desc: "On LinkedIn: Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select Complete — not Basic — and click Request archive. Basic won't include the data Nugget needs for most reports. If you get stuck, search LinkedIn Help for 'download your data'." },
                     { step: "02", title: "Download the file", desc: "Wait for LinkedIn to email your data file — usually within 24 hours. Click the link in that email and download the file to your computer." },
-                    { step: "03", title: "Drop it in below", desc: "Drag and drop the file into Nugget below. That's it! Nugget works its magic and does the rest automatically. Let's get your Nuggets..." },
+                    { step: "03", title: "Drop it in below", desc: "Drag and drop the file into Nugget below - no need to unzip it. Nugget opens it automatically and does the rest. Let's get your Nuggets..." },
                   ].reduce((acc, s, i) => {
                     acc.push(
                       <div key={s.step} style={{ display: "flex", flexDirection: "column", gap: 8, padding: "0 24px" }}>
