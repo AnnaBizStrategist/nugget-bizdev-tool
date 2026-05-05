@@ -855,7 +855,7 @@ export default function App() {
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <div style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, letterSpacing: "-0.5px", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", whiteSpace: "nowrap" }}>Nugget<span style={{ fontSize: 13, verticalAlign: "super", marginLeft: 1 }}>™</span></div>
           <div style={{ width: 1, height: 28, background: BORDER, flexShrink: 0 }} />
-          <div style={{ fontSize: 13, color: MUTED, letterSpacing: "0.03em", lineHeight: 1.4 }}>The BizDev Tool for Founders done with the ick of cold outreach.</div>
+          <div style={{ fontSize: 13, color: MUTED, letterSpacing: "0.03em", lineHeight: 1.4 }}>Turn your network into your pipeline. No cold outreach required.</div>
         </div>
         <nav style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
           {step === "upload" ? (
@@ -880,9 +880,7 @@ export default function App() {
           <>
               {/* ── Hero ── */}
             <div style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, padding: "80px 24px 72px", borderRadius: "0 0 24px 24px", textAlign: "center", marginBottom: 0 }}>
-              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.55)", letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 600, marginBottom: 28, animation: "fadeSlideUp 0.6s ease-out both" }}>
-                The BizDev Tool for Founders done with the ick of cold outreach.
-              </p>
+              
               <h1 style={{ fontSize: 48, fontFamily: "Georgia, serif", fontWeight: 700, color: "#ffffff", marginBottom: 28, lineHeight: 1.1, animation: "fadeSlideUp 0.7s ease-out 0.1s both" }}>
                 Your next client is already<br />
                 <span style={{ background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>in your network.</span>
@@ -1232,7 +1230,7 @@ export default function App() {
                   Your next client is already<br />in your network.
                 </h2>
                 
-                <button style={{ ...primaryBtn, fontSize: 17, padding: "16px 44px", animation: "pulseCTA 2.5s ease-in-out infinite" }} onClick={scrollToUpload}>
+                <button style={{ ...primaryBtn, fontSize: 17, padding: "16px 44px", animation: "pulseCTA 2.5s ease-in-out infinite", marginTop: 24 }} onClick={scrollToUpload}>
                   Get My Free Reports →
                 </button>
               </div>
