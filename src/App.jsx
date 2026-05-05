@@ -1031,7 +1031,7 @@ export default function App() {
                   <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>Nugget's Signature Metric</div>
                   <h2 style={{ fontSize: 34, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 28, lineHeight: 1.2 }}>Meet Your BizDev Readiness Score.</h2>
                   <p style={{ fontSize: 16, color: MUTED, maxWidth: 520, margin: "0 auto 24px", lineHeight: 1.75 }}>
-                    Most Founders have no idea where they actually stand when it comes to business development. Not a gut feeling — an actual number. NUGGET changes that.
+                    Most people have no idea where they actually stand when it comes to business development. Not a gut feeling — an actual number. NUGGET changes that.
                   </p>
                   <p style={{ fontSize: 15, color: WHITE, maxWidth: 640, margin: "0 auto 32px", lineHeight: 1.75 }}>
                     Every time you run NUGGET, you get a score out of 100 across five dimensions. Each one tied directly to a report. Each one telling you exactly where to focus.
@@ -1231,9 +1231,7 @@ export default function App() {
                 <h2 style={{ fontSize: 36, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 16, lineHeight: 1.2 }}>
                   Your next client is already<br />in your network.
                 </h2>
-                <p style={{ fontSize: 17, color: MUTED, marginBottom: 32 }}>
-                  You don't need to do icky cold outreach. You just need Nugget.
-                </p>
+                
                 <button style={{ ...primaryBtn, fontSize: 17, padding: "16px 44px", animation: "pulseCTA 2.5s ease-in-out infinite" }} onClick={scrollToUpload}>
                   Get My Free Reports →
                 </button>
