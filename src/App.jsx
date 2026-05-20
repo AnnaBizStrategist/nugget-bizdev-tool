@@ -42,7 +42,7 @@ const REPORTS = [
     tag: "FREE",
     subtitle: "Who's already in your corner",
     description: "The people already in your corner who you're not leveraging. Ranked by likely value and best ask type.",
-    files: ["Recommendations", "Messages"],
+    files: ["Recommendations_Received", "Messages"],
     free: true,
   },
   {
@@ -378,7 +378,9 @@ function getFileKey(name) {
   const lower = name.toLowerCase().replace(/[-_ ]/g, "");
   if (lower.includes("connection"))  return "Connections";
   if (lower.includes("message"))     return "Messages";
-  if (lower.includes("recommendation")) return "Recommendations";
+  if (lower.includes("recommendation_received")) return "Recommendations_Received";
+  if (lower.includes("recommendation_given")) return "Recommendations_Given";
+  if (lower.includes("recommendation")) return "Recommendations_Received";
   if (lower.includes("endorsement")) return "Endorsements";
   if (lower.includes("skill"))       return "Skills";
   if (lower.includes("profile") && !lower.includes("summary")) return "Profile";
