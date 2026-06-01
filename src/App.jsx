@@ -393,7 +393,6 @@ function getFileKey(name) {
 
 // ── API calls ─────────────────────────────────────────────────────────────────
 async function callClaude(systemPrompt, data, retries = 3, onRetry = null) {
-  const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY;
   const body = JSON.stringify({
     model: "claude-sonnet-4-20250514",
     max_tokens: 1500,
@@ -401,13 +400,10 @@ async function callClaude(systemPrompt, data, retries = 3, onRetry = null) {
     messages: [{ role: "user", content: `Here is the LinkedIn export data to analyze:\n\n${JSON.stringify(data, null, 2)}\n\nGenerate the report now. Be specific, use real names from the data, and make every insight immediately actionable.` }],
   });
   for (let attempt = 0; attempt < retries; attempt++) {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-        "anthropic-dangerous-direct-browser-access": "true",
+    const response = await fetch("/api/claude", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
       },
       body,
     });
@@ -424,7 +420,6 @@ async function callClaude(systemPrompt, data, retries = 3, onRetry = null) {
 }
 
 async function callClaudeGN(systemPrompt, data, reportsContext, retries = 3, onRetry = null) {
-  const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY;
   const body = JSON.stringify({
     model: "claude-sonnet-4-20250514",
     max_tokens: 3500,
@@ -435,13 +430,10 @@ async function callClaudeGN(systemPrompt, data, reportsContext, retries = 3, onR
     }],
   });
   for (let attempt = 0; attempt < retries; attempt++) {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-        "anthropic-dangerous-direct-browser-access": "true",
+    const response = await fetch("/api/claude", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
       },
       body,
     });
