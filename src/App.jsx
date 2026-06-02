@@ -853,7 +853,8 @@ export default function App() {
         @keyframes pulseCTA    { 0%,100% { box-shadow: 0 0 0 0 rgba(65,161,232,0.4); } 70% { box-shadow: 0 0 0 14px rgba(65,161,232,0); } }
 @media print {
   body { background: #fff !important; color: #000 !important; }
-  header, footer, nav, .no-print { display: none !important; }
+header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; }
+  .print-report-panel { grid-column: 1 / -1 !important; width: 100% !important; }
   .print-header { display: block !important; }
   .print-report-panel { box-shadow: none !important; border: none !important; background: #fff !important; color: #000 !important; padding: 0 !important; }
   .print-report-panel h3 { color: #0d2d6b !important; border-left-color: #0d2d6b !important; }
@@ -1274,7 +1275,7 @@ export default function App() {
           <div style={{ paddingTop: 32, display: "grid", gridTemplateColumns: "210px 1fr", gap: 22, alignItems: "start" }}>
 
             {/* Sidebar */}
-            <div style={{ background: DARK_CARD, borderRadius: 12, border: `1px solid ${BORDER}`, overflow: "hidden", position: "sticky", top: 80 }}>
+            <div className="print-hide-sidebar" style={{ background: DARK_CARD, borderRadius: 12, border: `1px solid ${BORDER}`, overflow: "hidden", position: "sticky", top: 80 }}>
               {REPORTS.map(r => {
                 let statusText;
                 if (!r.free && !isBeta) {
