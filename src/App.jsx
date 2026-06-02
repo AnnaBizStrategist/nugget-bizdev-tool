@@ -392,10 +392,10 @@ function getFileKey(name) {
 }
 
 // ── API calls ─────────────────────────────────────────────────────────────────
-async function callClaude(systemPrompt, data, retries = 3, onRetry = null) {
+async function callClaude(systemPrompt, data, retries = 3, onRetry = null, testMode = false) {
   const body = JSON.stringify({
     model: "claude-sonnet-4-20250514",
-    max_tokens: 1500,
+    max_tokens: testMode ? 400 : 1500,
     system: systemPrompt,
     messages: [{ role: "user", content: `Here is the LinkedIn export data to analyze:\n\n${JSON.stringify(data, null, 2)}\n\nGenerate the report now. Be specific, use real names from the data, and make every insight immediately actionable.` }],
   });
@@ -419,10 +419,10 @@ async function callClaude(systemPrompt, data, retries = 3, onRetry = null) {
   }
 }
 
-async function callClaudeGN(systemPrompt, data, reportsContext, retries = 3, onRetry = null) {
+async function callClaudeGN(systemPrompt, data, reportsContext, retries = 3, onRetry = null, testMode = false) {
   const body = JSON.stringify({
     model: "claude-sonnet-4-20250514",
-    max_tokens: 3500,
+    max_tokens: testMode ? 600 : 3500,
     system: systemPrompt,
     messages: [{
       role: "user",
@@ -678,7 +678,8 @@ function Divider() {
 
 // ── Main App ──────────────────────────────────────────────────────────────────
 export default function App() {
-  const isBeta = new URLSearchParams(window.location.search).get("beta") === "true";
+  const isBeta   = new URLSearchParams(window.location.search).get("beta") === "true";
+  const isTest   = new URLSearchParams(window.location.search).get("test") === "true";
 
   const [step,            setStep]           = useState("upload");
   const [uploadedFiles,   setUploadedFiles]  = useState({});
@@ -739,16 +740,26 @@ export default function App() {
     e.preventDefault(); setDragOver(false); handleFiles(e.dataTransfer.files);
   }, [handleFiles]);
 
+  const slimDataForTest = (data) => {
+    const out = {};
+    Object.entries(data).forEach(([k, v]) => {
+      out[k] = Array.isArray(v) ? v.slice(0, 10) : v;
+    });
+    return out;
+  };
+
   const runReport = async (reportId) => {
   const report = REPORTS.find(r => r.id === reportId);
   if (!report?.free || generating) return;
   setGenerating(reportId); setActiveReport(reportId); setStep("reports"); setError(null); setRetryMessage(null);
   try {
+    const prepared = prepareData(parsedData, report.files);
     const result = await callClaude(
       PROMPTS[reportId],
-      prepareData(parsedData, report.files),
+      isTest ? slimDataForTest(prepared) : prepared,
       3,
-      (secs) => setRetryMessage(`The hamster's catching its breath — back in ~${Math.round(secs)}s! 🐹`)
+      (secs) => setRetryMessage(`The hamster's catching its breath — back in ~${Math.round(secs)}s! 🐹`),
+      isTest
     );
     setReports(prev => ({ ...prev, [reportId]: result }));
   } catch (err) { setError(err.message); }
@@ -768,7 +779,8 @@ export default function App() {
   data,
   reportsContext,
   3,
-  (secs) => setRetryMessage(`The hamster's catching its breath — back in ~${Math.round(secs)}s! 🐹`)
+  (secs) => setRetryMessage(`The hamster's catching its breath — back in ~${Math.round(secs)}s! 🐹`),
+  isTest
 );
       const parsedScores = parseScores(fullText);
       const cleanText    = stripScores(fullText);
@@ -862,6 +874,7 @@ export default function App() {
           <div style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, letterSpacing: "-0.5px", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", whiteSpace: "nowrap" }}>Nugget<span style={{ fontSize: 13, verticalAlign: "super", marginLeft: 1 }}>™</span></div>
           <div style={{ width: 1, height: 28, background: BORDER, flexShrink: 0 }} />
           <div style={{ fontSize: 13, color: MUTED, letterSpacing: "0.03em", lineHeight: 1.4 }}>Turn your network into your pipeline. No cold outreach required.</div>
+          {isTest && <div style={{ padding: "3px 10px", background: "#2a1a00", border: "1px solid #E8A000", borderRadius: 4, fontSize: 11, color: "#E8A000", fontWeight: 700, letterSpacing: "0.06em" }}>TEST MODE</div>}
         </div>
         <nav style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
           {step === "upload" ? (
