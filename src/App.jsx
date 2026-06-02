@@ -839,6 +839,18 @@ export default function App() {
         @keyframes pulse       { 0%,100% { opacity:1; } 50% { opacity:0.6; } }
         @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes pulseCTA    { 0%,100% { box-shadow: 0 0 0 0 rgba(65,161,232,0.4); } 70% { box-shadow: 0 0 0 14px rgba(65,161,232,0); } }
+@media print {
+  body { background: #fff !important; color: #000 !important; }
+  header, footer, nav, .no-print { display: none !important; }
+  .print-header { display: block !important; }
+  .print-report-panel { box-shadow: none !important; border: none !important; background: #fff !important; color: #000 !important; padding: 0 !important; }
+  .print-report-panel h3 { color: #0d2d6b !important; border-left-color: #0d2d6b !important; }
+  .print-report-panel p, .print-report-panel div { color: #000 !important; background: transparent !important; }
+  .print-report-panel strong { color: #0d2d6b !important; }
+  .print-intro { background: #f0f4ff !important; border: 1px solid #c0d0f0 !important; color: #222 !important; }
+  .print-intro p { color: #222 !important; }
+  @page { margin: 18mm 16mm; }
+}
         .scroll-reveal         { opacity: 0; transform: translateY(32px); transition: opacity 0.65s ease, transform 0.65s ease; }
         .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1276,9 +1288,27 @@ export default function App() {
               </div>
             </div>
 
-            {/* Report panel */}
-            <div style={{ background: DARK_CARD, borderRadius: 12, border: `1px solid ${BORDER}`, padding: 32, minHeight: 420 }}>
+                       {/* Report panel */}
+            <div className="print-report-panel" style={{ background: DARK_CARD, borderRadius: 12, border: `1px solid ${BORDER}`, padding: 32, minHeight: 420 }}>
+
+              {/* Print-only header */}
+              <div className="print-header" style={{ display: "none", marginBottom: 24, paddingBottom: 16, borderBottom: "2px solid #0d2d6b" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <div style={{ fontSize: 22, fontWeight: 700, color: "#0d2d6b", fontFamily: "Georgia, serif" }}>Nugget™</div>
+                  <div style={{ fontSize: 11, color: "#666", letterSpacing: "0.06em" }}>getnugget.ca</div>
+                </div>
+                <div style={{ fontSize: 16, fontWeight: 700, color: "#0d2d6b", marginTop: 8, fontFamily: "Georgia, serif" }}>{activeReportMeta?.name}</div>
+                <div style={{ fontSize: 11, color: "#444", textTransform: "uppercase", letterSpacing: "0.05em", marginTop: 2 }}>{activeReportMeta?.subtitle}</div>
+              </div>
               {error && <div style={{ background: "#1a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
+
+              {reports[activeReport] && activeReport !== "gold" || (activeReport === "gold" && reports.gold) ? (
+                <div className="no-print" style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
+                  <button onClick={() => window.print()} style={{ padding: "7px 18px", background: "transparent", border: `1px solid ${BORDER}`, color: MUTED, borderRadius: 7, fontSize: 12, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
+                    <span>↓</span> Save as PDF
+                  </button>
+                </div>
+              ) : null}
 
               <div style={{ marginBottom: 22, paddingBottom: 16, borderBottom: `1px solid ${BORDER}` }}>
                 <div style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", marginBottom: 4 }}>{activeReportMeta?.name}</div>
