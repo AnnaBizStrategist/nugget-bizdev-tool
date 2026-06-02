@@ -1318,7 +1318,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
 
               {reports[activeReport] && activeReport !== "gold" || (activeReport === "gold" && reports.gold) ? (
                 <div className="no-print" style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
-                  <button onClick={() => window.print()} style={{ padding: "7px 18px", background: "transparent", border: `1px solid ${BORDER}`, color: MUTED, borderRadius: 7, fontSize: 12, fontWeight: 600, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
+                  <button onClick={() => window.print()} style={{ padding: "7px 18px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
                     <span>↓</span> Save as PDF
                   </button>
                 </div>
