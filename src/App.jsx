@@ -14,7 +14,7 @@ const MUTED       = "#9fc4e8";
 const BORDER      = "#1e4080";
 
 const LOGO_BASE64 = null;
-const ANNA_PHOTO = "/public/Anna-Nugget-Image.png";
+const ANNA_PHOTO = new URL('/Anna-Nugget-Image.png', import.meta.url).href;
 
 // ── Report definitions ────────────────────────────────────────────────────────
 const REPORTS = [
