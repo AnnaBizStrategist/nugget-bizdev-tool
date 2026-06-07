@@ -1182,9 +1182,9 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               </div>
 
               {/* ── Upload Zone ── */}
-              <div ref={uploadRef}>
+              <div ref={uploadRef} style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, borderRadius: 24, padding: "48px 32px", marginBottom: 0 }}>
                 <div
-                  style={{ border: `2px dashed ${dragOver ? BLUE_BRIGHT : BORDER}`, borderRadius: 16, padding: "44px 32px", textAlign: "center", cursor: "pointer", background: dragOver ? BLUE_MID + "11" : DARK_CARD, transition: "all 0.2s", marginBottom: 28 }}
+                  style={{ border: `2px dashed ${dragOver ? BLUE_BRIGHT : BLUE_BRIGHT + "66"}`, borderRadius: 16, padding: "44px 32px", textAlign: "center", cursor: "pointer", background: dragOver ? BLUE_MID + "33" : "rgba(255,255,255,0.05)", transition: "all 0.2s", marginBottom: 28 }}
                   onDragOver={e => { e.preventDefault(); setDragOver(true); }}
                   onDragLeave={() => setDragOver(false)}
                   onDrop={handleDrop}
