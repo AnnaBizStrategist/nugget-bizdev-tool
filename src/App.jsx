@@ -1190,8 +1190,8 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   onDrop={handleDrop}
                   onClick={() => fileInputRef.current?.click()}
                 >
-                  <div style={{ fontSize: 36, marginBottom: 14 }}>📂</div>
-                  <div style={{ fontSize: 17, color: WHITE, fontWeight: 600, marginBottom: 8 }}>Drop your LinkedIn file here</div>
+                  <div style={{ fontSize: 28, fontWeight: 700, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", marginBottom: 10 }}>Drop your LinkedIn file here</div>
+                  <div style={{ fontSize: 32, marginBottom: 12 }}>📂</div>
                   <div style={{ fontSize: 13, color: MUTED, marginBottom: 18, lineHeight: 1.5 }}>
                     Drop the zip file LinkedIn sent you here — don't unzip it. Nugget handles everything inside automatically.<br />Or upload individual files if you prefer.
                   </div>
