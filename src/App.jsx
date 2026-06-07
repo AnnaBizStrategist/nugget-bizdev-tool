@@ -1157,26 +1157,27 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               <Divider />
 
               {/* ── How It Works ── */}
-              <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "64px 40px", marginBottom: 0 }}>
+              <div style={{ marginBottom: 0 }}>
                 <p style={{ fontSize: 22, color: WHITE, fontWeight: 700, textAlign: "center", marginBottom: 32, fontFamily: "Georgia, serif", letterSpacing: "-0.3px" }}>
                   Your Nuggets are waiting — Just 3 easy steps to find them...
                 </p>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1px 1fr 1px 1fr", gap: 0, alignItems: "start" }}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 20 }}>
                   {[
-                    { step: "01", title: "Request your data", desc: "On LinkedIn: Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select Complete — not Basic — and click Request archive. Basic won't include the data Nugget needs for most reports. If you get stuck, search LinkedIn Help for 'download your data'." },
+                    { step: "01", title: "Request your data", desc: "On LinkedIn: Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select Complete — not Basic — and click Request archive." },
                     { step: "02", title: "Download the file", desc: "Wait for LinkedIn to email your data file — usually within 24 hours. Click the link in that email and download the file to your computer." },
-                    { step: "03", title: "Drop it in below", desc: "Drag and drop the file into Nugget below - no need to unzip it. Nugget opens it automatically and does the rest. Let's get your Nuggets..." },
-                  ].reduce((acc, s, i) => {
-                    acc.push(
-                      <div key={s.step} style={{ display: "flex", flexDirection: "column", gap: 8, padding: "0 24px" }}>
-                        <div style={{ fontSize: 20, fontWeight: 700, color: BLUE_BRIGHT, fontFamily: "Georgia, serif", opacity: 0.5, lineHeight: 1, marginBottom: 4 }}>Step {s.step}</div>
-                        <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, marginBottom: 4 }}>{s.title}</div>
+                    { step: "03", title: "Drop it in below", desc: "Drag and drop the file into Nugget below — no need to unzip it. Nugget opens it automatically and does the rest." },
+                  ].map((s) => (
+                    <div key={s.step} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, overflow: "hidden" }}>
+                      <div style={{ width: "100%", height: 180, background: BLUE_MID + "44", display: "flex", alignItems: "center", justifyContent: "center", borderBottom: `1px solid ${BORDER}` }}>
+                        <span style={{ fontSize: 13, color: MUTED, fontStyle: "italic" }}>Image coming soon</span>
+                      </div>
+                      <div style={{ padding: "20px 24px" }}>
+                        <div style={{ fontSize: 13, fontWeight: 700, color: BLUE_BRIGHT, opacity: 0.6, marginBottom: 6, letterSpacing: "0.06em" }}>STEP {s.step}</div>
+                        <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, marginBottom: 8 }}>{s.title}</div>
                         <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.7 }}>{s.desc}</div>
                       </div>
-                    );
-                    if (i < 2) acc.push(<div key={`div-${i}`} style={{ width: 1, background: BORDER, alignSelf: "stretch" }} />);
-                    return acc;
-                  }, [])}
+                    </div>
+                  ))}
                 </div>
               </div>
 
