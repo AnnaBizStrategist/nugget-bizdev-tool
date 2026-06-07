@@ -1051,32 +1051,44 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 </div>
 
                 {/* Mockup 3 — Gold Nugget */}
-                <LaptopFrame>
-                <div style={{ background: DARK_CARD, padding: "28px 32px", position: "relative", overflow: "hidden" }}>
-                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg, #E8A000, #f5c842)` }} />
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
-                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: "#2a1a00", color: "#E8A000", padding: "3px 10px", borderRadius: 4 }}>PAID</div>
-                    <div style={{ fontSize: 16, fontWeight: 700, color: WHITE, fontFamily: "Georgia, serif" }}>The Gold Nugget</div>
-                    <div style={{ fontSize: 11, color: MUTED, textTransform: "uppercase", letterSpacing: "0.05em" }}>— Full BD action plan</div>
-                  </div>
-                  <div style={{ borderLeft: `3px solid #E8A000`, paddingLeft: 12, marginBottom: 20 }}>
-                    <div style={{ fontSize: 11, color: "#E8A000", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 10 }}>Your People — Move Now (Hot)</div>
-                  </div>
-                  {[
-                    { name: "Lisa Thornton", why: "Connected 3 months ago, exchanged 6 messages about exit planning challenges — she went quiet after you shared your CFO framework", move: "Reply to her last message: 'Lisa — I've been working with two Founders navigating exactly the kind of pre-exit complexity you mentioned. Worth a 15-minute call?'" },
-                    { name: "David Mercer", why: "Most engaged connection — reacted to 4 posts this month, replied to your comment on his scaling article last week", move: "DM him today: 'David — your point about financial ops being the silent killer in scaling resonated. That's exactly what I help Founders fix. Coffee chat?'" },
-                    { name: "Priya Nair", why: "Liked your last 3 posts, asked a question in comments about runway modeling — never got a private follow-up", move: "Send a voice note: 'Priya — loved your question about runway modeling. I've got a framework that might help as you scale. Happy to walk you through it.'" },
-                  ].map((p, i) => (
-                    <div key={i} style={{ background: DARK, borderRadius: 10, padding: "16px 18px", marginBottom: 12, border: `1px solid ${BORDER}` }}>
-                      <div style={{ fontSize: 13, fontWeight: 700, color: BLUE_BRIGHT, marginBottom: 6 }}>{p.name}</div>
-                      <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.65, marginBottom: 10 }}>{p.why}</div>
-                      <div style={{ fontSize: 12, color: WHITE, lineHeight: 1.65, background: BLUE_MID + "22", padding: "10px 14px", borderRadius: 8, borderLeft: `3px solid ${BLUE_BRIGHT}` }}>
-                        <span style={{ color: BLUE_BRIGHT, fontWeight: 700 }}>Best move: </span>{p.move}
-                      </div>
-                    </div>
-                  ))}
-                  <div style={{ marginTop: 16, fontSize: 12, color: MUTED, fontStyle: "italic", textAlign: "center" }}>+ 22 more connections in your full Gold Nugget report</div>
-                </div>
+<LaptopFrame>
+<div style={{ display: "flex", height: 420, overflow: "hidden" }}>
+  {/* Sidebar */}
+  <div style={{ width: 180, borderRight: `1px solid ${BORDER}`, padding: "16px 0", flexShrink: 0 }}>
+    {[
+      { name: "The Field Report", sub: "✓ Complete", active: false },
+      { name: "The Warm List", sub: "✓ Complete", active: false },
+      { name: "The Hidden Nuggets Report", sub: "✓ Complete", active: false },
+      { name: "The Inbound Report", sub: "✓ Complete", active: false },
+      { name: "The Outbound Report", sub: "✓ Complete", active: false },
+      { name: "The Gold Nugget", sub: "✓ Complete", active: true },
+    ].map((r, i) => (
+      <div key={i} style={{ padding: "10px 16px", borderLeft: r.active ? `3px solid #E8A000` : "3px solid transparent", marginBottom: 2 }}>
+        <div style={{ fontSize: 12, fontWeight: 700, color: r.active ? "#E8A000" : WHITE }}>{r.name}</div>
+        <div style={{ fontSize: 11, color: MUTED }}>{r.sub}</div>
+      </div>
+    ))}
+  </div>
+  {/* Report Panel */}
+  <div style={{ flex: 1, padding: "20px 24px", overflowY: "auto" }}>
+    <div style={{ borderLeft: `3px solid #E8A000`, paddingLeft: 12, marginBottom: 16 }}>
+      <div style={{ fontSize: 11, color: "#E8A000", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>Your People — Move Now (Hot)</div>
+    </div>
+    {[
+      { name: "Lisa Thornton", why: "Connected 3 months ago, exchanged 6 messages about exit planning challenges — she went quiet after you shared your CFO framework", move: "Reply to her last message: 'Lisa — I've been working with two Founders navigating exactly the kind of pre-exit complexity you mentioned. Worth a 15-minute call?'" },
+      { name: "David Mercer", why: "Most engaged connection — reacted to 4 posts this month, replied to your comment on his scaling article last week", move: "DM him today: 'David — your point about financial ops being the silent killer in scaling resonated. That's exactly what I help Founders fix. Coffee chat?'" },
+      { name: "Priya Nair", why: "Liked your last 3 posts, asked a question in comments about runway modeling — never got a private follow-up", move: "Send a voice note: 'Priya — loved your question about runway modeling. I have a framework for this. Want me to share it?'" },
+    ].map((p, i) => (
+      <div key={i} style={{ background: DARK, borderRadius: 10, padding: "16px 18px", marginBottom: 12, border: `1px solid ${BORDER}` }}>
+        <div style={{ fontSize: 13, fontWeight: 700, color: BLUE_BRIGHT, marginBottom: 6 }}>{p.name}</div>
+        <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.65, marginBottom: 10 }}>{p.why}</div>
+        <div style={{ fontSize: 12, color: WHITE, lineHeight: 1.65, background: BLUE_MID + "22", padding: "10px 14px", borderRadius: 8, borderLeft: `3px solid ${BLUE_BRIGHT}` }}>
+          <span style={{ color: BLUE_BRIGHT, fontWeight: 700 }}>Best move: </span>{p.move}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
                 </LaptopFrame>
               </div>
 
