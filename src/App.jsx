@@ -88,7 +88,7 @@ Format your response with these exact sections:
 State total connections and highlight what % and how many are Founders/owners/CEOs (ICP). Include an observation about connection growth rate and trajectory — is it accelerating, steady, or stagnating? Be specific with numbers. Write 2-3 sentences.
 
 ## Network Strengths & Gaps  
-Where is this network dense by industry/function? Where are the notable blind spots for BD purposes?
+Where is this network dense by industry/function? Where are the biggest opportunities to grow into - the industries, functions, or seniority levels that are currently underrepresented but matter for BD? Never use the words "blind spots" or "gap". Frame every observation as "where to focus next" or "biggest opportunity."
 
 ## Top 10 Untapped Connections
 List 10 strategically valuable people not yet leveraged for BD. Use real names from the data. Format: **Name** | Title | Company | Why they matter for BD
@@ -119,7 +119,7 @@ Top 5 people with existing relationship that just needs a nudge. Format: **Name*
 Top 5 people who went quiet but still matter for BD. Format: **Name** | Why they still matter | How to re-open naturally
 
 ## Reality Check
-One honest observation about their relationship patterns — something they probably haven't noticed. Keep it direct but kind.
+One honest observation about their relationship patterns — a useful insight they can act on immediately. Frame it as an opportunity, not a critique. Keep it direct and encouraging.
 
 ## 3 Outreach Conversation Starters
 Ready-to-use opening lines they can adapt and send today:
@@ -145,7 +145,7 @@ Tone: You are a trusted advisor, not a critic. Deliver every insight the way a g
 **Name** | Title | Why they're already in your corner | Relationship depth | Best ask: (referral / intro / recommendation / collaboration)
 
 ## The Three You're Definitely Overlooking
-Name 3 specific people the data shows are clearly supportive but almost certainly never asked for anything.
+Name 3 specific people the data shows are clearly supportive and ready to be activated. Frame this as untapped potential, not missed opportunity - these are warm doors to be opened.
 
 ## Referral Ask Framework
 **Who to ask:** [Profile of your strongest advocates based on the data]
