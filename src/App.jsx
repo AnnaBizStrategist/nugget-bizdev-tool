@@ -966,37 +966,53 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 </div>
 
                 {/* Mockup 1 — Field Report */}
-                <LaptopFrame>
-                <div style={{ background: DARK_CARD, padding: "28px 32px", position: "relative", overflow: "hidden" }}>
-                  <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_MID})` }} />
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
-                    <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: BLUE_MID + "33", color: BLUE_BRIGHT, padding: "3px 10px", borderRadius: 4 }}>FREE</div>
-                    <div style={{ fontSize: 16, fontWeight: 700, color: WHITE, fontFamily: "Georgia, serif" }}>The Field Report</div>
-                    <div style={{ fontSize: 11, color: MUTED, textTransform: "uppercase", letterSpacing: "0.05em" }}>— What your network is really made of</div>
-                  </div>
-                  <div style={{ borderLeft: `3px solid ${BLUE_BRIGHT}`, paddingLeft: 12, marginBottom: 20 }}>
-                    <div style={{ fontSize: 11, color: BLUE_BRIGHT, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 10 }}>Top 10 Untapped Connections</div>
-                  </div>
-                  {[
-                    { name: "David Mercer", title: "CEO", company: "Mercer Growth Partners", reason: "Built 3 companies from $0 to exit — prime referral source for Founders needing financial infrastructure" },
-                    { name: "Lisa Thornton", title: "Founder & MD", company: "Thornton Capital Advisory", reason: "Runs a boutique M&A firm — her Clients are exactly who needs a Fractional CFO pre-transaction" },
-                    { name: "Ray Okonkwo", title: "Managing Partner", company: "Okonkwo Ventures", reason: "Invests in early-stage SaaS — portfolio companies consistently underserved on financial ops" },
-                    { name: "Priya Nair", title: "Co-Founder", company: "Scalepath Inc.", reason: "Scaling from $2M to $10M ARR — the exact moment Fractional CFO engagement becomes critical" },
-                    { name: "Tom Castellano", title: "President", company: "Castellano Business Group", reason: "SMB advisory practice with 40+ active business Owner Clients — strong referral multiplier" },
-                  ].map((p, i) => (
-                    <div key={i} style={{ display: "flex", gap: 14, padding: "12px 0", borderBottom: i < 4 ? `1px solid ${BORDER}` : "none" }}>
-                      <div style={{ width: 36, height: 36, borderRadius: "50%", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 700, color: WHITE, flexShrink: 0 }}>{p.name.split(" ").map(n => n[0]).join("")}</div>
-                      <div style={{ flex: 1 }}>
-                        <div style={{ display: "flex", gap: 8, alignItems: "baseline", marginBottom: 3, flexWrap: "wrap" }}>
-                          <span style={{ fontSize: 13, fontWeight: 700, color: BLUE_BRIGHT }}>{p.name}</span>
-                          <span style={{ fontSize: 11, color: MUTED }}>| {p.title} | {p.company}</span>
-                        </div>
-                        <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.6 }}>{p.reason}</div>
-                      </div>
-                    </div>
-                  ))}
-                  <div style={{ marginTop: 16, fontSize: 12, color: MUTED, fontStyle: "italic", textAlign: "center" }}>+ 5 more connections in your full report</div>
-                </div>
+<LaptopFrame>
+<div style={{ display: "flex", height: 420, overflow: "hidden" }}>
+  {/* Sidebar */}
+  <div style={{ width: 180, borderRight: `1px solid ${BORDER}`, padding: "16px 0", flexShrink: 0 }}>
+    {[
+      { name: "The Field Report", sub: "✓ Complete", active: true },
+      { name: "The Warm List", sub: "✓ Complete", active: false },
+      { name: "The Hidden Nuggets Report", sub: "✓ Complete", active: false },
+      { name: "The Inbound Report", sub: "Unmined", active: false },
+      { name: "The Outbound Report", sub: "Unmined", active: false },
+      { name: "The Gold Nugget", sub: "🔒 Upgrade to unlock", active: false },
+    ].map((r, i) => (
+      <div key={i} style={{ padding: "10px 16px", borderLeft: r.active ? `3px solid ${BLUE_BRIGHT}` : "3px solid transparent", marginBottom: 2 }}>
+        <div style={{ fontSize: 12, fontWeight: 700, color: r.active ? BLUE_BRIGHT : WHITE }}>{r.name}</div>
+        <div style={{ fontSize: 11, color: MUTED }}>{r.sub}</div>
+      </div>
+    ))}
+  </div>
+  {/* Report Panel */}
+  <div style={{ flex: 1, padding: "20px 24px", overflowY: "auto" }}>
+    <div style={{ borderLeft: `3px solid ${BLUE_BRIGHT}`, paddingLeft: 12, marginBottom: 16 }}>
+      <div style={{ fontSize: 11, color: BLUE_BRIGHT, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>Top 10 Untapped Connections</div>
+    </div>
+    {[
+      { name: "David Mercer", title: "CEO", company: "Mercer Growth Partners", reason: "Built 3 companies from $0 to exit — prime referral source for Founders needing financial infrastructure" },
+      { name: "Lisa Thornton", title: "Founder & MD", company: "Thornton Capital Advisory", reason: "Runs a boutique M&A firm — her Clients are exactly who needs a Fractional CFO pre-transaction" },
+      { name: "Ray Okonkwo", title: "Managing Partner", company: "Okonkwo Ventures", reason: "Invests in early-stage SaaS — portfolio companies consistently underserved on financial ops" },
+      { name: "Priya Nair", title: "Co-Founder", company: "Scalepath Inc.", reason: "Scaling from $2M to $10M ARR — the exact moment Fractional CFO engagement becomes critical" },
+      { name: "Tom Castellano", title: "President", company: "Castellano Business Group", reason: "SMB advisory practice with 40+ active business Owner Clients — strong referral multiplier" },
+      { name: "Sandra Kwon", title: "VP Finance", company: "Northgate Ventures", reason: "Oversees financial operations for 12 portfolio companies — high-value referral network" },
+      { name: "Marcus Webb", title: "CEO", company: "Webb Advisory Group", reason: "Serial entrepreneur with 3 exits — actively mentors Founders in growth stages" },
+      { name: "Elena Vasquez", title: "Director of Operations", company: "Clearpath Consulting", reason: "Manages finance function for 20+ SMB clients — direct line to CFO-ready companies" },
+      { name: "James Oduya", title: "Managing Director", company: "Bridgepoint Capital", reason: "Funds early-stage B2B SaaS — portfolio consistently needs fractional finance support" },
+      { name: "Rachel Fong", title: "Founder", company: "Fong Strategic Advisors", reason: "Boutique strategy firm serving scale-up CEOs — natural co-referral partner" },
+    ].map((p, i) => (
+      <div key={i} style={{ display: "flex", gap: 10, padding: "10px 0", borderBottom: i < 9 ? `1px solid ${BORDER}` : "none" }}>
+        <div style={{ flex: 1 }}>
+          <div style={{ display: "flex", gap: 8, alignItems: "baseline", marginBottom: 3, flexWrap: "wrap" }}>
+            <span style={{ fontSize: 13, fontWeight: 700, color: BLUE_BRIGHT }}>{p.name}</span>
+            <span style={{ fontSize: 11, color: MUTED }}>| {p.title} | {p.company}</span>
+          </div>
+          <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.6 }}>{p.reason}</div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
                 </LaptopFrame>
 
                 {/* Mockup 2 — Your BizDev Readiness Score */}
