@@ -949,12 +949,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   Your LinkedIn network is full of connections who could refer you, hire you, or open a door. But LinkedIn doesn't show you who they are, how warm they are, or what to say. So you either throw spaghetti hoping something sticks — or you do nothing and wonder why business development feels so hard. Either way you're leaving money behind.
                 </p>
               </div>
-
-              {/* ── The Solution ── */}
-              <div className="scroll-reveal" style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 16, padding: "64px 48px", marginBottom: 0, marginTop: 40, textAlign: "center" }}>
-                
-              </div>
-
+                        
               <Divider />
 
               {/* ── Report Mockups ── */}
