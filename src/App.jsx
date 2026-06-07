@@ -116,16 +116,19 @@ Top 5 people with real, active relationship momentum. Format: **Name** | Why hot
 Top 5 people with existing relationship that just needs a nudge. Format: **Name** | When last active | Recommended reactivation angle
 
 ## Cool But Valuable — Worth Reviving  
-Top 5 people who went quiet but still matter for BD. Format: **Name** | Why they still matter | How to re-open naturally
+Top 5 people who went quiet but still matter for BD. Exclude anyone identified as Inner Circle. Format: **Name** | Why they still matter | How to re-open naturally
 
 ## Reality Check
 One honest observation about their relationship patterns — a useful insight they can act on immediately. Frame it as an opportunity, not a critique. Keep it direct and encouraging.
 
+## Your Inner Circle
+Identify 3-5 people whose message frequency and recency are significantly higher than the rest of the network — the tight cluster who show up consistently. Exclude these people from the Hot, Warm, and Cool lists above. Celebrate this warmly: a strong Inner Circle is a genuine asset. These are your people.
+
 ## 3 Outreach Conversation Starters
-Ready-to-use opening lines they can adapt and send today:
-1. [Starter for reactivating a warm contact]
-2. [Starter for reaching out to a cool contact]
-3. [Starter for deepening a hot relationship]
+Three short, natural messages they can send today — written the way a real person texts or messages, not like a LinkedIn template. No brackets, no placeholders. Specific enough to feel human, loose enough to adapt:
+1. [Reactivating a warm contact]
+2. [Reaching out to a cool contact]
+3. [Deepening a hot relationship]
 
 ## Next Steps
 3 specific actions to take this week. Name real people where possible.
