@@ -952,10 +952,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
 
               {/* ── The Solution ── */}
               <div className="scroll-reveal" style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 16, padding: "64px 48px", marginBottom: 0, marginTop: 40, textAlign: "center" }}>
-                <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 20 }}>Enter Nugget™</div>
-                <p style={{ fontSize: 19, color: WHITE, lineHeight: 1.8, maxWidth: 660, margin: "0 auto", fontFamily: "Georgia, serif" }}>
-                  Upload your LinkedIn data once and we'll show you exactly who's warm, who's ready, and where your next Client is most likely coming from.
-                </p>
+                
               </div>
 
               <Divider />
@@ -965,7 +962,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 <div style={{ textAlign: "center", marginBottom: 40 }}>
                   <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>See It In Action</div>
                   <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 12 }}>Real intelligence. Real names. Real next steps.</h2>
-                  <p style={{ fontSize: 15, color: MUTED, maxWidth: 500, margin: "0 auto" }}>Here's a sample of what your reports actually look like.</p>
+                  <p style={{ fontSize: 15, color: MUTED, maxWidth: 500, margin: "0 auto" }}>Upload your LinkedIn data once — here's exactly what comes back.</p>
                 </div>
 
                 {/* Mockup 1 — Field Report */}
