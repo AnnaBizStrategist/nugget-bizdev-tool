@@ -999,7 +999,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 </div>
                 </LaptopFrame>
 
-                {/* Mockup 2 — BizDev Readiness Score */}
+                {/* Mockup 2 — Your BizDev Readiness Score */}
                 <div className="scroll-reveal" style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "36px 40px", marginBottom: 20 }}>
                   <div style={{ textAlign: "center", marginBottom: 32 }}>
                     <div style={{ fontSize: 11, color: MUTED, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: 10 }}>BizDev Readiness Score</div>
