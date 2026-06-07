@@ -930,7 +930,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 <span style={{ background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>in your network.</span>
               </h1>
               <p style={{ fontSize: 18, color: "rgba(255,255,255,0.85)", maxWidth: 580, margin: "0 auto 44px", lineHeight: 1.75, animation: "fadeSlideUp 0.7s ease-out 0.2s both" }}>
-                Nugget shows you exactly who to talk to, what to say, and where your next opportunity is hiding.
+                You've built a solid LinkedIn network. Nugget shows you exactly who to talk to, what to say, and where your next opportunity is hiding.
               </p>
               <div style={{ display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap", marginBottom: 44, animation: "fadeSlideUp 0.7s ease-out 0.4s both" }}>
                 <button style={{ ...primaryBtn, fontSize: 16, padding: "14px 36px" }} onClick={scrollToUpload}>Get My Free Reports →</button>
