@@ -156,9 +156,10 @@ Name 3 specific people the data shows are clearly supportive and ready to be act
 **What to ask for:** Rank these in order for this founder: referrals / intros / recommendations / collaboration
 
 ## Outreach Templates by Ask Type
-For referrals: [2-sentence template]
-For introductions: [2-sentence template]  
-For recommendations: [2-sentence template]
+Write three short, natural messages — one for each ask type. Written the way a real person actually reaches out, not like a template. No brackets, no placeholders. Warm, direct, and specific enough to feel human:
+For referrals: [natural, conversational message]
+For introductions: [natural, conversational message]
+For recommendations: [natural, conversational message]
 
 ## Next Steps
 3 specific actions. Name real advocates from the data.
