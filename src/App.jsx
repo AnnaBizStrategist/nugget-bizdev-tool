@@ -1142,9 +1142,14 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 </div>
 
                 <div style={{ background: BLUE_MID + "22", border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 12, padding: "20px 28px", textAlign: "center" }}>
-                  <p style={{ fontSize: 15, color: WHITE, lineHeight: 1.7 }}>
-                    Watch your score climb every quarter. Share your milestone. Show your work.<br />
-                    <span style={{ color: MUTED, fontSize: 13, fontStyle: "italic" }}>"My score went from 42 to 78 in 90 days." — that's not a coincidence. That's NUGGET working.</span>
+                  <p style={{ fontSize: 15, color: WHITE, lineHeight: 1.7, marginBottom: 16 }}>
+                    Watch your score climb every quarter. Share your milestone. Show your work.
+                  </p>
+                  <p style={{ fontSize: 13, color: MUTED, fontStyle: "italic", lineHeight: 1.8 }}>
+                    "It takes what most people overcomplicate and makes it obvious and simple." — Meredith Brewer
+                  </p>
+                  <p style={{ fontSize: 13, color: MUTED, fontStyle: "italic", lineHeight: 1.8 }}>
+                    "The Nugget is amazing. It's incredibly valuable info." — Noelle Labrie
                   </p>
                 </div>
               </div>
