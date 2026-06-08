@@ -1208,7 +1208,8 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     </div>
                   )}
                 </div>
-                 
+              </div>
+
                 {isMissingCriticalFiles && (
   <div style={{ background: "#1a0e00", border: "1px solid #E8A000", borderRadius: 10, padding: "16px 20px", marginBottom: 20, display: "flex", gap: 14, alignItems: "flex-start" }}>
     <div style={{ fontSize: 20, flexShrink: 0 }}>⚠️</div>
