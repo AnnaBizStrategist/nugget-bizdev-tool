@@ -1202,7 +1202,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   {hasFiles && (
                     <div style={{ marginTop: 20, display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center" }}>
                       {Object.keys(uploadedFiles).map(k => (
-                        <span key={k} style={{ padding: "4px 12px", background: BLUE_MID + "33", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 20, fontSize: 12, color: BLUE_BRIGHT }}>✓ {k}</span>
+                        <span key={k} style={{ padding: "4px 12px", background: BLUE_MID + "33", border: "1px solid #41a1e844", borderRadius: 20, fontSize: 12, color: BLUE_BRIGHT }}>✓ {k}</span>
                       ))}
                     </div>
                   )}
