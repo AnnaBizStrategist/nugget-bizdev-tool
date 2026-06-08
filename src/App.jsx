@@ -1182,18 +1182,20 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               </div>
 
               {/* ── Upload Zone ── */}
-              <div ref={uploadRef} style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, borderRadius: 24, padding: "48px 32px", marginBottom: 0 }}>
+             <div ref={uploadRef} style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, borderRadius: 24, padding: "48px 32px", marginBottom: 0, marginTop: 32 }}>
                 <div
-                  style={{ border: `2px dashed ${dragOver ? BLUE_BRIGHT : BLUE_BRIGHT + "66"}`, borderRadius: 16, padding: "44px 32px", textAlign: "center", cursor: "pointer", background: dragOver ? BLUE_MID + "33" : "rgba(255,255,255,0.05)", transition: "all 0.2s", marginBottom: 28 }}
+                  style={{ borderRadius: 16, padding: "44px 32px", textAlign: "center", cursor: "pointer", background: dragOver ? "rgba(255,255,255,0.1)" : "transparent", transition: "all 0.2s", marginBottom: 28 }}
                   onDragOver={e => { e.preventDefault(); setDragOver(true); }}
                   onDragLeave={() => setDragOver(false)}
                   onDrop={handleDrop}
                   onClick={() => fileInputRef.current?.click()}
                 >
-                  <div style={{ fontSize: 28, fontWeight: 700, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", marginBottom: 10 }}>Drop your LinkedIn file here</div>
+                   <div style={{ fontSize: 28, fontWeight: 700, fontFamily: "Georgia, serif", color: WHITE, marginBottom: 10 }}>Drop your LinkedIn file here</div>
                   <div style={{ fontSize: 32, marginBottom: 12 }}>📂</div>
-                  <div style={{ fontSize: 13, color: MUTED, marginBottom: 18, lineHeight: 1.5 }}>
-                    Drop the zip file LinkedIn sent you here — don't unzip it. Nugget handles everything inside automatically.<br />Or upload individual files if you prefer.
+                  <div style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", marginBottom: 36, lineHeight: 1.5 }}>
+                    <div style={{ marginBottom: 6 }}>Drop the zip file LinkedIn sent you here — don't unzip it. Nugget handles everything inside automatically.</div>
+                    <div>Or upload individual files if you prefer.</div>
+                  </div>
                   </div>
                   <button style={{ padding: "10px 28px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: "pointer" }}
                     onClick={e => { e.stopPropagation(); fileInputRef.current?.click(); }}>Choose Files</button>
