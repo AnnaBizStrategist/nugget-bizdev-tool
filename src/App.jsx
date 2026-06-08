@@ -886,6 +886,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
   .print-intro { background: #f0f4ff !important; border: 1px solid #c0d0f0 !important; color: #222 !important; }
   .print-intro p { color: #222 !important; }
   @page { margin: 18mm 16mm; }
+        /* end print */
 }
         .scroll-reveal         { opacity: 0; transform: translateY(32px); transition: opacity 0.65s ease, transform 0.65s ease; }
         .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
