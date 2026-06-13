@@ -1239,12 +1239,8 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     <p style={{ fontSize: 15, color: WHITE, marginBottom: 12 }}>✅ Your data is loaded and ready. Scroll down to generate your reports — start with the Field Report.</p>
                   </div>
                 )}
-               {connCount > 0 && (
-                  <div style={{ textAlign: "center", padding: "16px 0 4px" }}>
-                    <p style={{ fontSize: 15, color: WHITE, marginBottom: 12 }}>✅ Your data is loaded and ready. Scroll down to generate your reports — start with the Field Report.</p>
-              </div>
-            )}
-          </div>
+               
+               </div>
 
               {error && <div style={{ background: "#1a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
               <Divider />
