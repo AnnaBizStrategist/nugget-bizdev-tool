@@ -1184,7 +1184,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               </div>
 
               {/* ── Upload Zone ── */}
-             <div ref={uploadRef} style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, borderRadius: 24, padding: "48px 32px", marginBottom: 0, marginTop: 32 }}>
+             <div id="upload-zone" ref={uploadRef} style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, borderRadius: 24, padding: "48px 32px", marginBottom: 0, marginTop: 32 }}>
                 <div
                   style={{ borderRadius: 16, padding: "44px 32px", textAlign: "center", cursor: "pointer", background: dragOver ? "rgba(255,255,255,0.1)" : "transparent", transition: "all 0.2s" }}
                   onDragOver={e => { e.preventDefault(); setDragOver(true); }}
@@ -1234,6 +1234,11 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     ))}
                   </div>
                 )}
+                {connCount > 0 && (
+                  <div style={{ textAlign: "center", padding: "16px 0 4px" }}>
+                    <p style={{ fontSize: 15, color: WHITE, marginBottom: 12 }}>✅ Your data is loaded and ready. Scroll down to generate your reports — start with the Field Report.</p>
+                  </div>
+                )}
                {connCount > 0 && (
                   <div style={{ textAlign: "center", padding: "16px 0 4px" }}>
                     <p style={{ fontSize: 15, color: WHITE, marginBottom: 12 }}>✅ Your data is loaded and ready. Scroll down to generate your reports — start with the Field Report.</p>
@@ -1247,7 +1252,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               <div style={{ marginBottom: 0 }}>
                 <div style={{ textAlign: "center", marginBottom: 40 }}>
                   <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>What You Get</div>
-                  <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 24 }}>2 free reports. Unlock the other 5 to find your next client.</h2>
+                  <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 24 }}>2 free reports.<br />Unlock the other 5 to find your next client.</h2>
                   <p style={{ fontSize: 14, color: MUTED, maxWidth: 500, margin: "0 auto" }}>
                     Every insight, every name, and every next step is unique to you.<br />This is <span style={{ color: WHITE, fontWeight: 700 }}>YOUR</span> data. These are <span style={{ color: WHITE, fontWeight: 700 }}>YOUR</span> people. This is <span style={{ color: WHITE, fontWeight: 700 }}>YOUR</span> pipeline.
                   </p>
