@@ -1278,6 +1278,68 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     </div>
                   ))}
                 </div>
+
+                {/* ── Pricing section ── */}
+                <div style={{ marginTop: 60, textAlign: "center" }}>
+                  <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 16 }}>Pricing</div>
+                  <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 48 }}>
+                    Start free. Then unlock the <span style={{ color: "#C9A84C" }}>Gold.</span>
+                  </h2>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24, maxWidth: 780, margin: "0 auto" }}>
+
+                    {/* Free card */}
+                    <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: 32, textAlign: "left", display: "flex", flexDirection: "column" }}>
+                      <div style={{ display: "inline-block", padding: "3px 10px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", background: BLUE_MID + "33", color: BLUE_BRIGHT, marginBottom: 16 }}>FREE</div>
+                      <div style={{ fontSize: 36, fontWeight: 700, fontFamily: "Georgia, serif", color: WHITE, marginBottom: 4 }}>$0</div>
+                      <div style={{ fontSize: 13, color: MUTED, marginBottom: 24 }}>No credit card required</div>
+                      <div style={{ borderTop: `1px solid ${BORDER}`, paddingTop: 20, marginBottom: 24, display: "flex", flexDirection: "column", gap: 12 }}>
+                        {[
+                          { name: "The Field Report", desc: "Your network landscape — who's in it and what it's worth." },
+                          { name: "The Warm List", desc: "Your top 5 warmest contacts, ranked and ready." },
+                        ].map((item, i) => (
+                          <div key={i} style={{ display: "flex", gap: 10 }}>
+                            <span style={{ color: BLUE_BRIGHT, fontWeight: 700, marginTop: 1 }}>✓</span>
+                            <div>
+                              <div style={{ fontSize: 13, fontWeight: 700, color: WHITE }}>{item.name}</div>
+                              <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.5 }}>{item.desc}</div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <button onClick={() => { const el = document.getElementById("upload-zone"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ marginTop: "auto", padding: "12px 24px", background: "transparent", border: `1px solid ${BLUE_BRIGHT}`, color: BLUE_BRIGHT, borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%" }}>
+                        Start Free →
+                      </button>
+                    </div>
+
+                    {/* Gold card */}
+                    <div style={{ background: `linear-gradient(160deg, #1a1200 0%, ${DARK_CARD} 100%)`, border: `1px solid #C9A84C66`, borderRadius: 16, padding: 32, textAlign: "left", display: "flex", flexDirection: "column" }}>
+                      <div style={{ display: "inline-block", padding: "3px 10px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", background: "#C9A84C33", color: "#C9A84C", marginBottom: 16 }}>GOLD</div>
+                      <div style={{ fontSize: 36, fontWeight: 700, fontFamily: "Georgia, serif", color: WHITE, marginBottom: 4 }}>$29<span style={{ fontSize: 16, fontWeight: 400, color: MUTED }}>/month</span></div>
+                      <div style={{ fontSize: 13, color: MUTED, marginBottom: 24 }}>Cancel anytime</div>
+                      <div style={{ borderTop: `1px solid #C9A84C33`, paddingTop: 20, marginBottom: 24, display: "flex", flexDirection: "column", gap: 12 }}>
+                        {[
+                          { name: "Full Warm List", desc: "Every warm contact you have, ranked and ready. Not just the top 5 — ALL of them." },
+                          { name: "The Hidden Nuggets Report", desc: "The people already in your corner you can tap into immediately. Low effort, high return." },
+                          { name: "The Inbound Report", desc: "Find out who's already circling. These are the people most likely to say yes." },
+                          { name: "The Outbound Report", desc: "Your best cold-to-warm targets. Know who to reach out to before you ever hit send." },
+                          { name: "The Gold Nugget", desc: "Your full BizDev Readiness Score. A complete action plan for turning your network into your pipeline." },
+                        ].map((item, i) => (
+                          <div key={i} style={{ display: "flex", gap: 10 }}>
+                            <span style={{ color: "#C9A84C", fontWeight: 700, marginTop: 1 }}>✓</span>
+                            <div>
+                              <div style={{ fontSize: 13, fontWeight: 700, color: WHITE }}>{item.name}</div>
+                              <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.5 }}>{item.desc}</div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <a href="https://buy.stripe.com/3cIcN64sBd54d5pf3r6kg0b" target="_blank" rel="noopener noreferrer" style={{ marginTop: "auto", padding: "12px 24px", background: `linear-gradient(135deg, #C9A84C, #E8C97A)`, border: "none", color: "#0d2d6b", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%", textAlign: "center", textDecoration: "none", display: "block" }}>
+                        Unlock Gold →
+                      </a>
+                    </div>
+
+                  </div>
+                </div>
               </div>
 
               <Divider />
