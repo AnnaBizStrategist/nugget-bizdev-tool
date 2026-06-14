@@ -773,7 +773,7 @@ export default function App() {
 
   const runReport = async (reportId) => {
   const report = REPORTS.find(r => r.id === reportId);
-  if (!report?.free || generating) return;
+  if ((!report?.free && !isBeta) || generating) return;
   if (!emailSubmitted) { setPendingReportId(reportId); setShowEmailModal(true); return; }
   setGenerating(reportId); setActiveReport(reportId); setStep("reports"); setError(null); setRetryMessage(null);
   try {
