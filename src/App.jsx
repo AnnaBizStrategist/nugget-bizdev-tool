@@ -1508,7 +1508,25 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
 </div>
                     </div>
                   ) : reports[activeReport] ? (
-                    <><IntroBlock reportId={activeReport} /><ReportContent text={reports[activeReport]} /></>
+                    <>
+                      <IntroBlock reportId={activeReport} />
+                      {activeReport === "warm" && !isBeta ? (
+                        <div style={{ position: "relative" }}>
+                          <div style={{ maxHeight: 420, overflow: "hidden", position: "relative" }}>
+                            <ReportContent text={reports[activeReport]} />
+                            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 180, background: `linear-gradient(to bottom, transparent, ${DARK_CARD})` }} />
+                          </div>
+                          <div style={{ textAlign: "center", padding: "28px 24px", background: DARK_CARD, borderTop: `1px solid ${BORDER}`, borderRadius: "0 0 12px 12px" }}>
+                            <div style={{ fontSize: 18, marginBottom: 8 }}>🔒</div>
+                            <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, fontFamily: "Georgia, serif", marginBottom: 6 }}>Your full Warm List is waiting.</div>
+                            <p style={{ fontSize: 13, color: MUTED, marginBottom: 20, lineHeight: 1.6 }}>Unlock Gold to see every warm contact — ranked, ready, and worth reaching out to.</p>
+                            <a href="https://buy.stripe.com/3cIcN64sBd54d5pf3r6kg0b" target="_blank" rel="noreferrer" style={{ display: "inline-block", padding: "12px 28px", background: `linear-gradient(135deg, #C9A84C, #f5c842)`, color: "#0a1628", borderRadius: 8, fontSize: 14, fontWeight: 700, textDecoration: "none" }}>Unlock Gold — $29/month →</a>
+                          </div>
+                        </div>
+                      ) : (
+                        <ReportContent text={reports[activeReport]} />
+                      )}
+                    </>
                   ) : (
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
                       <div style={{ fontSize: 38, marginBottom: 14 }}>📊</div>
