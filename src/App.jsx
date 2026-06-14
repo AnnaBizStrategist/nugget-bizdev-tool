@@ -1309,6 +1309,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                           </div>
                         ))}
                       </div>
+                     <div style={{ fontSize: 12, color: MUTED, textAlign: "center", marginBottom: 12 }}>1 report run per month</div>
                       <button onClick={() => { const el = document.getElementById("upload-zone"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ marginTop: "auto", padding: "12px 24px", background: "transparent", border: `1px solid ${BLUE_BRIGHT}`, color: BLUE_BRIGHT, borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%" }}>
                         Start Free →
                       </button>
@@ -1336,6 +1337,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                           </div>
                         ))}
                       </div>
+                      <div style={{ fontSize: 12, color: MUTED, textAlign: "center", marginBottom: 12 }}>Run weekly or monthly, you choose</div>
                       <a href="https://buy.stripe.com/3cIcN64sBd54d5pf3r6kg0b" target="_blank" rel="noopener noreferrer" style={{ marginTop: "auto", padding: "12px 24px", background: `linear-gradient(135deg, #C9A84C, #E8C97A)`, border: "none", color: "#0d2d6b", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%", textAlign: "center", textDecoration: "none", display: "block" }}>
                         Unlock Gold →
                       </a>
