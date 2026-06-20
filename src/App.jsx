@@ -139,7 +139,7 @@ Use real names. Be direct. Make every recommendation immediately actionable.`,
 
 Do not include a title or heading at the start of your response. Begin directly with the first section.
 
-Look for: people who wrote recommendations, people who endorsed your skills, consistent high-volume messengers, patterns of support and responsiveness. Limit to 5-10 advocates maximum with richer insight per person. Never quote recommendation text directly - summarize what they said in your own words to avoid misattribution.
+Look for: people who wrote recommendations, people who endorsed your skills, consistent high-volume messengers, patterns of support and responsiveness. Check the most recent message DATE for each candidate — if there's no contact in the last 12 months, label them dormant and recommend reconnection before any ask, never a direct ask. Limit to 5-10 advocates maximum with richer insight per person. Never quote recommendation text directly - summarize what they said in your own words to avoid misattribution. Never list {{OWNER_NAME}} as their own advocate — exclude any entry matching that name.
 
 Tone: You are a trusted advisor, not a critic. Deliver every insight the way a good mentor would — direct, honest, and always on the founder's side. Name gaps clearly but pivot immediately to the opportunity. Never editorialize about past decisions or linger on what went wrong. Hard truths land better when the person feels supported, not judged. Never use words like "finally" or "at last" — they imply the founder was previously doing something wrong. Personal details that create memorability and human connection — chickens, dogs, family, hobbies — are intentional BD strategy. Treat them as assets unless there is a specific, concrete professional reason not to.
 
@@ -148,7 +148,7 @@ Tone: You are a trusted advisor, not a critic. Deliver every insight the way a g
 **Name** | Title | Why they're already in your corner | Relationship depth | Best ask: (referral / intro / recommendation / collaboration)
 
 ## The Three You're Definitely Overlooking
-Name 3 specific people — different from those named in Your Hidden Advocates — the data shows are clearly supportive and ready to be activated. Never list {{OWNER_NAME}} as their own advocate — exclude any entry matching that name. Frame this as untapped potential, not missed opportunity - these are warm doors to be opened.
+Name 3 specific people — different from those named in Your Hidden Advocates — the data shows are clearly supportive and ready to be activated. Apply the same 12-month recency check — if dormant, frame as reconnect-first, not a direct ask. Never list {{OWNER_NAME}}. Frame this as untapped potential, not missed opportunity - these are warm doors to be opened.
 
 ## Referral Ask Framework
 **Who to ask:** [Profile of your strongest advocates based on the data]
@@ -156,7 +156,7 @@ Name 3 specific people — different from those named in Your Hidden Advocates �
 **What to ask for:** Rank these in order for this founder: referrals / intros / recommendations / collaboration
 
 ## Outreach Templates by Ask Type
-Write three short, natural messages — one for each ask type. Written the way a real person actually reaches out, not like a template. No brackets, no placeholders. Warm, direct, and specific enough to feel human:
+Write three short, natural messages — one for each ask type. Written the way a real person actually reaches out, not like a template. No brackets, no placeholders. Warm, direct, and specific. Never name specific third parties mentioned in message content as introduction targets — you can't confirm they aren't already {{OWNER_NAME}}'s own connection. Keep introduction asks general:
 For referrals: [natural, conversational message]
 For introductions: [natural, conversational message]
 For recommendations: [natural, conversational message]
@@ -410,7 +410,7 @@ function getFileKey(name) {
 async function callClaude(systemPrompt, data, retries = 3, onRetry = null, testMode = false) {
   const body = JSON.stringify({
     model: "claude-sonnet-4-6",
-    max_tokens: testMode ? 400 : 1500,
+    max_tokens: testMode ? 400 : 2200,
     system: systemPrompt,
     messages: [{ role: "user", content: `Here is the LinkedIn export data to analyze:\n\n${JSON.stringify(data, null, 2)}\n\nGenerate the report now. Be specific, use real names from the data, and make every insight immediately actionable.` }],
   });
