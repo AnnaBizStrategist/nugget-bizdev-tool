@@ -484,7 +484,7 @@ function slimConnection(c) {
     connected: c["Connected On"] || "",
   };
 }
-function prepareData(parsedData, fileKeys, ownName = "") {
+function prepareData(parsedData, fileKeys, ownName = "", icpData = null) {
   const out  = {};
   const meta = {};
   const ICP_RE = /founder|owner|co-founder|ceo|president|partner|principal|entrepreneur|solopreneur/i;
@@ -576,6 +576,10 @@ function prepareData(parsedData, fileKeys, ownName = "") {
       meta[`${k}_shown`] = Math.min(50, total);
     }
   });
+
+  if (icpData && (icpData.client || icpData.problem)) {
+    meta.user_stated_icp = { ideal_client: icpData.client || "", problem_solved: icpData.problem || "" };
+  }
 
   if (Object.keys(out).length === 0) out["_note"] = "No matching files found. User may have uploaded Basic export.";
   if (Object.keys(meta).length > 0)  out["_meta"] = meta;
@@ -814,7 +818,7 @@ export default function App() {
   setGenerating(reportId); setActiveReport(reportId); setStep("reports"); setError(null); setRetryMessage(null);
   try {
     const ownName = `${parsedData["Profile"]?.[0]?.["First Name"] || ""} ${parsedData["Profile"]?.[0]?.["Last Name"] || ""}`.trim();
-      const prepared = prepareData(parsedData, report.files, ownName);
+      const prepared = prepareData(parsedData, report.files, ownName, { client: icpClient, problem: icpProblem });
       const promptText = PROMPTS[reportId].replace(/{{OWNER_NAME}}/g, ownName);
       const result = await callClaude(
         promptText,
@@ -833,7 +837,7 @@ export default function App() {
     setGenerating("gold"); setActiveReport("gold"); setStep("reports"); setError(null); setRetryMessage(null);
     try {
       const ownName = `${parsedData["Profile"]?.[0]?.["First Name"] || ""} ${parsedData["Profile"]?.[0]?.["Last Name"] || ""}`.trim();
-      const data = prepareData(parsedData, ["Connections", "Messages"], ownName);
+      const data = prepareData(parsedData, ["Connections", "Messages"], ownName, { client: icpClient, problem: icpProblem });
       const reportsContext = Object.entries(reports)
         .map(([id, text]) => `=== ${REPORTS.find(r => r.id === id)?.name?.toUpperCase() || id.toUpperCase()} ===\n${text}`)
         .join("\n\n---\n\n");
