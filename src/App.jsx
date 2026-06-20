@@ -484,7 +484,7 @@ function slimConnection(c) {
     connected: c["Connected On"] || "",
   };
 }
-function prepareData(parsedData, fileKeys) {
+function prepareData(parsedData, fileKeys, ownName = "") {
   const out  = {};
   const meta = {};
   const ICP_RE = /founder|owner|co-founder|ceo|president|partner|principal|entrepreneur|solopreneur/i;
@@ -785,8 +785,8 @@ export default function App() {
   if (!emailSubmitted) { setPendingReportId(reportId); setShowEmailModal(true); return; }
   setGenerating(reportId); setActiveReport(reportId); setStep("reports"); setError(null); setRetryMessage(null);
   try {
-    const prepared = prepareData(parsedData, report.files);
-      const ownName = `${parsedData["Profile"]?.[0]?.["First Name"] || ""} ${parsedData["Profile"]?.[0]?.["Last Name"] || ""}`.trim();
+    const ownName = `${parsedData["Profile"]?.[0]?.["First Name"] || ""} ${parsedData["Profile"]?.[0]?.["Last Name"] || ""}`.trim();
+      const prepared = prepareData(parsedData, report.files, ownName);
       const promptText = PROMPTS[reportId].replace(/{{OWNER_NAME}}/g, ownName);
       const result = await callClaude(
         promptText,
@@ -804,7 +804,8 @@ export default function App() {
     if (generating) return;
     setGenerating("gold"); setActiveReport("gold"); setStep("reports"); setError(null); setRetryMessage(null);
     try {
-      const data = prepareData(parsedData, ["Connections", "Messages"]);
+      const ownName = `${parsedData["Profile"]?.[0]?.["First Name"] || ""} ${parsedData["Profile"]?.[0]?.["Last Name"] || ""}`.trim();
+      const data = prepareData(parsedData, ["Connections", "Messages"], ownName);
       const reportsContext = Object.entries(reports)
         .map(([id, text]) => `=== ${REPORTS.find(r => r.id === id)?.name?.toUpperCase() || id.toUpperCase()} ===\n${text}`)
         .join("\n\n---\n\n");
