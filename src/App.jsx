@@ -113,7 +113,9 @@ ICP context: the data may include a _meta.user_stated_icp field — the founder'
 
 Tone: You are a trusted advisor, not a critic. Deliver every insight the way a good mentor would — direct, honest, and always on the founder's side. Name gaps clearly but pivot immediately to the opportunity. Never editorialize about past decisions or linger on what went wrong. Hard truths land better when the person feels supported, not judged. Never use words like "finally" or "at last" — they imply the founder was previously doing something wrong. Personal details that create memorability and human connection — chickens, dogs, family, hobbies — are intentional BD strategy. Treat them as assets unless there is a specific, concrete professional reason not to. Focus on BD relevance. Keep each section to top 5 people maximum.
 
-## Hot Contacts — Engage This Week
+Message data: each Messages entry includes a SENT_BY field (YOU or THEM). Never attribute a personal detail mentioned in a SNIPPET — a pet, family member, hobby, or life event — to either party without checking SENT_BY first. If SENT_BY is YOU, the detail belongs to the founder, not the contact.
+
+## Hot Contacts — Engage This Weekv
 Top 5 people with real, active relationship momentum. Format: **Name** | Why hot | Best opening move
 
 ## Warm Contacts — Activate Now
@@ -149,7 +151,11 @@ ICP context: the data may include a _meta.user_stated_icp field — the founder'
 
 Tone: You are a trusted advisor, not a critic. Deliver every insight the way a good mentor would — direct, honest, and always on the founder's side. Name gaps clearly but pivot immediately to the opportunity. Never editorialize about past decisions or linger on what went wrong. Hard truths land better when the person feels supported, not judged. Never use words like "finally" or "at last" — they imply the founder was previously doing something wrong. Personal details that create memorability and human connection — chickens, dogs, family, hobbies — are intentional BD strategy. Treat them as assets unless there is a specific, concrete professional reason not to.
 
+Message data: each Messages entry includes a SENT_BY field (YOU or THEM). Never attribute a personal detail mentioned in a SNIPPET — a pet, family member, hobby, or life event — to either party without checking SENT_BY first. If SENT_BY is YOU, the detail belongs to the founder, not the contact.
+
 ## Your Hidden Advocates
+One flag before you paste this: the tone-guardrail paragraph appears verbatim in all six prompts (Field, Warm List, Hidden Nuggets, Inbound, Outbound, Gold Nugget), so this exact search string may not be unique in the file — your editor might find multiple matches. Since Hidden Nuggets is the only one followed immediately by ## Your Hidden Advocates, the full search block including that heading should be unique. If your editor flags it as non-unique anyway, let me know and I'll narrow it further.
+Once that's in, let's do Outbound next — I'll need its tone guardrail + first heading the same way.
 5-10 people ranked by likely willingness and strategic BD value:
 **Name** | Title | Why they're already in your corner | Relationship depth | Best ask: (referral / intro / recommendation / collaboration)
 
@@ -225,6 +231,8 @@ ICP context: the data may include a _meta.user_stated_icp field — the founder'
 
 Tone: You are a trusted advisor, not a critic. Deliver every insight the way a good mentor would — direct, honest, and always on the founder's side. Name gaps clearly but pivot immediately to the opportunity. Never editorialize about past decisions or linger on what went wrong. Hard truths land better when the person feels supported, not judged. Never use words like "finally" or "at last" — they imply the founder was previously doing something wrong. Personal details that create memorability and human connection — chickens, dogs, family, hobbies — are intentional BD strategy. Treat them as assets unless there is a specific, concrete professional reason not to.
 
+Message data: each Messages entry includes a SENT_BY field (YOU or THEM). Never attribute a personal detail mentioned in a SNIPPET — a pet, family member, hobby, or life event — to either party without checking SENT_BY first. If SENT_BY is YOU, the detail belongs to the founder, not the contact.
+
 Analyze the comments and shares/posts to understand their market signal and social selling effectiveness.
 
 ## Signal Strength: X/10
@@ -263,6 +271,8 @@ Anna's voice: warm, direct, witty. Zero fluff. Treat the founder like a smart ad
 ICP context: the data may include a _meta.user_stated_icp field — the founder's own description of their Ideal Client and the problem they solve. If present, treat it as the primary, authoritative ICP definition, overriding any inference from job titles where the two conflict.
 
 Tone: You are a trusted advisor, not a critic. Deliver every insight the way a good mentor would — direct, honest, and always on the founder's side. Name gaps clearly but pivot immediately to the opportunity. Never editorialize about past decisions or linger on what went wrong. Hard truths land better when the person feels supported, not judged. Never use words like "finally" or "at last" — they imply the founder was previously doing something wrong. Personal details that create memorability and human connection — chickens, dogs, family, hobbies — are intentional BD strategy. Treat them as assets unless there is a specific, concrete professional reason not to.
+
+Message data: each Messages entry includes a SENT_BY field (YOU or THEM). Never attribute a personal detail mentioned in a SNIPPET — a pet, family member, hobby, or life event — to either party without checking SENT_BY first. If SENT_BY is YOU, the detail belongs to the founder, not the contact.
 
 Format your response with these exact sections:
 
@@ -527,7 +537,7 @@ function prepareData(parsedData, fileKeys, ownName = "", icpData = null) {
         icp_connections: icpConns,
         other_sample: otherConns,
       };
-    } else if (k === "Messages") {
+     } else if (k === "Messages") {
       const ownLower = ownName.trim().toLowerCase();
       const byPerson = {};
       parsedData[k].forEach((m) => {
@@ -539,14 +549,16 @@ function prepareData(parsedData, fileKeys, ownName = "", icpData = null) {
         const dateStr = m.DATE || m.Date || "";
         const ts = Date.parse(dateStr);
         const content = (m.CONTENT || m.Content || "").substring(0, 180);
+        const sentBy = from.toLowerCase() === ownLower ? "YOU" : "THEM";
         if (!byPerson[other]) {
-          byPerson[other] = { count: 0, lastTs: -Infinity, lastDate: dateStr, snippet: content };
+          byPerson[other] = { count: 0, lastTs: -Infinity, lastDate: dateStr, snippet: content, sentBy };
         }
         byPerson[other].count += 1;
         if (!isNaN(ts) && ts > byPerson[other].lastTs) {
           byPerson[other].lastTs = ts;
           byPerson[other].lastDate = dateStr;
           byPerson[other].snippet = content;
+          byPerson[other].sentBy = sentBy;
         }
       });
       out[k] = Object.entries(byPerson)
@@ -557,6 +569,7 @@ function prepareData(parsedData, fileKeys, ownName = "", icpData = null) {
           MESSAGE_COUNT: v.count,
           LAST_CONTACT: v.lastDate,
           SNIPPET: v.snippet,
+          SENT_BY: v.sentBy,
         }));
       meta[`${k}_shown`] = Math.min(60, out[k].length);
       meta[`${k}_unique_people`] = Object.keys(byPerson).length;
