@@ -539,10 +539,17 @@ function prepareData(parsedData, fileKeys) {
     WHAT_THEY_SAID: (r["Text"] || "").substring(0, 300),
   }));
   meta[`${k}_shown`] = Math.min(20, total);
-} else {
-  out[k] = parsedData[k].slice(0, 50);
-  meta[`${k}_shown`] = Math.min(50, total);
-}
+    } else if (k === "Endorsements") {
+      out[k] = parsedData[k].slice(0, 30).map((e) => ({
+        WHO:   `${e["Endorser First Name"] || ""} ${e["Endorser Last Name"] || ""}`.trim(),
+        SKILL: e["Skill Name"] || "",
+        DATE:  e["Endorsement Date"] || "",
+      }));
+      meta[`${k}_shown`] = Math.min(30, total);
+    } else {
+      out[k] = parsedData[k].slice(0, 50);
+      meta[`${k}_shown`] = Math.min(50, total);
+    }
   });
 
   if (Object.keys(out).length === 0) out["_note"] = "No matching files found. User may have uploaded Basic export.";
