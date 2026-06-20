@@ -176,7 +176,7 @@ Tone: You are a trusted advisor, not a critic. Deliver every insight the way a g
 DATA STRUCTURE — use these exact column names:
 - Profile.csv: one row with columns Headline, Summary, Industry
 - Skills.csv: one column "Name" — each row is a skill
-- Endorsement_Received_Info.csv: columns Skill Name, Endorser First Name, Endorser Last Name, Endorsement Status (count ACCEPTED only)
+- Endorsements: each row has WHO (endorser name), SKILL (skill endorsed), DATE (endorsement date). Already filtered to accepted endorsements only — use all rows as signal.
 If Headline or Summary exist but are empty, flag as a critical gap.
 
 ## Profile Scorecard
@@ -540,12 +540,13 @@ function prepareData(parsedData, fileKeys) {
   }));
   meta[`${k}_shown`] = Math.min(20, total);
     } else if (k === "Endorsements") {
-      out[k] = parsedData[k].slice(0, 30).map((e) => ({
+      const accepted = parsedData[k].filter((e) => (e["Endorsement Status"] || "").toUpperCase() === "ACCEPTED");
+      out[k] = accepted.slice(0, 30).map((e) => ({
         WHO:   `${e["Endorser First Name"] || ""} ${e["Endorser Last Name"] || ""}`.trim(),
         SKILL: e["Skill Name"] || "",
         DATE:  e["Endorsement Date"] || "",
       }));
-      meta[`${k}_shown`] = Math.min(30, total);
+      meta[`${k}_shown`] = Math.min(30, accepted.length);
     } else {
       out[k] = parsedData[k].slice(0, 50);
       meta[`${k}_shown`] = Math.min(50, total);
