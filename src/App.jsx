@@ -516,14 +516,38 @@ function prepareData(parsedData, fileKeys, ownName = "") {
         other_sample: otherConns,
       };
     } else if (k === "Messages") {
-      out[k] = parsedData[k].slice(0, 60).map((m) => ({
-        FROM:    m.FROM    || m.From    || "",
-        TO:      m.TO      || m.To      || "",
-        DATE:    m.DATE    || m.Date    || "",
-        SUBJECT: (m.SUBJECT || m.Subject || "").substring(0, 80),
-        CONTENT: (m.CONTENT || m.Content || "").substring(0, 180),
-      }));
-      meta[`${k}_shown`] = Math.min(60, total);
+      const ownLower = ownName.trim().toLowerCase();
+      const byPerson = {};
+      parsedData[k].forEach((m) => {
+        const from = (m.FROM || m.From || "").trim();
+        const to   = (m.TO   || m.To   || "").trim();
+        if (!from && !to) return;
+        const other = from.toLowerCase() === ownLower ? to : from;
+        if (!other) return;
+        const dateStr = m.DATE || m.Date || "";
+        const ts = Date.parse(dateStr);
+        const content = (m.CONTENT || m.Content || "").substring(0, 180);
+        if (!byPerson[other]) {
+          byPerson[other] = { count: 0, lastTs: -Infinity, lastDate: dateStr, snippet: content };
+        }
+        byPerson[other].count += 1;
+        if (!isNaN(ts) && ts > byPerson[other].lastTs) {
+          byPerson[other].lastTs = ts;
+          byPerson[other].lastDate = dateStr;
+          byPerson[other].snippet = content;
+        }
+      });
+      out[k] = Object.entries(byPerson)
+        .sort((a, b) => b[1].count - a[1].count)
+        .slice(0, 60)
+        .map(([who, v]) => ({
+          WHO: who,
+          MESSAGE_COUNT: v.count,
+          LAST_CONTACT: v.lastDate,
+          SNIPPET: v.snippet,
+        }));
+      meta[`${k}_shown`] = Math.min(60, out[k].length);
+      meta[`${k}_unique_people`] = Object.keys(byPerson).length;
     } else if (k === "Comments") {
       out[k] = parsedData[k].slice(0, 40).map((c) => ({
         Date:    c.Date    || c.date    || "",
