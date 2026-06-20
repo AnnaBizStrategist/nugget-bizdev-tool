@@ -42,7 +42,7 @@ const REPORTS = [
     tag: "GOLD",
     subtitle: "Who's already in your corner",
     description: "The people already in your corner who you're not leveraging. Ranked by likely value and best ask type.",
-    files: ["Recommendations_Received", "Messages"],
+    files: ["Recommendations_Received", "Messages", "Endorsements"],
     free: false,
   },
   {
