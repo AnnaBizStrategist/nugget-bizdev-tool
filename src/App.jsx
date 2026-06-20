@@ -148,7 +148,7 @@ Tone: You are a trusted advisor, not a critic. Deliver every insight the way a g
 **Name** | Title | Why they're already in your corner | Relationship depth | Best ask: (referral / intro / recommendation / collaboration)
 
 ## The Three You're Definitely Overlooking
-Name 3 specific people the data shows are clearly supportive and ready to be activated. Frame this as untapped potential, not missed opportunity - these are warm doors to be opened.
+Name 3 specific people — different from those named in Your Hidden Advocates — the data shows are clearly supportive and ready to be activated. Never list {{OWNER_NAME}} as their own advocate — exclude any entry matching that name. Frame this as untapped potential, not missed opportunity - these are warm doors to be opened.
 
 ## Referral Ask Framework
 **Who to ask:** [Profile of your strongest advocates based on the data]
@@ -786,8 +786,10 @@ export default function App() {
   setGenerating(reportId); setActiveReport(reportId); setStep("reports"); setError(null); setRetryMessage(null);
   try {
     const prepared = prepareData(parsedData, report.files);
-    const result = await callClaude(
-      PROMPTS[reportId],
+      const ownName = `${parsedData["Profile"]?.[0]?.["First Name"] || ""} ${parsedData["Profile"]?.[0]?.["Last Name"] || ""}`.trim();
+      const promptText = PROMPTS[reportId].replace(/{{OWNER_NAME}}/g, ownName);
+      const result = await callClaude(
+        promptText,
       isTest ? slimDataForTest(prepared) : prepared,
       3,
       (secs) => setRetryMessage(`The hamster's catching its breath — back in ~${Math.round(secs)}s! 🐹`),
