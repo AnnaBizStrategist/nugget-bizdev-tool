@@ -888,7 +888,7 @@ const submitICP = () => {
   setShowICPModal(false);
   const pending = pendingReportId; setPendingReportId(null);
   if (pending) runReport(pending);
-};v
+};
 
   // Scroll reveal observer
   const observerRef = useRef(null);
