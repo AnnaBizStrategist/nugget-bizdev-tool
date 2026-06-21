@@ -432,7 +432,7 @@ function getFileKey(name) {
 async function callClaude(systemPrompt, data, retries = 3, onRetry = null, testMode = false) {
   const body = JSON.stringify({
     model: "claude-sonnet-4-6",
-    max_tokens: testMode ? 400 : 2200,
+    max_tokens: testMode ? 400 : 3200,
     system: systemPrompt,
     messages: [{ role: "user", content: `Here is the LinkedIn export data to analyze:\n\n${JSON.stringify(data, null, 2)}\n\nGenerate the report now. Be specific, use real names from the data, and make every insight immediately actionable.` }],
   });
@@ -459,7 +459,7 @@ async function callClaude(systemPrompt, data, retries = 3, onRetry = null, testM
 async function callClaudeGN(systemPrompt, data, reportsContext, retries = 3, onRetry = null, testMode = false) {
   const body = JSON.stringify({
     model: "claude-sonnet-4-6",
-    max_tokens: testMode ? 600 : 3500,
+    max_tokens: testMode ? 600 : 4500,
     system: systemPrompt,
     messages: [{
       role: "user",
@@ -1626,7 +1626,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
       {showICPModal && (
         <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(2,8,18,0.97)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: 24 }}>
           <div style={{ background: `linear-gradient(160deg, #0f2040 0%, #0a1628 100%)`, border: `1px solid ${BLUE_BRIGHT}66`, borderRadius: 20, padding: "44px 52px", maxWidth: 580, width: "100%", boxShadow: `0 0 80px rgba(65,161,232,0.15), 0 24px 60px rgba(0,0,0,0.8)`, animation: "fadeIn 0.2s ease-out" }}>
-            <h2 style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, textAlign: "center", marginBottom: 14, lineHeight: 1.4 }}>One quick thing before we mine your data.</h2>
+            <h2 style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, textAlign: "center", marginBottom: 14, lineHeight: 1.4 }}>One quick thing before I mine your <span style={{ whiteSpace: "nowrap" }}>data.</span></h2>
             <p style={{ fontSize: 14, color: MUTED, textAlign: "center", marginBottom: 36, lineHeight: 1.6 }}>Tell us who you actually sell to — it sharpens every report that follows.</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 26, marginBottom: 30 }}>
               <div>
