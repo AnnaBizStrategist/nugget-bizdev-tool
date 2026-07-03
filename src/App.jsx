@@ -441,6 +441,7 @@ async function callClaude(systemPrompt, data, retries = 3, onRetry = null, testM
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "x-app-token": import.meta.env.VITE_APP_PROXY_TOKEN,
       },
       body,
     });
@@ -471,6 +472,7 @@ async function callClaudeGN(systemPrompt, data, reportsContext, retries = 3, onR
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "x-app-token": import.meta.env.VITE_APP_PROXY_TOKEN,
       },
       body,
     });
