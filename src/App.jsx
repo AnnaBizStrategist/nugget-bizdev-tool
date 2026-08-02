@@ -886,16 +886,25 @@ export default function App() {
   if (!emailName.trim() || !emailAddress.trim()) return;
   setEmailSubmitting(true);
   const pending = pendingReportId; setPendingReportId(null);
+
+  // Existing: feeds your Kit newsletter list — unchanged
   fetch("https://hook.us2.make.com/xu7d06pva2t2hhyccr86ddar7msqm4zl", {
     method: "POST", headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name: emailName.trim(), email: emailAddress.trim(), source: "nugget-free-user" }),
   }).catch(err => console.log("Webhook error:", err));
+
+  // New: registers the user in Supabase and sends their magic link
+  fetch("/api/register", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name: emailName.trim(), email: emailAddress.trim() }),
+  }).catch(err => console.log("Registration error:", err));
+
   setEmailSubmitted(true);
   setEmailSubmitting(false);
   setShowEmailModal(false);
   if (pending) { setPendingReportId(pending); setShowICPModal(true); }
 };
-
+  
 const submitICP = () => {
   setICPSubmitted(true);
   setShowICPModal(false);
