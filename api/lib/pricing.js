@@ -20,6 +20,7 @@ export const TIERS = {
     pricePerReport: 79,
     totalPrice: 79,
     includesGN: false,
+    stripePriceId: "price_1U04xCJs9mPzeO99JSccQkmc",
   },
   connector: {
     name: "Connector",
@@ -27,6 +28,7 @@ export const TIERS = {
     pricePerReport: 69,
     totalPrice: 207,
     includesGN: true,
+    stripePriceId: "price_1U05G3Js9mPzeO99KTnfBHtt",
   },
   closer: {
     name: "Closer",
@@ -34,6 +36,7 @@ export const TIERS = {
     pricePerReport: 49,
     totalPrice: 294,
     includesGN: true,
+    stripePriceId: "price_1U05I3Js9mPzeO99nztrtHKL",
   },
   rainmaker: {
     name: "Rainmaker",
