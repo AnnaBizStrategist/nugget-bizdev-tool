@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",
+    "stripe": "^17.4.0",
     "jszip": "^3.10.1",
     "papaparse": "^5.4.1",
     "react": "^18.2.0",
