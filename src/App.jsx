@@ -1419,7 +1419,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                       <div style={{ borderTop: `1px solid #C9A84C33`, paddingTop: 20, marginBottom: 24, display: "flex", flexDirection: "column", gap: 12, flex: 1 }}>
                         <div style={{ display: "flex", gap: 10 }}>
                           <span style={{ color: "#C9A84C", fontWeight: 700, marginTop: 1 }}>✓</span>
-                          <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.5 }}>Run any 1 of the 5 paid reports.</div>
+                          <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.5 }}>1 full run of the 4-report bundle — Warm List, Hidden Nuggets, Inbound, and Outbound.</div>
                         </div>
                         <div style={{ display: "flex", gap: 10 }}>
                           <span style={{ color: MUTED, fontWeight: 700, marginTop: 1 }}>–</span>
@@ -1440,7 +1440,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                       <div style={{ borderTop: `1px solid #C9A84C33`, paddingTop: 20, marginBottom: 24, display: "flex", flexDirection: "column", gap: 12, flex: 1 }}>
                         <div style={{ display: "flex", gap: 10 }}>
                           <span style={{ color: "#C9A84C", fontWeight: 700, marginTop: 1 }}>✓</span>
-                          <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.5 }}>Run any 3 of the 5 paid reports.</div>
+                          <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.5 }}>3 full runs of the 5-report bundle.</div>
                         </div>
                         <div style={{ display: "flex", gap: 10 }}>
                           <span style={{ color: "#C9A84C", fontWeight: 700, marginTop: 1 }}>✓</span>
@@ -1460,11 +1460,11 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                       <div style={{ borderTop: `1px solid #C9A84C33`, paddingTop: 20, marginBottom: 24, display: "flex", flexDirection: "column", gap: 12, flex: 1 }}>
                         <div style={{ display: "flex", gap: 10 }}>
                           <span style={{ color: "#C9A84C", fontWeight: 700, marginTop: 1 }}>✓</span>
-                          <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.5 }}>6 report credits to spend across the 5 paid reports — room to rerun as your network changes.</div>
+                          <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.5 }}>6 full runs of the 5-report bundle — plenty of room to rerun as your network changes.</div>
                         </div>
                         <div style={{ display: "flex", gap: 10 }}>
                           <span style={{ color: "#C9A84C", fontWeight: 700, marginTop: 1 }}>✓</span>
-                          <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.5 }}>Gold Nugget included on every run.</div>
+                          <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.5 }}>Gold Nugget included on every run — your business development work, done for you.</div>
                         </div>
                       </div>
                       <a href="https://buy.stripe.com/test_9B67sMf7f0iid5p8F36kg02" target="_blank" rel="noopener noreferrer" style={{ marginTop: "auto", padding: "12px 24px", background: `linear-gradient(135deg, #C9A84C, #E8C97A)`, border: "none", color: "#0d2d6b", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%", textAlign: "center", textDecoration: "none", display: "block" }}>
