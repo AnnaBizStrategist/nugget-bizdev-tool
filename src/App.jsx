@@ -835,10 +835,16 @@ export default function App() {
     return out;
   };
 
-  const runReport = async (reportId) => {
+ const runReport = async (reportId) => {
   const report = REPORTS.find(r => r.id === reportId);
   const needsCredit = !report?.free && !isBeta;
-  if ((needsCredit && !creditStatus?.canRun) || generating) return;
+  const regenCount = creditStatus?.activeRunReports?.[reportId] || 0;
+  if (needsCredit && !creditStatus?.canRun) return;
+  if (needsCredit && regenCount >= 3) {
+    setError("You've used your 3 regenerations for this report in the current run. Generate your other reports to complete this run — the next one will start fresh.");
+    return;
+  }
+  if (generating) return;
   if (!emailSubmitted) { setPendingReportId(reportId); setShowEmailModal(true); return; }
   setGenerating(reportId); setActiveReport(reportId); setStep("reports"); setError(null); setRetryMessage(null);
   try {
