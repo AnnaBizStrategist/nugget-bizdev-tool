@@ -837,7 +837,8 @@ export default function App() {
 
   const runReport = async (reportId) => {
   const report = REPORTS.find(r => r.id === reportId);
-  if ((!report?.free && !isBeta) || generating) return;
+  const needsCredit = !report?.free && !isBeta;
+  if ((needsCredit && !creditStatus?.canRun) || generating) return;
   if (!emailSubmitted) { setPendingReportId(reportId); setShowEmailModal(true); return; }
   setGenerating(reportId); setActiveReport(reportId); setStep("reports"); setError(null); setRetryMessage(null);
   try {
@@ -852,6 +853,16 @@ export default function App() {
       isTest
     );
     setReports(prev => ({ ...prev, [reportId]: result }));
+    if (needsCredit) {
+      fetch("/api/consume-credit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: emailAddress.trim(), reportId, reportTitle: report?.name }),
+      })
+        .then(res => res.json())
+        .then(data => { if (data?.creditStatus) setCreditStatus(data.creditStatus); })
+        .catch(err => console.log("consume-credit error:", err));
+    }
   } catch (err) { setError(err.message); }
   finally { setGenerating(null); setRetryMessage(null); }
 };
