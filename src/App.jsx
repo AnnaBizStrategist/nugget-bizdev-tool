@@ -1469,6 +1469,8 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   </div>
                   <p style={{ fontSize: 12, color: MUTED, marginTop: 20 }}>Credits expire 18 months from purchase. No subscription, no auto-renewal.</p>
                 </div>
+              </div>
+              
               <Divider />
 
               {/* ── Anna section ── */}
