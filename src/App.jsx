@@ -901,6 +901,10 @@ export default function App() {
   setEmailSubmitted(true);
   setEmailSubmitting(false);
   setShowEmailModal(false);
+  fetch(`/api/check-credits?email=${encodeURIComponent(emailAddress.trim())}`)
+    .then(res => res.json())
+    .then(data => setCreditStatus(data))
+    .catch(err => console.log("check-credits error:", err));
   if (pending) { setPendingReportId(pending); setShowICPModal(true); }
 };
   
