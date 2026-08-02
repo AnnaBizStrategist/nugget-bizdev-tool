@@ -5,8 +5,9 @@
 //
 // Called from the frontend right after a paid report finishes generating
 // successfully. Re-derives the correct batch server-side via getCreditStatus
-// (never trusts anything from the client except the email) and decrements
-// it, logging a report_runs row. Session 7.
+// (never trusts anything from the client except the email) and records the
+// generation — spending a credit only if this starts a fresh run, logging a
+// report_runs row either way. Session 7.
 
 import { getUserIdByEmail, getCreditStatus, consumeCredit } from "./lib/gating.js";
 
@@ -32,7 +33,7 @@ export default async function handler(req, res) {
       return res.status(402).json({ error: "No credits available", reason: status.reason });
     }
 
-    await consumeCredit({
+    const result = await consumeCredit({
       userId,
       batchId: status.batchId,
       includesGN: status.includesGN,
@@ -40,8 +41,13 @@ export default async function handler(req, res) {
       reportTypeMetadata: reportId,
     });
 
+    if (!result.ok) {
+      const code = result.reason === "regen_cap_reached" ? 429 : 402;
+      return res.status(code).json({ error: "Cannot record this generation", reason: result.reason });
+    }
+
     const updatedStatus = await getCreditStatus(email);
-    return res.status(200).json({ success: true, creditStatus: updatedStatus });
+    return res.status(200).json({ success: true, runCompleted: result.runCompleted, creditStatus: updatedStatus });
   } catch (err) {
     console.error("consume-credit error:", err);
     return res.status(500).json({ error: "Internal error consuming credit" });
