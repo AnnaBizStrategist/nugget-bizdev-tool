@@ -32,7 +32,7 @@ const supabaseAdmin = createClient(
  * Shouldn't normally happen — registration runs before any report — but
  * callers must handle it (e.g. someone hitting the API directly).
  */
-async function getUserIdByEmail(email) {
+export async function getUserIdByEmail(email) {
   const { data, error } = await supabaseAdmin
     .from("users")
     .select("id")
