@@ -783,6 +783,7 @@ export default function App() {
   const [icpSubmitted,    setICPSubmitted]   = useState(false);
   const [icpClient,       setICPClient]      = useState("");
   const [icpProblem,      setICPProblem]     = useState("");
+  const [creditStatus,    setCreditStatus]   = useState(null);
   const fileInputRef = useRef(null);
   const uploadRef    = useRef(null);
 
