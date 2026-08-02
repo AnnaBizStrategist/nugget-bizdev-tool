@@ -1474,6 +1474,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
 
                   </div>
                   <p style={{ fontSize: 12, color: MUTED, marginTop: 20 }}>Credits expire 18 months from purchase. No subscription, no auto-renewal.</p>
+                  <p style={{ fontSize: 12, color: MUTED, marginTop: 6 }}>Each report can be regenerated up to 3 times per run.</p>
                 </div>
               </div>
               
