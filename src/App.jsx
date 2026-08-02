@@ -154,8 +154,6 @@ Tone: You are a trusted advisor, not a critic. Deliver every insight the way a g
 Message data: each Messages entry includes a SENT_BY field (YOU or THEM). Never attribute a personal detail mentioned in a SNIPPET — a pet, family member, hobby, or life event — to either party without checking SENT_BY first. If SENT_BY is YOU, the detail belongs to the founder, not the contact.
 
 ## Your Hidden Advocates
-One flag before you paste this: the tone-guardrail paragraph appears verbatim in all six prompts (Field, Warm List, Hidden Nuggets, Inbound, Outbound, Gold Nugget), so this exact search string may not be unique in the file — your editor might find multiple matches. Since Hidden Nuggets is the only one followed immediately by ## Your Hidden Advocates, the full search block including that heading should be unique. If your editor flags it as non-unique anyway, let me know and I'll narrow it further.
-Once that's in, let's do Outbound next — I'll need its tone guardrail + first heading the same way.
 5-10 people ranked by likely willingness and strategic BD value:
 **Name** | Title | Why they're already in your corner | Relationship depth | Best ask: (referral / intro / recommendation / collaboration)
 
