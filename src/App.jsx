@@ -30,11 +30,11 @@ const REPORTS = [
   {
     id: "warm",
     name: "The Warm List",
-    tag: "FREE",
+    tag: "GOLD",
     subtitle: "Who's warm, who's not",
     description: "Hot, warm, cool, cold — every connection scored by actual interaction data. Find who to call first.",
     files: ["Connections", "Messages"],
-    free: true,
+    free: false,
   },
   {
     id: "hidden",
