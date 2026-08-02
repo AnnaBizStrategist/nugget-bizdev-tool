@@ -54,3 +54,18 @@ export function getPurchasableTiers() {
     .filter(([, tier]) => !tier.notSoldYet)
     .map(([key, tier]) => ({ key, ...tier }));
 }
+
+// Report types that make up one complete "run." A run is done once all of
+// these have been generated at least once against a given batch — at which
+// point the next generate starts a fresh run and spends the next credit.
+// Explorer excludes "gold" since it doesn't include GN; every other tier
+// includes it.
+export const REQUIRED_REPORT_TYPES = {
+  explorer: ["warm", "hidden", "inbound", "outbound"],
+  connector: ["warm", "hidden", "inbound", "outbound", "gold"],
+  closer: ["warm", "hidden", "inbound", "outbound", "gold"],
+  rainmaker: ["warm", "hidden", "inbound", "outbound", "gold"],
+};
+
+// Max free regenerations of the same report type within one open run.
+export const MAX_REGENS_PER_REPORT = 3;
