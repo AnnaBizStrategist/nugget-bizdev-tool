@@ -66,7 +66,8 @@ export async function getCreditStatus(email) {
     )
     .eq("user_id", userId)
     .gte("expiration_date", today)
-    .order("purchase_date", { ascending: true }); // FIFO — oldest purchase first
+    .order("purchase_date", { ascending: true })
+    .order("id", { ascending: true }); // stable tiebreaker for same-day purchases
 
   if (error) throw error;
 
