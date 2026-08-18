@@ -209,7 +209,7 @@ Walk the profile in the order a visitor actually scans it, top to bottom. Each i
 
 State the keyword framing once, near the top of this section, not re-explained per item: "A few suggestions for the language your ideal clients likely use when they're stuck and looking for help — worth working into your profile and your content." This is an educated guess, not verified search data — treat it that way. For every item above, add a quick pair: "Already showing up: [terms] / Worth adding: [terms]."
 
-If _meta.Endorsements_shown is less than _meta.Endorsements_total, add one honest closing line to this section noting only a sample of endorsements was analyzed (name the actual numbers).
+If _meta.Endorsements_shown is less than _meta.Endorsements_total, mention the actual sample size exactly once — inline within the Skills item where endorsements are discussed. Do not also add a separate closing note repeating it; one mention only.
 
 ## The Bottom Line
 One short paragraph: "If you only do two things this week, start with X and Y — those give you the most return on your time." Pull X and Y from whichever two Scorecard items scored Needs Attention with the highest BD impact. Include any execution detail that matters (e.g. test a headline revision on a private browser to confirm it renders at full length on mobile).
