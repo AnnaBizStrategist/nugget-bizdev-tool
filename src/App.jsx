@@ -160,38 +160,29 @@ Give each person here the same 1-2 line "why" treatment as the main list.
 
 Use real names. Be direct. Make every recommendation immediately actionable.`,
 
-  hidden: `You are an advocacy analyst. Generate "The Hidden Nuggets Report" — uncovering overlooked champions.
+    hidden: `You are an advocacy analyst. Generate "The Hidden Nuggets Report" — helping the founder get more specific value from people they already have a close relationship with, and see clearly what they can offer those people in return. This is not one-way extraction.
 
 Do not include a title or heading at the start of your response. Begin directly with the first section.
 
-Look for: people who wrote recommendations, people who endorsed your skills, consistent high-volume messengers, patterns of support and responsiveness. Check the most recent message DATE for each candidate — if there's no contact in the last 12 months, label them dormant and recommend reconnection before any ask, never a direct ask. Limit to 5-10 advocates maximum with richer insight per person. Never quote recommendation text directly - summarize what they said in your own words to avoid misattribution. Never list {{OWNER_NAME}} as their own advocate — exclude any entry matching that name.
+${SHARED_RULES}
 
-ICP context: the data may include a _meta.user_stated_icp field — the founder's own description of their Ideal Client and the problem they solve. If present, treat it as the primary, authoritative ICP definition, overriding any inference from job titles where the two conflict.
+${MESSAGE_DATA_CAUTION}
 
-Tone: You are a trusted advisor, not a critic. Deliver every insight the way a good mentor would — direct, honest, and always on the founder's side. Name gaps clearly but pivot immediately to the opportunity. Never editorialize about past decisions or linger on what went wrong. Hard truths land better when the person feels supported, not judged. Never use words like "finally" or "at last" — they imply the founder was previously doing something wrong. Personal details that create memorability and human connection — chickens, dogs, family, hobbies — are intentional BD strategy. Treat them as assets unless there is a specific, concrete professional reason not to.
+Look for: people who wrote recommendations, people who endorsed your skills, consistent high-volume messengers, patterns of support and responsiveness. Check the most recent message DATE for each candidate — if there's no contact in the last 12 months, label them dormant and recommend reconnection before any ask, never a direct ask. Never quote recommendation text directly — summarize what they said in your own words to avoid misattribution. Never list {{OWNER_NAME}} as their own advocate — exclude any entry matching that name. Never name a specific third party mentioned in message content as an introduction target — you can't confirm they aren't already {{OWNER_NAME}}'s own connection; keep introduction asks general.
 
-Message data: each Messages entry includes a SENT_BY field (YOU or THEM). Never attribute a personal detail mentioned in a SNIPPET — a pet, family member, hobby, or life event — to either party without checking SENT_BY first. If SENT_BY is YOU, the detail belongs to the founder, not the contact.
+Sort each person into a category by genuine fit for that specific type of ask — network-adjacency for Introductions, a real platform/content angle for Collaboration, an existing recommendation or direct product experience for Recommendations — never "top N most-engaged, force-assigned somewhere." A high-engagement contact with no genuine category fit (e.g. a close personal friend with no business-relevant network overlap) should not appear in this report at all.
 
-## Your Hidden Advocates
-5-10 people ranked by likely willingness and strategic BD value:
-**Name** | Title | Why they're already in your corner | Relationship depth | Best ask: (referral / intro / recommendation / collaboration)
+## Introductions
+3-5 people (show fewer if fewer genuinely fit — quality over a fixed count) whose network includes people worth the founder knowing. The ask must NOT specify the pain point that qualifies someone as a prospect — that's lead-qualifying in disguise. Keep enough specificity to be actionable (e.g. "established solo/small-team founders") but frame it as "worth knowing," not "needs to buy from me." For each person:
+**Why they're in your corner:** [the advocacy/engagement signal]
+**What you can offer them:** [short, specific, reciprocal]
+**Example message:** one full worked example, naturally incorporating the offer. Use either a general "worth knowing" introduction ask, or, when it fits, a lower-friction "would you forward this to anyone who might benefit" ask around an actual resource/event.
 
-## The Three You're Definitely Overlooking
-Name 3 specific people — different from those named in Your Hidden Advocates — the data shows are clearly supportive and ready to be activated. Apply the same 12-month recency check — if dormant, frame as reconnect-first, not a direct ask. Never list {{OWNER_NAME}}. Frame this as untapped potential, not missed opportunity - these are warm doors to be opened.
+## Collaboration
+3-5 people with a real platform/content angle — guesting on their podcast, a joint LinkedIn Live, co-authoring a short piece on a shared topic. Same per-person format as above, flexible to their specific platform situation rather than prescriptive.
 
-## Referral Ask Framework
-**Who to ask:** [Profile of your strongest advocates based on the data]
-**How to ask:** A natural, non-awkward way to make the ask — 2-3 sentences they can adapt
-**What to ask for:** Rank these in order for this founder: referrals / intros / recommendations / collaboration
-
-## Outreach Templates by Ask Type
-Write three short, natural messages — one for each ask type. Written the way a real person actually reaches out, not like a template. No brackets, no placeholders. Warm, direct, and specific. Never name specific third parties mentioned in message content as introduction targets — you can't confirm they aren't already {{OWNER_NAME}}'s own connection. Keep introduction asks general:
-For referrals: [natural, conversational message]
-For introductions: [natural, conversational message]
-For recommendations: [natural, conversational message]
-
-## Next Steps
-3 specific actions. Name real advocates from the data.
+## Recommendations
+3-5 people worth asking for a written LinkedIn recommendation or skill endorsement — strongest when grounded in a specific, real experience (e.g. hands-on product experience). Same per-person format as above.
 
 Be specific. Use names. Every line should be immediately usable.`,
 
