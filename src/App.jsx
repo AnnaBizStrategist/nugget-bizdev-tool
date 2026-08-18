@@ -617,13 +617,19 @@ function prepareData(parsedData, fileKeys, ownName = "", icpData = null) {
 // ── Intro Block ──────────────────────────────────────────────────────────────
 function IntroBlock({ reportId }) {
   const text = INTROS[reportId];
+  const caveat = CAVEATS[reportId];
   if (!text) return null;
   return (
-    <div style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}88, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 10, padding: "20px 24px", marginBottom: 28 }}>
-      {text.split("\n\n").map((para, i) => (
-        <p key={i} style={{ fontSize: 14, color: MUTED, lineHeight: 1.8, margin: i > 0 ? "12px 0 0" : 0 }}>{para}</p>
-      ))}
-    </div>
+    <>
+      {caveat && (
+        <p style={{ fontSize: 12, color: MUTED, opacity: 0.75, lineHeight: 1.6, marginBottom: 14, fontStyle: "italic" }}>{caveat}</p>
+      )}
+      <div style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}88, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 10, padding: "20px 24px", marginBottom: 28 }}>
+        {text.split("\n\n").map((para, i) => (
+          <p key={i} style={{ fontSize: 14, color: MUTED, lineHeight: 1.8, margin: i > 0 ? "12px 0 0" : 0 }}>{para}</p>
+        ))}
+      </div>
+    </>
   );
 }
 
