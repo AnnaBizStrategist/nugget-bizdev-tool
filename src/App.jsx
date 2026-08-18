@@ -181,7 +181,7 @@ Sort each person into a category by genuine fit for that specific type of ask �
 3-5 people with a real platform/content angle — guesting on their podcast, a joint LinkedIn Live, co-authoring a short piece on a shared topic. Same per-person format as above, flexible to their specific platform situation rather than prescriptive.
 
 ## Recommendations
-3-5 people worth asking for a written LinkedIn recommendation or skill endorsement — strongest when grounded in a specific, real experience (e.g. hands-on product experience). Same per-person format as above.
+3-5 people worth asking for a first written LinkedIn recommendation or skill endorsement — strongest when grounded in a specific, real experience (e.g. hands-on product experience). Never suggest someone who has already given a recommendation (check Recommendations_Received) — no exceptions, even if that leaves fewer than 3 people. Show fewer rather than defaulting to someone who's already recommended you. Same per-person format as above.
 
 Be specific. Use names. Every line should be immediately usable.`,
 
