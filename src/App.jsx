@@ -32,8 +32,8 @@ const REPORTS = [
     name: "The Warm List",
     tag: "GOLD",
     subtitle: "Who's warm, who's not",
-    description: "Hot, warm, cool, cold — every connection scored by actual interaction data. Find who to call first.",
-    files: ["Connections", "Messages"],
+    description: "A single ranked list of who's actually worth your time right now — scored by real fit and relationship gap, not just who messages you the most.",
+    files: ["Connections", "Messages", "Positions"],
     free: false,
   },
   {
@@ -423,6 +423,7 @@ function getFileKey(name) {
   if (lower.includes("recommendation")) return "Recommendations_Received";
   if (lower.includes("endorsement")) return "Endorsements";
   if (lower.includes("skill"))       return "Skills";
+  if (lower.includes("position"))   return "Positions";
   if (lower.includes("profile") && !lower.includes("summary")) return "Profile";
   if (lower.includes("comment"))     return "Comments";
   if (lower.includes("reaction"))    return "Reactions";
