@@ -436,7 +436,7 @@ function getFileKey(name) {
 async function callClaude(systemPrompt, data, retries = 3, onRetry = null, testMode = false) {
   const body = JSON.stringify({
     model: "claude-sonnet-4-6",
-    max_tokens: testMode ? 400 : 3200,
+    max_tokens: testMode ? 400 : 5000,
     system: systemPrompt,
     messages: [{ role: "user", content: `Here is the LinkedIn export data to analyze:\n\n${JSON.stringify(data, null, 2)}\n\nGenerate the report now. Be specific, use real names from the data, and make every insight immediately actionable.` }],
   });
