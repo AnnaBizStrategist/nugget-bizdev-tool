@@ -134,41 +134,29 @@ Open with 1-2 sentences synthesizing the real takeaway, in the shape of: "Your n
 
 Speak directly to the founder. Use real names and specific numbers. No corporate language. No fluff.`,
 
-  warm: `You are a relationship intelligence analyst. Generate "The Warm List" — a heat map of this founder's actual relationship strength.
+    warm: `You are a relationship intelligence analyst. Generate "The Warm List" — a ranked list of who this founder should actually be talking to, based on real fit and relationship gap, not just message volume.
 
 Do not include a title or heading at the start of your response. Begin directly with the first section.
 
-Use message frequency and recency to score relationships. Focus on BD relevance. Keep each section to top 5 people maximum.
+${SHARED_RULES}
 
-ICP context: the data may include a _meta.user_stated_icp field — the founder's own description of their Ideal Client and the problem they solve. If present, treat it as the primary, authoritative ICP definition, overriding any inference from job titles where the two conflict.
+${MESSAGE_DATA_CAUTION}
 
-Tone: You are a trusted advisor, not a critic. Deliver every insight the way a good mentor would — direct, honest, and always on the founder's side. Name gaps clearly but pivot immediately to the opportunity. Never editorialize about past decisions or linger on what went wrong. Hard truths land better when the person feels supported, not judged. Never use words like "finally" or "at last" — they imply the founder was previously doing something wrong. Personal details that create memorability and human connection — chickens, dogs, family, hobbies — are intentional BD strategy. Treat them as assets unless there is a specific, concrete professional reason not to. Focus on BD relevance. Keep each section to top 5 people maximum.
+Positions data, if present, contains the founder's own past companies. Cross-reference each connection's company field against it — a match means this connection currently works (or worked) somewhere the founder used to work, a real warmth signal invisible to recency/frequency scoring alone. Note: the export only gives full position history for the founder, not connections (their file only shows current company), so phrase a match as "works somewhere you used to work," not a confirmed overlap.
 
-Message data: each Messages entry includes a SENT_BY field (YOU or THEM). Never attribute a personal detail mentioned in a SNIPPET — a pet, family member, hobby, or life event — to either party without checking SENT_BY first. If SENT_BY is YOU, the detail belongs to the founder, not the contact.
+Rank by fit + relationship gap — NOT purely by message recency or volume. A person who messages weekly but needs no action right now (an already-active relationship) does not belong on this list; a person who's genuinely warm but underused does.
 
-## Hot Contacts — Engage This Weekv
-Top 5 people with real, active relationship momentum. Format: **Name** | Why hot | Best opening move
+## The Warm List
+A single flat list of up to 25 people — no priority tiers, no "hottest first" ordering. Open with a one-line pacing note: "You don't need to work through all 25 in a day. Think of this as a working list — three people a week, five a week, whatever's sustainable for you." Then note that a few entries below include a full example message to model from.
 
-## Warm Contacts — Activate Now
-Top 5 people with existing relationship that just needs a nudge. Format: **Name** | When last active | Recommended reactivation angle
+Every person gets a 1-2 line "why" — who they are + the specific fit/gap signal (recency, former-colleague match, engagement pattern, etc.), since the founder likely doesn't recognize every name in a large network. Choose exactly 3 entries, spread throughout the list (not clustered at the top — there's no priority order), to carry a full worked example message instead of just the why-line. Pick 3 that represent different situations: a warm relationship gone quiet, a strong fit that's barely started, and a semi-regular contact worth deepening.
 
-## Cool But Valuable — Worth Reviving  
-Top 5 people who went quiet but still matter for BD. Exclude anyone identified as Inner Circle. Format: **Name** | Why they still matter | How to re-open naturally
+## Don't Forget to Say Hi
+People who match the ICP but have ZERO message history — never had a first conversation. Two short paragraphs:
+1. What this section is and why it matters: a quick hello goes a long way, start a real conversation, don't be pitchy or sound weird, just be human.
+2. One concrete way in: if something they posted actually resonated, mention it directly ("Hey, your post about [topic] today was great, I've had the same experience...") — or just leave a comment on the post itself. Keep it real, don't reference something that didn't actually mean anything to you.
 
-## Reality Check
-One honest observation about their relationship patterns — a useful insight they can act on immediately. Frame it as an opportunity, not a critique. Keep it direct and encouraging.
-
-## Your Inner Circle
-Identify 3-5 people whose message frequency and recency are significantly higher than the rest of the network — the tight cluster who show up consistently. Exclude these people from the Hot, Warm, and Cool lists above. Celebrate this warmly: a strong Inner Circle is a genuine asset. These are your people.
-
-## 3 Outreach Conversation Starters
-Three short, natural messages they can send today — written the way a real person texts or messages, not like a LinkedIn template. No brackets, no placeholders. Specific enough to feel human, loose enough to adapt:
-1. [Reactivating a warm contact]
-2. [Reaching out to a cool contact]
-3. [Deepening a hot relationship]
-
-## Next Steps
-3 specific actions to take this week. Name real people where possible.
+Give each person here the same 1-2 line "why" treatment as the main list.
 
 Use real names. Be direct. Make every recommendation immediately actionable.`,
 
@@ -403,7 +391,7 @@ Replace the 0s with honest scores from 0-100 based on the data. Most Founders sc
 const INTROS = {
   field: `Your network is bigger than you think — and more strategic than you're treating it.\n\nThis report gives you a bird's-eye view of who's in your corner: how your connections break down by role, where your ICP density actually sits, and where the gaps are that you might not see yet.\n\nIt ends with your Top 10 Untapped Connections — specific people worth moving on, with context on why. Before you prospect outward, know what you're already sitting on.`,
 
-  warm: `The Warm List isn't just a roster — it's a ranked action plan.\n\nYou'll see who's hot right now and needs your attention this week, who's warm and ready to activate, and — here's the part most people skip — a Reality Check on the patterns quietly working against you.\n\nYou'll also get conversation starters you can actually use, not just names and good luck. Read those carefully. The goal isn't more connections. It's more conversations with the right people, at the right time.`,
+    warm: `This isn't a tiered popularity contest — it's a working list of who's actually worth your time right now, ranked by real fit and relationship gap, not just who happens to message you the most.\n\nYou'll get 25 people to work through at your own pace, three worked example messages to model your own outreach after, and a second list for the people who match what you're looking for but you've never actually said hello to.\n\nThe goal isn't more connections. It's more conversations with the right people, at the right time.`,
 
   hidden: `These aren't just quiet connections — these are people who've already shown up for you. A recommendation written, a conversation started, a genuine thank you sent. They're already in your corner. You just haven't activated them yet.\n\nThis report tells you who your strongest advocates are, what to ask each one for, and gives you the exact words to do it. The Referral Ask Framework alone is worth the read.\n\nBefore you reach out, check if they've posted in the last 7 days. Comment first, then make your ask. Timing matters more than you think.`,
 
