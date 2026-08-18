@@ -383,6 +383,11 @@ const INTROS = {
   gold: `You've seen where the opportunities are. This is where you go get them.\n\nThe Gold Nugget pulls everything together into one complete bizdev action plan — your BizDev Readiness Score, an honest look at what's working and what's quietly costing you, and your Next 25 people prioritized by who needs your attention right now.\n\nYou'll also find the conversations you started but never finished, outreach sequences written and ready to send, and a 30-day plan broken down week by week so nothing stays on a "someday" list.\n\nRun this every quarter. Watch your score move. That's not motivation — that's bizdev in action.`,
 };
 
+// ── Report caveats (static, shown above the intro card) ────────────────────────
+const CAVEATS = {
+  field: `This report reflects your LinkedIn connections as of your last data export — if it's been a while since you downloaded it, recent connections may not be reflected yet. It's also built from your export data alone, so a few names here may already be people you've worked with.`,
+  warm: `A note on this list: it's built from your export data, so a few names might reflect an account that's gone quiet or inactive on LinkedIn — and if your recent conversations included voice messages, we can't read what was said, just that you talked.`,
+};
 // ── Score utilities ───────────────────────────────────────────────────────────
 function parseScores(text) {
   const match = text.match(/<SCORES>([\s\S]*?)<\/SCORES>/);
