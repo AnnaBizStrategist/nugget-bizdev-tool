@@ -1283,9 +1283,9 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 </p>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 20 }}>
                   {[
-                    { step: "01", title: "Request your data", desc: "On LinkedIn: Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select Complete — not Basic — and click Request archive." },
-                    { step: "02", title: "Download the file", desc: "Wait for LinkedIn to email your data file — usually within 24 hours. Click the link in that email and download the file to your computer." },
-                    { step: "03", title: "Drop it in below", desc: "Drag and drop the file into Nugget below — no need to unzip it. Nugget opens it automatically and does the rest." },
+                    { step: "01", title: "Request your data", desc: "On LinkedIn: Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select Complete — not Basic — and click Request archive.", image: STEP1_IMAGE },
+                    { step: "02", title: "Download the file", desc: "Wait for LinkedIn to email your data file — usually within 24 hours. Click the link in that email and download the file to your computer.", image: null },
+                    { step: "03", title: "Drop it in below", desc: "Drag and drop the file into Nugget below — no need to unzip it. Nugget opens it automatically and does the rest.", image: STEP3_IMAGE },
                   ].map((s) => (
                     <div key={s.step} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, overflow: "hidden" }}>
                       <div style={{ width: "100%", height: 180, background: BLUE_MID + "44", display: "flex", alignItems: "center", justifyContent: "center", borderBottom: `1px solid ${BORDER}` }}>
