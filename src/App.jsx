@@ -15,6 +15,8 @@ const BORDER      = "#1e4080";
 
 const LOGO_BASE64 = null;
 import ANNA_PHOTO from './Anna-Nugget-Image.png';
+import STEP1_IMAGE from './step-01-request-data.png';
+import STEP3_IMAGE from './step-03-drop-file.png';
 
 // ── Report definitions ────────────────────────────────────────────────────────
 const REPORTS = [
