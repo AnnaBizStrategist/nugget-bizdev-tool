@@ -1288,9 +1288,13 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     { step: "03", title: "Drop it in below", desc: "Drag and drop the file into Nugget below — no need to unzip it. Nugget opens it automatically and does the rest.", image: STEP3_IMAGE },
                   ].map((s) => (
                     <div key={s.step} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, overflow: "hidden" }}>
-                      <div style={{ width: "100%", height: 180, background: BLUE_MID + "44", display: "flex", alignItems: "center", justifyContent: "center", borderBottom: `1px solid ${BORDER}` }}>
-                        <span style={{ fontSize: 13, color: MUTED, fontStyle: "italic" }}>Image coming soon</span>
-                      </div>
+                      <div style={{ width: "100%", height: 180, background: BLUE_MID + "44", display: "flex", alignItems: "center", justifyContent: "center", borderBottom: 1px solid ${BORDER}, overflow: "hidden" }}>
+{s.image ? (
+<img src={s.image} alt={s.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+) : (
+<span style={{ fontSize: 13, color: MUTED, fontStyle: "italic" }}>Image coming soon</span>
+)}
+</div>
                       <div style={{ padding: "20px 24px" }}>
                         <div style={{ fontSize: 13, fontWeight: 700, color: BLUE_BRIGHT, opacity: 0.6, marginBottom: 6, letterSpacing: "0.06em" }}>STEP {s.step}</div>
                         <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, marginBottom: 8 }}>{s.title}</div>
