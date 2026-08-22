@@ -684,6 +684,131 @@ function ReportContent({ text }) {
     </div>
   );
 }
+// ── Upgrade CTA card (shown at the bottom of free reports) ────────────────────
+function UpgradeCTA({ text }) {
+  return (
+    <div style={{ background: `linear-gradient(135deg, #1a1200, ${DARK_CARD})`, border: "1px solid #C9A84C66", borderRadius: 12, padding: "24px 28px", marginTop: 28, textAlign: "center" }}>
+      <p style={{ fontSize: 14, color: WHITE, lineHeight: 1.7, marginBottom: 18 }}>{text}</p>
+      <a href="https://buy.stripe.com/3cIcN64sBd54d5pf3r6kg0b" target="_blank" rel="noreferrer" style={{ display: "inline-block", padding: "12px 28px", background: "linear-gradient(135deg, #C9A84C, #f5c842)", color: "#0a1628", borderRadius: 8, fontSize: 14, fontWeight: 700, textDecoration: "none" }}>Unlock Gold — $29/month →</a>
+    </div>
+  );
+}
+
+// ── The Line-Up report ─────────────────────────────────────────────────────────
+function LineUpReport({ connections }) {
+  const [expanded, setExpanded] = useState(null);
+  const [search, setSearch] = useState("");
+  const [sortDesc, setSortDesc] = useState(true);
+  const [revealed, setRevealed] = useState({});
+
+  if (!connections || connections.length === 0) {
+    return (
+      <div style={{ textAlign: "center", padding: "48px 32px", color: MUTED, fontSize: 14 }}>
+        No connections loaded yet — upload your LinkedIn data to see The Line-Up.
+      </div>
+    );
+  }
+
+  const grouped = {};
+  LINEUP_BUCKETS.forEach(b => { grouped[b] = []; });
+  connections.forEach(c => {
+    grouped[categorizeRoleForLineUp(c["Position"])].push(c);
+  });
+
+  const toggleBucket = (id) => {
+    setExpanded(prev => (prev === id ? null : id));
+    setSearch("");
+  };
+
+  const activeList = expanded ? grouped[expanded] : [];
+  const q = search.trim().toLowerCase();
+  let filtered = activeList.filter(c => {
+    if (!q) return true;
+    const name = `${c["First Name"] || ""} ${c["Last Name"] || ""}`.toLowerCase();
+    const company = (c["Company"] || "").toLowerCase();
+    const title = (c["Position"] || "").toLowerCase();
+    return name.includes(q) || company.includes(q) || title.includes(q);
+  });
+  filtered = filtered.slice().sort((a, b) => {
+    const ta = Date.parse(a["Connected On"] || "") || 0;
+    const tb = Date.parse(b["Connected On"] || "") || 0;
+    return sortDesc ? tb - ta : ta - tb;
+  });
+  const revealedThis = expanded ? !!revealed[expanded] : false;
+  const visibleCount = revealedThis ? filtered.length : Math.min(8, filtered.length);
+  const visible = filtered.slice(0, visibleCount);
+  const remaining = filtered.length - visible.length;
+
+  return (
+    <div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 24 }}>
+        {LINEUP_BUCKETS.map(b => {
+          const count = grouped[b].length;
+          const active = expanded === b;
+          return (
+            <div key={b} onClick={() => toggleBucket(b)} style={{ padding: "8px 16px", borderRadius: 20, cursor: "pointer", background: active ? BLUE_MID + "33" : "#0a1628", border: `1px solid ${active ? BLUE_BRIGHT : BORDER}`, color: active ? BLUE_BRIGHT : MUTED, fontSize: 13, fontWeight: 600 }}>
+              {b} · {count}
+            </div>
+          );
+        })}
+      </div>
+
+      {!expanded && (
+        <div style={{ padding: "40px 20px", textAlign: "center", color: MUTED, fontSize: 13, border: `1px dashed ${BORDER}`, borderRadius: 10 }}>
+          Click a bucket above to see who's in it.
+        </div>
+      )}
+
+      {expanded && (
+        <div>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, marginBottom: 16, flexWrap: "wrap" }}>
+            <input type="text" placeholder="Search by name, role, or company..." value={search} onChange={e => setSearch(e.target.value)} style={{ flex: 1, minWidth: 220, padding: "10px 14px", background: "#0a1628", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 8, color: WHITE, fontSize: 14 }} />
+            <div style={{ display: "flex", gap: 6, flexShrink: 0 }}>
+              <div onClick={() => setSortDesc(true)} style={{ padding: "8px 14px", borderRadius: 6, cursor: "pointer", border: `1px solid ${sortDesc ? BLUE_BRIGHT : BORDER}`, background: sortDesc ? BLUE_MID + "44" : "transparent", color: sortDesc ? BLUE_BRIGHT : MUTED, fontSize: 12, fontWeight: 600 }}>Most recent</div>
+              <div onClick={() => setSortDesc(false)} style={{ padding: "8px 14px", borderRadius: 6, cursor: "pointer", border: `1px solid ${!sortDesc ? BLUE_BRIGHT : BORDER}`, background: !sortDesc ? BLUE_MID + "44" : "transparent", color: !sortDesc ? BLUE_BRIGHT : MUTED, fontSize: 12, fontWeight: 600 }}>Oldest first</div>
+            </div>
+          </div>
+
+          <div style={{ fontSize: 11, color: MUTED, textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 700, marginBottom: 10 }}>
+            {expanded} · {grouped[expanded].length} total
+          </div>
+
+          {filtered.length === 0 && (
+            <div style={{ padding: 24, textAlign: "center", color: MUTED, fontSize: 13 }}>No matches — try a different search.</div>
+          )}
+
+          {visible.map((c, i) => {
+            const name = `${c["First Name"] || ""} ${c["Last Name"] || ""}`.trim() || "—";
+            const title = c["Position"] || "—";
+            const company = c["Company"] || "—";
+            const dateRaw = c["Connected On"] || "";
+            const ts = Date.parse(dateRaw);
+            const dateDisplay = !isNaN(ts) ? new Date(ts).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : (dateRaw || "—");
+            const url = c["URL"] || "";
+            return (
+              <div key={i} style={{ display: "grid", gridTemplateColumns: "minmax(180px, 1.4fr) minmax(160px, 1.1fr) minmax(160px, 1.1fr) 110px", alignItems: "center", gap: 16, background: "#0a1628", border: `1px solid ${BORDER}`, borderRadius: 10, padding: "14px 16px", marginBottom: 8 }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: BLUE_BRIGHT }}>
+                  {url ? <a href={url} target="_blank" rel="noreferrer" style={{ color: BLUE_BRIGHT, textDecoration: "none" }}>{name} ↗</a> : name}
+                </div>
+                <div style={{ fontSize: 12, color: WHITE }}>{title}</div>
+                <div style={{ fontSize: 12, color: MUTED }}>{company}</div>
+                <div style={{ fontSize: 11, color: MUTED, textAlign: "right" }}>{dateDisplay}</div>
+              </div>
+            );
+          })}
+
+          {remaining > 0 && (
+            <div style={{ textAlign: "center", marginTop: 12 }}>
+              <div onClick={() => setRevealed(prev => ({ ...prev, [expanded]: true }))} style={{ display: "inline-block", padding: "8px 18px", background: "transparent", border: `1px solid ${BORDER}`, color: MUTED, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
+                Show {remaining} more
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
 
 // ── Score Reveal screen ───────────────────────────────────────────────────────
 function ScoreReveal({ scores, onContinue }) {
