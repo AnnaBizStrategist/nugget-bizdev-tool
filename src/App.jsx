@@ -1353,9 +1353,9 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
           <>
               {/* ── Hero ── */}
                           {/* ── Hero ── */}
-            <div style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, padding: "64px 24px", borderRadius: "0 0 24px 24px", textAlign: "center", marginBottom: 0, minHeight: "calc(100vh - 64px)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+                        <div style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, padding: "84px 24px 56px", borderRadius: "0 0 24px 24px", textAlign: "center", marginBottom: 0, minHeight: "calc(100vh - 64px)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>
 
-              <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: 5, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.22)", borderRadius: 26, padding: "12px 28px", marginBottom: 34, animation: "fadeSlideUp 0.7s ease-out 0s both" }}>
+              <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: 5, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.22)", borderRadius: 26, padding: "12px 28px", marginBottom: 44, animation: "fadeSlideUp 0.7s ease-out 0s both" }}>
                 <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#ffffff" }}>Nugget <span style={{ color: BLUE_LIGHT }}>·</span> LinkedIn Warm Outreach Tool</div>
                 <div style={{ fontSize: 11.5, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "rgba(255,255,255,0.62)" }}>for Founders and Solopreneurs who hate cold outreach</div>
               </div>
