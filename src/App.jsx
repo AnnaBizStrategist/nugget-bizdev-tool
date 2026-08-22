@@ -21,6 +21,16 @@ import STEP3_IMAGE from './step-03-drop-file.png';
 // ── Report definitions ────────────────────────────────────────────────────────
 const REPORTS = [
   {
+    id: "lineup",
+    name: "The Line-Up",
+    tag: "FREE",
+    subtitle: "Your network, sorted by role",
+    description: "Instantly organize every connection by role — Founders, C-Suite, VPs, and more. Searchable and sortable. No waiting, no credits.",
+    files: ["Connections"],
+    free: true,
+    computed: true,
+  },
+  {
     id: "field",
     name: "The Field Report",
     tag: "FREE",
