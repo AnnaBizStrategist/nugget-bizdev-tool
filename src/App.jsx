@@ -1811,8 +1811,15 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 </>
               )}
 
-              {/* Free report panels */}
-              {activeReport !== "gold" && (
+                            {/* Free report panels */}
+              {activeReport === "lineup" ? (
+                <>
+                  <LineUpReport connections={parsedData["Connections"] || []} />
+                  {!isBeta && (
+                    <UpgradeCTA text="You've sorted your network by role. The Warm List sorts it by opportunity." />
+                  )}
+                </>
+              ) : activeReport !== "gold" && (
                 <>
                   {generating === activeReport ? (
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
