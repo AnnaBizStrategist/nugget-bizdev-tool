@@ -783,8 +783,33 @@ function UpgradeCTA({ text }) {
   );
 }
 
+// ── Company clustering (isolated from role-bucket logic above) ─────────────────
+const COMPANY_CLUSTER_NOISE = new Set([
+  "self-employed", "self employed", "freelance", "freelancer",
+  "independent", "independent consultant", "consultant",
+  "n/a", "none", "-", "retired", "various clients",
+  "stealth", "stealth startup", "undisclosed",
+  "linkedin", "upwork", "fiverr",
+]);
+
+function getCompanyClusters(connections) {
+  const groups = {};
+  connections.forEach((c) => {
+    const raw = (c["Company"] || "").trim();
+    if (!raw) return;
+    const key = raw.toLowerCase().replace(/\s+/g, " ");
+    if (COMPANY_CLUSTER_NOISE.has(key)) return;
+    if (!groups[key]) groups[key] = { name: raw, connections: [] };
+    groups[key].connections.push(c);
+  });
+  return Object.values(groups)
+    .filter((g) => g.connections.length >= 2)
+    .sort((a, b) => b.connections.length - a.connections.length);
+}
+
 // ── The Line-Up report ─────────────────────────────────────────────────────────
 function LineUpReport({ connections }) {
+  const [viewMode, setViewMode] = useState("role");
   const [expanded, setExpanded] = useState(null);
   const [search, setSearch] = useState("");
   const [sortDesc, setSortDesc] = useState(true);
@@ -804,12 +829,26 @@ function LineUpReport({ connections }) {
     grouped[categorizeRoleForLineUp(c["Position"])].push(c);
   });
 
+  const companyClusters = getCompanyClusters(connections);
+  const companyGrouped = {};
+  companyClusters.forEach(g => { companyGrouped[g.name] = g.connections; });
+
+  const buckets = viewMode === "role" ? LINEUP_BUCKETS : companyClusters.map(g => g.name);
+  const activeSource = viewMode === "role" ? grouped : companyGrouped;
+  const countFor = (key) => (activeSource[key] || []).length;
+
   const toggleBucket = (id) => {
     setExpanded(prev => (prev === id ? null : id));
     setSearch("");
   };
 
-  const activeList = expanded ? grouped[expanded] : [];
+  const switchMode = (mode) => {
+    setViewMode(mode);
+    setExpanded(null);
+    setSearch("");
+  };
+
+  const activeList = expanded ? (activeSource[expanded] || []) : [];
   const q = search.trim().toLowerCase();
   let filtered = activeList.filter(c => {
     if (!q) return true;
@@ -828,11 +867,22 @@ function LineUpReport({ connections }) {
   const visible = filtered.slice(0, visibleCount);
   const remaining = filtered.length - visible.length;
 
-  return (
+    return (
     <div>
+      <div style={{ display: "flex", gap: 6, marginBottom: 18 }}>
+        <div onClick={() => switchMode("role")} style={{ padding: "8px 16px", borderRadius: 7, cursor: "pointer", fontSize: 12.5, fontWeight: 700, border: `1px solid ${viewMode === "role" ? BLUE_BRIGHT : BORDER}`, background: viewMode === "role" ? BLUE_MID + "44" : "transparent", color: viewMode === "role" ? BLUE_BRIGHT : MUTED }}>By Role</div>
+        <div onClick={() => switchMode("company")} style={{ padding: "8px 16px", borderRadius: 7, cursor: "pointer", fontSize: 12.5, fontWeight: 700, border: `1px solid ${viewMode === "company" ? BLUE_BRIGHT : BORDER}`, background: viewMode === "company" ? BLUE_MID + "44" : "transparent", color: viewMode === "company" ? BLUE_BRIGHT : MUTED }}>By Company</div>
+      </div>
+
+      {viewMode === "company" && (
+        <div style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}88, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 10, padding: "16px 20px", marginBottom: 22, fontSize: 13.5, color: MUTED, lineHeight: 1.65 }}>
+          Multiple connections at the same company is real leverage — a coordinated push into a specific account, or a warm ask for an intro from whoever's closest to the door. Generic entries like Self-Employed and Freelance are filtered out — they're not a company, just noise.
+        </div>
+      )}
+
       <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 24 }}>
-        {LINEUP_BUCKETS.map(b => {
-          const count = grouped[b].length;
+        {buckets.map(b => {
+          const count = countFor(b);
           const active = expanded === b;
           return (
             <div key={b} onClick={() => toggleBucket(b)} style={{ padding: "8px 16px", borderRadius: 20, cursor: "pointer", background: active ? BLUE_MID + "33" : "#0a1628", border: `1px solid ${active ? BLUE_BRIGHT : BORDER}`, color: active ? BLUE_BRIGHT : MUTED, fontSize: 13, fontWeight: 600 }}>
@@ -840,14 +890,16 @@ function LineUpReport({ connections }) {
             </div>
           );
         })}
+        {viewMode === "company" && buckets.length === 0 && (
+          <div style={{ color: MUTED, fontSize: 13 }}>No company shows up more than once in this network yet.</div>
+        )}
       </div>
 
       {!expanded && (
         <div style={{ padding: "40px 20px", textAlign: "center", color: MUTED, fontSize: 13, border: `1px dashed ${BORDER}`, borderRadius: 10 }}>
-          Click a bucket above to see who's in it.
+          Click a {viewMode === "role" ? "bucket" : "company"} above to see who's in it.
         </div>
       )}
-
       {expanded && (
         <div>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, marginBottom: 16, flexWrap: "wrap" }}>
@@ -858,8 +910,8 @@ function LineUpReport({ connections }) {
             </div>
           </div>
 
-          <div style={{ fontSize: 11, color: MUTED, textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 700, marginBottom: 10 }}>
-            {expanded} · {grouped[expanded].length} total
+                    <div style={{ fontSize: 11, color: MUTED, textTransform: "uppercase", letterSpacing: "0.06em", fontWeight: 700, marginBottom: 10 }}>
+            {expanded} · {(activeSource[expanded] || []).length} total
           </div>
 
           {filtered.length === 0 && (
