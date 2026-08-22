@@ -1560,7 +1560,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                                     })}
                 </div>
 
-                                {(() => {
+                                               {(() => {
                   const gr = REPORTS.find(r => r.id === "gold");
                   const goldUnlocked = isBeta || !!creditStatus?.canRun;
                   return (
