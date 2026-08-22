@@ -1331,7 +1331,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
         </div>
         <nav style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
           {step === "upload" ? (
-            <button style={{ ...primaryBtn, padding: "8px 20px", fontSize: 13 }} onClick={scrollToUpload}>Get My Free Reports →</button>
+                        <button style={{ ...primaryBtn, padding: "8px 20px", fontSize: 13 }} onClick={scrollToUpload}>Find My Next Client →</button>
           ) : (
             <>
               <button style={{ padding: "6px 16px", borderRadius: 6, border: `1px solid ${BORDER}`, background: "transparent", color: MUTED, cursor: "pointer", fontSize: 13 }} onClick={() => setStep("upload")}>Home</button>
@@ -1352,22 +1352,28 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
         {step === "upload" && (
           <>
               {/* ── Hero ── */}
-            <div style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, padding: "80px 24px 72px", borderRadius: "0 0 24px 24px", textAlign: "center", marginBottom: 0 }}>
-              
-              <p style={{ fontSize: 13, fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.6)", marginBottom: 16, animation: "fadeSlideUp 0.7s ease-out 0s both" }}>For Founders and Solopreneurs who hate cold outreach</p>
-        <h1 style={{ fontSize: 48, fontFamily: "Georgia, serif", fontWeight: 700, color: "#ffffff", marginBottom: 28, lineHeight: 1.1, animation: "fadeSlideUp 0.7s ease-out 0.1s both" }}>
+                          {/* ── Hero ── */}
+            <div style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, padding: "64px 24px", borderRadius: "0 0 24px 24px", textAlign: "center", marginBottom: 0, minHeight: "calc(100vh - 64px)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+
+              <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: 5, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.22)", borderRadius: 26, padding: "12px 28px", marginBottom: 34, animation: "fadeSlideUp 0.7s ease-out 0s both" }}>
+                <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#ffffff" }}>Nugget <span style={{ color: BLUE_LIGHT }}>·</span> LinkedIn Warm Outreach Tool</div>
+                <div style={{ fontSize: 11.5, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "rgba(255,255,255,0.62)" }}>for Founders and Solopreneurs who hate cold outreach</div>
+              </div>
+
+        <h1 style={{ fontSize: 60, fontFamily: "Georgia, serif", fontWeight: 700, color: "#ffffff", marginBottom: 40, lineHeight: 1.15, animation: "fadeSlideUp 0.7s ease-out 0.1s both" }}>
                 Your next client is already<br />
                 <span style={{ background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>in your network.</span>
               </h1>
-              <p style={{ fontSize: 18, color: "rgba(255,255,255,0.85)", maxWidth: 580, margin: "0 auto 44px", lineHeight: 1.75, animation: "fadeSlideUp 0.7s ease-out 0.2s both" }}>
+              <p style={{ fontSize: 19, color: "rgba(255,255,255,0.85)", maxWidth: 600, margin: "0 auto 52px", lineHeight: 1.8, animation: "fadeSlideUp 0.7s ease-out 0.2s both" }}>
                 You've built a solid LinkedIn network. Nugget shows you exactly who to talk to, what to say, and where your next opportunity is hiding.
               </p>
-              <div style={{ display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap", marginBottom: 44, animation: "fadeSlideUp 0.7s ease-out 0.4s both" }}>
-                <button style={{ ...primaryBtn, fontSize: 16, padding: "14px 36px" }} onClick={scrollToUpload}>Get My Free Reports →</button>
+              <div style={{ display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap", marginBottom: 56, animation: "fadeSlideUp 0.7s ease-out 0.4s both" }}>
+                <button style={{ ...primaryBtn, fontSize: 17, padding: "17px 44px" }} onClick={scrollToUpload}>Find My Next Client →</button>
               </div>
               <p style={{ fontSize: 30, fontFamily: "Georgia, serif", fontWeight: 700, color: "rgba(255,255,255,0.85)", letterSpacing: "-0.3px", marginTop: 20, animation: "fadeSlideUp 0.7s ease-out 0.5s both" }}>
                 NO scraping.&nbsp;&nbsp;NO cold outreach.&nbsp;&nbsp;NO guessing.
               </p>
+              <div style={{ marginTop: 44, fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>Scroll to see how ↓</div>
             </div>
 
             <div style={{ padding: "56px 0 0" }}>
