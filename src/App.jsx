@@ -1529,7 +1529,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               <div style={{ marginBottom: 0 }}>
                 <div style={{ textAlign: "center", marginBottom: 40 }}>
                   <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>What You Get</div>
-                  <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 24 }}>1 free report.<br />Unlock the other 5 to find your next client.</h2>
+                          <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 24 }}>2 free reports.<br />Unlock the other 5 to find your next client.</h2>
                   <p style={{ fontSize: 14, color: MUTED, maxWidth: 500, margin: "0 auto" }}>
                     Every insight, every name, and every next step is unique to you.<br />This is <span style={{ color: WHITE, fontWeight: 700 }}>YOUR</span> data. These are <span style={{ color: WHITE, fontWeight: 700 }}>YOUR</span> people. This is <span style={{ color: WHITE, fontWeight: 700 }}>YOUR</span> pipeline.
                   </p>
