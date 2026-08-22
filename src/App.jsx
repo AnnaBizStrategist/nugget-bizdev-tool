@@ -941,7 +941,7 @@ export default function App() {
   const [reports,         setReports]        = useState({});
   const [scores,          setScores]         = useState(null);
   const [generating,      setGenerating]     = useState(null);
-  const [activeReport,    setActiveReport]   = useState("field");
+  const [activeReport,    setActiveReport]   = useState("lineup");
   const [dragOver,        setDragOver]       = useState(false);
   const [error,           setError]          = useState(null);
   const [retryMessage,    setRetryMessage]   = useState(null);
