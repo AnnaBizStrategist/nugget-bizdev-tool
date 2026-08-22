@@ -54,7 +54,7 @@ const REPORTS = [
     tag: "GOLD",
     subtitle: "Who's already in your corner",
     description: "The people already in your corner who you're not leveraging. Ranked by likely value and best ask type.",
-    files: ["Recommendations_Received", "Messages", "Endorsements"],
+    files: ["Recommendations_Received", "Messages", "Endorsements_Received"],
     free: false,
   },
   {
@@ -63,7 +63,7 @@ const REPORTS = [
     tag: "GOLD",
     subtitle: "Is your profile ready to convert?",
     description: "If a perfect prospect landed on your profile right now — would they stay or bounce?",
-    files: ["Profile", "Skills", "Endorsements"],
+        files: ["Profile", "Skills", "Endorsements_Received"],
     free: false,
   },
   {
@@ -437,7 +437,9 @@ function getFileKey(name) {
   if (lower.includes("recommendation_received")) return "Recommendations_Received";
   if (lower.includes("recommendation_given")) return "Recommendations_Given";
   if (lower.includes("recommendation")) return "Recommendations_Received";
-  if (lower.includes("endorsement")) return "Endorsements";
+  if (lower.includes("endorsementgiven")) return "Endorsements_Given";
+  if (lower.includes("endorsementreceived")) return "Endorsements_Received";
+  if (lower.includes("endorsement")) return "Endorsements_Received";
   if (lower.includes("skill"))       return "Skills";
   if (lower.includes("position"))   return "Positions";
   if (lower.includes("profile") && !lower.includes("summary")) return "Profile";
