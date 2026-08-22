@@ -1844,8 +1844,13 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                             <a href="https://buy.stripe.com/3cIcN64sBd54d5pf3r6kg0b" target="_blank" rel="noreferrer" style={{ display: "inline-block", padding: "12px 28px", background: `linear-gradient(135deg, #C9A84C, #f5c842)`, color: "#0a1628", borderRadius: 8, fontSize: 14, fontWeight: 700, textDecoration: "none" }}>Unlock Gold — $29/month →</a>
                           </div>
                         </div>
-                      ) : (
-                        <ReportContent text={reports[activeReport]} />
+                                            ) : (
+                        <>
+                          <ReportContent text={reports[activeReport]} />
+                          {activeReport === "field" && !isBeta && (
+                            <UpgradeCTA text="This shows you what's in your network. The Warm List tells you who to reach out to first, and why." />
+                          )}
+                        </>
                       )}
                     </>
                   ) : (
