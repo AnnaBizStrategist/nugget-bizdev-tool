@@ -1591,14 +1591,20 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     Start free. Then unlock the <span style={{ color: "#C9A84C" }}>Gold.</span>
                   </h2>
                   <p style={{ fontSize: 13, color: "#E8A000", fontWeight: 700, marginBottom: 48 }}>Founder pricing — lock it in before Oct 9.</p>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20, maxWidth: 1040, margin: "0 auto" }}>
-
+                                    <div style={{ display: "flex", justifyContent: "center", marginBottom: 20 }}>
                     {/* Free card */}
-                    <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: 28, textAlign: "left", display: "flex", flexDirection: "column" }}>
+                    <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: 28, textAlign: "left", display: "flex", flexDirection: "column", maxWidth: 340, width: "100%" }}>
                       <div style={{ display: "inline-block", padding: "3px 10px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", background: BLUE_MID + "33", color: BLUE_BRIGHT, marginBottom: 16 }}>FREE</div>
                       <div style={{ fontSize: 32, fontWeight: 700, fontFamily: "Georgia, serif", color: WHITE, marginBottom: 4 }}>$0</div>
                       <div style={{ fontSize: 13, color: MUTED, marginBottom: 24 }}>No credit card required</div>
                       <div style={{ borderTop: `1px solid ${BORDER}`, paddingTop: 20, marginBottom: 24, display: "flex", flexDirection: "column", gap: 12, flex: 1 }}>
+                        <div style={{ display: "flex", gap: 10 }}>
+                          <span style={{ color: BLUE_BRIGHT, fontWeight: 700, marginTop: 1 }}>✓</span>
+                          <div>
+                            <div style={{ fontSize: 13, fontWeight: 700, color: WHITE }}>The Line-Up</div>
+                            <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.5 }}>Your network, sorted by role — searchable and instant.</div>
+                          </div>
+                        </div>
                         <div style={{ display: "flex", gap: 10 }}>
                           <span style={{ color: BLUE_BRIGHT, fontWeight: 700, marginTop: 1 }}>✓</span>
                           <div>
@@ -1611,6 +1617,9 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                         Start Free →
                       </button>
                     </div>
+                  </div>
+
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20, maxWidth: 1040, margin: "0 auto" }}>
 
                     {/* Explorer card */}
                     <div style={{ background: `linear-gradient(160deg, #1a1200 0%, ${DARK_CARD} 100%)`, border: `1px solid #C9A84C66`, borderRadius: 16, padding: 28, textAlign: "left", display: "flex", flexDirection: "column" }}>
