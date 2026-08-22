@@ -1534,7 +1534,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     Every insight, every name, and every next step is unique to you.<br />This is <span style={{ color: WHITE, fontWeight: 700 }}>YOUR</span> data. These are <span style={{ color: WHITE, fontWeight: 700 }}>YOUR</span> people. This is <span style={{ color: WHITE, fontWeight: 700 }}>YOUR</span> pipeline.
                   </p>
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 14, marginBottom: 24 }}>
+                                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 14, marginBottom: 76 }}>
                                     {REPORTS.filter(r => r.id !== "gold").map(r => {
                     const unlocked = r.free || isBeta || !!creditStatus?.canRun;
                     return (
