@@ -155,6 +155,8 @@ ${MESSAGE_DATA_CAUTION}
 
 Positions data, if present, contains the founder's own past companies. Cross-reference each connection's company field against it — a match means this connection currently works (or worked) somewhere the founder used to work, a real warmth signal invisible to recency/frequency scoring alone. Note: the export only gives full position history for the founder, not connections (their file only shows current company), so phrase a match as "works somewhere you used to work," not a confirmed overlap.
 
+Some connections include an invite_note field — the exact message the founder sent or received when they connected, in their own words (invite_direction says whether the founder sent it or received it). This is the single strongest fit/warmth signal available when present, since it's a stated reason for the relationship rather than an inference. Only a small share of connections will have one — say nothing about its absence for everyone else, just use it when it's there, and reference it specifically in the "why" (what was actually said, and who reached out to whom).
+
 Rank by fit + relationship gap — NOT purely by message recency or volume. A person who messages weekly but needs no action right now (an already-active relationship) does not belong on this list; a person who's genuinely warm but underused does.
 
 ## The Warm List
