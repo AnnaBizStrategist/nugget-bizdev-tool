@@ -554,6 +554,13 @@ function slimConnection(c) {
     slim.invite_note = c["_inviteNote"];
     slim.invite_direction = c["_inviteDirection"] || "";
   }
+  if (c["_recommendationText"]) {
+    slim.recommendation_text = c["_recommendationText"];
+    slim.recommendation_direction = c["_recommendationDirection"] || "";
+  }
+  if (c["_endorsedSkills"] && c["_endorsedSkills"].length > 0) {
+    slim.endorsed_skills = c["_endorsedSkills"];
+  }
   return slim;
 }
 
@@ -570,13 +577,63 @@ function attachInviteNotes(connections, invitations) {
     noteByUrl[key] = { note: msg, direction: direction === "INCOMING" ? "received" : "sent" };
   });
   if (Object.keys(noteByUrl).length === 0) return connections;
-  return connections.map((c) => {
+    return connections.map((c) => {
     const key = (c["URL"] || "").trim().replace(/\/$/, "");
     const match = key && noteByUrl[key];
     if (!match) return c;
     return { ...c, _inviteNote: match.note, _inviteDirection: match.direction };
   });
 }
+
+function attachRecommendations(connections, recommendationsReceived, recommendationsGiven) {
+  if (!connections) return connections;
+  const textByName = {};
+  (recommendationsReceived || []).forEach((r) => {
+    const name = `${r["First Name"] || ""} ${r["Last Name"] || ""}`.trim().toLowerCase();
+    const text = (r["Text"] || "").trim();
+    if (!name || !text) return;
+    textByName[name] = { text, direction: "received" };
+  });
+  (recommendationsGiven || []).forEach((r) => {
+    const name = `${r["First Name"] || ""} ${r["Last Name"] || ""}`.trim().toLowerCase();
+    const text = (r["Text"] || "").trim();
+    if (!name || !text || textByName[name]) return;
+    textByName[name] = { text, direction: "given" };
+  });
+  if (Object.keys(textByName).length === 0) return connections;
+  return connections.map((c) => {
+    const name = `${c["First Name"] || ""} ${c["Last Name"] || ""}`.trim().toLowerCase();
+    const match = name && textByName[name];
+    if (!match) return c;
+    return { ...c, _recommendationText: match.text, _recommendationDirection: match.direction };
+  });
+}
+
+function normalizeLIUrl(url) {
+  const match = String(url || "").match(/linkedin\.com\/(.*)/i);
+  const path = match ? match[1] : (url || "");
+  return path.trim().replace(/\/$/, "").toLowerCase();
+}
+
+function attachEndorsements(connections, endorsementsReceived) {
+  if (!connections || !endorsementsReceived || endorsementsReceived.length === 0) return connections;
+  const skillsByUrl = {};
+  endorsementsReceived.forEach((e) => {
+    if ((e["Endorsement Status"] || "").toUpperCase() !== "ACCEPTED") return;
+    const key = normalizeLIUrl(e["Endorser Public Url"]);
+    if (!key) return;
+    if (!skillsByUrl[key]) skillsByUrl[key] = [];
+    skillsByUrl[key].push(e["Skill Name"] || "");
+  });
+  if (Object.keys(skillsByUrl).length === 0) return connections;
+  return connections.map((c) => {
+    const key = normalizeLIUrl(c["URL"]);
+    const skills = key && skillsByUrl[key];
+    if (!skills || skills.length === 0) return c;
+    return { ...c, _endorsedSkills: skills.slice(0, 3) };
+  });
+}
+
 function prepareData(parsedData, fileKeys, ownName = "", icpData = null) {
   const out  = {};
   const meta = {};
