@@ -513,6 +513,29 @@ function categorizeRole(title = "") {
   if (/manager|lead/.test(t))                                      return "Manager";
   return "Other";
 }
+// ── The Line-Up: role-bucket matching (separate from categorizeRole above —
+// different bucket set, kept isolated so it can't affect Field Report) ────────
+const LINEUP_BUCKETS = [
+  "Founders/Owners",
+  "C-Suite",
+  "VP/Director",
+  "Coach/Consultant",
+  "Manager",
+  "Individual Contributor",
+  "Unclassified",
+];
+
+function categorizeRoleForLineUp(title = "") {
+  const t = (title || "").trim();
+  if (!t) return "Unclassified";
+  const low = t.toLowerCase();
+  if (/founder|co-founder|owner|proprietor|principal/.test(low)) return "Founders/Owners";
+  if (/\bceo\b|\bcfo\b|\bcoo\b|\bcto\b|\bcmo\b|\bcpo\b|chief[a-z\s]*officer|\bpresident\b/.test(low)) return "C-Suite";
+  if (/\bvp\b|vice president|\bdirector\b|head of/.test(low)) return "VP/Director";
+  if (/coach|consultant|advisor|strategist|freelance/.test(low)) return "Coach/Consultant";
+  if (/manager|team lead|\blead\b/.test(low)) return "Manager";
+  return "Individual Contributor";
+}
 
 function slimConnection(c) {
   return {
