@@ -1047,7 +1047,10 @@ export default function App() {
   setGenerating(reportId); setActiveReport(reportId); setStep("reports"); setError(null); setRetryMessage(null);
   try {
     const ownName = `${parsedData["Profile"]?.[0]?.["First Name"] || ""} ${parsedData["Profile"]?.[0]?.["Last Name"] || ""}`.trim();
-      const prepared = prepareData(parsedData, report.files, ownName, { client: icpClient, problem: icpProblem });
+            const dataForPrep = reportId === "warm" && parsedData["Invitations"]
+        ? { ...parsedData, Connections: attachInviteNotes(parsedData["Connections"], parsedData["Invitations"]) }
+        : parsedData;
+      const prepared = prepareData(dataForPrep, report.files, ownName, { client: icpClient, problem: icpProblem });
       const promptText = PROMPTS[reportId].replace(/{{OWNER_NAME}}/g, ownName);
       const result = await callClaude(
         promptText,
