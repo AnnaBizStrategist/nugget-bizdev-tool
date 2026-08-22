@@ -1586,32 +1586,64 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
 
               <Divider />
 
-              {/* ── How It Works ── */}
+                            {/* ── How It Works ── */}
               <div style={{ marginBottom: 0 }}>
                 <p style={{ fontSize: 22, color: WHITE, fontWeight: 700, textAlign: "center", marginBottom: 32, fontFamily: "Georgia, serif", letterSpacing: "-0.3px" }}>
                   Your Nuggets are waiting — Just 3 easy steps to find them...
                 </p>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 20 }}>
-                  {[
-                    { step: "01", title: "Request your data", desc: "On LinkedIn: Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select Complete — not Basic — and click Request archive.", image: STEP1_IMAGE },
-                    { step: "02", title: "Download the file", desc: "Wait for LinkedIn to email your data file — usually within 24 hours. Click the link in that email and download the file to your computer.", image: null },
-                    { step: "03", title: "Drop it in below", desc: "Drag and drop the file into Nugget below — no need to unzip it. Nugget opens it automatically and does the rest.", image: STEP3_IMAGE },
-                  ].map((s) => (
-                    <div key={s.step} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, overflow: "hidden" }}>
-                      <div style={{ width: "100%", height: 180, background: BLUE_MID + "44", display: "flex", alignItems: "center", justifyContent: "center", borderBottom: `1px solid ${BORDER}`, overflow: "hidden" }}>
-{s.image ? (
-<img src={s.image} alt={s.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-) : (
-<span style={{ fontSize: 13, color: MUTED, fontStyle: "italic" }}>Image coming soon</span>
-)}
-</div>
-                      <div style={{ padding: "20px 24px" }}>
-                        <div style={{ fontSize: 13, fontWeight: 700, color: BLUE_BRIGHT, opacity: 0.6, marginBottom: 6, letterSpacing: "0.06em" }}>STEP {s.step}</div>
-                        <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, marginBottom: 8 }}>{s.title}</div>
-                        <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.7 }}>{s.desc}</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+
+                  {/* Step 01 */}
+                  <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 18, padding: 32, display: "grid", gridTemplateColumns: "300px 1fr", gap: 32, alignItems: "center" }}>
+                    <div style={{ background: "#f4f1ea", border: "1px solid #ddd6c4", borderRadius: 12, overflow: "hidden", boxShadow: "0 12px 30px -10px rgba(0,0,0,0.5)" }}>
+                      <div style={{ display: "flex", gap: 5, padding: "9px 12px", background: "#eae5d8", borderBottom: "1px solid #ddd6c4" }}>
+                        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#cfc8b4" }} />
+                        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#cfc8b4" }} />
+                        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#cfc8b4" }} />
+                      </div>
+                      <img src={STEP1_IMAGE} alt="Request your data" style={{ display: "block", width: "100%", height: "auto" }} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", color: BLUE_BRIGHT, opacity: 0.75, textTransform: "uppercase", marginBottom: 8 }}>STEP 01</div>
+                      <div style={{ fontSize: 19, fontWeight: 700, color: WHITE, fontFamily: "Georgia, serif", marginBottom: 10 }}>Request your data</div>
+                      <div style={{ fontSize: 14, lineHeight: 1.7, color: MUTED }}>On LinkedIn: Me → Settings & Privacy → Data Privacy → Request a copy of your data. Select <strong style={{ color: WHITE }}>Complete</strong> — not Basic — and click Request archive.</div>
+                    </div>
+                  </div>
+
+                  {/* Step 02 */}
+                  <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 18, padding: 32 }}>
+                    <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", color: BLUE_BRIGHT, opacity: 0.75, textTransform: "uppercase", marginBottom: 8 }}>STEP 02</div>
+                    <div style={{ fontSize: 19, fontWeight: 700, color: WHITE, fontFamily: "Georgia, serif", marginBottom: 10 }}>Two emails will land in your inbox</div>
+                    <div style={{ fontSize: 14, lineHeight: 1.7, color: MUTED, marginBottom: 14 }}>LinkedIn sends your export as two separate emails — one called Basic, one called Complete. Drop each file in as it arrives.</div>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+                      <div style={{ display: "flex", gap: 12, padding: "14px 16px", background: "#0c1a33", border: "1px solid #16305c", borderRadius: 10 }}>
+                        <div style={{ flexShrink: 0, width: 22, height: 22, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, marginTop: 1, background: BLUE_BRIGHT, color: "#05203d" }}>1</div>
+                        <div style={{ fontSize: 13.5, lineHeight: 1.65, color: MUTED }}><strong style={{ color: WHITE }}>Basic</strong> — arrives within minutes. Drop it in right away — you can start with The Line-Up and The Field Report while you wait for the Complete email to arrive.</div>
+                      </div>
+                      <div style={{ display: "flex", gap: 12, padding: "14px 16px", background: "#0c1a33", border: "1px solid #16305c", borderRadius: 10 }}>
+                        <div style={{ flexShrink: 0, width: 22, height: 22, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, marginTop: 1, background: BLUE_BRIGHT, color: "#05203d" }}>2</div>
+                        <div style={{ fontSize: 13.5, lineHeight: 1.65, color: MUTED }}><strong style={{ color: WHITE }}>Complete</strong> — arrives within 24 hours, with your messages and activity. Drop that in too to unlock The Warm List, Hidden Nuggets, Inbound, and Outbound.</div>
                       </div>
                     </div>
-                  ))}
+                  </div>
+
+                  {/* Step 03 */}
+                  <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 18, padding: 32, display: "grid", gridTemplateColumns: "300px 1fr", gap: 32, alignItems: "center" }}>
+                    <div style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, border: `1px solid ${BORDER}`, borderRadius: 12, overflow: "hidden" }}>
+                      <div style={{ display: "flex", gap: 5, padding: "9px 12px", background: "rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.12)" }}>
+                        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(255,255,255,0.25)" }} />
+                        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(255,255,255,0.25)" }} />
+                        <span style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(255,255,255,0.25)" }} />
+                      </div>
+                      <img src={STEP3_IMAGE} alt="Drop it in below" style={{ display: "block", width: "100%", height: "auto" }} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", color: BLUE_BRIGHT, opacity: 0.75, textTransform: "uppercase", marginBottom: 8 }}>STEP 03</div>
+                      <div style={{ fontSize: 19, fontWeight: 700, color: WHITE, fontFamily: "Georgia, serif", marginBottom: 10 }}>Drop each file in below</div>
+                      <div style={{ fontSize: 14, lineHeight: 1.7, color: MUTED }}>Drag and drop into Nugget — no need to unzip either one. Nugget opens them automatically and merges everything in as it arrives.</div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
 
