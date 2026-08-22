@@ -212,7 +212,7 @@ Analyze the headline, summary, skills, and endorsements for BD effectiveness. Tr
 DATA STRUCTURE — use these exact column names:
 - Profile.csv: one row with columns Headline, Summary, Industry
 - Skills.csv: one column "Name" — each row is a skill
-- Endorsements: each row has WHO (endorser name), SKILL (skill endorsed), DATE (endorsement date). Already filtered to accepted endorsements only — use all rows as signal.
+- Endorsements_Received: each row has WHO (endorser name), SKILL (skill endorsed), DATE (endorsement date). Already filtered to accepted endorsements only — use all rows as signal.
 If Headline or Summary exist but are empty, flag as a critical gap.
 
 ## Profile Scorecard
@@ -659,7 +659,7 @@ function prepareData(parsedData, fileKeys, ownName = "", icpData = null) {
     WHAT_THEY_SAID: (r["Text"] || "").substring(0, 300),
   }));
   meta[`${k}_shown`] = Math.min(20, total);
-    } else if (k === "Endorsements") {
+    } else if (k === "Endorsements_Received") {
       const accepted = parsedData[k].filter((e) => (e["Endorsement Status"] || "").toUpperCase() === "ACCEPTED");
       out[k] = accepted.slice(0, 30).map((e) => ({
         WHO:   `${e["Endorser First Name"] || ""} ${e["Endorser Last Name"] || ""}`.trim(),
