@@ -1535,7 +1535,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   </p>
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 14, marginBottom: 24 }}>
-                  {REPORTS.map(r => {
+                                    {REPORTS.filter(r => r.id !== "gold").map(r => {
                     const unlocked = r.free || isBeta || !!creditStatus?.canRun;
                     return (
                     <div key={r.id} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: 20, opacity: unlocked ? 1 : 0.5, position: "relative", borderTop: "3px solid transparent", backgroundImage: `linear-gradient(${DARK_CARD}, ${DARK_CARD}), linear-gradient(90deg, ${unlocked ? BLUE_BRIGHT : BORDER}, ${unlocked ? BLUE_MID : BORDER})`, backgroundOrigin: "border-box", backgroundClip: "padding-box, border-box", display: "flex", flexDirection: "column" }}>
