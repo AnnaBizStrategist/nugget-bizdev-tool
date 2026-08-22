@@ -538,12 +538,38 @@ function categorizeRoleForLineUp(title = "") {
 }
 
 function slimConnection(c) {
-  return {
+  const slim = {
     name: `${c["First Name"] || ""} ${c["Last Name"] || ""}`.trim(),
     company: c["Company"] || "",
     position: c["Position"] || "",
     connected: c["Connected On"] || "",
   };
+  if (c["_inviteNote"]) {
+    slim.invite_note = c["_inviteNote"];
+    slim.invite_direction = c["_inviteDirection"] || "";
+  }
+  return slim;
+}
+
+function attachInviteNotes(connections, invitations) {
+  if (!connections || !invitations || invitations.length === 0) return connections;
+  const noteByUrl = {};
+  invitations.forEach((inv) => {
+    const msg = (inv["Message"] || "").trim();
+    if (!msg) return;
+    const direction = (inv["Direction"] || "").toUpperCase();
+    const url = direction === "INCOMING" ? inv["inviterProfileUrl"] : inv["inviteeProfileUrl"];
+    const key = (url || "").trim().replace(/\/$/, "");
+    if (!key) return;
+    noteByUrl[key] = { note: msg, direction: direction === "INCOMING" ? "received" : "sent" };
+  });
+  if (Object.keys(noteByUrl).length === 0) return connections;
+  return connections.map((c) => {
+    const key = (c["URL"] || "").trim().replace(/\/$/, "");
+    const match = key && noteByUrl[key];
+    if (!match) return c;
+    return { ...c, _inviteNote: match.note, _inviteDirection: match.direction };
+  });
 }
 function prepareData(parsedData, fileKeys, ownName = "", icpData = null) {
   const out  = {};
