@@ -1379,15 +1379,16 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
             <div style={{ padding: "56px 0 0" }}>
 
               {/* ── The Problem ── */}
-              <div className="scroll-reveal" style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "64px 48px", marginBottom: 0, textAlign: "center" }}>
-                <div style={{ fontSize: 14, color: MUTED, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 20 }}>Sound familiar?</div>
-                <p style={{ fontSize: 19, color: WHITE, lineHeight: 1.8, maxWidth: 660, margin: "0 auto 20px", fontFamily: "Georgia, serif" }}>
+                            {/* ── The Problem ── */}
+              <div className="scroll-reveal" style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "108px 64px", marginBottom: 0, textAlign: "center" }}>
+                <div style={{ fontSize: 15, color: MUTED, letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 700, marginBottom: 32 }}>Sound familiar?</div>
+                <p style={{ fontSize: 22, color: WHITE, lineHeight: 1.85, maxWidth: 700, margin: "0 auto 28px", fontFamily: "Georgia, serif" }}>
                   Your LinkedIn network is full of connections who could refer you, hire you, or open a door. But LinkedIn doesn't show you who they are, how warm they are, or what to say.
                 </p>
-                <p style={{ fontSize: 19, color: WHITE, lineHeight: 1.8, maxWidth: 660, margin: "0 auto 24px", fontFamily: "Georgia, serif" }}>
-                  So you either throw spaghetti hoping something sticks — or you do nothing and wonder why business development feels so hard.
+                <p style={{ fontSize: 22, color: WHITE, lineHeight: 1.85, maxWidth: 700, margin: "0 auto 28px", fontFamily: "Georgia, serif" }}>
+                  So you either throw spaghetti hoping something sticks — or you do nothing and wonder why your pipeline is dry.
                 </p>
-                <p style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, maxWidth: 660, margin: "0 auto", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                <p style={{ fontSize: 33, fontFamily: "Georgia, serif", fontWeight: 700, maxWidth: 700, margin: "12px auto 0", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                   Either way you're leaving money behind.
                 </p>
               </div>
