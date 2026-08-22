@@ -964,7 +964,7 @@ export default function App() {
   const msgCount            = parsedData["Messages"]?.length || 0;
   const reportsReady        = Object.keys(reports).length;
   const activeReportMeta    = REPORTS.find(r => r.id === activeReport);
-  const freeReportsComplete = REPORTS.filter(r => r.free).every(r => reports[r.id]);
+    const freeReportsComplete = REPORTS.filter(r => r.free && !r.computed).every(r => reports[r.id]);
   const isMissingCriticalFiles = hasFiles && !parsedData["Connections"];
 
   const handleFiles = useCallback((fileList) => {
