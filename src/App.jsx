@@ -157,6 +157,8 @@ Positions data, if present, contains the founder's own past companies. Cross-ref
 
 Some connections include an invite_note field — the exact message the founder sent or received when they connected, in their own words (invite_direction says whether the founder sent it or received it). This is the single strongest fit/warmth signal available when present, since it's a stated reason for the relationship rather than an inference. Only a small share of connections will have one — say nothing about its absence for everyone else, just use it when it's there, and reference it specifically in the "why" (what was actually said, and who reached out to whom).
 
+Some connections also include a recommendation_text field (a full written LinkedIn recommendation, with recommendation_direction telling you whether the founder received it or wrote it) and/or an endorsed_skills field (a list of skills this connection has endorsed the founder for). Both are strong proof of an existing relationship — a written recommendation especially so, since it takes real effort. Quote or reference recommendation_text directly when present. Treat endorsed_skills as a supporting signal, not a headline — worth a brief mention, not a "why" on its own. As with invite_note, only some connections will have these — never call out the absence for everyone else.
+
 Rank by fit + relationship gap — NOT purely by message recency or volume. A person who messages weekly but needs no action right now (an already-active relationship) does not belong on this list; a person who's genuinely warm but underused does.
 
 ## The Warm List
