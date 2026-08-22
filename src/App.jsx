@@ -1560,20 +1560,26 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                                     })}
                 </div>
 
-                {(() => {
+                                {(() => {
                   const gr = REPORTS.find(r => r.id === "gold");
                   const goldUnlocked = isBeta || !!creditStatus?.canRun;
                   return (
-                    <div style={{ background: `linear-gradient(135deg, #1a1200, ${DARK_CARD})`, border: "1px solid #C9A84C", borderRadius: 12, padding: "32px 28px", marginBottom: 24, textAlign: "center", position: "relative" }}>
-                      {!goldUnlocked && <span style={{ position: "absolute", top: 18, right: 20, fontSize: 15, color: MUTED }}>🔒</span>}
-                      <div style={{ fontSize: 34, marginBottom: 8, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, #E8A000, #f5c842)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontWeight: 700 }}>GN</div>
-                      <div style={{ display: "inline-block", padding: "2px 10px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: "#2a1a00", color: "#E8A000", marginBottom: 10 }}>
+                    <div style={{ background: `linear-gradient(135deg, ${BLUE_DEEP} 0%, ${DARK_CARD} 60%)`, border: "1px solid #C9A84C", borderRadius: 14, padding: "40px 36px 36px", marginBottom: 76, textAlign: "center", position: "relative", boxShadow: "0 0 0 1px rgba(201,168,76,0.1), 0 14px 50px -6px rgba(232,160,0,0.4), 0 0 90px -16px rgba(245,200,66,0.5)" }}>
+                      {!goldUnlocked && <span style={{ position: "absolute", top: 20, right: 22, fontSize: 15, color: MUTED }}>🔒</span>}
+                      <div style={{ display: "inline-block", padding: "2px 10px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: "#2a1a00", color: "#E8A000", marginBottom: 14 }}>
                         {isBeta ? "BETA" : gr.tag}
                       </div>
-                      <div style={{ fontSize: 19, fontWeight: 700, color: WHITE, marginBottom: 4, fontFamily: "Georgia, serif" }}>{gr.name}</div>
-                      <div style={{ fontSize: 11, color: MUTED, marginBottom: 10, textTransform: "uppercase", letterSpacing: "0.05em" }}>{gr.subtitle}</div>
-                      <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.6, maxWidth: 480, margin: "0 auto 20px" }}>{gr.description}</div>
-                      <button style={{ padding: "10px 28px", background: goldUnlocked ? `linear-gradient(135deg, #C9A84C, #f5c842)` : "transparent", border: goldUnlocked ? "none" : `1px solid ${BORDER}`, color: goldUnlocked ? "#0a1628" : MUTED, borderRadius: 7, fontSize: 13, fontWeight: 700, cursor: "pointer" }}
+                      <div style={{ fontSize: 30, fontWeight: 700, fontFamily: "Georgia, serif", marginBottom: 6, background: `linear-gradient(90deg, #E8A000, #f5c842)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{gr.name}</div>
+                      <div style={{ fontSize: 11.5, color: MUTED, marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.06em" }}>{gr.subtitle}</div>
+                      <div style={{ fontSize: 13.5, color: MUTED, lineHeight: 1.65, maxWidth: 480, margin: "0 auto 22px" }}>{gr.description}</div>
+                      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 8, marginBottom: 26 }}>
+                        <span style={{ fontSize: 11.5, fontWeight: 600, color: "#f5c842", background: "rgba(201,168,76,0.1)", border: "1px solid rgba(201,168,76,0.4)", borderRadius: 20, padding: "6px 14px" }}>Warm List</span>
+                        <span style={{ fontSize: 11.5, fontWeight: 600, color: "#f5c842", background: "rgba(201,168,76,0.1)", border: "1px solid rgba(201,168,76,0.4)", borderRadius: 20, padding: "6px 14px" }}>Hidden Nuggets</span>
+                        <span style={{ fontSize: 11.5, fontWeight: 600, color: "#f5c842", background: "rgba(201,168,76,0.1)", border: "1px solid rgba(201,168,76,0.4)", borderRadius: 20, padding: "6px 14px" }}>Inbound</span>
+                        <span style={{ fontSize: 11.5, fontWeight: 600, color: "#f5c842", background: "rgba(201,168,76,0.1)", border: "1px solid rgba(201,168,76,0.4)", borderRadius: 20, padding: "6px 14px" }}>Outbound</span>
+                        <span style={{ fontSize: 11.5, fontWeight: 600, color: "#0a1628", background: `linear-gradient(135deg, #C9A84C, #f5c842)`, borderRadius: 20, padding: "6px 14px" }}>+ Full Action Plan</span>
+                      </div>
+                      <button style={{ padding: "11px 30px", background: goldUnlocked ? `linear-gradient(135deg, #C9A84C, #f5c842)` : "transparent", border: goldUnlocked ? "none" : `1px solid ${BORDER}`, color: goldUnlocked ? "#0a1628" : MUTED, borderRadius: 7, fontSize: 13, fontWeight: 700, cursor: "pointer" }}
                         onClick={() => {
                           if (goldUnlocked) { setActiveReport("gold"); setStep("reports"); }
                           else { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }
