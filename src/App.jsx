@@ -1716,8 +1716,10 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
             {/* Sidebar */}
             <div className="print-hide-sidebar" style={{ background: DARK_CARD, borderRadius: 12, border: `1px solid ${BORDER}`, overflow: "hidden", position: "sticky", top: 80 }}>
               {REPORTS.map(r => {
-                let statusText;
-                if (!r.free && !isBeta) {
+                                let statusText;
+                if (r.computed) {
+                  statusText = "⚡ Ready";
+                } else if (!r.free && !isBeta) {
                   statusText = "🔒 Upgrade to unlock";
                 } else if (r.id === "gold" && isBeta) {
                   if (generating === "gold")   statusText = "⏳ Generating...";
