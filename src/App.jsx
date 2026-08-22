@@ -1517,7 +1517,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 )}
                 {connCount > 0 && (
                   <div style={{ textAlign: "center", padding: "16px 0 4px" }}>
-                    <p style={{ fontSize: 15, color: WHITE, marginBottom: 12 }}>✅ Your data is loaded and ready. Scroll down to generate your reports — start with the Field Report.</p>
+                                        <p style={{ fontSize: 15, color: WHITE, marginBottom: 12 }}>✅ Your data is loaded and ready. Check out The Line-Up instantly — no waiting — or scroll down to generate your other reports.</p>
                   </div>
                 )}
                
