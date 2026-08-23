@@ -1423,7 +1423,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 </div>
               </div>
                 
-                           {/* ── The Gold Nugget × BizDev Readiness Score ── */}
+                                        {/* ── The Gold Nugget × BizDev Readiness Score ── */}
               <div style={{ marginBottom: 0 }}>
                 <div style={{ textAlign: "center", marginBottom: 40 }}>
                   <div style={{ fontSize: 14, color: "#C9A84C", letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>The Seventh Report</div>
@@ -1436,18 +1436,19 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   </p>
                 </div>
 
-                <div style={{ background: DARK_CARD, border: "1px solid #C9A84C", borderRadius: 20, padding: "48px 56px", marginBottom: 48, textAlign: "center", boxShadow: "0 0 70px -15px #C9A84C55" }}>
-                  <div style={{ display: "inline-block", padding: "3px 12px", borderRadius: 6, fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", background: "#2a1a00", color: "#E8A000", marginBottom: 16 }}>GOLD</div>
-                  <h3 style={{ fontSize: 30, fontFamily: "Georgia, serif", fontWeight: 700, background: "linear-gradient(90deg, #C9A84C, #f5c842)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", marginBottom: 6, lineHeight: 1.2 }}>The Gold Nugget</h3>
-                  <div style={{ fontSize: 12, color: BLUE_BRIGHT, letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 700, marginBottom: 20 }}>Full BD Action Plan</div>
+                <div style={{ background: `linear-gradient(135deg, ${BLUE_DEEP} 0%, ${DARK_CARD} 60%)`, border: "1px solid #C9A84C", borderRadius: 14, padding: "40px 36px 36px", marginBottom: 48, textAlign: "center", position: "relative", boxShadow: "0 0 0 1px rgba(201,168,76,0.1), 0 14px 50px -6px rgba(232,160,0,0.4), 0 0 90px -16px rgba(245,200,66,0.5)" }}>
+                  <div style={{ display: "inline-block", padding: "2px 10px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: "#2a1a00", color: "#E8A000", marginBottom: 14 }}>GOLD</div>
+                  <div style={{ fontSize: 30, fontWeight: 700, fontFamily: "Georgia, serif", marginBottom: 6, background: "linear-gradient(90deg, #E8A000, #f5c842)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>The Gold Nugget</div>
+                  <div style={{ fontSize: 11.5, color: MUTED, marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.06em" }}>Full Business Development Action Plan</div>
                   <p style={{ fontSize: 15, color: WHITE, maxWidth: 520, margin: "0 auto 28px", lineHeight: 1.75 }}>
                     Your complete pipeline — prioritized targets, the warm relationships already in your corner, and outreach sequences ready to send. The treasure map, not just the reports.
                   </p>
-                  <div style={{ display: "flex", justifyContent: "center", gap: 10, flexWrap: "wrap" }}>
-                    {["Warm List", "Hidden Nuggets", "Inbound", "Outbound"].map((name, i) => (
-                      <span key={i} style={{ padding: "8px 18px", borderRadius: 20, border: `1px solid ${BORDER}`, color: MUTED, fontSize: 13, fontWeight: 600 }}>{name}</span>
-                    ))}
-                    <span style={{ padding: "8px 18px", borderRadius: 20, background: `linear-gradient(135deg, #C9A84C, #E8C97A)`, color: "#0a1628", fontSize: 13, fontWeight: 700 }}>+ Full Action Plan</span>
+                  <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 8 }}>
+                    <span style={{ fontSize: 11.5, fontWeight: 600, color: "#f5c842", background: "rgba(201,168,76,0.1)", border: "1px solid rgba(201,168,76,0.4)", borderRadius: 20, padding: "6px 14px" }}>Warm List</span>
+                    <span style={{ fontSize: 11.5, fontWeight: 600, color: "#f5c842", background: "rgba(201,168,76,0.1)", border: "1px solid rgba(201,168,76,0.4)", borderRadius: 20, padding: "6px 14px" }}>Hidden Nuggets</span>
+                    <span style={{ fontSize: 11.5, fontWeight: 600, color: "#f5c842", background: "rgba(201,168,76,0.1)", border: "1px solid rgba(201,168,76,0.4)", borderRadius: 20, padding: "6px 14px" }}>Inbound</span>
+                    <span style={{ fontSize: 11.5, fontWeight: 600, color: "#f5c842", background: "rgba(201,168,76,0.1)", border: "1px solid rgba(201,168,76,0.4)", borderRadius: 20, padding: "6px 14px" }}>Outbound</span>
+                    <span style={{ fontSize: 11.5, fontWeight: 600, color: "#0a1628", background: `linear-gradient(135deg, #C9A84C, #f5c842)`, borderRadius: 20, padding: "6px 14px" }}>+ Full Action Plan</span>
                   </div>
                 </div>
 
@@ -1463,7 +1464,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 </div>
 
                 {/* Five dimensions */}
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 12, marginBottom: 36 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 12 }}>
                   {[
                     { label: "Network", desc: "Who's in your network and how ICP-aligned they are" },
                     { label: "Profile", desc: "How ready your profile is to convert a visitor into a client" },
@@ -1477,18 +1478,6 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                       <div style={{ fontSize: 11, color: MUTED, lineHeight: 1.6 }}>{d.desc}</div>
                     </div>
                   ))}
-                </div>
-
-                <div style={{ background: BLUE_MID + "22", border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 12, padding: "20px 28px", textAlign: "center" }}>
-                  <p style={{ fontSize: 15, color: WHITE, lineHeight: 1.7, marginBottom: 16 }}>
-                    Watch your score climb every quarter. Share your milestone. Show your work.
-                  </p>
-                  <p style={{ fontSize: 13, color: MUTED, fontStyle: "italic", lineHeight: 1.8 }}>
-                    "It takes what most people overcomplicate and makes it obvious and simple." — Meredith Brewer
-                  </p>
-                  <p style={{ fontSize: 13, color: MUTED, fontStyle: "italic", lineHeight: 1.8 }}>
-                    "The Nugget is amazing. It's incredibly valuable info." — Noelle Labrie
-                  </p>
                 </div>
               </div>
 
