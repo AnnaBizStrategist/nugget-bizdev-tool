@@ -1395,64 +1395,33 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                         
               <Divider />
 
-              {/* ── Report Mockups ── */}
+                            {/* ── Report Mockups ── */}
               <div style={{ marginBottom: 40 }}>
                 <div style={{ textAlign: "center", marginBottom: 40 }}>
                   <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>See It In Action</div>
-                  <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 12 }}>Real intelligence. Real names. Real next steps.</h2>
-                  <p style={{ fontSize: 15, color: MUTED, maxWidth: 500, margin: "0 auto" }}>Upload your LinkedIn data once — here's exactly what comes back.</p>
+                  <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 12 }}>Six reports. Six real problems, solved.</h2>
+                  <p style={{ fontSize: 15, color: MUTED, maxWidth: 500, margin: "0 auto" }}>Every report exists to fix one specific thing that's costing you opportunities.</p>
                 </div>
 
-                {/* Mockup 1 — Field Report */}
-<LaptopFrame>
-<div style={{ display: "flex", height: 420, overflow: "hidden" }}>
-  {/* Sidebar */}
-  <div style={{ width: 180, borderRight: `1px solid ${BORDER}`, padding: "16px 0", flexShrink: 0 }}>
-    {[
-      { name: "The Field Report", sub: "✓ Complete", active: true },
-      { name: "The Warm List", sub: "✓ Complete", active: false },
-      { name: "The Hidden Nuggets Report", sub: "✓ Complete", active: false },
-      { name: "The Inbound Report", sub: "Unmined", active: false },
-      { name: "The Outbound Report", sub: "Unmined", active: false },
-      { name: "The Gold Nugget", sub: "🔒 Upgrade to unlock", active: false },
-    ].map((r, i) => (
-      <div key={i} style={{ padding: "10px 16px", borderLeft: r.active ? `3px solid ${BLUE_BRIGHT}` : "3px solid transparent", marginBottom: 2 }}>
-        <div style={{ fontSize: 12, fontWeight: 700, color: r.active ? BLUE_BRIGHT : WHITE }}>{r.name}</div>
-        <div style={{ fontSize: 11, color: MUTED }}>{r.sub}</div>
-      </div>
-    ))}
-  </div>
-  {/* Report Panel */}
-  <div style={{ flex: 1, padding: "20px 24px", overflowY: "auto" }}>
-    <div style={{ borderLeft: `3px solid ${BLUE_BRIGHT}`, paddingLeft: 12, marginBottom: 16 }}>
-      <div style={{ fontSize: 11, color: BLUE_BRIGHT, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>Top 10 Untapped Connections</div>
-    </div>
-    {[
-      { name: "David Mercer", title: "CEO", company: "Mercer Growth Partners", reason: "Built 3 companies from $0 to exit — prime referral source for Founders needing financial infrastructure" },
-      { name: "Lisa Thornton", title: "Founder & MD", company: "Thornton Capital Advisory", reason: "Runs a boutique M&A firm — her Clients are exactly who needs a Fractional CFO pre-transaction" },
-      { name: "Ray Okonkwo", title: "Managing Partner", company: "Okonkwo Ventures", reason: "Invests in early-stage SaaS — portfolio companies consistently underserved on financial ops" },
-      { name: "Priya Nair", title: "Co-Founder", company: "Scalepath Inc.", reason: "Scaling from $2M to $10M ARR — the exact moment Fractional CFO engagement becomes critical" },
-      { name: "Tom Castellano", title: "President", company: "Castellano Business Group", reason: "SMB advisory practice with 40+ active business Owner Clients — strong referral multiplier" },
-      { name: "Sandra Kwon", title: "VP Finance", company: "Northgate Ventures", reason: "Oversees financial operations for 12 portfolio companies — high-value referral network" },
-      { name: "Marcus Webb", title: "CEO", company: "Webb Advisory Group", reason: "Serial entrepreneur with 3 exits — actively mentors Founders in growth stages" },
-      { name: "Elena Vasquez", title: "Director of Operations", company: "Clearpath Consulting", reason: "Manages finance function for 20+ SMB clients — direct line to CFO-ready companies" },
-      { name: "James Oduya", title: "Managing Director", company: "Bridgepoint Capital", reason: "Funds early-stage B2B SaaS — portfolio consistently needs fractional finance support" },
-      { name: "Rachel Fong", title: "Founder", company: "Fong Strategic Advisors", reason: "Boutique strategy firm serving scale-up CEOs — natural co-referral partner" },
-    ].map((p, i) => (
-      <div key={i} style={{ display: "flex", gap: 10, padding: "10px 0", borderBottom: i < 9 ? `1px solid ${BORDER}` : "none" }}>
-        <div style={{ flex: 1 }}>
-          <div style={{ display: "flex", gap: 8, alignItems: "baseline", marginBottom: 3, flexWrap: "wrap" }}>
-            <span style={{ fontSize: 13, fontWeight: 700, color: BLUE_BRIGHT }}>{p.name}</span>
-            <span style={{ fontSize: 11, color: MUTED }}>| {p.title} | {p.company}</span>
-          </div>
-          <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.6 }}>{p.reason}</div>
-        </div>
-      </div>
-    ))}
-  </div>
-</div>
-                </LaptopFrame>
-
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+                  {[
+                    { name: "The Line-Up", free: true, pain: "You've got hundreds of connections and no idea who's actually a Founder, a decision-maker, or just noise." },
+                    { name: "The Field Report", free: true, pain: "You don't actually know who's in your network and how many match who you're trying to reach." },
+                    { name: "The Warm List", free: false, pain: "You're guessing who to reach out to first based on who messaged you last, not who's actually the best fit." },
+                    { name: "The Hidden Nuggets Report", free: false, pain: "People are already in your corner, ready to refer or vouch for you, but you're not leveraging them." },
+                    { name: "The Inbound Report", free: false, pain: "If your dream Client landed on your profile right now, would they stay or bounce? Right now, you don't know." },
+                    { name: "The Outbound Report", free: false, pain: "Your LinkedIn activity is broadcasting something about you right now — are you paying\u00A0attention?" },
+                  ].map((r, i) => (
+                    <div key={i} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "24px 22px", display: "flex", flexDirection: "column" }}>
+                      <div style={{ display: "inline-block", padding: "2px 9px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: r.free ? BLUE_MID + "33" : "#2a1a00", color: r.free ? BLUE_BRIGHT : "#E8A000", marginBottom: 12, width: "fit-content" }}>
+                        {r.free ? "FREE" : "GOLD"}
+                      </div>
+                      <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, fontFamily: "Georgia, serif", marginBottom: 10 }}>{r.name}</div>
+                      <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.65 }}>{r.pain}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
                 {/* Mockup 2 — Your BizDev Readiness Score */}
                 <div className="scroll-reveal" style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "36px 40px", marginBottom: 20 }}>
                   <div style={{ textAlign: "center", marginBottom: 32 }}>
