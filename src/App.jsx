@@ -2067,10 +2067,27 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
             <button onClick={submitEmail} disabled={emailSubmitting || !emailName.trim() || !emailAddress.trim()} style={{ width: "100%", padding: "14px 24px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", borderRadius: 10, color: WHITE, fontSize: 16, fontWeight: 700, cursor: emailSubmitting ? "not-allowed" : "pointer", fontFamily: "Georgia, serif", marginBottom: 12, opacity: emailSubmitting ? 0.6 : 1 }}>
               {emailSubmitting ? "Getting your Nuggets ready..." : "Get My Reports →"}
             </button>
-            <p style={{ fontSize: 11, color: MUTED, textAlign: "center" }}>No spam. No sharing. Just your personalized Nugget reports.</p>
+                        <p style={{ fontSize: 11, color: MUTED, textAlign: "center" }}>No spam. No sharing. Just your personalized Nugget reports.</p>
           </div>
         </div>
       )}
+
+      {/* ── Exit-intent save reminder ── */}
+      {showExitModal && (
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(2,8,18,0.97)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: 24 }}>
+          <div style={{ background: `linear-gradient(160deg, #0f2040 0%, #0a1628 100%)`, border: `1px solid ${BLUE_BRIGHT}66`, borderRadius: 20, padding: "40px 44px", maxWidth: 440, width: "100%", boxShadow: `0 0 80px rgba(65,161,232,0.15), 0 24px 60px rgba(0,0,0,0.8)`, animation: "fadeIn 0.2s ease-out", textAlign: "center" }}>
+            <div style={{ width: 46, height: 46, margin: "0 auto 18px", borderRadius: "50%", background: "rgba(201,168,76,0.14)", border: "1px solid rgba(201,168,76,0.4)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20 }}>↓</div>
+            <h2 style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 10, lineHeight: 1.3 }}>Don't lose this.</h2>
+            <p style={{ fontSize: 13.5, color: MUTED, lineHeight: 1.6, marginBottom: 12 }}>Nugget never stores a copy of your reports — everything's processed right here in your browser, so your network's data stays private.</p>
+            <p style={{ fontSize: 13.5, color: MUTED, lineHeight: 1.6, marginBottom: 26 }}>That also means once you close this tab, they're gone for good — getting them back means starting a fresh run and using another credit.</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <button onClick={() => { window.print(); setShowExitModal(false); }} style={{ width: "100%", padding: "14px 22px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", borderRadius: 10, color: WHITE, fontSize: 14.5, fontWeight: 700, cursor: "pointer" }}>↓ Save as PDF</button>
+              <button onClick={() => setShowExitModal(false)} style={{ width: "100%", padding: "14px 22px", background: "transparent", border: `1px solid ${BORDER}`, borderRadius: 10, color: MUTED, fontSize: 14.5, fontWeight: 700, cursor: "pointer" }}>I've already saved mine</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <footer style={{ borderTop: `1px solid ${BORDER}`, background: DARK_CARD, padding: "20px 40px", textAlign: "center", marginTop: 40 }}>
   <p style={{ fontSize: 12, color: MUTED, margin: 0 }}>
     © 2025 Nugget™ &nbsp;·&nbsp;
