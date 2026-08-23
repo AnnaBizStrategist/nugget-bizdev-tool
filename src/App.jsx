@@ -1143,10 +1143,10 @@ export default function App() {
  const runReport = async (reportId) => {
   const report = REPORTS.find(r => r.id === reportId);
   const needsCredit = !report?.free && !isBeta;
-  const regenCount = creditStatus?.activeRunReports?.[reportId] || 0;
+    const regenCount = creditStatus?.activeRunReports?.[reportId] || 0;
   if (needsCredit && !creditStatus?.canRun) return;
-  if (needsCredit && regenCount >= 3) {
-    setError("You've used your 3 regenerations for this report in the current run. Generate your other reports to complete this run — the next one will start fresh.");
+  if (needsCredit && regenCount >= 1) {
+    setError("This report has already been generated for this run — Nugget doesn't store reports, so be sure to save yours as a PDF. Getting a new one means starting a fresh run with another credit.");
     return;
   }
   if (generating) return;
