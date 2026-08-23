@@ -1423,52 +1423,60 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 </div>
               </div>
                 
-              {/* ── BizDev Readiness Score ── */}
+                           {/* ── The Gold Nugget × BizDev Readiness Score ── */}
               <div style={{ marginBottom: 0 }}>
+                <div style={{ textAlign: "center", marginBottom: 40 }}>
+                  <div style={{ fontSize: 14, color: "#C9A84C", letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>The Seventh Report</div>
+                  <h2 style={{ fontSize: 34, fontFamily: "Georgia, serif", color: WHITE, marginBottom: 20, lineHeight: 1.25 }}>
+                    <span style={{ fontWeight: 400 }}>And then there's</span><br />
+                    <span style={{ fontWeight: 700 }}>The Gold Nugget.</span>
+                  </h2>
+                  <p style={{ fontSize: 15, color: MUTED, maxWidth: 560, margin: "0 auto", lineHeight: 1.75 }}>
+                    Six reports tell you who's worth your time and why. The Gold Nugget tells you what to actually do about it.
+                  </p>
+                </div>
+
+                <div style={{ background: DARK_CARD, border: "1px solid #C9A84C", borderRadius: 20, padding: "48px 56px", marginBottom: 48, textAlign: "center", boxShadow: "0 0 70px -15px #C9A84C55" }}>
+                  <div style={{ display: "inline-block", padding: "3px 12px", borderRadius: 6, fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", background: "#2a1a00", color: "#E8A000", marginBottom: 16 }}>GOLD</div>
+                  <h3 style={{ fontSize: 30, fontFamily: "Georgia, serif", fontWeight: 700, background: "linear-gradient(90deg, #C9A84C, #f5c842)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", marginBottom: 6, lineHeight: 1.2 }}>The Gold Nugget</h3>
+                  <div style={{ fontSize: 12, color: BLUE_BRIGHT, letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 700, marginBottom: 20 }}>Full BD Action Plan</div>
+                  <p style={{ fontSize: 15, color: WHITE, maxWidth: 520, margin: "0 auto 28px", lineHeight: 1.75 }}>
+                    Your complete pipeline — prioritized targets, the warm relationships already in your corner, and outreach sequences ready to send. The treasure map, not just the reports.
+                  </p>
+                  <div style={{ display: "flex", justifyContent: "center", gap: 10, flexWrap: "wrap" }}>
+                    {["Warm List", "Hidden Nuggets", "Inbound", "Outbound"].map((name, i) => (
+                      <span key={i} style={{ padding: "8px 18px", borderRadius: 20, border: `1px solid ${BORDER}`, color: MUTED, fontSize: 13, fontWeight: 600 }}>{name}</span>
+                    ))}
+                    <span style={{ padding: "8px 18px", borderRadius: 20, background: `linear-gradient(135deg, #C9A84C, #E8C97A)`, color: "#0a1628", fontSize: 13, fontWeight: 700 }}>+ Full Action Plan</span>
+                  </div>
+                </div>
+
                 <div style={{ textAlign: "center", marginBottom: 48 }}>
                   <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>Nugget's Signature Metric</div>
                   <h2 style={{ fontSize: 34, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 28, lineHeight: 1.2 }}>Meet Your BizDev Readiness Score.</h2>
-                  <p style={{ fontSize: 16, color: MUTED, maxWidth: 520, margin: "0 auto 24px", lineHeight: 1.75 }}>
-                    Most people have no idea where they actually stand when it comes to business development. Not a gut feeling — an actual number. NUGGET changes that.
+                  <p style={{ fontSize: 16, color: MUTED, maxWidth: 560, margin: "0 auto 24px", lineHeight: 1.75 }}>
+                    Every time you run The Gold Nugget, you get a score out of 100 that shows you exactly where you stand — and what to do to raise it.
                   </p>
-                  <p style={{ fontSize: 15, color: WHITE, maxWidth: 640, margin: "0 auto 32px", lineHeight: 1.75 }}>
-                    Every time you run NUGGET, you get a score out of 100 across five dimensions. Each one tied directly to a report. Each one telling you exactly where to focus.
-                  </p>
+                  <div style={{ fontSize: 13, color: BLUE_BRIGHT, letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 700 }}>
+                    Your score is built from these five strengths
+                  </div>
                 </div>
 
                 {/* Five dimensions */}
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 12, marginBottom: 36 }}>
                   {[
-                    { label: "The Right People", icon: "🎯", desc: "Who's in your network and how ICP-aligned they are" },
-                    { label: "Your Front Door", icon: "🚪", desc: "How ready your profile is to convert a visitor into a client" },
-                    { label: "Showing Up", icon: "📣", desc: "What your content says about you when you're not in the room" },
-                    { label: "Your Pulse", icon: "💬", desc: "The warmth and depth of your active relationships" },
-                    { label: "Your Referral Engine", icon: "🤝", desc: "How many advocates are ready to go to bat for you" },
+                    { label: "Network", desc: "Who's in your network and how ICP-aligned they are" },
+                    { label: "Profile", desc: "How ready your profile is to convert a visitor into a client" },
+                    { label: "Content", desc: "What your content says when you're not in the room" },
+                    { label: "Relationship", desc: "The warmth and depth of your active relationships" },
+                    { label: "Advocate", desc: "How many advocates are ready to go to bat for you" },
                   ].map((d, i) => (
                     <div key={i} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: "20px 16px", textAlign: "center" }}>
-                      <div style={{ fontSize: 28, marginBottom: 10 }}>{d.icon}</div>
+                      <div style={{ width: 26, height: 26, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, background: BLUE_BRIGHT, color: WHITE, margin: "0 auto 12px" }}>{i + 1}</div>
                       <div style={{ fontSize: 13, fontWeight: 700, color: WHITE, marginBottom: 8, lineHeight: 1.3 }}>{d.label}</div>
                       <div style={{ fontSize: 11, color: MUTED, lineHeight: 1.6 }}>{d.desc}</div>
                     </div>
                   ))}
-                </div>
-
-                {/* Tiers */}
-                <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "28px 36px", marginBottom: 24, textAlign: "center" }}>
-                  <div style={{ fontSize: 11, color: MUTED, letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 700, marginBottom: 20 }}>Your Milestones</div>
-                  <div style={{ display: "flex", justifyContent: "center", gap: 8, flexWrap: "wrap", marginBottom: 20 }}>
-                    {[
-                      { label: "Just Getting Started", color: MUTED },
-                      { label: "Building Momentum ⚡", color: "#E8A000" },
-                      { label: "Getting Warm 🔥", color: BLUE_BRIGHT },
-                      { label: "BD Ready 🎯", color: "#4ade80" },
-                    ].map((t, i) => (
-                      <span key={i} style={{ padding: "6px 16px", borderRadius: 20, background: t.color + "22", border: `1px solid ${t.color}44`, color: t.color, fontSize: 13, fontWeight: 600 }}>{t.label}</span>
-                    ))}
-                  </div>
-                  <p style={{ fontSize: 14, color: MUTED, fontStyle: "italic" }}>
-                    BD Ready. You have everything in place to go get it. Now go. 🎯
-                  </p>
                 </div>
 
                 <div style={{ background: BLUE_MID + "22", border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 12, padding: "20px 28px", textAlign: "center" }}>
