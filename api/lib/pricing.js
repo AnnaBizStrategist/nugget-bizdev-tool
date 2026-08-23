@@ -67,5 +67,10 @@ export const REQUIRED_REPORT_TYPES = {
   rainmaker: ["warm", "hidden", "inbound", "outbound", "gold"],
 };
 
-// Max free regenerations of the same report type within one open run.
-export const MAX_REGENS_PER_REPORT = 3;
+// Max total generations of the same report type within one open run.
+// Set to 1 (Aug 2026): no free regenerations — once a report type has
+// been generated, that's the only copy. Getting it again means starting
+// a new run and spending another credit. (Not 0 — the check in
+// consumeCredit() is pre-increment, so 0 would block the very first
+// generation too.)
+export const MAX_REGENS_PER_REPORT = 1;
