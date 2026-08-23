@@ -1881,7 +1881,16 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 <div style={{ fontSize: 16, fontWeight: 700, color: "#0d2d6b", marginTop: 8, fontFamily: "Georgia, serif" }}>{activeReportMeta?.name}</div>
                 <div style={{ fontSize: 11, color: "#444", textTransform: "uppercase", letterSpacing: "0.05em", marginTop: 2 }}>{activeReportMeta?.subtitle}</div>
               </div>
-              {error && <div style={{ background: "#1a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
+                            {error && <div style={{ background: "#1a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
+
+              {Object.keys(reports).length > 0 && (
+                <div className="no-print" style={{ display: "flex", alignItems: "flex-start", gap: 12, background: DARK, border: `1px solid ${BORDER}`, borderLeft: "3px solid #C9A84C", borderRadius: 9, padding: "13px 16px", marginBottom: 16 }}>
+                  <span style={{ color: "#f5c842", fontSize: 15, lineHeight: 1, marginTop: 1 }}>↓</span>
+                  <div style={{ fontSize: 12.5, lineHeight: 1.55, color: MUTED }}>
+                    <strong style={{ color: WHITE }}>These reports live only in this tab.</strong> Save yours as a PDF before you close it — Nugget never stores a copy, so your network's data stays private.
+                  </div>
+                </div>
+              )}
 
               {reports[activeReport] && activeReport !== "gold" || (activeReport === "gold" && reports.gold) ? (
                 <div className="no-print" style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
