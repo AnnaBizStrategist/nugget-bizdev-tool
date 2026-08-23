@@ -1398,7 +1398,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                             {/* ── Report Mockups ── */}
               <div style={{ marginBottom: 40 }}>
                 <div style={{ textAlign: "center", marginBottom: 40 }}>
-                  <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>See It In Action</div>
+                                    <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>The Fix</div>
                   <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 12 }}>Six reports. Six real problems, solved.</h2>
                   <p style={{ fontSize: 15, color: MUTED, maxWidth: 500, margin: "0 auto" }}>Every report exists to fix one specific thing that's costing you opportunities.</p>
                 </div>
