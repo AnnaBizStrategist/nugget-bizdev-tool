@@ -1258,8 +1258,23 @@ const submitICP = () => {
     setTimeout(() => {
       document.querySelectorAll(".scroll-reveal").forEach(el => observer.observe(el));
     }, 100);
-    return () => observer.disconnect();
+        return () => observer.disconnect();
   });
+
+  // Exit-intent: once any report exists, warn before they lose it by
+  // leaving the tab. Fires once per visit (cursor heading toward the
+  // browser's tab bar / close button).
+  useEffect(() => {
+    if (Object.keys(reports).length === 0) return;
+    const handleMouseLeave = (e) => {
+      if (e.clientY <= 0 && !exitIntentShown.current) {
+        exitIntentShown.current = true;
+        setShowExitModal(true);
+      }
+    };
+    document.addEventListener("mouseleave", handleMouseLeave);
+    return () => document.removeEventListener("mouseleave", handleMouseLeave);
+  }, [reports]);
 
   const scrollToUpload = () => {
     uploadRef.current?.scrollIntoView({ behavior: "smooth" });
