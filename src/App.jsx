@@ -1087,8 +1087,10 @@ export default function App() {
   const [icpClient,       setICPClient]      = useState("");
   const [icpProblem,      setICPProblem]     = useState("");
   const [creditStatus,    setCreditStatus]   = useState(null);
+  const [showExitModal,   setShowExitModal]  = useState(false);
   const fileInputRef = useRef(null);
   const uploadRef    = useRef(null);
+  const exitIntentShown = useRef(false);
 
   const hasFiles            = Object.keys(uploadedFiles).length > 0;
   const connCount           = parsedData["Connections"]?.length || 0;
