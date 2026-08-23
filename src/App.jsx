@@ -1690,8 +1690,8 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                         <div style={{ fontSize: 11.5, color: MUTED, lineHeight: 1.4 }}>Who's in your network, and what it's worth.</div>
                       </div>
                     </div>
-                    <button onClick={() => { const el = document.getElementById("upload-zone"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ padding: "11px 22px", background: "transparent", border: `1px solid ${BLUE_BRIGHT}`, color: BLUE_BRIGHT, borderRadius: 8, fontSize: 13, fontWeight: 700, whiteSpace: "nowrap", flexShrink: 0, cursor: "pointer" }}>
-                      Start Free →
+                    <button onClick={() => { const el = document.getElementById("upload-zone"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ padding: "11px 22px", background: "transparent", border: `1px solid ${BLUE_BRIGHT}`, color: BLUE_BRIGHT, borderRadius: 8, fontSize: 13, fontWeight: 700, whiteSpace: "nowrap", flexShrink: 0, marginLeft: 20, cursor: "pointer" }}>
+                            Start Free →
                     </button>
                   </div>
 
