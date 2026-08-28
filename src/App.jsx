@@ -1789,7 +1789,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                                     {REPORTS.filter(r => !r.free && r.id !== "gold").map(r => {
                     const unlocked = r.free || isBeta || !!creditStatus?.canRun;
                     return (
-                    <div key={r.id} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: 26, opacity: unlocked ? 1 : 0.5, position: "relative", borderTop: "3px solid transparent", backgroundImage: `linear-gradient(${DARK_CARD}, ${DARK_CARD}), linear-gradient(90deg, ${unlocked ? BLUE_BRIGHT : BORDER}, ${unlocked ? BLUE_MID : BORDER})`, backgroundOrigin: "border-box", backgroundClip: "padding-box, border-box", display: "flex", flexDirection: "column" }}>
+                    <div key={r.id} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: 26, opacity: 1, position: "relative", borderTop: "3px solid transparent", backgroundImage: `linear-gradient(${DARK_CARD}, ${DARK_CARD}), linear-gradient(90deg, ${unlocked ? BLUE_BRIGHT : BORDER}, ${unlocked ? BLUE_MID : BORDER})`, backgroundOrigin: "border-box", backgroundClip: "padding-box, border-box", display: "flex", flexDirection: "column" }}>
                       {!unlocked && <span style={{ position: "absolute", top: 16, right: 16, fontSize: 15, color: MUTED }}>🔒</span>}
                       <div style={{ display: "inline-block", padding: "2px 8px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: r.free ? BLUE_MID + "33" : isBeta ? BLUE_MID + "33" : "#2a1a00", color: r.free ? BLUE_BRIGHT : isBeta ? BLUE_BRIGHT : "#E8A000", marginBottom: 10 }}>
                         {isBeta && !r.free ? "BETA" : r.tag}
