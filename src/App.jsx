@@ -2085,11 +2085,18 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               )}
 
                             {/* Free report panels */}
-              {activeReport === "lineup" ? (
+                           {activeReport === "lineup" ? (
                 <>
                   <LineUpReport connections={parsedData["Connections"] || []} />
                   {!isBeta && (
                     <UpgradeCTA text="You've sorted your network by role. The Warm List sorts it by opportunity." />
+                  )}
+                </>
+              ) : activeReport === "opendoor" ? (
+                <>
+                  <OpenDoorReport invitations={parsedData["Invitations"] || []} />
+                  {!isBeta && (
+                    <UpgradeCTA text="You've seen who's just outside your network. The Warm List tells you who inside it to reach out to first." />
                   )}
                 </>
               ) : activeReport !== "gold" && (
