@@ -938,7 +938,7 @@ function LineUpReport({ connections }) {
             );
           })}
 
-          {remaining > 0 && (
+                    {remaining > 0 && (
             <div style={{ textAlign: "center", marginTop: 12 }}>
               <div onClick={() => setRevealed(prev => ({ ...prev, [expanded]: true }))} style={{ display: "inline-block", padding: "8px 18px", background: "transparent", border: `1px solid ${BORDER}`, color: MUTED, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
                 Show {remaining} more
@@ -947,6 +947,135 @@ function LineUpReport({ connections }) {
           )}
         </div>
       )}
+    </div>
+  );
+}
+
+// ── The Open Door report ────────────────────────────────────────────────────
+function OpenDoorReport({ invitations }) {
+  const list = invitations || [];
+  const incoming = list
+    .filter(inv => (inv["Direction"] || "").toUpperCase() === "INCOMING")
+    .slice()
+    .sort((a, b) => (Date.parse(b["Sent At"] || "") || 0) - (Date.parse(a["Sent At"] || "") || 0));
+  const outgoing = list
+    .filter(inv => (inv["Direction"] || "").toUpperCase() === "OUTGOING")
+    .slice()
+    .sort((a, b) => (Date.parse(a["Sent At"] || "") || 0) - (Date.parse(b["Sent At"] || "") || 0));
+
+  const daysAgo = (dateStr) => {
+    const ts = Date.parse(dateStr || "");
+    if (isNaN(ts)) return null;
+    return Math.max(0, Math.floor((Date.now() - ts) / 86400000));
+  };
+
+  const ageBadge = (days) => {
+    if (days === null) return null;
+    if (days < 30) return { label: "Fresh", color: BLUE_BRIGHT, bg: BLUE_BRIGHT + "22", border: BLUE_BRIGHT + "55" };
+    if (days <= 60) return { label: "Worth a nudge", color: BLUE_LIGHT, bg: BLUE_LIGHT + "1f", border: BLUE_LIGHT + "4d" };
+    return { label: "Consider letting go", color: MUTED, bg: MUTED + "14", border: BORDER };
+  };
+
+  const OpenDoorRow = ({ name, days, url, note, showBadge, isLast }) => {
+    const badge = showBadge ? ageBadge(days) : null;
+    return (
+      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16, padding: "14px 16px", borderBottom: isLast ? "none" : `1px solid ${BORDER}`, background: DARK }}>
+        <div style={{ minWidth: 0, flex: 1 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 9, flexWrap: "wrap", marginBottom: note ? 4 : 0 }}>
+            <span style={{ fontSize: 14, fontWeight: 700, color: WHITE }}>{name}</span>
+            <span style={{ fontSize: 11.5, color: MUTED }}>{days === null ? "" : `${days} day${days === 1 ? "" : "s"} ago`}</span>
+            {badge && (
+              <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", padding: "2px 8px", borderRadius: 20, color: badge.color, background: badge.bg, border: `1px solid ${badge.border}` }}>{badge.label}</span>
+            )}
+          </div>
+          {note && (
+            <p style={{ fontSize: 12.5, fontStyle: "italic", color: MUTED, lineHeight: 1.55, margin: "4px 0 0", paddingLeft: 12, borderLeft: `2px solid ${BORDER}` }}>
+              "{note}"
+              <span style={{ display: "block", fontSize: 11, fontStyle: "normal", color: MUTED, opacity: 0.75, marginTop: 3 }}>Reply to what they said.</span>
+            </p>
+          )}
+        </div>
+        {!note && url && (
+          <a href={url} target="_blank" rel="noreferrer" style={{ flexShrink: 0, fontSize: 12, fontWeight: 600, color: BLUE_LIGHT, textDecoration: "none", border: `1px solid ${BORDER}`, borderRadius: 7, padding: "7px 12px", whiteSpace: "nowrap" }}>View Profile ↗</a>
+        )}
+      </div>
+    );
+  };
+
+  const OpenDoorEmpty = ({ glyph, children }) => (
+    <div style={{ textAlign: "center", padding: "40px 28px", border: `1px dashed ${BORDER}`, borderRadius: 10, background: DARK }}>
+      <div style={{ fontFamily: "Georgia, serif", fontSize: 24, fontWeight: 700, background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", marginBottom: 8 }}>{glyph}</div>
+      <p style={{ fontSize: 13.5, lineHeight: 1.7, color: MUTED, maxWidth: 380, margin: "0 auto" }}>{children}</p>
+    </div>
+  );
+
+  return (
+    <div>
+      <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 10, padding: "18px 20px", marginBottom: 30, fontSize: 14, lineHeight: 1.7, color: WHITE }}>
+        Every name on this list has a LinkedIn profile sitting right there — recent posts, mutual connections, where they're based, what they studied. A 30-second look beats a generic <strong style={{ color: BLUE_LIGHT, fontWeight: 600 }}>"What are you working on these days?"</strong> every time.
+      </div>
+
+      <div style={{ marginBottom: 36 }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 12 }}>
+          <div style={{ width: 3, alignSelf: "stretch", background: BLUE_BRIGHT, borderRadius: 2 }} />
+          <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: BLUE_LIGHT }}>Incoming</div>
+          <div style={{ fontSize: 12, color: MUTED }}>{incoming.length} pending</div>
+        </div>
+
+        {incoming.length === 0 ? (
+          <OpenDoorEmpty glyph="✓">You're fully caught up — every invite in your inbox has been handled. That's rare.</OpenDoorEmpty>
+        ) : (
+          <>
+            <p style={{ fontSize: 13.5, lineHeight: 1.7, color: MUTED, marginBottom: 16 }}>
+              Accepting isn't the finish line — it's the start. Before you say yes, take a look at their profile: is there anything you have in common? Anything they've said or done that sparked your interest? Mention that. It's the difference between a name in your network and a relationship in motion — and it's the one step most people skip.
+            </p>
+            <div style={{ border: `1px solid ${BORDER}`, borderRadius: 10, overflow: "hidden" }}>
+              {incoming.map((inv, i) => (
+                <OpenDoorRow
+                  key={i}
+                  name={inv["From"] || "—"}
+                  days={daysAgo(inv["Sent At"])}
+                  url={inv["inviterProfileUrl"]}
+                  note={(inv["Message"] || "").trim()}
+                  showBadge={false}
+                  isLast={i === incoming.length - 1}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+
+      <div>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 12 }}>
+          <div style={{ width: 3, alignSelf: "stretch", background: BLUE_BRIGHT, borderRadius: 2 }} />
+          <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.09em", textTransform: "uppercase", color: BLUE_LIGHT }}>Outgoing</div>
+          <div style={{ fontSize: 12, color: MUTED }}>{outgoing.length} pending</div>
+        </div>
+
+        {outgoing.length === 0 ? (
+          <OpenDoorEmpty glyph="→">Empty doesn't just mean you're caught up — it can also mean nothing's moving. A pipeline needs fresh water: aim to send a few new invites most weeks, not just when you happen to think of it. Reach for people who fit your ICP, or who work closely with people who do.</OpenDoorEmpty>
+        ) : (
+          <>
+            <p style={{ fontSize: 13.5, lineHeight: 1.7, color: MUTED, marginBottom: 16 }}>
+              Silence isn't usually a no — it's a missed notification, a busy week, a request that got buried. If it's been a month or more, a short nudge is worth sending. Past two months with nothing back, it's fair to let it go — a shorter list of live opportunities beats a long one of stale ones.
+            </p>
+            <div style={{ border: `1px solid ${BORDER}`, borderRadius: 10, overflow: "hidden" }}>
+              {outgoing.map((inv, i) => (
+                <OpenDoorRow
+                  key={i}
+                  name={inv["To"] || "—"}
+                  days={daysAgo(inv["Sent At"])}
+                  url={inv["inviteeProfileUrl"]}
+                  note={(inv["Message"] || "").trim()}
+                  showBadge={true}
+                  isLast={i === outgoing.length - 1}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }
