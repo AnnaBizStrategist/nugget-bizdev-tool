@@ -11,7 +11,7 @@ const DARK        = "#0a1628";
 const DARK_CARD   = "#0f2040";
 const WHITE       = "#e8f0fe";
 const MUTED       = "#9fc4e8";
-const BORDER      = "#1e4080";F
+const BORDER      = "#1e4080";
 
 const LOGO_BASE64 = null;
 import ANNA_PHOTO from './Anna-Nugget-Image.png';
