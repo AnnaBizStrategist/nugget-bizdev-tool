@@ -1544,28 +1544,35 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               <div style={{ marginBottom: 40 }}>
                 <div style={{ textAlign: "center", marginBottom: 40 }}>
                                     <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>The Fix</div>
-                  <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 12 }}>Six reports. Six real problems, solved.</h2>
+                  <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 12 }}>Seven reports. Seven real problems, solved.</h2>
                   <p style={{ fontSize: 15, color: MUTED, maxWidth: 500, margin: "0 auto" }}>Every report exists to fix one specific thing that's costing you opportunities.</p>
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
-                  {[
+                                {[
+                  { cols: 3, items: [
+                    { name: "The Open Door", free: true, pain: "You've got pending invites sitting in limbo — no idea who's still waiting on a yes from you, or who you reached out to and never heard back from." },
                     { name: "The Line-Up", free: true, pain: "You've got hundreds of connections and no idea who's actually a Founder, a decision-maker, or just noise." },
                     { name: "The Field Report", free: true, pain: "You don't actually know who's in your network and how many match who you're trying to reach." },
+                  ] },
+                  { cols: 2, items: [
                     { name: "The Warm List", free: false, pain: "You're guessing who to reach out to first based on who messaged you last, not who's actually the best fit." },
                     { name: "The Hidden Nuggets Report", free: false, pain: "People are already in your corner, ready to refer or vouch for you, but you're not leveraging them." },
                     { name: "The Inbound Report", free: false, pain: "If your dream Client landed on your profile right now, would they stay or bounce? Right now, you don't know." },
                     { name: "The Outbound Report", free: false, pain: "Your LinkedIn activity is broadcasting something about you right now — are you paying\u00A0attention?" },
-                  ].map((r, i) => (
-                    <div key={i} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "24px 22px", display: "flex", flexDirection: "column" }}>
-                      <div style={{ display: "inline-block", padding: "2px 9px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: r.free ? BLUE_MID + "33" : "#2a1a00", color: r.free ? BLUE_BRIGHT : "#E8A000", marginBottom: 12, width: "fit-content" }}>
-                        {r.free ? "FREE" : "GOLD"}
+                  ] },
+                ].map((group, gi) => (
+                  <div key={gi} style={{ display: "grid", gridTemplateColumns: `repeat(${group.cols}, 1fr)`, gap: 16, marginBottom: gi === 0 ? 16 : 0 }}>
+                    {group.items.map((r, i) => (
+                      <div key={i} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "24px 22px", display: "flex", flexDirection: "column" }}>
+                        <div style={{ display: "inline-block", padding: "2px 9px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: r.free ? BLUE_MID + "33" : "#2a1a00", color: r.free ? BLUE_BRIGHT : "#E8A000", marginBottom: 12, width: "fit-content" }}>
+                          {r.free ? "FREE" : "GOLD"}
+                        </div>
+                        <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, fontFamily: "Georgia, serif", marginBottom: 10 }}>{r.name}</div>
+                        <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.65 }}>{r.pain}</div>
                       </div>
-                      <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, fontFamily: "Georgia, serif", marginBottom: 10 }}>{r.name}</div>
-                      <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.65 }}>{r.pain}</div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                ))}
               </div>
                 
                                         {/* ── The Gold Nugget × BizDev Readiness Score ── */}
