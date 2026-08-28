@@ -30,7 +30,7 @@ const REPORTS = [
     free: true,
     computed: true,
   },
-  {
+    {
     id: "field",
     name: "The Field Report",
     tag: "FREE",
@@ -38,6 +38,16 @@ const REPORTS = [
     description: "Survey your land — who's actually in your network, how many match your ICP, and your top 10 untapped connections.",
     files: ["Connections"],
     free: true,
+  },
+  {
+    id: "opendoor",
+    name: "The Open Door",
+    tag: "FREE",
+    subtitle: "Real people, just outside your network",
+    description: "Every pending invite in your account — who's already waiting on a yes from you, and who you reached for that never got a reply.",
+    files: ["Invitations"],
+    free: true,
+    computed: true,
   },
   {
     id: "warm",
