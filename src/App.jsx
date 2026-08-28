@@ -11,7 +11,7 @@ const DARK        = "#0a1628";
 const DARK_CARD   = "#0f2040";
 const WHITE       = "#e8f0fe";
 const MUTED       = "#9fc4e8";
-const BORDER      = "#1e4080";
+const BORDER      = "#1e4080";F
 
 const LOGO_BASE64 = null;
 import ANNA_PHOTO from './Anna-Nugget-Image.png';
@@ -1584,7 +1584,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     <span style={{ fontWeight: 700 }}>The Gold Nugget.</span>
                   </h2>
                   <p style={{ fontSize: 15, color: MUTED, maxWidth: 560, margin: "0 auto", lineHeight: 1.75 }}>
-                    Six reports tell you who's worth your time and why. The Gold Nugget tells you what to actually do about it.
+                    Seven reports tell you who's worth your time and why. The Gold Nugget tells you what to actually do about it.
                   </p>
                 </div>
 
