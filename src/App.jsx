@@ -1759,8 +1759,8 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     Every insight, every name, and every next step is unique to you.<br />This is <span style={{ color: WHITE, fontWeight: 700 }}>YOUR</span> data. These are <span style={{ color: WHITE, fontWeight: 700 }}>YOUR</span> people. This is <span style={{ color: WHITE, fontWeight: 700 }}>YOUR</span> pipeline.
                   </p>
                 </div>
-                                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 14, marginBottom: 76 }}>
-                                    {REPORTS.filter(r => r.id !== "gold").map(r => {
+                                                                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 14, marginBottom: 26 }}>
+                                    {REPORTS.filter(r => r.free).map(r => {
                     const unlocked = r.free || isBeta || !!creditStatus?.canRun;
                     return (
                     <div key={r.id} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: 20, opacity: unlocked ? 1 : 0.5, position: "relative", borderTop: "3px solid transparent", backgroundImage: `linear-gradient(${DARK_CARD}, ${DARK_CARD}), linear-gradient(90deg, ${unlocked ? BLUE_BRIGHT : BORDER}, ${unlocked ? BLUE_MID : BORDER})`, backgroundOrigin: "border-box", backgroundClip: "padding-box, border-box", display: "flex", flexDirection: "column" }}>
@@ -1779,6 +1779,32 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                             </button>
                       ) : (
                         <button style={{ padding: "8px 16px", background: "transparent", border: `1px solid ${BORDER}`, color: MUTED, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>🔒 Buy credits to unlock</button>
+                      )}
+                    </div>
+                    );
+                                    })}
+                </div>
+
+                                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))", gap: 18, marginBottom: 76 }}>
+                                    {REPORTS.filter(r => !r.free && r.id !== "gold").map(r => {
+                    const unlocked = r.free || isBeta || !!creditStatus?.canRun;
+                    return (
+                    <div key={r.id} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: 26, opacity: unlocked ? 1 : 0.5, position: "relative", borderTop: "3px solid transparent", backgroundImage: `linear-gradient(${DARK_CARD}, ${DARK_CARD}), linear-gradient(90deg, ${unlocked ? BLUE_BRIGHT : BORDER}, ${unlocked ? BLUE_MID : BORDER})`, backgroundOrigin: "border-box", backgroundClip: "padding-box, border-box", display: "flex", flexDirection: "column" }}>
+                      {!unlocked && <span style={{ position: "absolute", top: 16, right: 16, fontSize: 15, color: MUTED }}>🔒</span>}
+                      <div style={{ display: "inline-block", padding: "2px 8px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: r.free ? BLUE_MID + "33" : isBeta ? BLUE_MID + "33" : "#2a1a00", color: r.free ? BLUE_BRIGHT : isBeta ? BLUE_BRIGHT : "#E8A000", marginBottom: 10 }}>
+                        {isBeta && !r.free ? "BETA" : r.tag}
+                      </div>
+                      <div style={{ fontSize: 19, fontWeight: 700, color: WHITE, marginBottom: 4, fontFamily: "Georgia, serif" }}>{r.name}</div>
+                      <div style={{ fontSize: 11, color: MUTED, marginBottom: 9, textTransform: "uppercase", letterSpacing: "0.05em" }}>{r.subtitle}</div>
+                      <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.5, marginBottom: 16, flex: 1 }}>{r.description}</div>
+                                            {unlocked ? (
+                                                (r.computed || reports[r.id])
+                          ? <button style={{ padding: "10px 18px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { setActiveReport(r.id); setStep("reports"); }}>✓ View Report</button>
+                          : <button style={{ padding: "10px 18px", background: generating === r.id ? BLUE_MID + "44" : `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: generating ? "not-allowed" : "pointer", width: "100%" }} onClick={() => runReport(r.id)} disabled={!!generating}>
+                              {generating === r.id ? "⏳ Mining..." : "Generate Report"}
+                            </button>
+                      ) : (
+                        <button style={{ padding: "10px 18px", background: "transparent", border: `1px solid ${BORDER}`, color: MUTED, borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>🔒 Buy credits to unlock</button>
                       )}
                     </div>
                     );
