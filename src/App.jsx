@@ -609,26 +609,20 @@ function attachRecommendations(connections, recommendationsReceived, recommendat
   });
 }
 
-function normalizeLIUrl(url) {
-  const match = String(url || "").match(/linkedin\.com\/(.*)/i);
-  const path = match ? match[1] : (url || "");
-  return path.trim().replace(/\/$/, "").toLowerCase();
-}
-
 function attachEndorsements(connections, endorsementsReceived) {
   if (!connections || !endorsementsReceived || endorsementsReceived.length === 0) return connections;
-  const skillsByUrl = {};
+  const skillsByName = {};
   endorsementsReceived.forEach((e) => {
     if ((e["Endorsement Status"] || "").toUpperCase() !== "ACCEPTED") return;
-    const key = normalizeLIUrl(e["Endorser Public Url"]);
-    if (!key) return;
-    if (!skillsByUrl[key]) skillsByUrl[key] = [];
-    skillsByUrl[key].push(e["Skill Name"] || "");
+    const name = `${e["Endorser First Name"] || ""} ${e["Endorser Last Name"] || ""}`.trim().toLowerCase();
+    if (!name) return;
+    if (!skillsByName[name]) skillsByName[name] = [];
+    skillsByName[name].push(e["Skill Name"] || "");
   });
-  if (Object.keys(skillsByUrl).length === 0) return connections;
+  if (Object.keys(skillsByName).length === 0) return connections;
   return connections.map((c) => {
-    const key = normalizeLIUrl(c["URL"]);
-    const skills = key && skillsByUrl[key];
+    const name = `${c["First Name"] || ""} ${c["Last Name"] || ""}`.trim().toLowerCase();
+    const skills = name && skillsByName[name];
     if (!skills || skills.length === 0) return c;
     return { ...c, _endorsedSkills: skills.slice(0, 3) };
   });
@@ -658,8 +652,14 @@ function prepareData(parsedData, fileKeys, ownName = "", icpData = null) {
         const role = categorizeRole(c["Position"] || "");
         roleDist[role] = (roleDist[role] || 0) + 1;
       });
-      const icpConns   = parsedData[k].filter((c) => ICP_RE.test(c["Position"] || "")).slice(0, 60).map(slimConnection);
-      const otherConns = parsedData[k].filter((c) => !ICP_RE.test(c["Position"] || "")).slice(0, 15).map(slimConnection);
+            // Anyone with an attached invite note, recommendation, or endorsement is a real signal
+      // worth surfacing to the model — never let an arbitrary file-order cutoff silently drop
+      // them from the sample (a connection with real engagement getting cut before a stranger
+      // with none is how the model ends up guessing someone "isn't a connection" when they are).
+      const hasSignal = (c) => !!(c["_inviteNote"] || c["_recommendationText"] || (c["_endorsedSkills"] && c["_endorsedSkills"].length));
+      const bySignalFirst = (arr) => arr.slice().sort((a, b) => (hasSignal(b) ? 1 : 0) - (hasSignal(a) ? 1 : 0));
+      const icpConns   = bySignalFirst(parsedData[k].filter((c) => ICP_RE.test(c["Position"] || ""))).slice(0, 60).map(slimConnection);
+      const otherConns = bySignalFirst(parsedData[k].filter((c) => !ICP_RE.test(c["Position"] || ""))).slice(0, 15).map(slimConnection);
       out[k] = {
         _summary: { total, icp_count: icpConns.length, role_distribution: roleDist },
         icp_connections: icpConns,
