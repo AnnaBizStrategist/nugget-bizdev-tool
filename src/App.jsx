@@ -2206,7 +2206,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
         <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(2,8,18,0.97)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: 24 }}>
           <div style={{ background: `linear-gradient(160deg, #0f2040 0%, #0a1628 100%)`, border: `1px solid ${BLUE_BRIGHT}66`, borderRadius: 20, padding: "44px 52px", maxWidth: 580, width: "100%", boxShadow: `0 0 80px rgba(65,161,232,0.15), 0 24px 60px rgba(0,0,0,0.8)`, animation: "fadeIn 0.2s ease-out" }}>
             <h2 style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, textAlign: "center", marginBottom: 14, lineHeight: 1.4 }}>One quick thing before I mine your <span style={{ whiteSpace: "nowrap" }}>data.</span></h2>
-            <p style={{ fontSize: 14, color: MUTED, textAlign: "center", marginBottom: 36, lineHeight: 1.6 }}>Tell us who you actually sell to — it sharpens every report that follows.</p>
+            <p style={{ fontSize: 15, color: WHITE, textAlign: "center", marginBottom: 36, lineHeight: 1.6 }}>Tell us who you actually sell to — it sharpens every report that follows.</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 26, marginBottom: 30 }}>
               <div>
                 <label style={{ fontSize: 12, color: MUTED, display: "block", marginBottom: 6, letterSpacing: "0.06em", textTransform: "uppercase" }}>Who's your Ideal Client?</label>
@@ -2237,7 +2237,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               Mine My Reports →
             </button>
             <div style={{ borderTop: `1px solid ${BORDER}`, paddingTop: 18 }}>
-              <p style={{ fontSize: 11, color: MUTED, textAlign: "center", lineHeight: 1.6 }}>
+              <p style={{ fontSize: 13, color: WHITE, textAlign: "center", lineHeight: 1.6 }}>
                 One more thing: Nugget reads your LinkedIn <strong style={{ color: WHITE }}>Connections</strong> — not your Followers. Those are two different numbers on LinkedIn, and Connections is the one that matters here.
               </p>
             </div>
