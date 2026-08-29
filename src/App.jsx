@@ -1006,7 +1006,7 @@ function OpenDoorReport({ invitations }) {
             )}
           </div>
           {note && (
-            <p style={{ fontSize: 14, fontStyle: "italic", color: MUTED, lineHeight: 1.6, margin: "5px 0 0", paddingLeft: 12, borderLeft: `2px solid ${BORDER}` }}>
+            <p style={{ fontSize: 15, fontStyle: "italic", color: WHITE, lineHeight: 1.65, margin: "5px 0 0", paddingLeft: 12, borderLeft: `2px solid ${BORDER}` }}>`
               "{note}"
               <span style={{ display: "block", fontSize: 12.5, fontStyle: "normal", color: MUTED, marginTop: 4 }}>Reply to what they said.</span>
             </p>
@@ -1074,7 +1074,7 @@ function OpenDoorReport({ invitations }) {
           <OpenDoorEmpty glyph="→">Empty doesn't just mean you're caught up — it can also mean nothing's moving. A pipeline needs fresh water: aim to send a few new invites most weeks, not just when you happen to think of it. Reach for people who fit your ICP, or who work closely with people who do.</OpenDoorEmpty>
         ) : (
           <>
-            <p style={{ fontSize: 13.5, lineHeight: 1.7, color: MUTED, marginBottom: 16 }}>
+            <p style={{ fontSize: 15, lineHeight: 1.75, color: WHITE, marginBottom: 18 }}>
               Silence isn't usually a no — it's a missed notification, a busy week, a request that got buried. If it's been a month or more, a short nudge is worth sending. Past two months with nothing back, it's fair to let it go — a shorter list of live opportunities beats a long one of stale ones.
             </p>
             <div style={{ border: `1px solid ${BORDER}`, borderRadius: 10, overflow: "hidden" }}>
