@@ -35,7 +35,7 @@ const REPORTS = [
     name: "The Line-Up",
     tag: "FREE",
     subtitle: "Your network, sorted by role",
-    description: "Instantly organize every connection by role — Founders, C-Suite, VPs, and more. Searchable and sortable. No waiting, no credits.",
+    description: "Every connection in your network, sorted by role — Founders, C-Suite, VPs, and more — so you can actually find the person you're looking for.",
     files: ["Connections"],
     free: true,
     computed: true,
