@@ -1236,7 +1236,7 @@ export default function App() {
   const msgCount            = parsedData["Messages"]?.length || 0;
   const reportsReady        = Object.keys(reports).length;
   const activeReportMeta    = REPORTS.find(r => r.id === activeReport);
-    const freeReportsComplete = REPORTS.filter(r => r.free && !r.computed).every(r => reports[r.id]);
+    const priorReportsComplete = REPORTS.filter(r => !r.computed && r.id !== "gold").every(r => reports[r.id]);
   const isMissingCriticalFiles = hasFiles && !parsedData["Connections"];
 
   const handleFiles = useCallback((fileList) => {
@@ -2023,7 +2023,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 } else if (r.id === "gold" && isBeta) {
                   if (generating === "gold")   statusText = "⏳ Generating...";
                   else if (reports.gold)        statusText = "✓ Complete";
-                  else if (freeReportsComplete) statusText = "✦ Ready to generate";
+                  else if (priorReportsComplete) statusText = "✦ Ready to generate";
                   else                          statusText = "Complete your reports first";
                 } else {
                   if (generating === r.id)  statusText = `⏳ Generating...`;
@@ -2100,7 +2100,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     </div>
                   ) : reports.gold ? (
                     <><IntroBlock reportId="gold" /><ReportContent text={reports.gold} /></>
-                  ) : freeReportsComplete ? (
+                  ) : priorReportsComplete ? (
                     <div style={{ textAlign: "center", padding: "48px 32px" }}>
                       <div style={{ fontSize: 44, marginBottom: 16, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, #E8A000, #f5c842)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontWeight: 700 }}>GN</div>
                       <div style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 10 }}>You've mined all 5 reports.</div>
@@ -2112,7 +2112,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   ) : (
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
                       <div style={{ fontSize: 38, marginBottom: 14, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, #E8A000, #f5c842)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontWeight: 700 }}>GN</div>
-                      <div style={{ fontSize: 16, color: WHITE, fontWeight: 600, marginBottom: 8 }}>Complete your 5 free reports first</div>
+                      <div style={{ fontSize: 16, color: WHITE, fontWeight: 600, marginBottom: 8 }}>Complete all 5 reports first</div>
                       <p style={{ fontSize: 13, color: MUTED, lineHeight: 1.7 }}>Generate all 5 reports to unlock your BizDev Readiness Score.</p>
                     </div>
                   )}
