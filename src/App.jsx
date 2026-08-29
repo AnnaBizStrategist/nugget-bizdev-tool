@@ -701,8 +701,9 @@ function prepareData(parsedData, fileKeys, ownName = "", icpData = null) {
         }));
       meta[`${k}_shown`] = Math.min(60, out[k].length);
       meta[`${k}_unique_people`] = Object.keys(byPerson).length;
-    } else if (k === "Comments") {
-      out[k] = parsedData[k].slice(0, 40).map((c) => ({
+        } else if (k === "Comments") {
+      const sortedComments = parsedData[k].slice().sort((a, b) => (Date.parse(b.Date || b.date || "") || 0) - (Date.parse(a.Date || a.date || "") || 0));
+      out[k] = sortedComments.slice(0, 40).map((c) => ({
         Date:    c.Date    || c.date    || "",
         Message: (c.Message || c.message || c.Comment || "").substring(0, 200),
         Link:    c.Link    || c.link    || "",
@@ -724,6 +725,10 @@ function prepareData(parsedData, fileKeys, ownName = "", icpData = null) {
         DATE:  e["Endorsement Date"] || "",
       }));
       meta[`${k}_shown`] = Math.min(30, accepted.length);
+        } else if (k === "Shares") {
+      const sortedShares = parsedData[k].slice().sort((a, b) => (Date.parse(b.Date || b.date || "") || 0) - (Date.parse(a.Date || a.date || "") || 0));
+      out[k] = sortedShares.slice(0, 50);
+      meta[`${k}_shown`] = Math.min(50, total);
     } else {
       out[k] = parsedData[k].slice(0, 50);
       meta[`${k}_shown`] = Math.min(50, total);
