@@ -263,7 +263,7 @@ Analyze the comments and shares/posts to understand their market signal and soci
 What does their LinkedIn activity communicate to potential Clients right now? Include a social selling assessment — are they showing up as a trusted advisor or just a broadcaster?
 
 ## What Potential Clients Actually See
-Based on content themes and engagement patterns — what impression does a potential client form observing your LinkedIn behavior over 30 days? Be specific about what's working and what isn't.
+Based on content themes and engagement patterns — what impression does a potential client form observing your most recent LinkedIn activity? Be specific about what's working and what isn't.
 
 ## Topic Alignment Check
 What topics dominate your engagement? Do they align with what you sell? Where's the disconnect? Does your content attract your ICP or a different audience?
@@ -394,7 +394,7 @@ const INTROS = {
 
   inbound: `People are landing on your profile right now. The question isn't whether inbound is happening — it's whether your profile is doing anything useful with it.\n\nThis report audits your profile the way a perfect prospect would: your headline, your summary, your skills, your keywords. It tells you exactly what they see, where they lose interest, and the two fixes — ranked by impact — that will change that.\n\nThe next steps are timed. This isn't a someday list — a profile that's bleeding opportunity doesn't get better by waiting.`,
 
-  outbound: `Your LinkedIn activity is saying something about you right now — whether you're managing the message or not.\n\nThis report looks at what potential Clients actually see when they scroll your last 30 days: your Signal Strength score, what's building trust, what's quietly undermining it, and where the gap is between how you show up and how you want to be known.\n\nYou'll get three ranked shifts to make, plus three ready-to-post content ideas tailored to your positioning. Not generic tips. Yours.`,
+  outbound: `Your LinkedIn activity is saying something about you right now — whether you're managing the message or not.\n\nThis report looks at what potential Clients actually see when they scroll your most recent activity: your Signal Strength score, what's building trust, what's quietly undermining it, and where the gap is between how you show up and how you want to be known.\n\nYou'll get three ranked shifts to make, plus three ready-to-post content ideas tailored to your positioning. Not generic tips. Yours.`,
 
   gold: `You've seen where the opportunities are. This is where you go get them.\n\nThe Gold Nugget pulls everything together into one complete bizdev action plan — your BizDev Readiness Score, an honest look at what's working and what's quietly costing you, and your Next 25 people prioritized by who needs your attention right now.\n\nYou'll also find the conversations you started but never finished, outreach sequences written and ready to send, and a 30-day plan broken down week by week so nothing stays on a "someday" list.\n\nRun this every quarter. Watch your score move. That's not motivation — that's bizdev in action.`,
 };
