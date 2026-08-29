@@ -1028,7 +1028,7 @@ function OpenDoorReport({ invitations }) {
 
   return (
     <div>
-      <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 10, padding: "18px 20px", marginBottom: 30, fontSize: 14, lineHeight: 1.7, color: WHITE }}>
+      <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 10, padding: "18px 20px", marginBottom: 30, fontSize: 15, lineHeight: 1.7, color: WHITE`
         Every name on this list has a LinkedIn profile sitting right there — recent posts, mutual connections, where they're based, what they studied. A 30-second look beats a generic <strong style={{ color: BLUE_LIGHT, fontWeight: 600 }}>"What are you working on these days?"</strong> every time.
       </div>
 
@@ -1043,7 +1043,7 @@ function OpenDoorReport({ invitations }) {
           <OpenDoorEmpty glyph="✓">You're fully caught up — every invite in your inbox has been handled. That's rare.</OpenDoorEmpty>
         ) : (
           <>
-            <p style={{ fontSize: 13.5, lineHeight: 1.7, color: MUTED, marginBottom: 16 }}>
+            <p style={{ fontSize: 15, lineHeight: 1.75, color: WHITE, marginBottom: 18 }}>
               Accepting isn't the finish line — it's the start. Before you say yes, take a look at their profile: is there anything you have in common? Anything they've said or done that sparked your interest? Mention that. It's the difference between a name in your network and a relationship in motion — and it's the one step most people skip.
             </p>
             <div style={{ border: `1px solid ${BORDER}`, borderRadius: 10, overflow: "hidden" }}>
