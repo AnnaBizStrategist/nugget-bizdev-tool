@@ -368,22 +368,27 @@ The 25 people they should be talking to right now. Pull from Warm List and Hidde
 [Personalized opener to someone from the Next 25 list]
 
 ## Your 30-Day Action Plan
-A realistic, prioritized plan broken into three phases.
+A realistic, prioritized plan broken into four weeks. Format every action item as a markdown checkbox — "- [ ] " followed by the action — since this report gets saved and printed, and the founder should be able to physically check items off as they go. The Outbound Report you were given above already generated three specific post ideas — sequence those three across this plan, one per week, instead of inventing new ones or clustering them into a single week. Reference each post by its angle, not its full text — the founder already has the complete draft in the Outbound Report.
 
 **Week 1 — Fix the foundation:**
-- [Action]
-- [Action]
-- [Action]
+- [ ] [Action]
+- [ ] [Action]
+- [ ] [Action]
 
-**Weeks 2–3 — Activate your people:**
-- [Action]
-- [Action]
-- [Action]
+**Week 2 — Start reaching out:**
+- [ ] [Action]
+- [ ] [Action]
+- [ ] [Action]
+
+**Week 3 — Keep the momentum going:**
+- [ ] [Action]
+- [ ] [Action]
+- [ ] [Action]
 
 **Week 4 — Build the habit:**
-- [Action]
-- [Action]
-- [Action]`,
+- [ ] [Action]
+- [ ] [Action]
+- [ ] [Action]`,
 
 };
 
