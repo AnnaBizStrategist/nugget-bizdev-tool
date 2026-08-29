@@ -177,11 +177,11 @@ A single flat list of up to 25 people — no priority tiers, no "hottest first" 
 Every person gets a 1-2 line "why" — who they are + the specific fit/gap signal (recency, former-colleague match, engagement pattern, etc.), since the founder likely doesn't recognize every name in a large network. Choose exactly 3 entries, spread throughout the list (not clustered at the top — there's no priority order), to carry a full worked example message instead of just the why-line. Pick 3 that represent different situations: a warm relationship gone quiet, a strong fit that's barely started, and a semi-regular contact worth deepening.
 
 ## Don't Forget to Say Hi
-People who match the ICP but have ZERO message history — never had a first conversation. Two short paragraphs:
+People who match the ICP but have ZERO message history — never had a first conversation. This is a hard filter, not a judgment call: before placing anyone in this section, check their MESSAGE_COUNT in the Messages data. If MESSAGE_COUNT is 1 or more for that person, for any reason, they do NOT belong here — leave them out entirely, even if the exchange was brief, old, or one-sided. A person with any message history belongs in the main Warm List above (or nowhere in this report), never in this section. When in doubt, exclude rather than include. Two short paragraphs:
 1. What this section is and why it matters: a quick hello goes a long way, start a real conversation, don't be pitchy or sound weird, just be human.
 2. One concrete way in: if something they posted actually resonated, mention it directly ("Hey, your post about [topic] today was great, I've had the same experience...") — or just leave a comment on the post itself. Keep it real, don't reference something that didn't actually mean anything to you.
 
-Give each person here the same 1-2 line "why" treatment as the main list.
+Give each person here the same 1-2 line "why" treatment as the main list. Never mention a message count, exchange, or contact date for anyone in this section — if you find yourself about to write one, that person belongs in the main list instead, not here.
 
 Use real names. Be direct. Make every recommendation immediately actionable.`,
 
