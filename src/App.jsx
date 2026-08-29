@@ -313,22 +313,27 @@ For each of the 5 dimensions scored above — Network, Profile, Content, Relatio
 
 **Network — [X]/20**
 What's working: [specific, from the data]
+
 What needs work: [specific, from the data]
 
 **Profile — [X]/20**
 What's working: [specific, from the data]
+
 What needs work: [specific, from the data]
 
 **Content — [X]/20**
 What's working: [specific, from the data]
+
 What needs work: [specific, from the data]
 
 **Relationship — [X]/20**
 What's working: [specific, from the data]
+
 What needs work: [specific, from the data]
 
 **Advocate — [X]/20**
 What's working: [specific, from the data]
+
 What needs work: [specific, from the data]
 
 ## What to Fix First
@@ -341,13 +346,13 @@ Identify whichever 1-2 dimensions scored lowest above. Give 3 ranked, specific, 
 ## Your People — The Next 25
 The 25 people they should be talking to right now. Pull from Warm List and Hidden Nuggets data. Use real names. For each: **Name** | Why now | Best opening move.
 
-**Move Now — Hot (5 people)**
+### Move Now — Hot (5 people)
 [5 people with highest relationship momentum and BD value]
 
-**Activate This Month — Warm (10 people)**
+### Activate This Month — Warm (10 people)
 [10 people with existing warmth that just needs a nudge]
 
-**Worth Reviving — Still Valuable (10 people)**
+### Worth Reviving — Still Valuable (10 people)
 [10 people who went quiet but still represent real BD opportunity]
 
 ## Your Outreach Sequences
@@ -396,7 +401,7 @@ const INTROS = {
 
   outbound: `Your LinkedIn activity is saying something about you right now — whether you're managing the message or not.\n\nThis report looks at what potential Clients actually see when they scroll your most recent activity: your Signal Strength score, what's building trust, what's quietly undermining it, and where the gap is between how you show up and how you want to be known.\n\nYou'll get three ranked shifts to make, plus three ready-to-post content ideas tailored to your positioning. Not generic tips. Yours.`,
 
-  gold: `You've seen where the opportunities are. This is where you go get them.\n\nThe Gold Nugget pulls everything together into one complete bizdev action plan — your BizDev Readiness Score, an honest look at what's working and what's quietly costing you, and your Next 25 people prioritized by who needs your attention right now.\n\nYou'll also find the conversations you started but never finished, outreach sequences written and ready to send, and a 30-day plan broken down week by week so nothing stays on a "someday" list.\n\nRun this every quarter. Watch your score move. That's not motivation — that's bizdev in action.`,
+  gold: `You've seen where the opportunities are. This is where you go get them.\n\nThe Gold Nugget pulls everything together into one complete bizdev action plan — your BizDev Readiness Score, an honest look at what's working and what's quietly costing you, and your Next 25 people prioritized by who needs your attention right now.\n\nYou'll also find the conversations you started but never finished, outreach sequences written and ready to send, and a 30-day plan broken down week by week so nothing stays on a "someday" list.\n\nRun this every month. Watch your score move. That's not motivation — that's bizdev in action.`,
 };
 
 // ── Report caveats (static, shown above the intro card) ────────────────────────
