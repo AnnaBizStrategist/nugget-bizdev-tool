@@ -383,7 +383,7 @@ A realistic, prioritized plan broken into three phases.
 **Week 4 — Build the habit:**
 - [Action]
 - [Action]
-- [Action]
+- [Action]`,
 
 };
 
