@@ -762,7 +762,7 @@ function IntroBlock({ reportId }) {
       {caveat && (
                 <p style={{ fontSize: 13, color: WHITE, lineHeight: 1.6, marginBottom: 20, fontStyle: "italic" }}>{caveat}</p>
       )}
-            <div style={{ background: DARK_CARD, borderLeft: `3px solid ${BLUE_BRIGHT}`, borderRadius: 4, padding: "18px 22px", marginBottom: 36 }}>
+            <div style={{ background: DARK_CARD, borderLeft: `3px solid ${BLUE_BRIGHT}`, borderRadius: 4, padding: "18px 22px", marginBottom: 44 }}>
         {text.split("\n\n").map((para, i) => (
           <p key={i} style={{ fontSize: 15, color: WHITE, lineHeight: 1.8, margin: i > 0 ? "12px 0 0" : 0 }}>{para}</p>
         ))}
@@ -780,12 +780,13 @@ function ReportContent({ text }) {
         if (line.startsWith("## ")) return <h3 key={i} style={{ color: BLUE_BRIGHT, fontSize: 16, fontWeight: 700, marginTop: 28, marginBottom: 10, letterSpacing: "0.08em", textTransform: "uppercase", borderLeft: "3px solid #41a1e8", paddingLeft: 10, paddingBottom: 4 }}>{line.replace("## ", "")}</h3>;
         if (line.startsWith("### ")) return <h4 key={i} style={{ color: BLUE_LIGHT, fontSize: 14, fontWeight: 700, marginTop: 18, marginBottom: 6 }}>{line.replace("### ", "")}</h4>;
         const bold = line.replace(/\*\*(.*?)\*\*/g, `<strong style="color:${BLUE_LIGHT}">$1</strong>`);
-        if (line.match(/^\d+\./)) return <div key={i} style={{ display: "flex", gap: 12, margin: "8px 0", paddingLeft: 8 }}><span style={{ color: BLUE_BRIGHT, fontWeight: 700, minWidth: 20, fontSize: 13 }}>{line.match(/^\d+/)[0]}.</span><p style={{ color: WHITE, margin: 0, fontSize: 14, flex: 1 }} dangerouslySetInnerHTML={{ __html: bold.replace(/^\d+\./, "") }} /></div>;
-                if (line.startsWith("- [ ] ")) return <div key={i} style={{ display: "flex", gap: 10, margin: "8px 0", paddingLeft: 8, alignItems: "flex-start" }}><span style={{ width: 15, height: 15, border: `2px solid ${BLUE_BRIGHT}`, borderRadius: 3, flexShrink: 0, marginTop: 2, display: "block" }} /><p style={{ color: WHITE, margin: 0, fontSize: 14 }} dangerouslySetInnerHTML={{ __html: bold.replace(/^- \[ \] /, "") }} /></div>;
-        if (line.startsWith("- ") || line.startsWith("• ")) return <div key={i} style={{ display: "flex", gap: 10, margin: "6px 0", paddingLeft: 8 }}><span style={{ color: BLUE_BRIGHT, marginTop: 8, width: 5, height: 5, borderRadius: "50%", background: BLUE_BRIGHT, flexShrink: 0, display: "block" }} /><p style={{ color: WHITE, margin: 0, fontSize: 14 }} dangerouslySetInnerHTML={{ __html: bold.replace(/^[-•]\s/, "") }} /></div>;
-        if (line.startsWith("- ") || line.startsWith("• ")) return <div key={i} style={{ display: "flex", gap: 10, margin: "6px 0", paddingLeft: 8 }}><span style={{ color: BLUE_BRIGHT, marginTop: 8, width: 5, height: 5, borderRadius: "50%", background: BLUE_BRIGHT, flexShrink: 0, display: "block" }} /><p style={{ color: WHITE, margin: 0, fontSize: 14 }} dangerouslySetInnerHTML={{ __html: bold.replace(/^[-•]\s/, "") }} /></div>;
-        if (line.trim() === "") return <div key={i} style={{ height: 6 }} />;
-        return <p key={i} style={{ fontSize: 15, margin: "6px 0", color: WHITE, lineHeight: 1.85 }} dangerouslySetInnerHTML={{ __html: bold }} />;
+                if (line.match(/^\d+\./)) return <div key={i} style={{ display: "flex", gap: 12, margin: "14px 0", paddingLeft: 8 }}><span style={{ color: BLUE_BRIGHT, fontWeight: 700, minWidth: 20, fontSize: 13 }}>{line.match(/^\d+/)[0]}.</span><p style={{ color: WHITE, margin: 0, fontSize: 14, flex: 1 }} dangerouslySetInnerHTML={{ __html: bold.replace(/^\d+\./, "") }} /></div>;
+                                if (line.startsWith("- [ ] ")) return <div key={i} style={{ display: "flex", gap: 10, margin: "14px 0", paddingLeft: 8, alignItems: "flex-start" }}><span style={{ width: 15, height: 15, border: `2px solid ${BLUE_BRIGHT}`, borderRadius: 3, flexShrink: 0, marginTop: 2, display: "block" }} /><p style={{ color: WHITE, margin: 0, fontSize: 14 }} dangerouslySetInnerHTML={{ __html: bold.replace(/^- \[ \] /, "") }} /></div>;
+                if (line.startsWith("- ") || line.startsWith("• ")) return <div key={i} style={{ display: "flex", gap: 10, margin: "12px 0", paddingLeft: 8 }}><span style={{ color: BLUE_BRIGHT, marginTop: 8, width: 5, height: 5, borderRadius: "50%", background: BLUE_BRIGHT, flexShrink: 0, display: "block" }} /><p style={{ color: WHITE, margin: 0, fontSize: 14 }} dangerouslySetInnerHTML={{ __html: bold.replace(/^[-•]\s/, "") }} /></div>;
+                if (line.startsWith("- ") || line.startsWith("• ")) return <div key={i} style={{ display: "flex", gap: 10, margin: "12px 0", paddingLeft: 8 }}><span style={{ color: BLUE_BRIGHT, marginTop: 8, width: 5, height: 5, borderRadius: "50%", background: BLUE_BRIGHT, flexShrink: 0, display: "block" }} /><p style={{ color: WHITE, margin: 0, fontSize: 14 }} dangerouslySetInnerHTML={{ __html: bold.replace(/^[-•]\s/, "") }} /></div>;
+                if (line.trim() === "---") return <div key={i} style={{ textAlign: "center", color: MUTED, fontSize: 13, letterSpacing: "0.3em", margin: "30px 0" }}>— — —</div>;
+                if (line.trim() === "") return <div key={i} style={{ height: 6 }} />;
+                return <p key={i} style={{ fontSize: 15, margin: "12px 0", color: WHITE, lineHeight: 1.85 }} dangerouslySetInnerHTML={{ __html: bold }} />;
       })}
     </div>
   );
