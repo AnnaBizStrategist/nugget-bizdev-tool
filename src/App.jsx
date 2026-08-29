@@ -876,7 +876,7 @@ function LineUpReport({ connections }) {
 
       {viewMode === "company" && (
         <div style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}88, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 10, padding: "16px 20px", marginBottom: 22, fontSize: 13.5, color: MUTED, lineHeight: 1.65 }}>
-          Multiple connections at the same company is real leverage — a coordinated push into a specific account, or a warm ask for an intro from whoever's closest to the door. Generic entries like Self-Employed and Freelance are filtered out — they're not a company, just noise.
+          Multiple connections at the same company are real leverage — more than one way in, or someone already inside who can vouch for you and make the introduction. Generic entries like Self-Employed and Freelance are filtered out — they're not a company, just noise.
         </div>
       )}
 
