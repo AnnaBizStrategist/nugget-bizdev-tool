@@ -1028,7 +1028,7 @@ function OpenDoorReport({ invitations }) {
 
   return (
     <div>
-      <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 10, padding: "18px 20px", marginBottom: 30, fontSize: 15, lineHeight: 1.7, color: WHITE`
+      <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 10, padding: "18px 20px", marginBottom: 30, fontSize: 15, lineHeight: 1.7, color: WHITE }}>
         Every name on this list has a LinkedIn profile sitting right there — recent posts, mutual connections, where they're based, what they studied. A 30-second look beats a generic <strong style={{ color: BLUE_LIGHT, fontWeight: 600 }}>"What are you working on these days?"</strong> every time.
       </div>
 
