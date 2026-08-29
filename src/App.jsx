@@ -764,7 +764,7 @@ function IntroBlock({ reportId }) {
       )}
       <div style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}88, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 10, padding: "20px 24px", marginBottom: 28 }}>
         {text.split("\n\n").map((para, i) => (
-          <p key={i} style={{ fontSize: 15, color: MUTED, lineHeight: 1.8, margin: i > 0 ? "12px 0 0" : 0 }}>{para}</p>
+          <p key={i} style={{ fontSize: 15, color: WHITE, lineHeight: 1.8, margin: i > 0 ? "12px 0 0" : 0 }}>{para}</p>
         ))}
       </div>
     </>
@@ -2074,7 +2074,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                             {error && <div style={{ background: "#1a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
 
               {Object.keys(reports).length > 0 && (
-                <div className="no-print" style={{ display: "flex", alignItems: "flex-start", gap: 12, background: `linear-gradient(135deg, ${BLUE_DEEP}, ${BLUE_MID})`, border: `1px solid ${BLUE_BRIGHT}66`, borderRadius: 9, padding: "15px 18px", marginBottom: 16 }}>`
+                <div className="no-print" style={{ display: "flex", alignItems: "flex-start", gap: 12, background: `linear-gradient(135deg, ${BLUE_DEEP}, ${BLUE_MID})`, border: `1px solid ${BLUE_BRIGHT}66`, borderRadius: 9, padding: "15px 18px", marginBottom: 16 }}>
                   <span style={{ color: "#f5c842", fontSize: 17, lineHeight: 1, marginTop: 1 }}>↓</span>
                   <div style={{ fontSize: 13.5, lineHeight: 1.6, color: MUTED }}>
                     <strong style={{ color: WHITE }}>These reports live only in this tab.</strong> Save yours as a PDF before you close it — Nugget never stores a copy, so your network's data stays private.
