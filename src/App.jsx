@@ -73,7 +73,7 @@ const REPORTS = [
     tag: "GOLD",
     subtitle: "Is your profile ready to convert?",
     description: "If a perfect prospect landed on your profile right now — would they stay or bounce?",
-        files: ["Profile", "Skills", "Endorsements_Received"],
+        files: ["Profile", "Skills", "Endorsements_Received", "Positions"],
     free: false,
   },
   {
@@ -223,6 +223,7 @@ DATA STRUCTURE — use these exact column names:
 - Profile.csv: one row with columns Headline, Summary, Industry
 - Skills.csv: one column "Name" — each row is a skill
 - Endorsements_Received: each row has WHO (endorser name), SKILL (skill endorsed), DATE (endorsement date). Already filtered to accepted endorsements only — use all rows as signal.
+- Positions: each row has Company Name, Title, Description, Location, Started On, Finished On — the founder's own employment history, most recent role(s) first. This is what the Experience item below must be grounded in.
 If Headline or Summary exist but are empty, flag as a critical gap.
 
 ## Profile Scorecard
@@ -230,12 +231,12 @@ Walk the profile in the order a visitor actually scans it, top to bottom. Each i
 
 1. **Photo, name, and tagline** — does it say what you do before it gets cut off? Fold in keyword suggestions here (see below).
 2. **About section** — reads like a resume (job history) or explains the transformation you provide? Fold in keyword suggestions here.
-3. **Experience** — reinforces the positioning, or dilutes it with unrelated history? Fold in keyword suggestions here.
+3. **Experience** — using the actual Positions data (titles, descriptions, company names), does the listed history reinforce the current positioning, or dilute it with unrelated or outdated roles? Name the specific role(s) you mean — never a generic "your experience section." Fold in keyword suggestions here.
 4. **Skills** — pinned skills should match ICP search language; archive/deprioritize resume-style skills that don't serve a BD-optimized profile. Fold in keyword suggestions here.
 
 State the keyword framing once, near the top of this section, not re-explained per item: "A few suggestions for the language your ideal clients likely use when they're stuck and looking for help — worth working into your profile and your content." This is an educated guess, not verified search data — treat it that way. For every item above, add a quick pair: "Already showing up: [terms] / Worth adding: [terms]."
 
-If _meta.Endorsements_shown is less than _meta.Endorsements_total, mention the actual sample size exactly once — inline within the Skills item where endorsements are discussed. Do not also add a separate closing note repeating it; one mention only.
+If _meta.Endorsements_Received_shown is less than _meta.Endorsements_Received_total, mention the actual sample size exactly once — inline within the Skills item where endorsements are discussed. Do not also add a separate closing note repeating it; one mention only.
 
 ## The Bottom Line
 One short paragraph: "If you only do two things this week, start with X and Y — those give you the most return on your time." Pull X and Y from whichever two Scorecard items scored Needs Attention with the highest BD impact. Include any execution detail that matters (e.g. test a headline revision on a private browser to confirm it renders at full length on mobile).
