@@ -945,7 +945,7 @@ function LineUpReport({ connections }) {
             const url = c["URL"] || "";
             return (
               <div key={i} style={{ display: "grid", gridTemplateColumns: "minmax(180px, 1.4fr) minmax(160px, 1.1fr) minmax(160px, 1.1fr) 110px", alignItems: "center", gap: 16, background: "#0a1628", border: `1px solid ${BORDER}`, borderRadius: 10, padding: "14px 16px", marginBottom: 8 }}>
-                                <div style={{ fontSize: 14, fontWeight: 700, color: BLUE_BRIGHT }}>
+                                <div style={{ fontSize: 14, fontWeight: 700, color: WHITE }}>
                   {url ? <a href={url} target="_blank" rel="noreferrer" style={{ color: BLUE_BRIGHT, textDecoration: "none" }}>{name} ↗</a> : name}
                 </div>
                 <div style={{ fontSize: 13, color: WHITE }}>{title}</div>
