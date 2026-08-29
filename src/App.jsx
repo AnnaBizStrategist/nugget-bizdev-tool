@@ -1747,13 +1747,15 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     ))}
                   </div>
                 )}
-                {connCount > 0 && (
-                  <div style={{ textAlign: "center", padding: "16px 0 4px" }}>
-                                        <p style={{ fontSize: 15, color: WHITE, marginBottom: 12 }}>✅ Your data is loaded and ready. Check out The Line-Up instantly — no waiting — or scroll down to generate your other reports.</p>
-                  </div>
-                )}
-               
-               </div>
+                               </div>
+
+              {connCount > 0 && (
+                <div style={{ textAlign: "center", padding: "32px 0 8px" }}>
+                  <div style={{ fontSize: 42, color: BLUE_BRIGHT, lineHeight: 1, marginBottom: 10 }}>↓</div>
+                  <p style={{ fontSize: 18, fontWeight: 700, color: WHITE, fontFamily: "Georgia, serif", marginBottom: 6 }}>Your data's in and ready.</p>
+                  <p style={{ fontSize: 15, color: MUTED }}>The Open Door and The Line-Up are ready right now, no waiting — start below.</p>
+                </div>
+              )}
 
               {error && <div style={{ background: "#1a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
               <Divider />
