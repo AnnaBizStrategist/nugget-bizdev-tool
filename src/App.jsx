@@ -2074,9 +2074,9 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                             {error && <div style={{ background: "#1a0a0a", border: "1px solid #8B0000", borderRadius: 8, padding: "12px 16px", color: "#ff8080", fontSize: 13, marginBottom: 16 }}>{error}</div>}
 
               {Object.keys(reports).length > 0 && (
-                <div className="no-print" style={{ display: "flex", alignItems: "flex-start", gap: 12, background: DARK, border: `1px solid ${BORDER}`, borderLeft: "3px solid #C9A84C", borderRadius: 9, padding: "13px 16px", marginBottom: 16 }}>
-                  <span style={{ color: "#f5c842", fontSize: 15, lineHeight: 1, marginTop: 1 }}>↓</span>
-                  <div style={{ fontSize: 12.5, lineHeight: 1.55, color: MUTED }}>
+                <div className="no-print" style={{ display: "flex", alignItems: "flex-start", gap: 12, background: `linear-gradient(135deg, ${BLUE_DEEP}, ${BLUE_MID})`, border: `1px solid ${BLUE_BRIGHT}66`, borderRadius: 9, padding: "15px 18px", marginBottom: 16 }}>`
+                  <span style={{ color: "#f5c842", fontSize: 17, lineHeight: 1, marginTop: 1 }}>↓</span>
+                  <div style={{ fontSize: 13.5, lineHeight: 1.6, color: MUTED }}>
                     <strong style={{ color: WHITE }}>These reports live only in this tab.</strong> Save yours as a PDF before you close it — Nugget never stores a copy, so your network's data stays private.
                   </div>
                 </div>
@@ -2084,7 +2084,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
 
               {reports[activeReport] && activeReport !== "gold" || (activeReport === "gold" && reports.gold) ? (
                 <div className="no-print" style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
-                  <button onClick={() => window.print()} style={{ padding: "7px 18px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
+                  <button onClick={() => window.print()} style={{ padding: "11px 24px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>`
                     <span>↓</span> Save as PDF
                   </button>
                 </div>
