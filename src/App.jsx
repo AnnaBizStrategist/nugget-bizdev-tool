@@ -181,8 +181,7 @@ People who match the ICP but have ZERO message history — never had a first con
 1. What this section is and why it matters: a quick hello goes a long way, start a real conversation, don't be pitchy or sound weird, just be human.
 2. One concrete way in: if something they posted actually resonated, mention it directly ("Hey, your post about [topic] today was great, I've had the same experience...") — or just leave a comment on the post itself. Keep it real, don't reference something that didn't actually mean anything to you.
 
-Give each person here the same 1-2 line "why" treatment as the main list. Never mention a message count, exchange, or contact date for anyone in this section — if you find yourself about to write one, that person belongs in the main list instead, not here.
-
+Give each person here the same 1-2 line "why" treatment as the main list, and include how long they've been connected (e.g. "connected since 2019") to show the real gap. Never mention a message count, an exchange, or anything about a message/contact date — that would mean they don't actually have zero message history, and belong in the main list instead, not here.
 Use real names. Be direct. Make every recommendation immediately actionable.`,
 
     hidden: `You are an advocacy analyst. Generate "The Hidden Nuggets Report" — helping the founder get more specific value from people they already have a close relationship with, and see clearly what they can offer those people in return. This is not one-way extraction.
