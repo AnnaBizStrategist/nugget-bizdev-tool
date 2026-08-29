@@ -760,9 +760,9 @@ function IntroBlock({ reportId }) {
   return (
     <>
       {caveat && (
-        <p style={{ fontSize: 13, color: WHITE, lineHeight: 1.6, marginBottom: 14, fontStyle: "italic" }}>{caveat}</p>
+                <p style={{ fontSize: 13, color: WHITE, lineHeight: 1.6, marginBottom: 20, fontStyle: "italic" }}>{caveat}</p>
       )}
-      <div style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}88, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 10, padding: "20px 24px", marginBottom: 28 }}>
+            <div style={{ background: DARK_CARD, borderLeft: `3px solid ${BLUE_BRIGHT}`, borderRadius: 4, padding: "18px 22px", marginBottom: 36 }}>
         {text.split("\n\n").map((para, i) => (
           <p key={i} style={{ fontSize: 15, color: WHITE, lineHeight: 1.8, margin: i > 0 ? "12px 0 0" : 0 }}>{para}</p>
         ))}
