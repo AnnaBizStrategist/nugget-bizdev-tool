@@ -385,8 +385,6 @@ A realistic, prioritized plan broken into three phases.
 - [Action]
 - [Action]
 
-## Next Steps
-Their prioritized action list. No timeline — their cadence. Max 7 items, ranked by impact.`,
 };
 
 // ── Report Intros ─────────────────────────────────────────────────────────────
