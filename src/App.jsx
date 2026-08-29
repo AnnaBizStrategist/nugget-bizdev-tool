@@ -493,7 +493,7 @@ async function callClaudeGN(systemPrompt, data, reportsContext, retries = 3, onR
     system: systemPrompt,
     messages: [{
       role: "user",
-      content: `Here is the LinkedIn export data:\n\n${JSON.stringify(data, null, 2)}\n\n---\n\nHere are the 5 free reports already generated for this founder:\n\n${reportsContext}\n\nGenerate the Gold Nugget report now. Use these reports as your primary source. Use real names and make every recommendation immediately actionable.`,
+      content: `Here is the LinkedIn export data:\n\n${JSON.stringify(data, null, 2)}\n\n---\n\nHere are the 5 reports already generated for this founder:\n\n${reportsContext}\n\nGenerate the Gold Nugget report now. Use these reports as your primary source. Use real names and make every recommendation immediately actionable.`,
     }],
   });
   for (let attempt = 0; attempt < retries; attempt++) {
@@ -2041,7 +2041,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   if (generating === "gold")   statusText = "⏳ Generating...";
                   else if (reports.gold)        statusText = "✓ Complete";
                   else if (priorReportsComplete) statusText = "✦ Ready to generate";
-                  else                          statusText = "Complete your reports first";
+                  else                          statusText = "Complete all 5 reports first";
                 } else {
                   if (generating === r.id)  statusText = `⏳ Generating...`;
                   else if (reports[r.id])   statusText = "✓ Complete";
@@ -2092,7 +2092,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
 
               <div style={{ marginBottom: 22, paddingBottom: 16, borderBottom: `1px solid ${BORDER}` }}>
                 <div style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", marginBottom: 4 }}>{activeReportMeta?.name}</div>
-                <div style={{ fontSize: 12, color: MUTED }}>{activeReportMeta?.subtitle}</div>
+                <div style={{ fontSize: 13, color: MUTED }}>{activeReportMeta?.subtitle}</div>
               </div>
 
               {/* Gold Nugget panel */}
