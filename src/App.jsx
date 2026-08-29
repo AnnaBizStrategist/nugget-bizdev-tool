@@ -973,7 +973,7 @@ function OpenDoorReport({ invitations }) {
     if (days === null) return null;
     if (days < 30) return { label: "Fresh", color: BLUE_BRIGHT, bg: BLUE_BRIGHT + "22", border: BLUE_BRIGHT + "55" };
     if (days <= 60) return { label: "Worth a nudge", color: BLUE_LIGHT, bg: BLUE_LIGHT + "1f", border: BLUE_LIGHT + "4d" };
-    return { label: "Consider letting go", color: MUTED, bg: MUTED + "14", border: BORDER };
+    return { label: "Consider letting go", color: MUTED, bg: MUTED + "14", border: MUTED + "55" };
   };
 
   const OpenDoorRow = ({ name, days, url, note, showBadge, isLast }) => {
