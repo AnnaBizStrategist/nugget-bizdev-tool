@@ -2084,7 +2084,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
 
               {reports[activeReport] && activeReport !== "gold" || (activeReport === "gold" && reports.gold) ? (
                 <div className="no-print" style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
-                  <button onClick={() => window.print()} style={{ padding: "11px 24px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>`
+                                    <button onClick={() => window.print()} style={{ padding: "11px 24px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
                     <span>↓</span> Save as PDF
                   </button>
                 </div>
