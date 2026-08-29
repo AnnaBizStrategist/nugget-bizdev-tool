@@ -764,7 +764,7 @@ function IntroBlock({ reportId }) {
       )}
       <div style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}88, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 10, padding: "20px 24px", marginBottom: 28 }}>
         {text.split("\n\n").map((para, i) => (
-          <p key={i} style={{ fontSize: 14, color: MUTED, lineHeight: 1.8, margin: i > 0 ? "12px 0 0" : 0 }}>{para}</p>
+          <p key={i} style={{ fontSize: 15, color: MUTED, lineHeight: 1.8, margin: i > 0 ? "12px 0 0" : 0 }}>{para}</p>
         ))}
       </div>
     </>
@@ -778,7 +778,7 @@ function ReportContent({ text }) {
       {text.split("\n").map((line, i) => {
         if (line.startsWith("## ")) return <h3 key={i} style={{ color: BLUE_BRIGHT, fontSize: 16, fontWeight: 700, marginTop: 28, marginBottom: 10, letterSpacing: "0.08em", textTransform: "uppercase", borderLeft: "3px solid #41a1e8", paddingLeft: 10, paddingBottom: 4 }}>{line.replace("## ", "")}</h3>;
         if (line.startsWith("## ")) return <h3 key={i} style={{ color: BLUE_BRIGHT, fontSize: 16, fontWeight: 700, marginTop: 28, marginBottom: 10, letterSpacing: "0.08em", textTransform: "uppercase", borderLeft: "3px solid #41a1e8", paddingLeft: 10, paddingBottom: 4 }}>{line.replace("## ", "")}</h3>;
-        if (line.startsWith("### ")) return <h4 key={i} style={{ color: BLUE_LIGHT, fontSize: 13, fontWeight: 700, marginTop: 18, marginBottom: 6 }}>{line.replace("### ", "")}</h4>;
+        if (line.startsWith("### ")) return <h4 key={i} style={{ color: BLUE_LIGHT, fontSize: 14, fontWeight: 700, marginTop: 18, marginBottom: 6 }}>{line.replace("### ", "")}</h4>;
         const bold = line.replace(/\*\*(.*?)\*\*/g, `<strong style="color:${BLUE_LIGHT}">$1</strong>`);
         if (line.match(/^\d+\./)) return <div key={i} style={{ display: "flex", gap: 12, margin: "8px 0", paddingLeft: 8 }}><span style={{ color: BLUE_BRIGHT, fontWeight: 700, minWidth: 20, fontSize: 13 }}>{line.match(/^\d+/)[0]}.</span><p style={{ color: WHITE, margin: 0, fontSize: 14, flex: 1 }} dangerouslySetInnerHTML={{ __html: bold.replace(/^\d+\./, "") }} /></div>;
                 if (line.startsWith("- [ ] ")) return <div key={i} style={{ display: "flex", gap: 10, margin: "8px 0", paddingLeft: 8, alignItems: "flex-start" }}><span style={{ width: 15, height: 15, border: `2px solid ${BLUE_BRIGHT}`, borderRadius: 3, flexShrink: 0, marginTop: 2, display: "block" }} /><p style={{ color: WHITE, margin: 0, fontSize: 14 }} dangerouslySetInnerHTML={{ __html: bold.replace(/^- \[ \] /, "") }} /></div>;
@@ -892,7 +892,7 @@ function LineUpReport({ connections }) {
       </div>
 
       {viewMode === "company" && (
-        <div style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}88, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 10, padding: "16px 20px", marginBottom: 22, fontSize: 13.5, color: MUTED, lineHeight: 1.65 }}>
+        <div style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}88, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 10, padding: "16px 20px", marginBottom: 22, fontSize: 15, color: WHITE, lineHeight: 1.7 }}>`
           Multiple connections at the same company are real leverage — more than one way in, or someone already inside who can vouch for you and make the introduction. Generic entries like Self-Employed and Freelance are filtered out — they're not a company, just noise.
         </div>
       )}
