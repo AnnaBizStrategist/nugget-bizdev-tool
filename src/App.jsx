@@ -1681,8 +1681,8 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
 
               <Divider />
 
-                            {/* ── How It Works ── */}
-              <div style={{ marginBottom: 0 }}>
+                                                        {/* ── How It Works ── */}
+              <div id="how-it-works" style={{ marginBottom: 0 }}>
                 <p style={{ fontSize: 22, color: WHITE, fontWeight: 700, textAlign: "center", marginBottom: 32, fontFamily: "Georgia, serif", letterSpacing: "-0.3px" }}>
                   Your Nuggets are waiting — Just 3 easy steps to find them...
                 </p>
@@ -2053,7 +2053,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               <Divider />
 
               {/* ── Anna section ── */}
-                            <div className="bio-grid" style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 48, alignItems: "start", marginBottom: 40 }}>
+                                          <div id="about" className="bio-grid" style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 48, alignItems: "start", marginBottom: 40 }}>
                 <div style={{ borderRadius: 16, overflow: "hidden", position: "relative", border: `1px solid ${BORDER}` }}>
                   <img src={ANNA_PHOTO} alt="Anna Ludwinowski" style={{ width: "100%", display: "block" }} />
                   <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "linear-gradient(transparent, rgba(10,22,40,0.92))", padding: "32px 16px 18px", textAlign: "center" }}>
