@@ -1307,7 +1307,8 @@ export default function App() {
     return;
   }
   if (generating) return;
-  if (!emailSubmitted) { setPendingReportId(reportId); setShowEmailModal(true); return; }
+    if (!emailSubmitted) { setPendingReportId(reportId); setShowEmailModal(true); return; }
+  if (!icpSubmitted) { setPendingReportId(reportId); setShowICPModal(true); return; }
   setGenerating(reportId); setActiveReport(reportId); setStep("reports"); setError(null); setRetryMessage(null);
   try {
     const ownName = `${parsedData["Profile"]?.[0]?.["First Name"] || ""} ${parsedData["Profile"]?.[0]?.["Last Name"] || ""}`.trim();
