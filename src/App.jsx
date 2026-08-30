@@ -2249,23 +2249,23 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
       {/* ── Email capture modal ── */}
       {showEmailModal && (
         <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(2,8,18,0.97)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: 24 }}>
-          <div style={{ background: `linear-gradient(160deg, #0f2040 0%, #0a1628 100%)`, border: `1px solid ${BLUE_BRIGHT}66`, borderRadius: 20, padding: "40px 48px", maxWidth: 480, width: "100%", boxShadow: `0 0 80px rgba(65,161,232,0.15), 0 24px 60px rgba(0,0,0,0.8)`, animation: "fadeIn 0.2s ease-out" }}>
-            <h2 style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, textAlign: "center", marginBottom: 8, lineHeight: 1.3 }}>Where should we send your personalized Nugget reports?</h2>
-            <p style={{ fontSize: 15, color: WHITE, textAlign: "center", marginBottom: 28, lineHeight: 1.6 }}>Your reports are ready to generate. Enter your details and we'll deliver them straight to your inbox.</p>
-            <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 20 }}>
+                    <div style={{ background: `linear-gradient(160deg, #0f2040 0%, #0a1628 100%)`, border: `1px solid ${BLUE_BRIGHT}66`, borderRadius: 22, padding: "52px 56px", maxWidth: 520, width: "100%", boxShadow: `0 0 80px rgba(65,161,232,0.15), 0 24px 60px rgba(0,0,0,0.8)`, animation: "fadeIn 0.2s ease-out" }}>
+                    <h2 style={{ fontSize: 25, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, textAlign: "center", marginBottom: 14, lineHeight: 1.35 }}>Welcome to Nugget!</h2>
+                        <p style={{ fontSize: 15.5, color: WHITE, textAlign: "center", marginBottom: 36, lineHeight: 1.7 }}>Enter your name and email to unlock your free reports below. Save each report as a PDF before you close this tab — so you can refer to them after.</p>
+                        <div style={{ display: "flex", flexDirection: "column", gap: 20, marginBottom: 30 }}>
               <div>
-                <label style={{ fontSize: 12, color: MUTED, display: "block", marginBottom: 6, letterSpacing: "0.06em", textTransform: "uppercase" }}>First Name</label>
+                                <label style={{ fontSize: 12.5, color: MUTED, display: "block", marginBottom: 8, letterSpacing: "0.06em", textTransform: "uppercase" }}>First Name</label>
                 <input type="text" placeholder="Your first name" value={emailName} onChange={e => setEmailName(e.target.value)} style={{ width: "100%", padding: "12px 16px", background: "#0a1628", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 8, color: WHITE, fontSize: 15 }} />
               </div>
               <div>
-                <label style={{ fontSize: 12, color: MUTED, display: "block", marginBottom: 6, letterSpacing: "0.06em", textTransform: "uppercase" }}>Email Address</label>
+                                <label style={{ fontSize: 12.5, color: MUTED, display: "block", marginBottom: 8, letterSpacing: "0.06em", textTransform: "uppercase" }}>First Name</label>
                 <input type="email" placeholder="your@email.com" value={emailAddress} onChange={e => setEmailAddress(e.target.value)} onKeyDown={e => e.key === "Enter" && submitEmail()} style={{ width: "100%", padding: "12px 16px", background: "#0a1628", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 8, color: WHITE, fontSize: 15 }} />
               </div>
             </div>
-            <button onClick={submitEmail} disabled={emailSubmitting || !emailName.trim() || !emailAddress.trim()} style={{ width: "100%", padding: "14px 24px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", borderRadius: 10, color: WHITE, fontSize: 16, fontWeight: 700, cursor: emailSubmitting ? "not-allowed" : "pointer", fontFamily: "Georgia, serif", marginBottom: 12, opacity: emailSubmitting ? 0.6 : 1 }}>
+                        <button onClick={submitEmail} disabled={emailSubmitting || !emailName.trim() || !emailAddress.trim()} style={{ width: "100%", padding: "16px 24px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", borderRadius: 10, color: WHITE, fontSize: 16, fontWeight: 700, cursor: emailSubmitting ? "not-allowed" : "pointer", fontFamily: "Georgia, serif", marginBottom: 16, opacity: emailSubmitting ? 0.6 : 1 }}>
               {emailSubmitting ? "Getting your Nuggets ready..." : "Get My Reports →"}
             </button>
-                        <p style={{ fontSize: 11, color: MUTED, textAlign: "center" }}>No spam. No sharing. Just your personalized Nugget reports.</p>
+                                                <p style={{ fontSize: 12.5, color: MUTED, textAlign: "center", lineHeight: 1.5 }}>No spam. No sharing. Just the occasional Nugget update.</p>
           </div>
         </div>
       )}
