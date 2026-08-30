@@ -1604,17 +1604,15 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     ))}
                   </div>
                 ))}
-              </div>
-                
+                            </div>
+
+              <Divider />
+
                                         {/* ── The Gold Nugget × BizDev Readiness Score ── */}
               <div style={{ marginBottom: 0 }}>
-                <div style={{ textAlign: "center", marginBottom: 40 }}>
-                  <div style={{ fontSize: 14, color: "#C9A84C", letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>The Seventh Report</div>
-                  <h2 style={{ fontSize: 34, fontFamily: "Georgia, serif", color: WHITE, marginBottom: 20, lineHeight: 1.25 }}>
-                    <span style={{ fontWeight: 400 }}>And then there's</span><br />
-                    <span style={{ fontWeight: 700 }}>The Gold Nugget.</span>
-                  </h2>
-                  <p style={{ fontSize: 15, color: MUTED, maxWidth: 560, margin: "0 auto", lineHeight: 1.75 }}>
+                <div style={{ textAlign: "center", padding: "80px 24px 88px" }}>
+                  <div style={{ fontSize: 14, color: "#C9A84C", letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 28 }}>The Seventh Report</div>
+                  <h2 style={{ fontSize: 37, fontFamily: "Georgia, serif", color: WHITE, marginBottom: 28, lineHeight: 1.3 }}>
                     Seven reports tell you who's worth your time and why. The Gold Nugget tells you what to actually do about it.
                   </p>
                 </div>
@@ -1635,8 +1633,12 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   </div>
                 </div>
 
-                <div style={{ textAlign: "center", marginBottom: 48 }}>
-                  <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>Nugget's Signature Metric</div>
+                              </div>
+
+              <Divider />
+
+                <div style={{ textAlign: "center", padding: "64px 24px 56px" }}>
+                  <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 24 }}>Nugget's Signature Metric</div>
                   <h2 style={{ fontSize: 34, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 28, lineHeight: 1.2 }}>Meet Your BizDev Readiness Score.</h2>
                   <p style={{ fontSize: 16, color: MUTED, maxWidth: 560, margin: "0 auto 24px", lineHeight: 1.75 }}>
                     Every time you run The Gold Nugget, you get a score out of 100 that shows you exactly where you stand — and what to do to raise it.
@@ -1881,10 +1883,14 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   );
                 })()}
 
+                               })()}
+
+              <Divider />
+
                {/* ── Pricing section ── */}
-               <div id="pricing-section" style={{ marginTop: 60, textAlign: "center" }}>
-                  <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 16 }}>Pricing</div>
-                  <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 16 }}>
+               <div id="pricing-section" style={{ textAlign: "center", padding: "64px 24px 56px" }}>
+                  <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 24 }}>Pricing</div>
+                  <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 24 }}>
                     Start free. Then unlock the <span style={{ color: "#C9A84C" }}>Gold.</span>
                   </h2>
                   <p style={{ fontSize: 13, color: "#E8A000", fontWeight: 700, marginBottom: 48 }}>Founder pricing — lock it in before Oct 9.</p>
