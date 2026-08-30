@@ -1599,7 +1599,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                           {r.free ? "FREE" : "GOLD"}
                         </div>
                         <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, fontFamily: "Georgia, serif", marginBottom: 10 }}>{r.name}</div>
-                        <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.65 }}>{r.pain}</div>
+                        <div style={{ fontSize: 15, color: MUTED, lineHeight: 1.6 }}>{r.pain}</div>
                       </div>
                     ))}
                   </div>
@@ -1810,7 +1810,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                       </div>
                       <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, marginBottom: 3, fontFamily: "Georgia, serif" }}>{r.name}</div>
                       <div style={{ fontSize: 11, color: MUTED, marginBottom: 7, textTransform: "uppercase", letterSpacing: "0.05em" }}>{r.subtitle}</div>
-                      <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.5, marginBottom: 14, flex: 1 }}>{r.description}</div>
+                      <div style={{ fontSize: 15, color: MUTED, lineHeight: 1.5, marginBottom: 14, flex: 1 }}>{r.description}</div>
                                             {unlocked ? (
                                                 (r.computed || reports[r.id])
                                                     ? <button style={{ padding: "8px 16px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { if (!emailSubmitted) { setPendingReportId(r.id); setShowEmailModal(true); return; } setActiveReport(r.id); setStep("reports"); }}>✓ View Report</button>
@@ -1836,7 +1836,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                       </div>
                       <div style={{ fontSize: 19, fontWeight: 700, color: WHITE, marginBottom: 4, fontFamily: "Georgia, serif" }}>{r.name}</div>
                       <div style={{ fontSize: 11, color: MUTED, marginBottom: 9, textTransform: "uppercase", letterSpacing: "0.05em" }}>{r.subtitle}</div>
-                      <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.5, marginBottom: 16, flex: 1 }}>{r.description}</div>
+                      <div style={{ fontSize: 15, color: MUTED, lineHeight: 1.5, marginBottom: 16, flex: 1 }}>{r.description}</div>
                                             {unlocked ? (
                                                 (r.computed || reports[r.id])
                           ? <button style={{ padding: "10px 18px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { setActiveReport(r.id); setStep("reports"); }}>✓ View Report</button>
