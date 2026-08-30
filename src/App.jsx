@@ -1493,8 +1493,9 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
           .header-tagline, .header-divider { display: none !important; }
                     .fix-grid { grid-template-columns: 1fr !important; }
           .bio-grid { grid-template-columns: 1fr !important; }
-          .free-banner-wide { display: none !important; }
+                    .free-banner-wide { display: none !important; }
           .free-banner-narrow { display: flex !important; }
+          .header-nav-links { display: none !important; }
         }
       `}</style>
 
@@ -1506,9 +1507,16 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
           <div className="header-tagline" style={{ fontSize: 13, color: MUTED, letterSpacing: "0.03em", lineHeight: 1.4 }}>Turn your network into your pipeline. No cold outreach required.</div>
           {isTest && <div style={{ padding: "3px 10px", background: "#2a1a00", border: "1px solid #E8A000", borderRadius: 4, fontSize: 11, color: "#E8A000", fontWeight: 700, letterSpacing: "0.06em" }}>TEST MODE</div>}
         </div>
-        <nav style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
+                <nav style={{ marginLeft: "auto", display: "flex", gap: 8, alignItems: "center" }}>
           {step === "upload" ? (
-                        <button style={{ ...primaryBtn, padding: "8px 20px", fontSize: 13 }} onClick={scrollToUpload}>Find My Next Client →</button>
+            <>
+              <div className="header-nav-links" style={{ display: "flex", gap: 22, marginRight: 8 }}>
+                <a style={{ fontSize: 13, color: MUTED, fontWeight: 600, cursor: "pointer", textDecoration: "none" }} onClick={() => { const el = document.getElementById("how-it-works"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>How It Works</a>
+                <a style={{ fontSize: 13, color: MUTED, fontWeight: 600, cursor: "pointer", textDecoration: "none" }} onClick={() => { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>Pricing</a>
+                <a style={{ fontSize: 13, color: MUTED, fontWeight: 600, cursor: "pointer", textDecoration: "none" }} onClick={() => { const el = document.getElementById("about"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>About</a>
+              </div>
+              <button style={{ ...primaryBtn, padding: "8px 20px", fontSize: 13 }} onClick={scrollToUpload}>Find My Next Client →</button>
+            </>
           ) : (
             <>
               <button style={{ padding: "6px 16px", borderRadius: 6, border: `1px solid ${BORDER}`, background: "transparent", color: MUTED, cursor: "pointer", fontSize: 13 }} onClick={() => setStep("upload")}>Home</button>
