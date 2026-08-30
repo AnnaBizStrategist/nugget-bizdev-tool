@@ -1639,8 +1639,9 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
 
                               </div>
 
-              <Divider />
+                            <Divider />
 
+              <div style={{ marginBottom: 0 }}>
                 <div style={{ textAlign: "center", padding: "64px 24px 56px" }}>
                   <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 24 }}>Nugget's Signature Metric</div>
                   <h2 style={{ fontSize: 34, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 28, lineHeight: 1.2 }}>Meet Your BizDev Readiness Score.</h2>
