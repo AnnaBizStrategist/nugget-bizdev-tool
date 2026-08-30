@@ -1394,7 +1394,11 @@ export default function App() {
     .then(res => res.json())
     .then(data => setCreditStatus(data))
     .catch(err => console.log("check-credits error:", err));
-  if (pending) { setPendingReportId(pending); setShowICPModal(true); }
+    if (pending) {
+    const pendingReport = REPORTS.find(r => r.id === pending);
+    if (pendingReport?.computed) { setActiveReport(pending); setStep("reports"); }
+    else { setPendingReportId(pending); setShowICPModal(true); }
+  }
 };
   
 const submitICP = () => {
@@ -1800,7 +1804,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                       <div style={{ fontSize: 13, color: MUTED, lineHeight: 1.5, marginBottom: 14, flex: 1 }}>{r.description}</div>
                                             {unlocked ? (
                                                 (r.computed || reports[r.id])
-                          ? <button style={{ padding: "8px 16px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { setActiveReport(r.id); setStep("reports"); }}>✓ View Report</button>
+                                                    ? <button style={{ padding: "8px 16px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { if (!emailSubmitted) { setPendingReportId(r.id); setShowEmailModal(true); return; } setActiveReport(r.id); setStep("reports"); }}>✓ View Report</button>
                           : <button style={{ padding: "8px 16px", background: generating === r.id ? BLUE_MID + "44" : `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: generating ? "not-allowed" : "pointer", width: "100%" }} onClick={() => runReport(r.id)} disabled={!!generating}>
                               {generating === r.id ? "⏳ Mining..." : "Generate Report"}
                             </button>
