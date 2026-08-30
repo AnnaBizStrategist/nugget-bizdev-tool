@@ -1496,13 +1496,12 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
         }
       `}</style>
 
-      {/* ── Header ── */}
-                      <div style={{ width: 1, height: 28, background: BORDER, flexShrink: 0 }} />
-          <div style={{ fontSize: 13, color: MUTED, letterSpacing: "0.03em", lineHeight: 1.4 }}>Turn your network into your pipeline. No cold outreach required.</div>
+            {/* ── Header ── */}
+      <header className="site-header" style={{ borderBottom: `1px solid ${BORDER}`, padding: "16px 40px", display: "flex", alignItems: "center", background: DARK_CARD, position: "sticky", top: 0, zIndex: 100 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <div style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, letterSpacing: "-0.5px", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", whiteSpace: "nowrap" }}>Nugget<span style={{ fontSize: 13, verticalAlign: "super", marginLeft: 1 }}>™</span></div>
-          <div style={{ width: 1, height: 28, background: BORDER, flexShrink: 0 }} />
-          <div style={{ fontSize: 13, color: MUTED, letterSpacing: "0.03em", lineHeight: 1.4 }}>Turn your network into your pipeline. No cold outreach required.</div>
+          <div className="header-divider" style={{ width: 1, height: 28, background: BORDER, flexShrink: 0 }} />
+          <div className="header-tagline" style={{ fontSize: 13, color: MUTED, letterSpacing: "0.03em", lineHeight: 1.4 }}>Turn your network into your pipeline. No cold outreach required.</div>
           {isTest && <div style={{ padding: "3px 10px", background: "#2a1a00", border: "1px solid #E8A000", borderRadius: 4, fontSize: 11, color: "#E8A000", fontWeight: 700, letterSpacing: "0.06em" }}>TEST MODE</div>}
         </div>
         <nav style={{ marginLeft: "auto", display: "flex", gap: 8 }}>
