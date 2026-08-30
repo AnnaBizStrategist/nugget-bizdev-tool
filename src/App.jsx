@@ -2258,7 +2258,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 <input type="text" placeholder="Your first name" value={emailName} onChange={e => setEmailName(e.target.value)} style={{ width: "100%", padding: "12px 16px", background: "#0a1628", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 8, color: WHITE, fontSize: 15 }} />
               </div>
               <div>
-                                <label style={{ fontSize: 12.5, color: MUTED, display: "block", marginBottom: 8, letterSpacing: "0.06em", textTransform: "uppercase" }}>First Name</label>
+                                <label style={{ fontSize: 12.5, color: MUTED, display: "block", marginBottom: 8, letterSpacing: "0.06em", textTransform: "uppercase" }}>Email Address</label>
                 <input type="email" placeholder="your@email.com" value={emailAddress} onChange={e => setEmailAddress(e.target.value)} onKeyDown={e => e.key === "Enter" && submitEmail()} style={{ width: "100%", padding: "12px 16px", background: "#0a1628", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 8, color: WHITE, fontSize: 15 }} />
               </div>
             </div>
