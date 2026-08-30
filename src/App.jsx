@@ -1487,11 +1487,18 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
 }
         .scroll-reveal         { opacity: 0; transform: translateY(32px); transition: opacity 0.65s ease, transform 0.65s ease; }
         .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+               * { box-sizing: border-box; margin: 0; padding: 0; }
+        @media (max-width: 640px) {
+          .site-header { padding: 12px 16px !important; }
+          .header-tagline, .header-divider { display: none !important; }
+          .fix-grid { grid-template-columns: 1fr !important; }
+          .bio-grid { grid-template-columns: 1fr !important; }
+        }
       `}</style>
 
       {/* ── Header ── */}
-      <header style={{ borderBottom: `1px solid ${BORDER}`, padding: "16px 40px", display: "flex", alignItems: "center", background: DARK_CARD, position: "sticky", top: 0, zIndex: 100 }}>
+                      <div style={{ width: 1, height: 28, background: BORDER, flexShrink: 0 }} />
+          <div style={{ fontSize: 13, color: MUTED, letterSpacing: "0.03em", lineHeight: 1.4 }}>Turn your network into your pipeline. No cold outreach required.</div>
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <div style={{ fontSize: 24, fontFamily: "Georgia, serif", fontWeight: 700, letterSpacing: "-0.5px", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", whiteSpace: "nowrap" }}>Nugget<span style={{ fontSize: 13, verticalAlign: "super", marginLeft: 1 }}>™</span></div>
           <div style={{ width: 1, height: 28, background: BORDER, flexShrink: 0 }} />
@@ -1584,7 +1591,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     { name: "The Outbound Report", free: false, pain: "Your LinkedIn activity is broadcasting something about you right now — are you paying\u00A0attention?" },
                   ] },
                 ].map((group, gi) => (
-                  <div key={gi} style={{ display: "grid", gridTemplateColumns: `repeat(${group.cols}, 1fr)`, gap: 16, marginBottom: gi === 0 ? 16 : 0 }}>
+                  <div key={gi} className="fix-grid" style={{ display: "grid", gridTemplateColumns: `repeat(${group.cols}, 1fr)`, gap: 16, marginBottom: gi === 0 ? 16 : 0 }}>
                     {group.items.map((r, i) => (
                       <div key={i} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "24px 22px", display: "flex", flexDirection: "column" }}>
                         <div style={{ display: "inline-block", padding: "2px 9px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.06em", background: r.free ? BLUE_MID + "33" : "#2a1a00", color: r.free ? BLUE_BRIGHT : "#E8A000", marginBottom: 12, width: "fit-content" }}>
@@ -1980,7 +1987,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               <Divider />
 
               {/* ── Anna section ── */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 48, alignItems: "start", marginBottom: 40 }}>
+                            <div className="bio-grid" style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 48, alignItems: "start", marginBottom: 40 }}>
                 <div style={{ borderRadius: 16, overflow: "hidden", position: "relative", border: `1px solid ${BORDER}` }}>
                   <img src={ANNA_PHOTO} alt="Anna Ludwinowski" style={{ width: "100%", display: "block" }} />
                   <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, background: "linear-gradient(transparent, rgba(10,22,40,0.92))", padding: "32px 16px 18px", textAlign: "center" }}>
