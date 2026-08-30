@@ -2012,7 +2012,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 </h2>
                 
                 <button style={{ ...primaryBtn, fontSize: 17, padding: "16px 44px", animation: "pulseCTA 2.5s ease-in-out infinite", marginTop: 24 }} onClick={scrollToUpload}>
-                  Get My Free Reports →
+                                    Find My Next Client →
                 </button>
               </div>
 
@@ -2293,7 +2293,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
 
       <footer style={{ borderTop: `1px solid ${BORDER}`, background: DARK_CARD, padding: "20px 40px", textAlign: "center", marginTop: 40 }}>
   <p style={{ fontSize: 12, color: MUTED, margin: 0 }}>
-    © 2025 Nugget™ &nbsp;·&nbsp;
+    © 2026 Nugget™ &nbsp;·&nbsp;
     <a href="/privacy.html" style={{ color: BLUE_BRIGHT, textDecoration: "none" }}>Privacy Policy</a> &nbsp;·&nbsp;
 <a href="/terms.html" style={{ color: BLUE_BRIGHT, textDecoration: "none" }}>Terms of Service</a> &nbsp;·&nbsp;
 <a href="mailto:hello@annaludwinowski.com" style={{ color: BLUE_BRIGHT, textDecoration: "none" }}>hello@annaludwinowski.com</a>
