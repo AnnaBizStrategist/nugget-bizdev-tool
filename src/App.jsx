@@ -1491,8 +1491,10 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
         @media (max-width: 640px) {
           .site-header { padding: 12px 16px !important; }
           .header-tagline, .header-divider { display: none !important; }
-          .fix-grid { grid-template-columns: 1fr !important; }
+                    .fix-grid { grid-template-columns: 1fr !important; }
           .bio-grid { grid-template-columns: 1fr !important; }
+          .free-banner-wide { display: none !important; }
+          .free-banner-narrow { display: flex !important; }
         }
       `}</style>
 
@@ -1886,8 +1888,8 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     Start free. Then unlock the <span style={{ color: "#C9A84C" }}>Gold.</span>
                   </h2>
                   <p style={{ fontSize: 13, color: "#E8A000", fontWeight: 700, marginBottom: 48 }}>Founder pricing — lock it in before Oct 9.</p>
-                                                                       <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "20px 28px", display: "flex", alignItems: "flex-start", flexWrap: "wrap", rowGap: 16, gap: 24, maxWidth: 1040, margin: "0 auto 40px" }}>
-                                                            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 4, flexShrink: 0, minWidth: 160 }}>
+                                                                                         <div className="free-banner-wide" style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "20px 28px", display: "flex", alignItems: "flex-start", flexWrap: "wrap", rowGap: 16, gap: 24, maxWidth: 1040, margin: "0 auto 40px" }}>
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 4, flexShrink: 0, minWidth: 160 }}>
                       <div style={{ display: "flex", alignItems: "center", gap: 10, height: 30 }}>
                         <span style={{ padding: "3px 10px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", background: BLUE_MID + "33", color: BLUE_BRIGHT }}>FREE</span>
                         <span style={{ fontFamily: "Georgia, serif", fontSize: 26, fontWeight: 700, color: WHITE, lineHeight: 1 }}>$0</span>
@@ -1898,20 +1900,68 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     <div style={{ display: "flex", gap: 9, flex: 1, minWidth: 140 }}>
                       <span style={{ display: "flex", alignItems: "center", height: 30, color: BLUE_BRIGHT, fontWeight: 700 }}>✓</span>
                       <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                        <div style={{ display: "flex", alignItems: "center", height: 30, fontSize: 13, fontWeight: 700, color: WHITE, whiteSpace: "nowrap" }}>The Open Door</div>
+                        <div style={{ fontSize: 11.5, color: MUTED, lineHeight: 1.4, textAlign: "left" }}>See who's already waiting on a yes from you.</div>
+                      </div>
+                    </div>
+                    <div style={{ display: "flex", gap: 9, flex: 1, minWidth: 140 }}>
+                      <span style={{ display: "flex", alignItems: "center", height: 30, color: BLUE_BRIGHT, fontWeight: 700 }}>✓</span>
+                      <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
                         <div style={{ display: "flex", alignItems: "center", height: 30, fontSize: 13, fontWeight: 700, color: WHITE, whiteSpace: "nowrap" }}>The Line-Up</div>
-                        <div style={{ fontSize: 11.5, color: MUTED, lineHeight: 1.4 }}>Your network, sorted by role.</div>
+                        <div style={{ fontSize: 11.5, color: MUTED, lineHeight: 1.4, textAlign: "left" }}>Your network, sorted by role.</div>
                       </div>
                     </div>
                     <div style={{ display: "flex", gap: 9, flex: 1, minWidth: 140 }}>
                       <span style={{ display: "flex", alignItems: "center", height: 30, color: BLUE_BRIGHT, fontWeight: 700 }}>✓</span>
                       <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
                         <div style={{ display: "flex", alignItems: "center", height: 30, fontSize: 13, fontWeight: 700, color: WHITE, whiteSpace: "nowrap" }}>The Field Report</div>
-                        <div style={{ fontSize: 11.5, color: MUTED, lineHeight: 1.4 }}>Who's in your network, and what it's worth.</div>
+                        <div style={{ fontSize: 11.5, color: MUTED, lineHeight: 1.4, textAlign: "left" }}>Who's in your network, and what it's worth.</div>
                       </div>
                     </div>
-                    <button onClick={() => { const el = document.getElementById("upload-zone"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ padding: "11px 22px", background: "transparent", border: `1px solid ${BLUE_BRIGHT}`, color: BLUE_BRIGHT, borderRadius: 8, fontSize: 13, fontWeight: 700, whiteSpace: "nowrap", flexShrink: 0, marginLeft: 20, cursor: "pointer" }}>
-                            Start Free →
+                    <button onClick={() => { const el = document.getElementById("upload-zone"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ padding: "15px 34px", background: "transparent", border: `1px solid ${BLUE_BRIGHT}`, color: BLUE_BRIGHT, borderRadius: 8, fontSize: 14, fontWeight: 700, whiteSpace: "nowrap", flexShrink: 0, marginLeft: "auto", cursor: "pointer" }}>
+                      Get Started For Free Right Now
                     </button>
+                  </div>
+
+                  <div className="free-banner-narrow" style={{ display: "none", flexDirection: "column", alignItems: "stretch", background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "20px 24px", maxWidth: 1040, margin: "0 auto 40px" }}>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 24, rowGap: 16 }}>
+                      <div style={{ display: "flex", gap: 9, flex: 1, minWidth: 140 }}>
+                        <span style={{ display: "flex", alignItems: "center", height: 30, color: BLUE_BRIGHT, fontWeight: 700 }}>✓</span>
+                        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                          <div style={{ display: "flex", alignItems: "center", height: 30, fontSize: 13, fontWeight: 700, color: WHITE, whiteSpace: "nowrap" }}>The Open Door</div>
+                          <div style={{ fontSize: 11.5, color: MUTED, lineHeight: 1.4, textAlign: "left" }}>See who's already waiting on a yes from you.</div>
+                        </div>
+                      </div>
+                      <div style={{ display: "flex", gap: 9, flex: 1, minWidth: 140 }}>
+                        <span style={{ display: "flex", alignItems: "center", height: 30, color: BLUE_BRIGHT, fontWeight: 700 }}>✓</span>
+                        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                          <div style={{ display: "flex", alignItems: "center", height: 30, fontSize: 13, fontWeight: 700, color: WHITE, whiteSpace: "nowrap" }}>The Line-Up</div>
+                          <div style={{ fontSize: 11.5, color: MUTED, lineHeight: 1.4, textAlign: "left" }}>Your network, sorted by role.</div>
+                        </div>
+                      </div>
+                      <div style={{ display: "flex", gap: 9, flex: 1, minWidth: 140 }}>
+                        <span style={{ display: "flex", alignItems: "center", height: 30, color: BLUE_BRIGHT, fontWeight: 700 }}>✓</span>
+                        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+                          <div style={{ display: "flex", alignItems: "center", height: 30, fontSize: 13, fontWeight: 700, color: WHITE, whiteSpace: "nowrap" }}>The Field Report</div>
+                          <div style={{ fontSize: 11.5, color: MUTED, lineHeight: 1.4, textAlign: "left" }}>Who's in your network, and what it's worth.</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16, marginTop: 22, paddingTop: 20, borderTop: `1px solid ${BORDER}` }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
+                        <span style={{ visibility: "hidden" }} aria-hidden="true">✓</span>
+                        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 14, minWidth: 0 }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: 10, height: 30 }}>
+                            <span style={{ padding: "3px 10px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", background: BLUE_MID + "33", color: BLUE_BRIGHT }}>FREE</span>
+                            <span style={{ fontFamily: "Georgia, serif", fontSize: 26, fontWeight: 700, color: WHITE, lineHeight: 1 }}>$0</span>
+                          </div>
+                          <span style={{ fontSize: 11.5, color: MUTED, whiteSpace: "nowrap" }}>No credit card required</span>
+                        </div>
+                      </div>
+                      <button onClick={() => { const el = document.getElementById("upload-zone"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ padding: "15px 34px", background: "transparent", border: `1px solid ${BLUE_BRIGHT}`, color: BLUE_BRIGHT, borderRadius: 8, fontSize: 14, fontWeight: 700, whiteSpace: "nowrap", cursor: "pointer" }}>
+                        Get Started For Free Right Now
+                      </button>
+                    </div>
                   </div>
 
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20, maxWidth: 1040, margin: "0 auto" }}>
