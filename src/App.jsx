@@ -796,7 +796,7 @@ function UpgradeCTA({ text }) {
   return (
     <div style={{ background: `linear-gradient(135deg, #1a1200, ${DARK_CARD})`, border: "1px solid #C9A84C66", borderRadius: 12, padding: "24px 28px", marginTop: 28, textAlign: "center" }}>
       <p style={{ fontSize: 14, color: WHITE, lineHeight: 1.7, marginBottom: 18 }}>{text}</p>
-      <a href="https://buy.stripe.com/3cIcN64sBd54d5pf3r6kg0b" target="_blank" rel="noreferrer" style={{ display: "inline-block", padding: "12px 28px", background: "linear-gradient(135deg, #C9A84C, #f5c842)", color: "#0a1628", borderRadius: 8, fontSize: 14, fontWeight: 700, textDecoration: "none" }}>Unlock Gold — $29/month →</a>
+            <button onClick={() => { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ display: "inline-block", padding: "12px 28px", background: "linear-gradient(135deg, #C9A84C, #f5c842)", color: "#0a1628", borderRadius: 8, fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer" }}>See Pricing →</button>
     </div>
   );
 }
@@ -2252,7 +2252,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                             <div style={{ fontSize: 18, marginBottom: 8 }}>🔒</div>
                             <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, fontFamily: "Georgia, serif", marginBottom: 6 }}>Your full Warm List is waiting.</div>
                             <p style={{ fontSize: 13, color: MUTED, marginBottom: 20, lineHeight: 1.6 }}>Unlock Gold to see every warm contact — ranked, ready, and worth reaching out to.</p>
-                            <a href="https://buy.stripe.com/3cIcN64sBd54d5pf3r6kg0b" target="_blank" rel="noreferrer" style={{ display: "inline-block", padding: "12px 28px", background: `linear-gradient(135deg, #C9A84C, #f5c842)`, color: "#0a1628", borderRadius: 8, fontSize: 14, fontWeight: 700, textDecoration: "none" }}>Unlock Gold — $29/month →</a>
+                                                        <button onClick={() => { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ display: "inline-block", padding: "12px 28px", background: `linear-gradient(135deg, #C9A84C, #f5c842)`, color: "#0a1628", borderRadius: 8, fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer" }}>See Pricing →</button>
                           </div>
                         </div>
                                             ) : (
