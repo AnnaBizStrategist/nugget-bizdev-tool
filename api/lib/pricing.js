@@ -32,9 +32,9 @@ export const TIERS = {
   },
   closer: {
     name: "Closer",
-    credits: 6,
-    pricePerReport: 49,
-    totalPrice: 294,
+    credits: 5,
+    pricePerReport: 59,
+    totalPrice: 295,
     includesGN: true,
     stripePriceId: "price_1U05I3Js9mPzeO99nztrtHKL",
   },
