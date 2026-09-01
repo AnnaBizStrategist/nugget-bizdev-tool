@@ -1998,7 +1998,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                           <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.5 }}>Gold Nugget not included</div>
                         </div>
                       </div>
-                      <a href="https://buy.stripe.com/test_4gM5kE9MV6GG0iD3kJ6kg00" target="_blank" rel="noopener noreferrer" style={{ marginTop: "auto", padding: "12px 24px", background: `linear-gradient(135deg, #C9A84C, #E8C97A)`, border: "none", color: "#0d2d6b", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%", textAlign: "center", textDecoration: "none", display: "block" }}>
+                                            <a href="https://buy.stripe.com/7sYbJ2bV38OO4yT8F36kg0c" target="_blank" rel="noopener noreferrer" style={{ marginTop: "auto", padding: "12px 24px", background: `linear-gradient(135deg, #C9A84C, #E8C97A)`, border: "none", color: "#0d2d6b", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%", textAlign: "center", textDecoration: "none", display: "block" }}>
                         Get Explorer →
                       </a>
                     </div>
@@ -2019,7 +2019,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                           <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.5 }}>Gold Nugget included on every run — your business development work, done for you.</div>
                         </div>
                       </div>
-                      <a href="https://buy.stripe.com/test_cNi4gA5wFe982qLcVj6kg01" target="_blank" rel="noopener noreferrer" style={{ marginTop: "auto", padding: "12px 24px", background: `linear-gradient(135deg, #C9A84C, #E8C97A)`, border: "none", color: "#0d2d6b", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%", textAlign: "center", textDecoration: "none", display: "block" }}>
+                                            <a href="https://buy.stripe.com/dRmdRa3ox5CC3uPbRf6kg0d" target="_blank" rel="noopener noreferrer" style={{ marginTop: "auto", padding: "12px 24px", background: `linear-gradient(135deg, #C9A84C, #E8C97A)`, border: "none", color: "#0d2d6b", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%", textAlign: "center", textDecoration: "none", display: "block" }}>
                         Get Connector →
                       </a>
                     </div>
@@ -2039,7 +2039,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                           <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.5 }}>Gold Nugget included on every run — your business development work, done for you.</div>
                         </div>
                       </div>
-                      <a href="https://buy.stripe.com/test_9B67sMf7f0iid5p8F36kg02" target="_blank" rel="noopener noreferrer" style={{ marginTop: "auto", padding: "12px 24px", background: `linear-gradient(135deg, #C9A84C, #E8C97A)`, border: "none", color: "#0d2d6b", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%", textAlign: "center", textDecoration: "none", display: "block" }}>
+                                            <a href="https://buy.stripe.com/4gM4gAbV3aWW7L57AZ6kg0e" target="_blank" rel="noopener noreferrer" style={{ marginTop: "auto", padding: "12px 24px", background: `linear-gradient(135deg, #C9A84C, #E8C97A)`, border: "none", color: "#0d2d6b", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%", textAlign: "center", textDecoration: "none", display: "block" }}>
                         Get Closer →
                       </a>
                     </div>
