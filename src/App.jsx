@@ -2027,12 +2027,12 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     {/* Closer card */}
                     <div style={{ background: `linear-gradient(160deg, #1a1200 0%, ${DARK_CARD} 100%)`, border: `1px solid #C9A84C66`, borderRadius: 16, padding: 28, textAlign: "left", display: "flex", flexDirection: "column" }}>
                       <div style={{ display: "inline-block", padding: "3px 10px", borderRadius: 4, fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", background: "#C9A84C33", color: "#C9A84C", marginBottom: 16 }}>CLOSER</div>
-                      <div style={{ fontSize: 32, fontWeight: 700, fontFamily: "Georgia, serif", color: WHITE, marginBottom: 4 }}>$294</div>
-                      <div style={{ fontSize: 13, color: MUTED, marginBottom: 24 }}>6 report credits — $49 each</div>
+                      <div style={{ fontSize: 32, fontWeight: 700, fontFamily: "Georgia, serif", color: WHITE, marginBottom: 4 }}>$295</div>
+                      <div style={{ fontSize: 13, color: MUTED, marginBottom: 24 }}>5 report credits — $59 each</div>
                       <div style={{ borderTop: `1px solid #C9A84C33`, paddingTop: 20, marginBottom: 24, display: "flex", flexDirection: "column", gap: 12, flex: 1 }}>
                         <div style={{ display: "flex", gap: 10 }}>
                           <span style={{ color: "#C9A84C", fontWeight: 700, marginTop: 1 }}>✓</span>
-                          <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.5 }}>6 full runs of the 5-report bundle — plenty of room to rerun as your network changes.</div>
+                          <div style={{ fontSize: 12, color: MUTED, lineHeight: 1.5 }}>5 full runs of the 5-report bundle — plenty of room to rerun as your network changes.</div>
                         </div>
                         <div style={{ display: "flex", gap: 10 }}>
                           <span style={{ color: "#C9A84C", fontWeight: 700, marginTop: 1 }}>✓</span>
