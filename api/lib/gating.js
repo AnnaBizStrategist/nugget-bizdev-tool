@@ -37,7 +37,7 @@ export async function getUserIdByEmail(email) {
   const { data, error } = await supabaseAdmin
     .from("users")
     .select("id")
-    .eq("email", email)
+    .eq("email", email.trim().toLowerCase())
     .maybeSingle();
 
   if (error) throw error;
