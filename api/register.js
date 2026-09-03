@@ -15,11 +15,13 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  const { name, email } = req.body || {}
+    const { name, email: rawEmail } = req.body || {}
 
-  if (!name || !email) {
+  if (!name || !rawEmail) {
     return res.status(400).json({ error: 'Name and email are required.' })
   }
+
+  const email = rawEmail.trim().toLowerCase()
 
   try {
     // Upsert into the custom `users` table by email
