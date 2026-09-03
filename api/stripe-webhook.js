@@ -77,11 +77,12 @@ export default async function handler(req, res) {
   const session = event.data.object;
 
   try {
-    const email = session.customer_details?.email || session.customer_email;
-    if (!email) {
+        const rawEmail = session.customer_details?.email || session.customer_email;
+    if (!rawEmail) {
       console.error("Checkout session has no email attached:", session.id);
       return res.status(400).json({ error: "No email on checkout session" });
     }
+    const email = rawEmail.trim().toLowerCase();
 
     // Find which price was actually purchased.
     const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
