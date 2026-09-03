@@ -2132,7 +2132,13 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     <div style={{ fontSize: 12, color: reports[r.id] ? BLUE_BRIGHT : MUTED }}>{statusText}</div>
                   </div>
                 );
-              })}
+                            })}
+              {creditStatus?.canRun && (
+                <div style={{ padding: "32px 16px 13px", borderTop: `4px double ${BORDER}`, borderBottom: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <span style={{ fontSize: 12.5, color: MUTED, fontWeight: 600 }}>Credits remaining</span>
+                  <span style={{ fontSize: 12.5, color: WHITE, fontWeight: 700 }}>{creditStatus.creditsRemainingInBatch}</span>
+                </div>
+              )}
               <div style={{ padding: "14px 16px" }}>
                 <button style={{ width: "100%", padding: "10px 16px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 13, fontWeight: 700, cursor: "pointer" }} onClick={() => setStep("upload")}>← Back to Home</button>
               </div>
