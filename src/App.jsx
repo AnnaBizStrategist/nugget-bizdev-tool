@@ -1869,7 +1869,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                               {generating === r.id ? "⏳ Mining..." : "Generate Report"}
                             </button>
                       ) : (
-                        <button style={{ padding: "10px 18px", background: "transparent", border: `1px solid ${BORDER}`, color: MUTED, borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>🔒 Buy credits to unlock</button>
+                                                <button style={{ padding: "10px 18px", background: "transparent", border: `1px solid ${BORDER}`, color: MUTED, borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { if (!emailSubmitted) { setPendingReportId(r.id); setShowEmailModal(true); return; } const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>🔒 Buy credits to unlock</button>
                       )}
                     </div>
                     );
@@ -1896,8 +1896,9 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                         <span style={{ fontSize: 11.5, fontWeight: 600, color: "#0a1628", background: `linear-gradient(135deg, #C9A84C, #f5c842)`, borderRadius: 20, padding: "6px 14px" }}>+ Full Action Plan</span>
                       </div>
                       <button style={{ padding: "11px 30px", background: goldUnlocked ? `linear-gradient(135deg, #C9A84C, #f5c842)` : "transparent", border: goldUnlocked ? "none" : `1px solid ${BORDER}`, color: goldUnlocked ? "#0a1628" : MUTED, borderRadius: 7, fontSize: 13, fontWeight: 700, cursor: "pointer" }}
-                        onClick={() => {
+                                                onClick={() => {
                           if (goldUnlocked) { setActiveReport("gold"); setStep("reports"); }
+                          else if (!emailSubmitted) { setShowEmailModal(true); }
                           else { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }
                         }}>
                         {goldUnlocked ? "View The Gold Nugget →" : "🔒 Buy credits to unlock"}
