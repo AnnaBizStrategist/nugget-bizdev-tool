@@ -1363,9 +1363,19 @@ export default function App() {
   (secs) => setRetryMessage(`The hamster's catching its breath — back in ~${Math.round(secs)}s! 🐹`),
   isTest
 );
-      const parsedScores = parseScores(fullText);
+            const parsedScores = parseScores(fullText);
       const cleanText    = stripScores(fullText);
       setReports(prev => ({ ...prev, gold: cleanText }));
+      if (!isBeta) {
+        fetch("/api/consume-credit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: emailAddress.trim(), reportId: "gold", reportTitle: REPORTS.find(r => r.id === "gold")?.name }),
+        })
+          .then(res => res.json())
+          .then(data => { if (data?.creditStatus) setCreditStatus(data.creditStatus); })
+          .catch(err => console.log("consume-credit error:", err));
+      }
       if (parsedScores) { setScores(parsedScores); setStep("score"); }
     } catch (err) { setError(err.message); }
     finally { setGenerating(null); setRetryMessage(null); }
@@ -2181,19 +2191,9 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               </div>
 
               {/* Gold Nugget panel */}
-              {activeReport === "gold" && (
+                            {activeReport === "gold" && (
                 <>
-                  {!isBeta ? (
-                    <div style={{ textAlign: "center", padding: "48px 32px" }}>
-                      <div style={{ fontSize: 44, marginBottom: 16 }}>🏆</div>
-                      <div style={{ fontSize: 22, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", marginBottom: 10 }}>The Gold Nugget</div>
-                      <p style={{ fontSize: 14, color: MUTED, marginBottom: 28, lineHeight: 1.7, maxWidth: 400, margin: "0 auto 28px" }}>
-                        Your complete BD action plan — prioritized targets, warm paths into companies, missed conversations that are still warm, and outreach sequences ready to go.<br /><br />
-                        The free reports show you where the opportunity is. The Gold Nugget hands you a map to go get it.
-                      </p>
-                      <button style={{ padding: "12px 32px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "Georgia, serif" }}>Upgrade to Gold Nugget →</button>
-                    </div>
-                  ) : generating === "gold" ? (
+                  {generating === "gold" ? (
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
                       <div style={{ width: 36, height: 36, border: `3px solid ${BORDER}`, borderTop: `3px solid ${BLUE_BRIGHT}`, borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto 16px" }} />
                       <div style={{ color: MUTED, fontSize: 14 }}>
@@ -2202,6 +2202,16 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     </div>
                   ) : reports.gold ? (
                     <><IntroBlock reportId="gold" /><ReportContent text={reports.gold} /></>
+                  ) : (!isBeta && !creditStatus?.includesGN) ? (
+                    <div style={{ textAlign: "center", padding: "48px 32px" }}>
+                      <div style={{ fontSize: 44, marginBottom: 16 }}>🏆</div>
+                      <div style={{ fontSize: 22, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", marginBottom: 10 }}>The Gold Nugget</div>
+                      <p style={{ fontSize: 14, color: MUTED, marginBottom: 28, lineHeight: 1.7, maxWidth: 400, margin: "0 auto 28px" }}>
+                        Your complete BD action plan — prioritized targets, warm paths into companies, missed conversations that are still warm, and outreach sequences ready to go.<br /><br />
+                        The free reports show you where the opportunity is. The Gold Nugget hands you a map to go get it.
+                      </p>
+                      <button style={{ padding: "12px 32px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "Georgia, serif" }} onClick={() => { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>Upgrade to Gold Nugget →</button>
+                    </div>
                   ) : priorReportsComplete ? (
                     <div style={{ textAlign: "center", padding: "48px 32px" }}>
                       <div style={{ fontSize: 44, marginBottom: 16, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, #E8A000, #f5c842)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontWeight: 700 }}>GN</div>
