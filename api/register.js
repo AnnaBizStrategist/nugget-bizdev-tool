@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import { generateAccessToken } from './lib/accessToken.js'
 
 // Server-side only — uses the service role key, which bypasses RLS.
 // Reusing VITE_SUPABASE_URL here is fine: that's just the project URL,
@@ -56,7 +57,12 @@ export default async function handler(req, res) {
       },
     })
 
-    if (otpError) throw otpError
+        if (otpError) throw otpError
+
+    const accessToken = generateAccessToken(email)
+
+    return res.status(200).json({ success: true, accessToken })
+  } catch (err) {
 
     return res.status(200).json({ success: true })
   } catch (err) {
