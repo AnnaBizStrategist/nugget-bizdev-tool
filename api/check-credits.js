@@ -15,16 +15,21 @@
 // and confirm the JSON response matches what you inserted.
 
 import { getCreditStatus } from "./lib/gating.js";
+import { verifyAccessToken } from "./lib/accessToken.js";
 
 export default async function handler(req, res) {
   if (req.method !== "GET") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { email } = req.query;
+  const { email, token } = req.query;
 
   if (!email) {
     return res.status(400).json({ error: "Missing email query param" });
+  }
+
+  if (!verifyAccessToken(token, email)) {
+    return res.status(401).json({ error: "Missing or invalid access token" });
   }
 
   try {
