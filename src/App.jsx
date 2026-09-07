@@ -1338,7 +1338,7 @@ export default function App() {
       fetch("/api/consume-credit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: emailAddress.trim(), reportId, reportTitle: report?.name }),
+                body: JSON.stringify({ email: emailAddress.trim(), reportId, reportTitle: report?.name, token: accessToken }),
       })
         .then(res => res.json())
         .then(data => { if (data?.creditStatus) setCreditStatus(data.creditStatus); })
@@ -1372,7 +1372,7 @@ export default function App() {
         fetch("/api/consume-credit", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: emailAddress.trim(), reportId: "gold", reportTitle: REPORTS.find(r => r.id === "gold")?.name }),
+                    body: JSON.stringify({ email: emailAddress.trim(), reportId: "gold", reportTitle: REPORTS.find(r => r.id === "gold")?.name, token: accessToken }),
         })
           .then(res => res.json())
           .then(data => { if (data?.creditStatus) setCreditStatus(data.creditStatus); })
@@ -1394,16 +1394,25 @@ export default function App() {
     body: JSON.stringify({ name: emailName.trim(), email: emailAddress.trim(), source: "nugget-free-user" }),
   }).catch(err => console.log("Webhook error:", err));
 
-  // New: registers the user in Supabase and sends their magic link
-  fetch("/api/register", {
-    method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name: emailName.trim(), email: emailAddress.trim() }),
-  }).catch(err => console.log("Registration error:", err));
+    // Registers the user in Supabase, sends their magic link, and returns a
+  // short-lived signed access token — required on every credit-related call
+  // so /api/check-credits and /api/consume-credit can no longer be queried
+  // by just guessing someone's email.
+  let token = null;
+  try {
+    const registerRes = await fetch("/api/register", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: emailName.trim(), email: emailAddress.trim() }),
+    });
+    const registerData = await registerRes.json();
+    token = registerData?.accessToken || null;
+  } catch (err) { console.log("Registration error:", err); }
+  setAccessToken(token);
 
   setEmailSubmitted(true);
   setEmailSubmitting(false);
   setShowEmailModal(false);
-  fetch(`/api/check-credits?email=${encodeURIComponent(emailAddress.trim())}`)
+  fetch(`/api/check-credits?email=${encodeURIComponent(emailAddress.trim())}&token=${encodeURIComponent(token || "")}`)
     .then(res => res.json())
     .then(data => setCreditStatus(data))
     .catch(err => console.log("check-credits error:", err));
