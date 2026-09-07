@@ -10,16 +10,21 @@
 // report_runs row either way. Session 7.
 
 import { getUserIdByEmail, getCreditStatus, consumeCredit } from "./lib/gating.js";
+import { verifyAccessToken } from "./lib/accessToken.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { email, reportId, reportTitle } = req.body || {};
+  const { email, reportId, reportTitle, token } = req.body || {};
 
   if (!email || !reportId) {
     return res.status(400).json({ error: "Missing email or reportId" });
+  }
+
+  if (!verifyAccessToken(token, email)) {
+    return res.status(401).json({ error: "Missing or invalid access token" });
   }
 
   try {
