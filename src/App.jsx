@@ -1243,7 +1243,8 @@ export default function App() {
   const [icpSubmitted,    setICPSubmitted]   = useState(false);
   const [icpClient,       setICPClient]      = useState("");
   const [icpProblem,      setICPProblem]     = useState("");
-  const [creditStatus,    setCreditStatus]   = useState(null);
+    const [creditStatus,    setCreditStatus]   = useState(null);
+  const [accessToken,     setAccessToken]    = useState(null);
     const [showExitModal,   setShowExitModal]  = useState(false);
   const [pdfSaveClicked,  setPdfSaveClicked] = useState(false);
   const fileInputRef = useRef(null);
