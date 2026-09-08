@@ -1236,8 +1236,9 @@ export default function App() {
   const [showEmailModal,  setShowEmailModal] = useState(false);
   const [emailSubmitted,  setEmailSubmitted] = useState(false);
   const [pendingReportId, setPendingReportId]= useState(null);
-  const [emailName,       setEmailName]      = useState("");
+    const [emailName,       setEmailName]      = useState("");
   const [emailAddress,    setEmailAddress]   = useState("");
+  const [promoCode,       setPromoCode]      = useState("");
   const [emailSubmitting, setEmailSubmitting]= useState(false);
   const [showICPModal,    setShowICPModal]   = useState(false);
   const [icpSubmitted,    setICPSubmitted]   = useState(false);
