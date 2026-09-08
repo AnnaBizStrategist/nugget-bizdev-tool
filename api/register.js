@@ -11,12 +11,21 @@ const supabaseAdmin = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 )
 
+// Product Hunt launch promo — "+1 bonus report credit" (Connector tier, so
+// Gold Nugget is included, same as any real Connector purchase). NUGGETPH,
+// expires Sept 23, 2026. Redemption is tracked via a sentinel
+// stripe_payment_id on the credit_batches row so resubmitting the code
+// never grants a second free credit.
+const PROMO_CODE = 'NUGGETPH'
+const PROMO_EXPIRES = '2026-09-23'
+const PROMO_MARKER = 'promo_nuggetph'
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-    const { name, email: rawEmail } = req.body || {}
+  const { name, email: rawEmail, promoCode } = req.body || {}
 
   if (!name || !rawEmail) {
     return res.status(400).json({ error: 'Name and email are required.' })
@@ -34,7 +43,10 @@ export default async function handler(req, res) {
 
     if (lookupError) throw lookupError
 
+    let userId
+
     if (existingUser) {
+      userId = existingUser.id
       const { error: updateError } = await supabaseAdmin
         .from('users')
         .update({ name, last_active_date: new Date().toISOString().slice(0, 10) })
@@ -42,11 +54,51 @@ export default async function handler(req, res) {
 
       if (updateError) throw updateError
     } else {
-      const { error: insertError } = await supabaseAdmin
+      const { data: newUser, error: insertError } = await supabaseAdmin
         .from('users')
         .insert({ name, email })
+        .select('id')
+        .single()
 
       if (insertError) throw insertError
+      userId = newUser.id
+    }
+
+    // Redeem the NUGGETPH promo code, if one was submitted and it's valid.
+    // One grant per user, ever — enforced by the PROMO_MARKER check below.
+    const submittedCode = (promoCode || '').trim().toUpperCase()
+    const today = new Date().toISOString().slice(0, 10)
+
+    if (submittedCode === PROMO_CODE && today <= PROMO_EXPIRES) {
+      const { data: existingPromoGrant, error: promoLookupError } = await supabaseAdmin
+        .from('credit_batches')
+        .select('id')
+        .eq('user_id', userId)
+        .eq('stripe_payment_id', PROMO_MARKER)
+        .maybeSingle()
+
+      if (promoLookupError) throw promoLookupError
+
+      if (!existingPromoGrant) {
+        const expiration = new Date()
+        expiration.setMonth(expiration.getMonth() + 18)
+
+        const { error: promoGrantError } = await supabaseAdmin
+          .from('credit_batches')
+          .insert({
+            user_id: userId,
+            tier_name: 'connector',
+            credits_granted: 1,
+            credits_remaining: 1,
+            includes_gn: true,
+            price_paid: 0,
+            purchase_date: today,
+            expiration_date: expiration.toISOString().slice(0, 10),
+            stripe_payment_id: PROMO_MARKER,
+          })
+
+        if (promoGrantError) throw promoGrantError
+      }
     }
 
     // Send the actual magic-link email
@@ -57,14 +109,11 @@ export default async function handler(req, res) {
       },
     })
 
-        if (otpError) throw otpError
+    if (otpError) throw otpError
 
     const accessToken = generateAccessToken(email)
 
     return res.status(200).json({ success: true, accessToken })
-  } catch (err) {
-
-    return res.status(200).json({ success: true })
   } catch (err) {
     console.error('Registration error:', err)
     return res.status(500).json({ error: 'Something went wrong. Please try again.' })
