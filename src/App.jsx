@@ -12,7 +12,6 @@ const DARK_CARD   = "#0f2040";
 const WHITE       = "#e8f0fe";
 const MUTED       = "#9fc4e8";
 const BORDER      = "#1e4080";
-
 const LOGO_BASE64 = null;
 import ANNA_PHOTO from './Anna-Nugget-Image.png';
 import STEP1_IMAGE from './step-01-request-data.png';
@@ -1401,10 +1400,10 @@ export default function App() {
   // by just guessing someone's email.
   let token = null;
   try {
-    const registerRes = await fetch("/api/register", {
-      method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: emailName.trim(), email: emailAddress.trim() }),
-    });
+            const registerRes = await fetch("/api/register", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: emailName.trim(), email: emailAddress.trim(), promoCode: promoCode.trim() }),
+        });
     const registerData = await registerRes.json();
     token = registerData?.accessToken || null;
   } catch (err) { console.log("Registration error:", err); }
@@ -2353,10 +2352,15 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 <input type="text" placeholder="Your first name" value={emailName} onChange={e => setEmailName(e.target.value)} style={{ width: "100%", padding: "12px 16px", background: "#0a1628", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 8, color: WHITE, fontSize: 15 }} />
               </div>
               <div>
-                                <label style={{ fontSize: 12.5, color: MUTED, display: "block", marginBottom: 8, letterSpacing: "0.06em", textTransform: "uppercase" }}>Email Address</label>
-                <input type="email" placeholder="your@email.com" value={emailAddress} onChange={e => setEmailAddress(e.target.value)} onKeyDown={e => e.key === "Enter" && submitEmail()} style={{ width: "100%", padding: "12px 16px", background: "#0a1628", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 8, color: WHITE, fontSize: 15 }} />
-              </div>
-            </div>
+                                                  <div>
+                                    <label style={{ fontSize: 12.5, color: MUTED, display: "block", marginBottom: 8, letterSpacing: "0.06em", textTransform: "uppercase" }}>Email Address</label>
+                      <input type="email" placeholder="your@email.com" value={emailAddress} onChange={e => setEmailAddress(e.target.value)} onKeyDown={e => e.key === "Enter" && submitEmail()} style={{ width: "100%", padding: "12px 16px", background: "#0a1628", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 8, color: WHITE, fontSize: 15 }} />
+                  </div>
+                  <div>
+                                    <label style={{ fontSize: 12.5, color: MUTED, display: "block", marginBottom: 8, letterSpacing: "0.06em", textTransform: "uppercase" }}>Promo Code (optional)</label>
+                      <input type="text" placeholder="NUGGETPH" value={promoCode} onChange={e => setPromoCode(e.target.value)} onKeyDown={e => e.key === "Enter" && submitEmail()} style={{ width: "100%", padding: "12px 16px", background: "#0a1628", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 8, color: WHITE, fontSize: 15 }} />
+                  </div>
+                </div>
                         <button onClick={submitEmail} disabled={emailSubmitting || !emailName.trim() || !emailAddress.trim()} style={{ width: "100%", padding: "16px 24px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", borderRadius: 10, color: WHITE, fontSize: 16, fontWeight: 700, cursor: emailSubmitting ? "not-allowed" : "pointer", fontFamily: "Georgia, serif", marginBottom: 16, opacity: emailSubmitting ? 0.6 : 1 }}>
               {emailSubmitting ? "Getting your Nuggets ready..." : "Get My Reports →"}
             </button>
