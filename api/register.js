@@ -101,15 +101,21 @@ export default async function handler(req, res) {
       }
     }
 
-    // Send the actual magic-link email
-    const { error: otpError } = await supabaseAdmin.auth.signInWithOtp({
-      email,
-      options: {
-        emailRedirectTo: process.env.SITE_URL || 'https://www.getnugget.ca',
-      },
-    })
-
-    if (otpError) throw otpError
+       // Send the actual magic-link email — best effort only. If this fails
+    // (rate limit, bad address, provider hiccup), it must never block
+    // issuing the access token, since the token is what actually lets
+    // someone use the credit they just redeemed.
+    try {
+      const { error: otpError } = await supabaseAdmin.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: process.env.SITE_URL || 'https://www.getnugget.ca',
+        },
+      })
+      if (otpError) console.error('Magic-link email error (non-fatal):', otpError)
+    } catch (otpErr) {
+      console.error('Magic-link email error (non-fatal):', otpErr)
+    }
 
     const accessToken = generateAccessToken(email)
 
