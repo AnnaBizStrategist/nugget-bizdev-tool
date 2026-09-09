@@ -2357,7 +2357,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   </div>
                   <div>
                                     <label style={{ fontSize: 12.5, color: MUTED, display: "block", marginBottom: 8, letterSpacing: "0.06em", textTransform: "uppercase" }}>Promo Code (optional)</label>
-                      <input type="text" placeholder="NUGGETPH" value={promoCode} onChange={e => setPromoCode(e.target.value)} onKeyDown={e => e.key === "Enter" && submitEmail()} style={{ width: "100%", padding: "12px 16px", background: "#0a1628", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 8, color: WHITE, fontSize: 15 }} />
+                                            <input type="text" placeholder="Have a code?" value={promoCode} onChange={e => setPromoCode(e.target.value)} onKeyDown={e => e.key === "Enter" && submitEmail()} style={{ width: "100%", padding: "12px 16px", background: "#0a1628", border: `1px solid ${BLUE_BRIGHT}44`, borderRadius: 8, color: WHITE, fontSize: 15 }} />
                   </div>
                 </div>
                         <button onClick={submitEmail} disabled={emailSubmitting || !emailName.trim() || !emailAddress.trim()} style={{ width: "100%", padding: "16px 24px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", borderRadius: 10, color: WHITE, fontSize: 16, fontWeight: 700, cursor: emailSubmitting ? "not-allowed" : "pointer", fontFamily: "Georgia, serif", marginBottom: 16, opacity: emailSubmitting ? 0.6 : 1 }}>
