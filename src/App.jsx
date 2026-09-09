@@ -1715,7 +1715,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
 
                   {/* Step 01 */}
-                  <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 18, padding: 32, display: "grid", gridTemplateColumns: "300px 1fr", gap: 32, alignItems: "center" }}>
+                  <div className="fix-grid" style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 18, padding: 32, display: "grid", gridTemplateColumns: "300px 1fr", gap: 32, alignItems: "center" }}>
                     <div style={{ background: "#f4f1ea", border: "1px solid #ddd6c4", borderRadius: 12, overflow: "hidden", boxShadow: "0 12px 30px -10px rgba(0,0,0,0.5)" }}>
                       <div style={{ display: "flex", gap: 5, padding: "9px 12px", background: "#eae5d8", borderBottom: "1px solid #ddd6c4" }}>
                         <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#cfc8b4" }} />
@@ -1749,7 +1749,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   </div>
 
                   {/* Step 03 */}
-                  <div style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 18, padding: 32, display: "grid", gridTemplateColumns: "300px 1fr", gap: 32, alignItems: "center" }}>
+                  <div className="fix-grid" style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 18, padding: 32, display: "grid", gridTemplateColumns: "300px 1fr", gap: 32, alignItems: "center" }}>
                     <div style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, border: `1px solid ${BORDER}`, borderRadius: 12, overflow: "hidden" }}>
                       <div style={{ display: "flex", gap: 5, padding: "9px 12px", background: "rgba(255,255,255,0.06)", borderBottom: "1px solid rgba(255,255,255,0.12)" }}>
                         <span style={{ width: 8, height: 8, borderRadius: "50%", background: "rgba(255,255,255,0.25)" }} />
