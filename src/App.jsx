@@ -1531,7 +1531,10 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 <nav style={{ marginLeft: "auto", display: "flex", gap: 8, alignItems: "center" }}>
           {step === "upload" ? (
             <>
-              <div className="header-nav-links" style={{ display: "flex", gap: 22, marginRight: 8 }}>
+                            <div className="header-nav-links" style={{ display: "flex", gap: 22, alignItems: "center", marginRight: 8 }}>
+                <a href="https://www.producthunt.com/products/nugget-the-bizdev-tool-for-founders?utm_source=badge-follow&utm_medium=badge&utm_source=badge-nugget-the-bizdev-tool-for-founders" target="_blank" rel="noopener noreferrer">
+                  <img src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=1246452&theme=light" alt='Nugget — LinkedIn Warm Outreach Tool - "Your next client is already in your LinkedIn network" | Product Hunt' width="160" height="35" style={{ width: 160, height: 35 }} />
+                </a>
                 <a style={{ fontSize: 13, color: MUTED, fontWeight: 600, cursor: "pointer", textDecoration: "none" }} onClick={() => { const el = document.getElementById("how-it-works"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>How It Works</a>
                 <a style={{ fontSize: 13, color: MUTED, fontWeight: 600, cursor: "pointer", textDecoration: "none" }} onClick={() => { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>Pricing</a>
                 <a style={{ fontSize: 13, color: MUTED, fontWeight: 600, cursor: "pointer", textDecoration: "none" }} onClick={() => { const el = document.getElementById("about"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>About</a>
