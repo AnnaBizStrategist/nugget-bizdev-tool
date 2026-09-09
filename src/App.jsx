@@ -1531,10 +1531,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 <nav style={{ marginLeft: "auto", display: "flex", gap: 8, alignItems: "center" }}>
           {step === "upload" ? (
             <>
-                            <div className="header-nav-links" style={{ display: "flex", gap: 22, alignItems: "center", marginRight: 8 }}>
-                <a href="https://www.producthunt.com/products/nugget-the-bizdev-tool-for-founders?utm_source=badge-follow&utm_medium=badge&utm_source=badge-nugget-the-bizdev-tool-for-founders" target="_blank" rel="noopener noreferrer">
-                  <img src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=1246452&theme=light" alt='Nugget — LinkedIn Warm Outreach Tool - "Your next client is already in your LinkedIn network" | Product Hunt' width="160" height="35" style={{ width: 160, height: 35 }} />
-                </a>
+                                          <div className="header-nav-links" style={{ display: "flex", gap: 22, marginRight: 8 }}>
                 <a style={{ fontSize: 13, color: MUTED, fontWeight: 600, cursor: "pointer", textDecoration: "none" }} onClick={() => { const el = document.getElementById("how-it-works"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>How It Works</a>
                 <a style={{ fontSize: 13, color: MUTED, fontWeight: 600, cursor: "pointer", textDecoration: "none" }} onClick={() => { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>Pricing</a>
                 <a style={{ fontSize: 13, color: MUTED, fontWeight: 600, cursor: "pointer", textDecoration: "none" }} onClick={() => { const el = document.getElementById("about"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>About</a>
@@ -1562,6 +1559,11 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               {/* ── Hero ── */}
                           {/* ── Hero ── */}
                                     <div style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, padding: "48px 24px", borderRadius: "0 0 24px 24px", textAlign: "center", marginBottom: 0, minHeight: "88vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+
+                            {/* Product Hunt badge — launch week, revisit removing/relocating once the push settles */}
+              <a href="https://www.producthunt.com/products/nugget-the-bizdev-tool-for-founders?utm_source=badge-follow&utm_medium=badge&utm_source=badge-nugget-the-bizdev-tool-for-founders" target="_blank" rel="noopener noreferrer" style={{ marginBottom: 20, animation: "fadeSlideUp 0.7s ease-out 0s both" }}>
+                <img src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=1246452&theme=light" alt='Nugget — LinkedIn Warm Outreach Tool - "Your next client is already in your LinkedIn network" | Product Hunt' width="220" height="48" style={{ width: 220, height: 48 }} />
+              </a>
 
               <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: 5, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.22)", borderRadius: 26, padding: "12px 28px", marginBottom: 44, animation: "fadeSlideUp 0.7s ease-out 0s both" }}>
                 <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#ffffff" }}>Nugget <span style={{ color: BLUE_LIGHT }}>·</span> LinkedIn Warm Outreach Tool</div>
