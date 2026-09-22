@@ -2209,16 +2209,11 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 return (
                   <div key={r.id} style={{ padding: "17px 16px", borderBottom: `1px solid ${BORDER}`, cursor: "pointer", background: activeReport === r.id ? BLUE_MID + "33" : "transparent", borderLeft: `3px solid ${activeReport === r.id ? BLUE_BRIGHT : "transparent"}`, transition: "all 0.15s" }} onClick={() => setActiveReport(r.id)}>
                     <div style={{ fontSize: 15, fontWeight: 600, color: activeReport === r.id ? BLUE_BRIGHT : WHITE, marginBottom: 2 }}>{r.name}</div>
-                    <div style={{ fontSize: 12, color: reports[r.id] ? BLUE_BRIGHT : MUTED }}>{statusText}</div>
+                    <div style={{ fontSize: 12, color: reports[r.id] ? BLUE_BRIGHT : doneEarlier(r.id) ? "#C9A84C" : MUTED }}>{statusText}</div>
                   </div>
                 );
                             })}
-              {creditStatus?.canRun && (
-                <div style={{ padding: "32px 16px 13px", borderTop: `4px double ${BORDER}`, borderBottom: `1px solid ${BORDER}`, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span style={{ fontSize: 12.5, color: MUTED, fontWeight: 600 }}>Credits remaining</span>
-                  <span style={{ fontSize: 12.5, color: WHITE, fontWeight: 700 }}>{creditStatus.creditsRemainingInBatch}</span>
-                </div>
-              )}
+              
               <div style={{ padding: "14px 16px" }}>
                 <button style={{ width: "100%", padding: "10px 16px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 13, fontWeight: 700, cursor: "pointer" }} onClick={() => setStep("upload")}>← Back to Home</button>
               </div>
@@ -2335,6 +2330,12 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                         )}
                       </>
                     </>
+                                    ) : doneEarlier(activeReport) ? (
+                    <div style={{ textAlign: "center", padding: "60px 32px" }}>
+                      <div style={{ fontSize: 34, marginBottom: 14, color: "#C9A84C" }}>✓</div>
+                      <div style={{ color: WHITE, fontSize: 15, fontWeight: 600, marginBottom: 8 }}>You generated this on an earlier visit.</div>
+                      <p style={{ color: MUTED, fontSize: 13.5, lineHeight: 1.7, maxWidth: 380, margin: "0 auto" }}>Once saving is live, it'll appear here automatically.</p>
+                    </div>
                   ) : (
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
                       <div style={{ fontSize: 38, marginBottom: 14 }}>📊</div>
@@ -2350,6 +2351,50 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
           </div>
         )}
       </main>
+
+            {/* ── Status card: returning users, once per visit (reopened from the header pill) ── */}
+      {showStatusCard && creditStatus && (
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(2,8,18,0.97)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: 24 }}>
+          <div style={{ background: `linear-gradient(160deg, #0f2040 0%, #0a1628 100%)`, border: `1px solid ${BLUE_BRIGHT}66`, borderRadius: 20, padding: "44px 48px", maxWidth: 520, width: "100%", boxShadow: `0 0 80px rgba(65,161,232,0.15), 0 24px 60px rgba(0,0,0,0.8)`, animation: "fadeIn 0.2s ease-out" }}>
+            <h2 style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, textAlign: "center", marginBottom: 24, lineHeight: 1.4 }}>
+              Welcome back{emailName.trim() ? `, ${emailName.trim().split(" ")[0]}` : ""}.
+            </h2>
+            {creditStatus.canRun ? (
+              <>
+                {runInProgress ? (
+                  <div style={{ marginBottom: 18 }}>
+                    <div style={{ fontSize: 15, color: WHITE, fontWeight: 700, marginBottom: 8 }}>Your current run: {runDone.length} of {runRequired.length} reports done</div>
+                    <div style={{ fontSize: 14, color: "#C9A84C", lineHeight: 1.8 }}>
+                      {runDone.map(t => <div key={t}>✓ {RUN_REPORT_NAMES[t]}</div>)}
+                    </div>
+                    {runStillToGo.length > 0 && (
+                      <div style={{ fontSize: 14, color: MUTED, lineHeight: 1.7, marginTop: 8 }}>Still to go, at no extra charge: {runStillToGo.map(t => RUN_REPORT_NAMES[t]).join(", ")}.</div>
+                    )}
+                  </div>
+                ) : (
+                  <div style={{ fontSize: 15, color: WHITE, fontWeight: 700, marginBottom: 18 }}>You're ready to start a new run.</div>
+                )}
+                <div style={{ fontSize: 14, color: MUTED, lineHeight: 1.7, marginBottom: 6 }}>
+                  {runInProgress
+                    ? (runsLeft === 0 ? "This is your last run (credit)." : `After this run: ${runsLabel(runsLeft)} (credits) left.`)
+                    : `You have ${runsLabel(runsLeft)} (credits) left. Each run includes ${runRequired.length} reports.`}
+                </div>
+                <div style={{ fontSize: 14, color: MUTED, lineHeight: 1.7, marginBottom: 28 }}>
+                  Use {runInProgress ? "this run" : (runsLeft === 1 ? "it" : "them")} by <strong style={{ color: WHITE }}>{useBy}</strong>.
+                </div>
+                <button style={{ ...primaryBtn, width: "100%" }} onClick={closeStatusCard}>{statusCardPending ? "Continue →" : "Got it"}</button>
+              </>
+            ) : (
+              <>
+                <div style={{ fontSize: 15, color: WHITE, fontWeight: 700, marginBottom: 8 }}>You've used all your runs (credits).</div>
+                <div style={{ fontSize: 14, color: MUTED, lineHeight: 1.7, marginBottom: 28 }}>Top up any time to start a new one.</div>
+                <button style={{ ...primaryBtn, width: "100%", marginBottom: 10 }} onClick={() => { setShowStatusCard(false); setStatusCardPending(null); setStep("upload"); setTimeout(() => { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }, 50); }}>See pricing →</button>
+                <button style={{ width: "100%", padding: "10px 16px", background: "transparent", border: `1px solid ${BORDER}`, color: MUTED, borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: "pointer" }} onClick={closeStatusCard}>Not now</button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* ── ICP Capture modal ── */}
       {showICPModal && (
