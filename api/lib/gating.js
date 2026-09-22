@@ -22,7 +22,7 @@
 // rather than throwing, so callers can respond cleanly instead of 500ing.
 
 import { createClient } from "@supabase/supabase-js";
-import { getPurchasableTiers, REQUIRED_REPORT_TYPES, MAX_REGENS_PER_REPORT } from "./pricing.js";
+import { getPurchasableTiers, getRequiredReportTypes, MAX_REGENS_PER_REPORT } from "./pricing.js";
 
 // Same service-role pattern as api/register.js — bypasses RLS.
 const supabaseAdmin = createClient(
@@ -118,7 +118,7 @@ export async function consumeCredit({
 }) {
   const { data: batch, error: fetchError } = await supabaseAdmin
     .from("credit_batches")
-    .select("credits_remaining, active_run_reports, tier_name")
+    .select("credits_remaining, active_run_reports, tier_name, includes_gn")
     .eq("id", batchId)
     .single();
 
@@ -143,7 +143,7 @@ export async function consumeCredit({
     [reportTypeMetadata]: currentCount + 1,
   };
 
-  const requiredTypes = REQUIRED_REPORT_TYPES[batch.tier_name] || [];
+  const requiredTypes = getRequiredReportTypes(batch.tier_name, batch.includes_gn);
   const runCompleted =
     requiredTypes.length > 0 &&
     requiredTypes.every((t) => updatedActiveRunReports[t]);
