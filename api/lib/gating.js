@@ -11,10 +11,10 @@
 // CURRENT open run is free, up to MAX_REGENS_PER_REPORT times — after that,
 // it's blocked until the run completes and a new one starts.
 //
-// getCreditStatus(email) is read-only: finds the oldest non-expired batch
-// that's either got fresh credits available OR has an in-progress run on it
-// (even if credits_remaining is 0 for that specific batch, since the credit
-// for an in-progress run was already committed when it started).
+// getCreditStatus(email) is read-only: uses the non-expired batch with a
+// run in progress if there is one (even if credits_remaining is 0 for that
+// batch, since the credit for an in-progress run was already committed when
+// it started); otherwise the batch with credits that expires soonest.
 //
 // consumeCredit(...) should only be called after a report has actually
 // finished generating successfully. It returns { ok: false, reason: ... }
@@ -71,20 +71,40 @@ export async function getCreditStatus(email) {
 
   if (error) throw error;
 
-  // A batch is usable if it has fresh credits available, OR it already has
-  // an in-progress run on it (credits_remaining may be 0 for that batch
-  // specifically, because the credit for the in-progress run was already
-  // committed when the run started — it still needs to be finished).
-  const usable = (batches || []).find((b) => {
-    const activeRunReports = b.active_run_reports || {};
-    return b.credits_remaining > 0 || Object.keys(activeRunReports).length > 0;
-  });
+    // Which batch to use (Sept 22 decision):
+  //   1. A batch with a run already in progress, so people finish what
+  //      they started (its credit was already spent when the run began).
+  //   2. Otherwise, the batch with credits that expires soonest.
+  const allBatches = batches || [];
+  const openRunBatch = allBatches.find(
+    (b) => Object.keys(b.active_run_reports || {}).length > 0
+  );
+  const soonestWithCredits = allBatches
+    .filter((b) => b.credits_remaining > 0)
+    .sort((a, b) => String(a.expiration_date).localeCompare(String(b.expiration_date)))[0];
+  const usable = openRunBatch || soonestWithCredits;
+
+  // Status card / pill data: credits left across ALL unexpired batches,
+  // and whether this person has used Nugget before (open run or any
+  // recorded paid report).
+  const totalCreditsRemaining = allBatches.reduce(
+    (sum, b) => sum + (b.credits_remaining || 0),
+    0
+  );
+  const { count: pastRunCount, error: countError } = await supabaseAdmin
+    .from("report_runs")
+    .select("id", { count: "exact", head: true })
+    .eq("user_id", userId);
+  if (countError) throw countError;
+  const isReturning = !!openRunBatch || (pastRunCount || 0) > 0;
 
   if (!usable) {
     return {
       canRun: false,
       reason: "no_credits",
       purchaseOptions: getPurchasableTiers(),
+      totalCreditsRemaining: 0,
+      isReturning,
     };
   }
 
@@ -95,6 +115,10 @@ export async function getCreditStatus(email) {
     includesGN: usable.includes_gn,
     creditsRemainingInBatch: usable.credits_remaining,
     activeRunReports: usable.active_run_reports || {},
+    requiredReportTypes: getRequiredReportTypes(usable.tier_name, usable.includes_gn),
+    expirationDate: usable.expiration_date,
+    totalCreditsRemaining,
+    isReturning,
   };
 }
 
