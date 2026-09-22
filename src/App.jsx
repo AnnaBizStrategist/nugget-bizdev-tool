@@ -1558,7 +1558,9 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
           .bio-grid { grid-template-columns: 1fr !important; }
                     .free-banner-wide { display: none !important; }
           .free-banner-narrow { display: flex !important; }
-          .header-nav-links { display: none !important; }
+                   .header-nav-links { display: none !important; }
+          .status-pill { font-size: 11px !important; padding: 5px 9px !important; }
+          .hide-on-mobile { display: none !important; }
         }
       `}</style>
 
@@ -1570,7 +1572,12 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
           <div className="header-tagline" style={{ fontSize: 13, color: MUTED, letterSpacing: "0.03em", lineHeight: 1.4 }}>Turn your network into your pipeline. No cold outreach required.</div>
           {isTest && <div style={{ padding: "3px 10px", background: "#2a1a00", border: "1px solid #E8A000", borderRadius: 4, fontSize: 11, color: "#E8A000", fontWeight: 700, letterSpacing: "0.06em" }}>TEST MODE</div>}
         </div>
-                <nav style={{ marginLeft: "auto", display: "flex", gap: 8, alignItems: "center" }}>
+                                <nav style={{ marginLeft: "auto", display: "flex", gap: 8, alignItems: "center" }}>
+          {showStatusPill && (
+            <button className="status-pill" onClick={() => { setStatusCardPending(null); setShowStatusCard(true); }} style={{ padding: "6px 12px", borderRadius: 999, border: `1px solid ${creditStatus?.canRun ? "#C9A84C88" : BORDER}`, background: "transparent", color: creditStatus?.canRun ? "#f5c842" : MUTED, fontSize: 12, fontWeight: 600, cursor: "pointer", whiteSpace: "nowrap", marginRight: 4 }}>
+              {statusPillText}
+            </button>
+          )}
           {step === "upload" ? (
             <>
                                           <div className="header-nav-links" style={{ display: "flex", gap: 22, marginRight: 8 }}>
@@ -1578,7 +1585,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 <a style={{ fontSize: 13, color: MUTED, fontWeight: 600, cursor: "pointer", textDecoration: "none" }} onClick={() => { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>Pricing</a>
                 <a style={{ fontSize: 13, color: MUTED, fontWeight: 600, cursor: "pointer", textDecoration: "none" }} onClick={() => { const el = document.getElementById("about"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>About</a>
               </div>
-              <button style={{ ...primaryBtn, padding: "8px 20px", fontSize: 13 }} onClick={scrollToUpload}>Find My Next Client →</button>
+                            <button className={showStatusPill ? "hide-on-mobile" : undefined} style={{ ...primaryBtn, padding: "8px 20px", fontSize: 13 }} onClick={scrollToUpload}>Find My Next Client →</button>
             </>
           ) : (
             <>
@@ -2188,15 +2195,16 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 } else if (r.id === "gold") {
                   if (!goldEntitled)            statusText = "🔒 Upgrade to unlock";
                   else if (generating === "gold") statusText = "⏳ Generating...";
-                  else if (reports.gold)        statusText = "✓ Complete";
+                    else if (reports.gold)        statusText = "✓ Done";
                   else if (priorReportsComplete) statusText = "✦ Ready to generate";
                   else                          statusText = "Complete all 5 reports first";
                 } else if (!entitled) {
                   statusText = "🔒 Upgrade to unlock";
                 } else {
                   if (generating === r.id)  statusText = `⏳ Generating...`;
-                  else if (reports[r.id])   statusText = "✓ Complete";
-                  else                      statusText = "Unmined";
+                                    else if (reports[r.id])   statusText = "✓ Done";
+                  else if (doneEarlier(r.id)) statusText = "✓ Done earlier";
+                  else                      statusText = "Ready to generate";
                 }
                 return (
                   <div key={r.id} style={{ padding: "17px 16px", borderBottom: `1px solid ${BORDER}`, cursor: "pointer", background: activeReport === r.id ? BLUE_MID + "33" : "transparent", borderLeft: `3px solid ${activeReport === r.id ? BLUE_BRIGHT : "transparent"}`, transition: "all 0.15s" }} onClick={() => setActiveReport(r.id)}>
