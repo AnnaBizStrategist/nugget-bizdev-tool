@@ -1459,6 +1459,8 @@ const submitICP = () => {
     return () => document.removeEventListener("mouseleave", handleMouseLeave);
   }, [reports]);
 
+    useEffect(() => { setError(null); }, [activeReport]);
+
   const scrollToUpload = () => {
     uploadRef.current?.scrollIntoView({ behavior: "smooth" });
   };
