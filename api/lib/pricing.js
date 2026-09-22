@@ -64,8 +64,19 @@ export const REQUIRED_REPORT_TYPES = {
   explorer: ["warm", "hidden", "inbound", "outbound"],
   connector: ["warm", "hidden", "inbound", "outbound", "gold"],
   closer: ["warm", "hidden", "inbound", "outbound", "gold"],
-  rainmaker: ["warm", "hidden", "inbound", "outbound", "gold"],
+    rainmaker: ["warm", "hidden", "inbound", "outbound", "gold"],
+  party_demo: ["warm", "hidden", "inbound", "outbound", "gold"],
+  invite: ["warm", "hidden", "inbound", "outbound", "gold"],
 };
+
+// Returns the report types for a tier. Any tier not listed above falls
+// back on the batch's includes_gn flag, so a run can always complete.
+export function getRequiredReportTypes(tierName, includesGN) {
+  if (REQUIRED_REPORT_TYPES[tierName]) return REQUIRED_REPORT_TYPES[tierName];
+  return includesGN
+    ? ["warm", "hidden", "inbound", "outbound", "gold"]
+    : ["warm", "hidden", "inbound", "outbound"];
+}
 
 // Max total generations of the same report type within one open run.
 // Set to 1 (Aug 2026): no free regenerations — once a report type has
