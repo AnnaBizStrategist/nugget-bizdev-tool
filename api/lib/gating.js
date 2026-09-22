@@ -3,7 +3,7 @@
 // Session 6 + Session 7 credit-gating rules.
 //
 // A credit_batches row represents a PURCHASE — it can grant more than one
-// "run" (Explorer=1 run, Connector=3 runs, Closer=6 runs). A run is a full
+// "run" (Explorer=1 run, Connector=3 runs, Closer=5 runs). A run is a full
 // bundle: Warm List + Hidden Nuggets + Inbound + Outbound, plus Gold Nugget
 // for tiers that include it. One credit is spent the moment a user starts a
 // fresh run (generates the first report type in an empty run), not per
