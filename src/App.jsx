@@ -1243,7 +1243,9 @@ export default function App() {
   const [icpSubmitted,    setICPSubmitted]   = useState(false);
   const [icpClient,       setICPClient]      = useState("");
   const [icpProblem,      setICPProblem]     = useState("");
-    const [creditStatus,    setCreditStatus]   = useState(null);
+        const [creditStatus,    setCreditStatus]   = useState(null);
+  const [showStatusCard,  setShowStatusCard] = useState(false);
+  const [statusCardPending, setStatusCardPending] = useState(null);
   const [accessToken,     setAccessToken]    = useState(null);
     const [showExitModal,   setShowExitModal]  = useState(false);
   const [pdfSaveClicked,  setPdfSaveClicked] = useState(false);
@@ -1256,7 +1258,29 @@ export default function App() {
   const msgCount            = parsedData["Messages"]?.length || 0;
   const reportsReady        = Object.keys(reports).length;
   const activeReportMeta    = REPORTS.find(r => r.id === activeReport);
-    const priorReportsComplete = REPORTS.filter(r => !r.computed && r.id !== "gold").every(r => reports[r.id]);
+        const priorReportsComplete = REPORTS.filter(r => !r.computed && r.id !== "gold").every(r => reports[r.id]);
+
+  // ── Status card + header pill (Step B) ──
+  const RUN_REPORT_NAMES = { warm: "Warm List", hidden: "Hidden Nuggets", inbound: "Inbound", outbound: "Outbound", gold: "Gold Nugget" };
+  const formatUseBy = (iso) => {
+    if (!iso) return "";
+    const [y, m, d] = String(iso).split("-").map(Number);
+    return new Date(y, m - 1, d).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  };
+  const runsLabel = (n) => `${n} ${n === 1 ? "run" : "runs"}`;
+  const doneEarlier = (id) => !!creditStatus?.activeRunReports?.[id] && !reports[id];
+  const runRequired   = creditStatus?.requiredReportTypes || [];
+  const runDone       = runRequired.filter(t => creditStatus?.activeRunReports?.[t]);
+  const runStillToGo  = runRequired.filter(t => !creditStatus?.activeRunReports?.[t] && t !== "gold");
+  const runInProgress = runDone.length > 0;
+  const runsLeft      = creditStatus?.totalCreditsRemaining ?? 0;
+  const useBy         = formatUseBy(creditStatus?.expirationDate);
+  const showStatusPill = emailSubmitted && !isBeta && !!creditStatus && ("canRun" in creditStatus);
+  const statusPillText = !creditStatus?.canRun
+    ? "No runs left"
+    : runInProgress
+      ? `Run: ${runDone.length} of ${runRequired.length} · ${runsLabel(runsLeft)} left · by ${useBy}`
+      : `${runsLabel(runsLeft)} left · by ${useBy}`;
   const isMissingCriticalFiles = hasFiles && !parsedData["Connections"];
 
   const handleFiles = useCallback((fileList) => {
@@ -1305,7 +1329,7 @@ export default function App() {
     const regenCount = creditStatus?.activeRunReports?.[reportId] || 0;
   if (needsCredit && !creditStatus?.canRun) return;
   if (needsCredit && regenCount >= 1) {
-    setError("This report has already been generated for this run — Nugget doesn't store reports, so be sure to save yours as a PDF. Getting a new one means starting a fresh run with another credit.");
+        setActiveReport(reportId); setStep("reports");
     return;
   }
   if (generating) return;
@@ -1412,15 +1436,31 @@ export default function App() {
   setEmailSubmitted(true);
   setEmailSubmitting(false);
   setShowEmailModal(false);
-  fetch(`/api/check-credits?email=${encodeURIComponent(emailAddress.trim())}&token=${encodeURIComponent(token || "")}`)
-    .then(res => res.json())
-    .then(data => setCreditStatus(data))
-    .catch(err => console.log("check-credits error:", err));
-    if (pending) {
-    const pendingReport = REPORTS.find(r => r.id === pending);
-    if (pendingReport?.computed) { setActiveReport(pending); setStep("reports"); }
-    else { setPendingReportId(pending); setShowICPModal(true); }
+    let status = null;
+  try {
+    const res = await fetch(`/api/check-credits?email=${encodeURIComponent(emailAddress.trim())}&token=${encodeURIComponent(token || "")}`);
+    status = await res.json();
+    setCreditStatus(status);
+  } catch (err) { console.log("check-credits error:", err); }
+  if (status?.isReturning && !isBeta) {
+    setStatusCardPending(pending);
+    setShowStatusCard(true);
+    return;
   }
+  continueAfterEmail(pending);
+};
+
+const continueAfterEmail = (pending) => {
+  if (!pending) return;
+  const pendingReport = REPORTS.find(r => r.id === pending);
+  if (pendingReport?.computed) { setActiveReport(pending); setStep("reports"); }
+  else { setPendingReportId(pending); setShowICPModal(true); }
+};
+
+const closeStatusCard = () => {
+  setShowStatusCard(false);
+  const pending = statusCardPending; setStatusCardPending(null);
+  continueAfterEmail(pending);
 };
   
 const submitICP = () => {
