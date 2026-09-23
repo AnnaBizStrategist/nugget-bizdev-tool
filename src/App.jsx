@@ -1284,6 +1284,58 @@ function Divider() {
   return <div style={{ height: 1, background: `linear-gradient(90deg, transparent, ${BORDER}, transparent)`, margin: "56px 0" }} />;
 }
 
+// ── Saved reports (Step C1) ───────────────────────────────────────────────────
+// Reports are saved in this browser's local storage, one folder per email
+// (lowercase, trimmed). Nothing here is ever sent to a server. Shape:
+//   { current: { batchId, startedAt, dataStamp, reports: { warm: { text, createdAt }, … }, scores },
+//     past:    [ …up to 3 finished runs, newest first ],
+//     field:   { text, createdAt, dataStamp } }   // latest Field Report only
+// Test mode (?beta=true) uses its own folder so it never mixes with real runs.
+const STORE_PREFIX  = "nugget:v1:";
+const EXIT_SEEN_KEY = "nugget:v1:exit-popup-seen";
+const MAX_PAST_RUNS = 3;
+const normEmail = (e) => String(e || "").trim().toLowerCase();
+const folderKeyFor = (email, beta) => `${STORE_PREFIX}${beta ? "beta:" : "user:"}${normEmail(email)}`;
+const readFolder = (key) => {
+  try { const raw = localStorage.getItem(key); return raw ? JSON.parse(raw) : null; } catch { return null; }
+};
+const writeFolder = (key, folder) => {
+  // If storage is full, drop the oldest past run and try again.
+  let f = folder;
+  for (let i = 0; i <= MAX_PAST_RUNS; i++) {
+    try { localStorage.setItem(key, JSON.stringify(f)); return f; }
+    catch { if (!f.past?.length) return null; f = { ...f, past: f.past.slice(0, -1) }; }
+  }
+  return null;
+};
+const removeFolder = (key) => { try { localStorage.removeItem(key); } catch { /* ignore */ } };
+const browserHasSavedReports = () => {
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      if ((localStorage.key(i) || "").startsWith(`${STORE_PREFIX}user:`)) return true;
+    }
+  } catch { /* ignore */ }
+  return false;
+};
+const exitPopupSeen = () => { try { return localStorage.getItem(EXIT_SEEN_KEY) === "1"; } catch { return false; } };
+const markExitPopupSeen = () => { try { localStorage.setItem(EXIT_SEEN_KEY, "1"); } catch { /* ignore */ } };
+// A fingerprint of the Connections file: the newest "Connected On" date plus
+// the total count. If either changes, the person has dropped newer data.
+const dataStampOf = (connections) => {
+  const list = connections || [];
+  let newest = 0;
+  list.forEach(c => { const t = Date.parse(c["Connected On"] || ""); if (!isNaN(t) && t > newest) newest = t; });
+  return { newestConnectedOn: newest ? new Date(newest).toISOString().slice(0, 10) : null, total: list.length };
+};
+const sameDataStamp = (a, b) => !!a && !!b && a.newestConnectedOn === b.newestConnectedOn && a.total === b.total;
+const hasSavedRunReports = (run) => !!run && Object.keys(run.reports || {}).length > 0;
+const reportsFromFolder = (folder) => {
+  const out = {};
+  Object.entries(folder?.current?.reports || {}).forEach(([id, r]) => { if (r?.text) out[id] = r.text; });
+  if (folder?.field?.text) out.field = folder.field.text;
+  return out;
+};
+
 // ── Main App ──────────────────────────────────────────────────────────────────
 export default function App() {
   const isBeta   = new URLSearchParams(window.location.search).get("beta") === "true";
@@ -1319,6 +1371,14 @@ export default function App() {
   const fileInputRef = useRef(null);
   const uploadRef    = useRef(null);
   const exitIntentShown = useRef(false);
+  // ── Saved reports (Step C1) ──
+  const OPEN_SAVED = "__open_saved__";
+  const folderKeyRef = useRef(null);
+  const folderRef    = useRef(null);
+  const [folderReady,      setFolderReady]      = useState(false);
+  const [hasSavedHere,     setHasSavedHere]     = useState(() => browserHasSavedReports());
+  const [showClearConfirm, setShowClearConfirm] = useState(false);
+  const [clearedNotice,    setClearedNotice]    = useState(false);
 
   const hasFiles            = Object.keys(uploadedFiles).length > 0;
   const connCount           = parsedData["Connections"]?.length || 0;
@@ -1349,6 +1409,70 @@ export default function App() {
       ? `Run: ${runDone.length} of ${runRequired.length} · ${runsLabel(runsLeft)} left · by ${useBy}`
       : `${runsLabel(runsLeft)} left · by ${useBy}`;
   const isMissingCriticalFiles = hasFiles && !parsedData["Connections"];
+
+  // ── Saved reports (Step C1): load, save, move to Past runs, clear ──
+  const updateFolder = (change) => {
+    const key = folderKeyRef.current;
+    if (!key) return;
+    const next = change(folderRef.current || { current: null, past: [], field: null });
+    folderRef.current = writeFolder(key, next) || next;
+    setHasSavedHere(true);
+  };
+
+  const loadSavedReports = (email) => {
+    const key = folderKeyFor(email, isBeta);
+    folderKeyRef.current = key;
+    folderRef.current = readFolder(key);
+    setReports(reportsFromFolder(folderRef.current));
+    setScores(folderRef.current?.current?.scores || null);
+    setFolderReady(true);
+  };
+
+  const saveRunReport = (reportId, text, startsNewRun, extra = {}) => {
+    const now = new Date().toISOString();
+    updateFolder(f => {
+      let current = f.current;
+      let past = f.past || [];
+      if (startsNewRun && hasSavedRunReports(current)) {
+        past = [current, ...past].slice(0, MAX_PAST_RUNS);
+        current = null;
+      }
+      if (!current) current = { batchId: creditStatus?.batchId || null, startedAt: now, dataStamp: dataStampOf(parsedData["Connections"]), reports: {}, scores: null };
+      return { ...f, past, current: { ...current, ...extra, reports: { ...current.reports, [reportId]: { text, createdAt: now } } } };
+    });
+  };
+
+  const saveFieldReport = (text) => {
+    updateFolder(f => ({ ...f, field: { text, createdAt: new Date().toISOString(), dataStamp: dataStampOf(parsedData["Connections"]) } }));
+  };
+
+  const clearSavedReports = () => {
+    if (folderKeyRef.current) removeFolder(folderKeyRef.current);
+    folderRef.current = null;
+    setReports({});
+    setScores(null);
+    setShowClearConfirm(false);
+    setClearedNotice(true);
+    setHasSavedHere(browserHasSavedReports());
+  };
+
+  // Newer LinkedIn data + a finished run + runs left → quietly move the
+  // finished run to Past runs, so the paid reports are ready for a new run.
+  // Nothing is charged until they actually generate a report.
+  useEffect(() => {
+    if (!folderReady) return;
+    const current = folderRef.current?.current;
+    const conns = parsedData["Connections"];
+    if (!hasSavedRunReports(current) || !conns?.length) return;
+    if (sameDataStamp(current.dataStamp, dataStampOf(conns))) return;
+    if (!isBeta) {
+      const runOpen = Object.keys(creditStatus?.activeRunReports || {}).length > 0;
+      if (!creditStatus?.canRun || runOpen) return;
+    }
+    updateFolder(f => ({ ...f, past: [f.current, ...(f.past || [])].slice(0, MAX_PAST_RUNS), current: null }));
+    setReports(prev => (prev.field ? { field: prev.field } : {}));
+    setScores(null);
+  }, [folderReady, parsedData, creditStatus]);
 
   const handleFiles = useCallback((fileList) => {
     Array.from(fileList).forEach((file) => {
@@ -1424,7 +1548,13 @@ export default function App() {
       (secs) => setRetryMessage(`The hamster's catching its breath — back in ~${Math.round(secs)}s! 🐹`),
       isTest
     );
-    setReports(prev => ({ ...prev, [reportId]: result }));
+    // The server starts a new run on this report when no run is open, so any
+    // saved run is finished: it moves to Past runs (Step C1).
+    const startsNewRun = needsCredit && Object.keys(creditStatus?.activeRunReports || {}).length === 0 && hasSavedRunReports(folderRef.current?.current);
+    if (startsNewRun) { setReports(prev => ({ ...(prev.field ? { field: prev.field } : {}), [reportId]: result })); setScores(null); }
+    else setReports(prev => ({ ...prev, [reportId]: result }));
+    if (report?.free) saveFieldReport(result);
+    else saveRunReport(reportId, result, startsNewRun);
     if (needsCredit) {
       fetch("/api/consume-credit", {
         method: "POST",
@@ -1459,6 +1589,7 @@ export default function App() {
             const parsedScores = parseScores(fullText);
       const cleanText    = stripScores(fullText);
       setReports(prev => ({ ...prev, gold: cleanText }));
+      saveRunReport("gold", cleanText, false, { scores: parsedScores || null });
       if (!isBeta) {
         fetch("/api/consume-credit", {
           method: "POST",
