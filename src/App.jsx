@@ -1605,7 +1605,9 @@ const submitICP = () => {
   body { background: #fff !important; color: #000 !important; }
 header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; }
   .print-report-panel { grid-column: 1 / -1 !important; width: 100% !important; }
-  .print-header { display: block !important; }
+.print-header { display: block !important; }
+  .print-only { display: block !important; }
+  .print-dark { color: #000 !important; }
   .print-report-panel { box-shadow: none !important; border: none !important; background: #fff !important; color: #000 !important; padding: 0 !important; }
   .print-report-panel h3 { color: #0d2d6b !important; border-left-color: #0d2d6b !important; }
   .print-report-panel p, .print-report-panel div { color: #000 !important; background: transparent !important; }
@@ -2309,15 +2311,15 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 </div>
               )}
 
-              {reports[activeReport] && activeReport !== "gold" || (activeReport === "gold" && reports.gold) ? (
+              {reports[activeReport] || activeReport === "opendoor" ? (
                 <div className="no-print" style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
-                                    <button onClick={() => window.print()} style={{ padding: "11px 24px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
+                                    <button onClick={() => printAs(`Nugget - ${activeReportMeta?.name || "Report"} - ${pdfDate()}`)} style={{ padding: "11px 24px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
                     <span>↓</span> Save as PDF
                   </button>
                 </div>
               ) : null}
 
-              <div style={{ marginBottom: 22, paddingBottom: 16, borderBottom: `1px solid ${BORDER}` }}>
+              <div className="no-print" style={{ marginBottom: 22, paddingBottom: 16, borderBottom: `1px solid ${BORDER}` }}>
                 <div style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", marginBottom: 4 }}>{activeReportMeta?.name}</div>
                 <div style={{ fontSize: 13, color: MUTED }}>{activeReportMeta?.subtitle}</div>
               </div>
@@ -2544,7 +2546,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
             <p style={{ fontSize: 15, color: WHITE, lineHeight: 1.65, marginBottom: 14 }}>Nugget never stores a copy of your reports — everything's processed right here in your browser, so your network's data stays private.</p>
             <p style={{ fontSize: 15, color: WHITE, lineHeight: 1.65, marginBottom: 26 }}>That also means once you close this tab, they're gone for good — getting them back means starting a fresh run and using another credit.</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              <button onClick={() => { window.print(); setPdfSaveClicked(true); }} style={{ width: "100%", padding: "14px 22px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", borderRadius: 10, color: WHITE, fontSize: 14.5, fontWeight: 700, cursor: "pointer", opacity: pdfSaveClicked ? 0.6 : 1 }}>↓ Save as PDF</button>
+              <button onClick={() => { printAs(`Nugget - ${activeReportMeta?.name || "Report"} - ${pdfDate()}`); setPdfSaveClicked(true); }} style={{ width: "100%", padding: "14px 22px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", borderRadius: 10, color: WHITE, fontSize: 14.5, fontWeight: 700, cursor: "pointer", opacity: pdfSaveClicked ? 0.6 : 1 }}>↓ Save as PDF</button>
               {pdfSaveClicked && (
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 7, fontSize: 13, fontWeight: 700, color: BLUE_LIGHT, padding: "2px 0" }}>✓ Almost there — save your PDF in the window that opened</div>
               )}
