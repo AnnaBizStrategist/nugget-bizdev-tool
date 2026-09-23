@@ -1514,7 +1514,7 @@ export default function App() {
     return out;
   };
 
- const runReport = async (reportId) => {
+ const runReport = async (reportId, { icpDone = false } = {}) => {
   const report = REPORTS.find(r => r.id === reportId);
   const needsCredit = !report?.free && !isBeta;
     const regenCount = creditStatus?.activeRunReports?.[reportId] || 0;
@@ -1525,7 +1525,7 @@ export default function App() {
   }
   if (generating) return;
     if (!emailSubmitted) { setPendingReportId(reportId); setShowEmailModal(true); return; }
-  if (!icpSubmitted) { setPendingReportId(reportId); setShowICPModal(true); return; }
+  if (!icpSubmitted && !icpDone) { setPendingReportId(reportId); setShowICPModal(true); return; }
   setGenerating(reportId); setActiveReport(reportId); setStep("reports"); setError(null); setRetryMessage(null);
   try {
     const ownName = `${parsedData["Profile"]?.[0]?.["First Name"] || ""} ${parsedData["Profile"]?.[0]?.["Last Name"] || ""}`.trim();
@@ -1676,7 +1676,7 @@ const submitICP = () => {
   setICPSubmitted(true);
   setShowICPModal(false);
   const pending = pendingReportId; setPendingReportId(null);
-  if (pending) runReport(pending);
+  if (pending) runReport(pending, { icpDone: true });
 };
 
   // Scroll reveal observer
