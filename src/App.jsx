@@ -1543,9 +1543,10 @@ export default function App() {
     return;
   }
   if (generating) return;
+    if (!parsedData["Connections"]?.length) { setActiveReport(reportId); setStep("reports"); return; }
     if (!emailSubmitted) { setPendingReportId(reportId); setShowEmailModal(true); return; }
   if (!icpSubmitted && !icpDone) { setPendingReportId(reportId); setShowICPModal(true); return; }
-  setGenerating(reportId); setActiveReport(reportId); setStep("reports"); setError(null); setRetryMessage(null);
+  setGenerating(forGold ? "gold" : reportId); if (!forGold) { setActiveReport(reportId); setStep("reports"); } setError(null); setRetryMessage(null);
   try {
     const ownName = `${parsedData["Profile"]?.[0]?.["First Name"] || ""} ${parsedData["Profile"]?.[0]?.["Last Name"] || ""}`.trim();
                   const dataForPrep = reportId === "warm"
@@ -1569,12 +1570,12 @@ export default function App() {
     );
     // The server starts a new run on this report when no run is open, so any
     // saved run is finished: it moves to Past runs (Step C1).
-    const startsNewRun = needsCredit && Object.keys(creditStatus?.activeRunReports || {}).length === 0 && hasSavedRunReports(folderRef.current?.current);
+    const startsNewRun = needsCredit && !recover && Object.keys(creditStatus?.activeRunReports || {}).length === 0 && hasSavedRunReports(folderRef.current?.current);
     if (startsNewRun) { setReports(prev => ({ ...(prev.field ? { field: prev.field } : {}), [reportId]: result })); setScores(null); }
     else setReports(prev => ({ ...prev, [reportId]: result }));
     if (report?.free) saveFieldReport(result);
     else saveRunReport(reportId, result, startsNewRun);
-    if (needsCredit) {
+    if (needsCredit && !recover) {
       fetch("/api/consume-credit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -1588,13 +1589,31 @@ export default function App() {
   finally { setGenerating(null); setRetryMessage(null); }
 };
 
-  const generateGoldNugget = async () => {
+  const generateGoldNugget = async ({ icpDone = false } = {}) => {
     if (generating) return;
+    if (!parsedData["Connections"]?.length) { setActiveReport("gold"); setStep("reports"); return; }
+    if (!icpSubmitted && !icpDone) { setPendingReportId("gold"); setShowICPModal(true); return; }
     setGenerating("gold"); setActiveReport("gold"); setStep("reports"); setError(null); setRetryMessage(null);
     try {
       const ownName = `${parsedData["Profile"]?.[0]?.["First Name"] || ""} ${parsedData["Profile"]?.[0]?.["Last Name"] || ""}`.trim();
+      // Gold Nugget reads only the 4 paid reports. Any the server counts as done
+      // but this browser doesn't have are quietly rebuilt first (Step C2).
+      const paidTexts = {};
+      for (let i = 0; i < PAID_FOUR.length; i++) {
+        const id = PAID_FOUR[i];
+        let text = reports[id] || folderRef.current?.current?.reports?.[id]?.text;
+        if (!text) {
+          setGoldPrep(`Getting your reports ready… (${i + 1} of ${PAID_FOUR.length})`);
+          await runReport(id, { recover: true, forGold: true, icpDone: true });
+          setGenerating("gold");
+          text = folderRef.current?.current?.reports?.[id]?.text;
+          if (!text) { setGoldPrep(null); return; }
+        }
+        paidTexts[id] = text;
+      }
+      setGoldPrep(null);
       const data = prepareData(parsedData, ["Connections", "Messages"], ownName, { client: icpClient, problem: icpProblem });
-      const reportsContext = Object.entries(reports)
+      const reportsContext = Object.entries(paidTexts)
         .map(([id, text]) => `=== ${REPORTS.find(r => r.id === id)?.name?.toUpperCase() || id.toUpperCase()} ===\n${text}`)
         .join("\n\n---\n\n");
       const fullText = await callClaudeGN(
@@ -1695,7 +1714,8 @@ const submitICP = () => {
   setICPSubmitted(true);
   setShowICPModal(false);
   const pending = pendingReportId; setPendingReportId(null);
-  if (pending) runReport(pending, { icpDone: true });
+  if (pending === "gold") generateGoldNugget({ icpDone: true });
+  else if (pending) runReport(pending, { icpDone: true });
 };
 
   // Scroll reveal observer
@@ -1928,7 +1948,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                                         {/* ── The Gold Nugget × BizDev Readiness Score ── */}
               <div style={{ marginBottom: 0 }}>
                 <div style={{ textAlign: "center", padding: "80px 24px 88px" }}>
-                  <div style={{ fontSize: 14, color: "#C9A84C", letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 28 }}>The Seventh Report</div>
+                  <div style={{ fontSize: 14, color: "#C9A84C", letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 28 }}>The Eighth Report</div>
                                     <h2 style={{ fontSize: 37, fontFamily: "Georgia, serif", color: WHITE, marginBottom: 28, lineHeight: 1.3 }}>
                     <span style={{ fontWeight: 400 }}>And then there's</span><br />
                     <span style={{ fontWeight: 700 }}>The Gold Nugget.</span>
