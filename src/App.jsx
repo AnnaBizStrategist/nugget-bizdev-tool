@@ -909,13 +909,25 @@ function LineUpReport({ connections }) {
 
     return (
     <div>
+      <div className="no-print" style={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 14, marginBottom: 18, flexWrap: "wrap" }}>
+        <div style={{ fontSize: 12.5, color: MUTED, lineHeight: 1.5, flex: 1, minWidth: 220, textAlign: "right" }}>
+          {expanded
+            ? <>Saves the summary of all groups, plus the full list for <strong style={{ color: WHITE }}>{expanded} ({peopleLabel(printList.length)})</strong>. To save another group, open it and save again.</>
+            : <>Saves the summary only. Open a group to include its names.</>}
+        </div>
+        <button onClick={saveLineUpPdf} style={{ padding: "11px 24px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
+          <span>↓</span> Save as PDF
+        </button>
+      </div>
+
+      <div className="no-print">
       <div style={{ display: "flex", gap: 6, marginBottom: 18 }}>
         <div onClick={() => switchMode("role")} style={{ padding: "8px 16px", borderRadius: 7, cursor: "pointer", fontSize: 12.5, fontWeight: 700, border: `1px solid ${viewMode === "role" ? BLUE_BRIGHT : BORDER}`, background: viewMode === "role" ? BLUE_MID + "44" : "transparent", color: viewMode === "role" ? BLUE_BRIGHT : MUTED }}>By Role</div>
         <div onClick={() => switchMode("company")} style={{ padding: "8px 16px", borderRadius: 7, cursor: "pointer", fontSize: 12.5, fontWeight: 700, border: `1px solid ${viewMode === "company" ? BLUE_BRIGHT : BORDER}`, background: viewMode === "company" ? BLUE_MID + "44" : "transparent", color: viewMode === "company" ? BLUE_BRIGHT : MUTED }}>By Company</div>
       </div>
 
       {viewMode === "company" && (
-        <div style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}88, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 10, padding: "16px 20px", marginBottom: 22, fontSize: 15, color: WHITE, lineHeight: 1.7 }}>`
+        <div style={{ background: `linear-gradient(135deg, ${BLUE_DEEP}88, ${DARK_CARD})`, border: `1px solid ${BLUE_BRIGHT}33`, borderRadius: 10, padding: "16px 20px", marginBottom: 22, fontSize: 15, color: WHITE, lineHeight: 1.7 }}>
           Multiple connections at the same company are real leverage — more than one way in, or someone already inside who can vouch for you and make the introduction. Generic entries like Self-Employed and Freelance are filtered out — they're not a company, just noise.
         </div>
       )}
@@ -987,6 +999,38 @@ function LineUpReport({ connections }) {
           )}
         </div>
       )}
+          </div>
+
+      {/* Print-only version: summary of every group + the full list for the open group */}
+      <div className="print-only" style={{ display: "none" }}>
+        <div style={{ fontSize: 12.5, lineHeight: 1.6, padding: "10px 14px", border: "1px solid #c0d0f0", borderRadius: 6, marginBottom: 18 }}>
+          {expanded
+            ? <>This PDF includes the summary of all groups and the full list for <strong>{expanded} ({peopleLabel(printList.length)})</strong>. Your other groups aren't included. Open them in The Line-Up to save them separately.</>
+            : <>This PDF includes the summary of all groups only. To save the names in a group, open it in The Line-Up and save again.</>}
+        </div>
+        <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 8 }}>{viewMode === "role" ? "Your network by role" : "Companies with more than one connection"}</div>
+        <div style={{ fontSize: 12.5, lineHeight: 1.8, marginBottom: 22 }}>
+          {buckets.map(b => `${b} · ${countFor(b)}`).join("   |   ")}
+        </div>
+        {expanded && (
+          <div>
+            <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 8 }}>{expanded} · {peopleLabel(printList.length)}</div>
+            {printList.map((c, i) => {
+              const name = `${c["First Name"] || ""} ${c["Last Name"] || ""}`.trim() || "—";
+              const ts = Date.parse(c["Connected On"] || "");
+              const dateDisplay = !isNaN(ts) ? new Date(ts).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : (c["Connected On"] || "—");
+              return (
+                <div key={i} style={{ display: "grid", gridTemplateColumns: "1.3fr 1.2fr 1.1fr 90px", gap: 10, fontSize: 11.5, lineHeight: 1.4, padding: "5px 0", borderBottom: "1px solid #ddd", breakInside: "avoid" }}>
+                  <div style={{ fontWeight: 700 }}>{name}</div>
+                  <div>{c["Position"] || "—"}</div>
+                  <div>{c["Company"] || "—"}</div>
+                  <div style={{ textAlign: "right" }}>{dateDisplay}</div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
