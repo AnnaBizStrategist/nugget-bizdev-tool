@@ -2416,7 +2416,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     else if (reports.gold)        statusText = "✓ Done";
                   else if (priorReportsComplete) statusText = "✦ Ready to generate";
                   else                          statusText = "Complete all 5 reports first";
-                } else if (!entitled) {
+                } else if (!entitled && !reports[r.id]) {
                   statusText = "🔒 Upgrade to unlock";
                 } else {
                   if (generating === r.id)  statusText = `⏳ Generating...`;
@@ -2434,6 +2434,11 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               
               <div style={{ padding: "14px 16px" }}>
                 <button style={{ width: "100%", padding: "10px 16px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 13, fontWeight: 700, cursor: "pointer" }} onClick={() => setStep("upload")}>← Back to Home</button>
+                {emailSubmitted && reportsReady > 0 && (
+                  <div style={{ marginTop: 12, textAlign: "center" }}>
+                    <button onClick={() => setShowClearConfirm(true)} disabled={!!generating} style={{ background: "transparent", border: "none", color: MUTED, fontSize: 11.5, textDecoration: "underline", textUnderlineOffset: 3, cursor: generating ? "not-allowed" : "pointer", opacity: 0.8 }}>Clear my saved reports</button>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -2455,12 +2460,15 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 <div className="no-print" style={{ display: "flex", alignItems: "flex-start", gap: 12, background: `linear-gradient(135deg, ${BLUE_DEEP}, ${BLUE_MID})`, border: `1px solid ${BLUE_BRIGHT}66`, borderRadius: 9, padding: "15px 18px", marginBottom: 16 }}>
                   <span style={{ color: "#f5c842", fontSize: 17, lineHeight: 1, marginTop: 1 }}>↓</span>
                   <div style={{ fontSize: 13.5, lineHeight: 1.6, color: MUTED }}>
-                    <strong style={{ color: WHITE }}>These reports live only in this tab.</strong> Save yours as a PDF before you close it — Nugget never stores a copy, so your network's data stays private.
+                    <strong style={{ color: WHITE }}>Your reports are saved in this browser, never on our servers.</strong> Come back on this browser to pick up where you left off. Want a permanent copy, or to read them on another device? Save a PDF.
                   </div>
                 </div>
               )}
 
-              {reports[activeReport] || activeReport === "opendoor" ? (
+              {clearedNotice && (
+                <div className="no-print" style={{ background: BLUE_DEEP, border: `1px solid ${BORDER}`, borderRadius: 9, padding: "13px 18px", marginBottom: 16, fontSize: 13.5, color: WHITE }}>Your saved reports have been cleared from this browser.</div>
+              )}
+              {reports[activeReport] || (activeReport === "opendoor" && hasFiles) ? (
                 <div className="no-print" style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
                                     <button onClick={() => printAs(`Nugget - ${activeReportMeta?.name || "Report"} - ${pdfDate()}`)} style={{ padding: "11px 24px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
                     <span>↓</span> Save as PDF
@@ -2524,7 +2532,9 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 </>
               ) : activeReport === "opendoor" ? (
                 <>
-                  <OpenDoorReport invitations={parsedData["Invitations"] || []} />
+{hasFiles ? <OpenDoorReport invitations={parsedData["Invitations"] || []} /> : (
+                    <div style={{ textAlign: "center", padding: "48px 32px", color: MUTED, fontSize: 14 }}>No invitations loaded yet — upload your LinkedIn data to see The Open Door.</div>
+                  )}
                   {!isBeta && !creditStatus?.canRun && (
                     <UpgradeCTA text="You've seen who's just outside your network. The Warm List tells you who inside it to reach out to first." />
                   )}
