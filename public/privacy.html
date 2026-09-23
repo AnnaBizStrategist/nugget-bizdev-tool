@@ -454,12 +454,22 @@
 
       <div class="sub-block">
         <h3>Vercel</h3>
-        <p>Nugget is hosted on Vercel. Vercel collects standard server logs and anonymized analytics (page views, performance data). No personal data beyond standard hosting is shared with Vercel.</p>
+        <p>Nugget is hosted on Vercel. Vercel collects standard server logs and anonymized analytics (page views, performance data). Nugget's server functions also run on Vercel, including the relay that passes your LinkedIn summary to Anthropic and returns your reports. The relay forwards data only. It doesn't store or log it.</p>
       </div>
 
       <div class="sub-block">
         <h3>Make.com</h3>
         <p>We use Make.com to route your name and email from the sign-up form to Kit. Only your name and email pass through this webhook — no LinkedIn data.</p>
+      </div>
+
+      <div class="sub-block">
+        <h3>Supabase</h3>
+        <p>Nugget uses Supabase as its database. It stores your name, email, the date you last used Nugget, your credit purchases, and which reports you've run and when. No LinkedIn data and no report content is ever stored there.</p>
+      </div>
+
+      <div class="sub-block">
+        <h3>Stripe</h3>
+        <p>Payments are processed by Stripe. Your card details go directly to Stripe, and Nugget never sees or stores them. Stripe tells us when a purchase is complete so your credits can be added.</p>
       </div>
     </section>
 
@@ -468,6 +478,8 @@
       <h2><span class="section-num">05</span> Data Retention</h2>
       <ul>
         <li><strong style="color: var(--blue-light);">LinkedIn export data:</strong> Not retained. Processed in-browser only and discarded at session end.</li>
+        <li><strong style="color: var(--blue-light);">Generated reports:</strong> Stored only in your own browser, on your device, never on our servers. Removed when you click “Clear my saved reports” or clear your browser data.</li>
+        <li><strong style="color: var(--blue-light);">Purchase and usage records:</strong> Retained for as long as you have an account, so your credits and history work correctly. You may request deletion at any time.</li>
         <li><strong style="color: var(--blue-light);">Name and email:</strong> Retained for as long as you are an active user or subscriber. You may request deletion at any time.</li>
         <li><strong style="color: var(--blue-light);">Analytics data:</strong> Aggregated and anonymized. Retained by Vercel per their standard data practices.</li>
       </ul>
@@ -494,17 +506,19 @@
       <h2><span class="section-num">07</span> Security</h2>
       <ul>
         <li>All data is transmitted over HTTPS (TLS encryption in transit)</li>
-        <li>Your LinkedIn data is never written to disk or stored on any server</li>
+        <li>Nugget never saves your raw LinkedIn data, on your device or on any server</li>
+        <li>Saved reports can be opened by anyone using the same browser. On a shared computer, click “Clear my saved reports” when you're done.</li>
         <li>Access to email marketing data is restricted to authorized personnel only</li>
         <li>We use reputable, security-audited third-party services</li>
       </ul>
       <p style="color: var(--muted); font-size: 14px;">No system is perfectly secure, and we cannot guarantee absolute security. If you have concerns about a specific data handling practice, please contact us.</p>
     </section>
 
-    <!-- 8. Cookies -->
+   <!-- 8. Cookies -->
     <section id="cookies">
-      <h2><span class="section-num">08</span> Cookies &amp; Analytics</h2>
+      <h2><span class="section-num">08</span> Cookies, Browser Storage &amp; Analytics</h2>
       <p>Nugget uses Vercel Analytics for basic, anonymized usage data — pages visited, load times, and general traffic patterns. This does not include personal identifiers. We do not use tracking cookies or third-party advertising pixels.</p>
+      <p>Nugget also uses your browser's local storage, a private storage area on your own device, to save two things: your finished reports, and a note that you've already seen our “keep a copy” reminder so we don't show it again. This is not a tracking cookie. It's never sent to our servers, and it can only be seen by someone using the same browser. You can clear your reports any time with “Clear my saved reports,” or clear everything by clearing your browser data.</p>
     </section>
 
     <!-- 9. Children -->
@@ -533,7 +547,7 @@
     <hr />
 
     <p style="font-size: 12px; color: var(--muted); text-align: center;">
-      This Privacy Policy was last reviewed and updated on May 1, 2025.<br />
+      This Privacy Policy was last reviewed and updated on September 23, 2026.<br />
       Nugget™ is a product of Anna Ludwinowski. All rights reserved.
     </p>
 
