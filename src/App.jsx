@@ -528,6 +528,20 @@ function categorizeRole(title = "") {
 }
 // ── The Line-Up: role-bucket matching (separate from categorizeRole above —
 // different bucket set, kept isolated so it can't affect Field Report) ────────
+// ── PDF helpers: each saved PDF gets its own filename (browsers use the page title) ──
+const PDF_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+function pdfDate() {
+  const d = new Date();
+  return `${PDF_MONTHS[d.getMonth()]} ${d.getDate()}`;
+}
+function printAs(fileName) {
+  const previous = document.title;
+  document.title = fileName.replace(/[\\/:*?"<>|]/g, "-");
+  const restore = () => { document.title = previous; window.removeEventListener("afterprint", restore); };
+  window.addEventListener("afterprint", restore);
+  window.print();
+}
+
 const LINEUP_BUCKETS = [
   "Founders/Owners",
   "C-Suite",
@@ -793,9 +807,9 @@ function ReportContent({ text }) {
 // ── Upgrade CTA card (shown at the bottom of free reports) ────────────────────
 function UpgradeCTA({ text }) {
   return (
-    <div style={{ background: `linear-gradient(135deg, #1a1200, ${DARK_CARD})`, border: "1px solid #C9A84C66", borderRadius: 12, padding: "24px 28px", marginTop: 28, textAlign: "center" }}>
+    <div className="no-print" style={{ background: `linear-gradient(135deg, #1a1200, ${DARK_CARD})`, border: "1px solid #C9A84C66", borderRadius: 12, padding: "24px 28px", marginTop: 28, textAlign: "center" }}>
       <p style={{ fontSize: 14, color: WHITE, lineHeight: 1.7, marginBottom: 18 }}>{text}</p>
-            <button onClick={() => { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ display: "inline-block", padding: "12px 28px", background: "linear-gradient(135deg, #C9A84C, #f5c842)", color: "#0a1628", borderRadius: 8, fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer" }}>See Pricing →</button>
+            <button onClick={() => { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ display: "inline-block", padding: "12px 28px", background: "linear-gradient(135deg, #C9A84C, #f5c842)", color: "#0a1628", borderRadius: 8, fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer" }}>Unlock all 5 reports →</button>
     </div>
   );
 }
@@ -883,6 +897,15 @@ function LineUpReport({ connections }) {
   const visibleCount = revealedThis ? filtered.length : Math.min(8, filtered.length);
   const visible = filtered.slice(0, visibleCount);
   const remaining = filtered.length - visible.length;
+
+  // PDF: the full open group (ignores search and "show more"), in the current sort order
+  const printList = expanded ? (activeSource[expanded] || []).slice().sort((a, b) => {
+    const ta = Date.parse(a["Connected On"] || "") || 0;
+    const tb = Date.parse(b["Connected On"] || "") || 0;
+    return sortDesc ? tb - ta : ta - tb;
+  }) : [];
+  const peopleLabel = (n) => `${n} ${n === 1 ? "person" : "people"}`;
+  const saveLineUpPdf = () => printAs(`Nugget - The Line-Up - ${expanded || "Summary"} - ${pdfDate()}`);
 
     return (
     <div>
