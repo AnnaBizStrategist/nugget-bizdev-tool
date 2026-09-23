@@ -1709,7 +1709,7 @@ const submitICP = () => {
     return () => document.removeEventListener("mouseleave", handleMouseLeave);
   }, [reports]);
 
-    useEffect(() => { setError(null); }, [activeReport]);
+    useEffect(() => { setError(null); setClearedNotice(false); }, [activeReport]);
 
   const scrollToUpload = () => {
     uploadRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -1802,7 +1802,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
           ) : (
             <>
               <button style={{ padding: "6px 16px", borderRadius: 6, border: `1px solid ${BORDER}`, background: "transparent", color: MUTED, cursor: "pointer", fontSize: 13 }} onClick={() => setStep("upload")}>Home</button>
-              <button style={{ padding: "6px 16px", borderRadius: 6, border: `1px solid ${step === "reports" ? BLUE_BRIGHT : BORDER}`, background: step === "reports" ? BLUE_MID + "44" : "transparent", color: step === "reports" ? BLUE_BRIGHT : MUTED, cursor: "pointer", fontSize: 13 }} onClick={() => connCount > 0 && setStep("reports")}>
+              <button style={{ padding: "6px 16px", borderRadius: 6, border: `1px solid ${step === "reports" ? BLUE_BRIGHT : BORDER}`, background: step === "reports" ? BLUE_MID + "44" : "transparent", color: step === "reports" ? BLUE_BRIGHT : MUTED, cursor: "pointer", fontSize: 13 }} onClick={() => (connCount > 0 || reportsReady > 0) && setStep("reports")}>
                 Reports {reportsReady > 0 && `(${reportsReady})`}
                 </button>
             </>
@@ -1841,6 +1841,9 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               <div style={{ display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap", marginBottom: 56, animation: "fadeSlideUp 0.7s ease-out 0.4s both" }}>
                 <button style={{ ...primaryBtn, fontSize: 17, padding: "17px 44px" }} onClick={scrollToUpload}>Find My Next Client →</button>
               </div>
+              {hasSavedHere && !emailSubmitted && (
+                <button onClick={() => { setPendingReportId(OPEN_SAVED); setShowEmailModal(true); }} style={{ background: "transparent", border: "none", color: "rgba(255,255,255,0.85)", fontSize: 15, fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 4, cursor: "pointer", marginTop: -32, marginBottom: 40 }}>Open your saved reports →</button>
+              )}
               <p style={{ fontSize: 30, fontFamily: "Georgia, serif", fontWeight: 700, color: "rgba(255,255,255,0.85)", letterSpacing: "-0.3px", marginTop: 20, animation: "fadeSlideUp 0.7s ease-out 0.5s both" }}>
                 NO scraping.&nbsp;&nbsp;NO cold outreach.&nbsp;&nbsp;NO guessing.
               </p>
@@ -2038,6 +2041,9 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   onDrop={handleDrop}
                   onClick={() => fileInputRef.current?.click()}
                 >
+                  {emailSubmitted && reportsReady > 0 && connCount === 0 && (
+                    <div style={{ maxWidth: 520, margin: "0 auto 28px", padding: "14px 18px", background: "rgba(10,22,40,0.55)", border: "1px solid rgba(255,255,255,0.25)", borderRadius: 10, fontSize: 14, lineHeight: 1.6, color: WHITE }}>Your saved reports are below. Drop your LinkedIn file again to refresh The Open Door and The Line-Up. They're built fresh from your data each time and never saved.</div>
+                  )}
                   <div style={{ fontSize: 28, fontWeight: 700, fontFamily: "Georgia, serif", color: WHITE, marginBottom: 10 }}>Drop your LinkedIn file here</div>
                   <div style={{ fontSize: 32, marginBottom: 12 }}>📂</div>
                   <div style={{ fontSize: 13, color: "rgba(255,255,255,0.7)", marginBottom: 36, lineHeight: 1.5 }}>
@@ -2113,7 +2119,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                       <div style={{ fontSize: 15, fontWeight: 700, color: WHITE, marginBottom: 3, fontFamily: "Georgia, serif" }}>{r.name}</div>
                       <div style={{ fontSize: 11, color: MUTED, marginBottom: 7, textTransform: "uppercase", letterSpacing: "0.05em" }}>{r.subtitle}</div>
                       <div style={{ fontSize: 15, color: MUTED, lineHeight: 1.5, marginBottom: 14, flex: 1 }}>{r.description}</div>
-                                            {unlocked ? (
+                                            {(unlocked || reports[r.id]) ? (
                                                 (r.computed || reports[r.id])
                                                     ? <button style={{ padding: "8px 16px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { if (!emailSubmitted) { setPendingReportId(r.id); setShowEmailModal(true); return; } setActiveReport(r.id); setStep("reports"); }}>✓ View Report</button>
                           : <button style={{ padding: "8px 16px", background: generating === r.id ? BLUE_MID + "44" : `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 12, fontWeight: 700, cursor: generating ? "not-allowed" : "pointer", width: "100%" }} onClick={() => runReport(r.id)} disabled={!!generating}>
@@ -2139,7 +2145,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                       <div style={{ fontSize: 19, fontWeight: 700, color: WHITE, marginBottom: 4, fontFamily: "Georgia, serif" }}>{r.name}</div>
                       <div style={{ fontSize: 11, color: MUTED, marginBottom: 9, textTransform: "uppercase", letterSpacing: "0.05em" }}>{r.subtitle}</div>
                       <div style={{ fontSize: 15, color: MUTED, lineHeight: 1.5, marginBottom: 16, flex: 1 }}>{r.description}</div>
-                                            {unlocked ? (
+                                            {(unlocked || reports[r.id]) ? (
                                                 (r.computed || reports[r.id])
                           ? <button style={{ padding: "10px 18px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { setActiveReport(r.id); setStep("reports"); }}>✓ View Report</button>
                           : <button style={{ padding: "10px 18px", background: generating === r.id ? BLUE_MID + "44" : `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: generating ? "not-allowed" : "pointer", width: "100%" }} onClick={() => runReport(r.id)} disabled={!!generating}>
@@ -2155,7 +2161,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
 
                                                {(() => {
                   const gr = REPORTS.find(r => r.id === "gold");
-                  const goldUnlocked = isBeta || !!creditStatus?.canRun;
+                  const goldUnlocked = isBeta || !!creditStatus?.canRun || !!reports.gold;
                   return (
                     <div style={{ background: `linear-gradient(135deg, ${BLUE_DEEP} 0%, ${DARK_CARD} 60%)`, border: "1px solid #C9A84C", borderRadius: 14, padding: "40px 36px 36px", marginBottom: 76, textAlign: "center", position: "relative", boxShadow: "0 0 0 1px rgba(201,168,76,0.1), 0 14px 50px -6px rgba(232,160,0,0.4), 0 0 90px -16px rgba(245,200,66,0.5)" }}>
                       {!goldUnlocked && <span style={{ position: "absolute", top: 20, right: 22, fontSize: 15, color: MUTED }}>🔒</span>}
@@ -2334,7 +2340,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
 
                   </div>
                   <p style={{ fontSize: 12, color: MUTED, marginTop: 20 }}>Credits expire 18 months from purchase. No subscription, no auto-renewal.</p>
-                                    <p style={{ fontSize: 12, color: MUTED, marginTop: 6 }}>Each report generates once per run — save yours as a PDF, since nothing's stored after you close the tab.</p>
+                                    <p style={{ fontSize: 12, color: MUTED, marginTop: 6 }}>Each report generates once per run. It's saved in this browser, never on our servers. Save a PDF for a permanent copy.</p>
                 </div>
               </div>
               
@@ -2403,9 +2409,9 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 const entitled = r.free || isBeta || !!creditStatus?.canRun;
                 const goldEntitled = isBeta || !!creditStatus?.includesGN;
                 if (r.computed) {
-                  statusText = "⚡ Ready";
+                  statusText = connCount > 0 ? "⚡ Ready" : "Needs your LinkedIn file";
                 } else if (r.id === "gold") {
-                  if (!goldEntitled)            statusText = "🔒 Upgrade to unlock";
+                  if (!goldEntitled && !reports.gold)            statusText = "🔒 Upgrade to unlock";
                   else if (generating === "gold") statusText = "⏳ Generating...";
                     else if (reports.gold)        statusText = "✓ Done";
                   else if (priorReportsComplete) statusText = "✦ Ready to generate";
