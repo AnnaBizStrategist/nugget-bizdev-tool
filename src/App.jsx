@@ -2454,19 +2454,19 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   else if (generating === "gold") statusText = "⏳ Generating...";
                     else if (reports.gold)        statusText = "✓ Done";
                   else if (priorReportsComplete) statusText = "✦ Ready to generate";
-                  else                          statusText = "Complete all 5 reports first";
+                  else                          statusText = "Complete the 4 paid reports first";
                 } else if (!entitled && !reports[r.id]) {
                   statusText = "🔒 Upgrade to unlock";
                 } else {
                   if (generating === r.id)  statusText = `⏳ Generating...`;
                                     else if (reports[r.id])   statusText = "✓ Done";
-                  else if (doneEarlier(r.id)) statusText = "✓ Done earlier";
+                  else if (doneEarlier(r.id)) statusText = "✓ Done";
                   else                      statusText = "Ready to generate";
                 }
                 return (
                   <div key={r.id} style={{ padding: "17px 16px", borderBottom: `1px solid ${BORDER}`, cursor: "pointer", background: activeReport === r.id ? BLUE_MID + "33" : "transparent", borderLeft: `3px solid ${activeReport === r.id ? BLUE_BRIGHT : "transparent"}`, transition: "all 0.15s" }} onClick={() => setActiveReport(r.id)}>
                     <div style={{ fontSize: 15, fontWeight: 600, color: activeReport === r.id ? BLUE_BRIGHT : WHITE, marginBottom: 2 }}>{r.name}</div>
-                    <div style={{ fontSize: 12, color: reports[r.id] ? BLUE_BRIGHT : doneEarlier(r.id) ? "#C9A84C" : MUTED }}>{statusText}</div>
+                    <div style={{ fontSize: 12, color: (reports[r.id] || doneEarlier(r.id)) ? BLUE_BRIGHT : MUTED }}>{statusText}</div>
                   </div>
                 );
                             })}
@@ -2527,7 +2527,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
                       <div style={{ width: 36, height: 36, border: `3px solid ${BORDER}`, borderTop: `3px solid ${BLUE_BRIGHT}`, borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto 16px" }} />
                       <div style={{ color: MUTED, fontSize: 14 }}>
-    {retryMessage || "Mining your data for gold..."}
+    {retryMessage || goldPrep || "Mining your data for gold..."}
 </div>
                     </div>
                   ) : reports.gold ? (
@@ -2542,10 +2542,17 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                       </p>
                       <button style={{ padding: "12px 32px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "Georgia, serif" }} onClick={() => { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>Upgrade to Gold Nugget →</button>
                     </div>
+                  ) : (priorReportsComplete && connCount === 0) ? (
+                    <div style={{ textAlign: "center", padding: "60px 32px" }}>
+                      <div style={{ fontSize: 38, marginBottom: 14 }}>📂</div>
+                      <div style={{ color: WHITE, fontSize: 15, fontWeight: 600, marginBottom: 8 }}>Drop your LinkedIn file to generate this report.</div>
+                      <p style={{ color: MUTED, fontSize: 13.5, lineHeight: 1.7, maxWidth: 380, margin: "0 auto" }}>Your saved reports stay right where they are.</p>
+                      <button onClick={() => { setStep("upload"); setTimeout(() => scrollToUpload(), 50); }} style={{ marginTop: 20, padding: "10px 24px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Drop my file →</button>
+                    </div>
                   ) : priorReportsComplete ? (
                     <div style={{ textAlign: "center", padding: "48px 32px" }}>
                       <div style={{ fontSize: 44, marginBottom: 16, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, #E8A000, #f5c842)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontWeight: 700 }}>GN</div>
-                      <div style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 10 }}>You've mined all 5 reports.</div>
+                      <div style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 10 }}>You've mined all 4 reports.</div>
                       <p style={{ fontSize: 14, color: MUTED, lineHeight: 1.7, maxWidth: 380, margin: "0 auto 28px" }}>Ready to see how it all adds up?</p>
                       <button style={{ padding: "12px 32px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "Georgia, serif" }} onClick={generateGoldNugget}>
                         Unlock Your BizDev Readiness Score →
@@ -2554,7 +2561,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   ) : (
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
                       <div style={{ fontSize: 38, marginBottom: 14, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, #E8A000, #f5c842)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontWeight: 700 }}>GN</div>
-                      <div style={{ fontSize: 16, color: WHITE, fontWeight: 600, marginBottom: 8 }}>Complete all 5 reports first</div>
+                      <div style={{ fontSize: 16, color: WHITE, fontWeight: 600, marginBottom: 8 }}>Complete the 4 paid reports first</div>
                       <p style={{ fontSize: 13, color: MUTED, lineHeight: 1.7 }}>Generate all 5 reports to unlock your BizDev Readiness Score.</p>
                     </div>
                   )}
