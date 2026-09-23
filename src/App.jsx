@@ -1632,6 +1632,7 @@ export default function App() {
   setAccessToken(token);
 
   setEmailSubmitted(true);
+  loadSavedReports(emailAddress);
   setEmailSubmitting(false);
   setShowEmailModal(false);
     let status = null;
@@ -1650,6 +1651,16 @@ export default function App() {
 
 const continueAfterEmail = (pending) => {
   if (!pending) return;
+  // "Open your saved reports →", or a card for a report that's already saved:
+  // show the saved copy instead of generating it again.
+  const savedNow = reportsFromFolder(folderRef.current);
+  if (pending === OPEN_SAVED) {
+    const first = REPORTS.find(r => savedNow[r.id]);
+    if (first) { setActiveReport(first.id); setStep("reports"); }
+    else scrollToUpload();
+    return;
+  }
+  if (savedNow[pending]) { setActiveReport(pending); setStep("reports"); return; }
   const pendingReport = REPORTS.find(r => r.id === pending);
   if (pendingReport?.computed) { setActiveReport(pending); setStep("reports"); }
   else { setPendingReportId(pending); setShowICPModal(true); }
@@ -1683,13 +1694,14 @@ const submitICP = () => {
   });
 
   // Exit-intent: once any report exists, warn before they lose it by
-  // leaving the tab. Fires once per visit (cursor heading toward the
+  // leaving the tab. Shows once per browser, ever (cursor heading toward the
   // browser's tab bar / close button).
   useEffect(() => {
-    if (Object.keys(reports).length === 0) return;
+    if (Object.keys(reports).length === 0 || exitPopupSeen()) return;
     const handleMouseLeave = (e) => {
       if (e.clientY <= 0 && !exitIntentShown.current) {
         exitIntentShown.current = true;
+        markExitPopupSeen();
         setShowExitModal(true);
       }
     };
