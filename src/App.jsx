@@ -292,7 +292,7 @@ Score the data first, before writing anything else. The very first thing in your
 {"networkStrength": 0, "profileStrength": 0, "contentStrength": 0, "relationshipStrength": 0, "advocateStrength": 0}
 </SCORES>
 
-Replace the 0s with honest scores from 0-100 based on the data. Most Founders score 45-72 overall. Score each: Network Strength = ICP match % and network quality. Profile Strength = profile BD readiness. Content Strength = posting consistency and ICP alignment. Relationship Strength = warm relationship depth and messaging activity. Advocate Strength = hidden nuggets count and referral potential.
+Replace the 0s with honest scores from 0-100 based on the data. Most Founders score 45-72 overall. Score each: Network Strength = ICP match % and network quality. To judge the network, use the Connections _summary: total (every connection), icp_count (every connection that matches the ICP) and role_distribution (every connection, grouped by role). Work out where the network is dense or thin by role and seniority, what share looks like the founder's ICP, and whether it leans toward peers rather than buyers. Base the Network score and the Network section of Your 5 Strengths on this, using real numbers. Profile Strength = profile BD readiness. Content Strength = posting consistency and ICP alignment. Relationship Strength = warm relationship depth and messaging activity. Advocate Strength = hidden nuggets count and referral potential.
 
 Anna's voice: warm, direct, witty. Zero fluff. Treat the founder like a smart adult who can handle the truth and act on it.
 
@@ -682,7 +682,7 @@ function prepareData(parsedData, fileKeys, ownName = "", icpData = null) {
       const icpConns   = bySignalFirst(parsedData[k].filter((c) => ICP_RE.test(c["Position"] || ""))).slice(0, 60).map(slimConnection);
       const otherConns = bySignalFirst(parsedData[k].filter((c) => !ICP_RE.test(c["Position"] || ""))).slice(0, 15).map(slimConnection);
       out[k] = {
-        _summary: { total, icp_count: icpConns.length, role_distribution: roleDist },
+        _summary: { total, icp_count: parsedData[k].filter((c) => ICP_RE.test(c["Position"] || "")).length, role_distribution: roleDist },
         icp_connections: icpConns,
         other_sample: otherConns,
       };
@@ -1294,6 +1294,7 @@ function Divider() {
 const STORE_PREFIX  = "nugget:v1:";
 const EXIT_SEEN_KEY = "nugget:v1:exit-popup-seen";
 const MAX_PAST_RUNS = 3;
+const PAID_FOUR = ["warm", "hidden", "inbound", "outbound"]; // Gold Nugget reads only these (Step C2)
 const normEmail = (e) => String(e || "").trim().toLowerCase();
 const folderKeyFor = (email, beta) => `${STORE_PREFIX}${beta ? "beta:" : "user:"}${normEmail(email)}`;
 const readFolder = (key) => {
@@ -1368,6 +1369,7 @@ export default function App() {
   const [accessToken,     setAccessToken]    = useState(null);
     const [showExitModal,   setShowExitModal]  = useState(false);
   const [pdfSaveClicked,  setPdfSaveClicked] = useState(false);
+  const [goldPrep,        setGoldPrep]       = useState(null);
   const fileInputRef = useRef(null);
   const uploadRef    = useRef(null);
   const exitIntentShown = useRef(false);
@@ -1385,7 +1387,7 @@ export default function App() {
   const msgCount            = parsedData["Messages"]?.length || 0;
   const reportsReady        = Object.keys(reports).length;
   const activeReportMeta    = REPORTS.find(r => r.id === activeReport);
-        const priorReportsComplete = REPORTS.filter(r => !r.computed && r.id !== "gold").every(r => reports[r.id]);
+        const priorReportsComplete = PAID_FOUR.every(id => reports[id] || !!creditStatus?.activeRunReports?.[id]);
 
   // ── Status card + header pill (Step B) ──
   const RUN_REPORT_NAMES = { warm: "Warm List", hidden: "Hidden Nuggets", inbound: "Inbound", outbound: "Outbound", gold: "Gold Nugget" };
@@ -1398,7 +1400,7 @@ export default function App() {
   const doneEarlier = (id) => !!creditStatus?.activeRunReports?.[id] && !reports[id];
   const runRequired   = creditStatus?.requiredReportTypes || [];
   const runDone       = runRequired.filter(t => creditStatus?.activeRunReports?.[t]);
-  const runStillToGo  = runRequired.filter(t => !creditStatus?.activeRunReports?.[t] && t !== "gold");
+  const runStillToGo  = runRequired.filter(t => !creditStatus?.activeRunReports?.[t]);
   const runInProgress = runDone.length > 0;
   const runsLeft      = creditStatus?.totalCreditsRemaining ?? 0;
   const useBy         = formatUseBy(creditStatus?.expirationDate);
@@ -1474,6 +1476,23 @@ export default function App() {
     setScores(null);
   }, [folderReady, parsedData, creditStatus]);
 
+  // Auto-recover (Step C2): a paid report the server counts as done, but this
+  // browser doesn't have, quietly rebuilds when it's opened. No credit is used.
+  const recoverTried = useRef({});
+  const recoverView  = useRef(null);
+  useEffect(() => {
+    if (recoverView.current !== activeReport) { recoverView.current = activeReport; recoverTried.current = {}; }
+    if (step !== "reports" || generating || !PAID_FOUR.includes(activeReport)) return;
+    if (!doneEarlier(activeReport) || connCount === 0) return;
+    if (!icpSubmitted) { setPendingReportId(activeReport); setShowICPModal(true); return; }
+    if (recoverTried.current[activeReport]) return;
+    recoverTried.current[activeReport] = true;
+    runReport(activeReport, { recover: true, icpDone: true });
+  }, [step, activeReport, generating, connCount, icpSubmitted, creditStatus, reports]);
+
+  // Field Report: offer a refresh only when the dropped file has newer data.
+  const fieldIsStale = connCount > 0 && !!folderRef.current?.field && !sameDataStamp(folderRef.current.field.dataStamp, dataStampOf(parsedData["Connections"]));
+
   const handleFiles = useCallback((fileList) => {
     Array.from(fileList).forEach((file) => {
       if (file.name.endsWith(".zip")) {
@@ -1514,12 +1533,12 @@ export default function App() {
     return out;
   };
 
- const runReport = async (reportId, { icpDone = false } = {}) => {
+ const runReport = async (reportId, { icpDone = false, recover = false, forGold = false } = {}) => {
   const report = REPORTS.find(r => r.id === reportId);
   const needsCredit = !report?.free && !isBeta;
     const regenCount = creditStatus?.activeRunReports?.[reportId] || 0;
   if (needsCredit && !creditStatus?.canRun) return;
-  if (needsCredit && regenCount >= 1) {
+  if (needsCredit && regenCount >= 1 && !recover) {
         setActiveReport(reportId); setStep("reports");
     return;
   }
