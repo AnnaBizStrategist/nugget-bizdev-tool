@@ -1066,14 +1066,14 @@ function OpenDoorReport({ invitations }) {
       <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 16, padding: "16px 18px", borderBottom: isLast ? "none" : `1px solid ${BORDER}`, background: DARK }}>
         <div style={{ minWidth: 0, flex: 1 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 9, flexWrap: "wrap", marginBottom: note ? 4 : 0 }}>
-            <span style={{ fontSize: 14, fontWeight: 700, color: WHITE }}>{name}</span>
-                        <span style={{ fontSize: 13, color: MUTED }}>{days === null ? "" : `${days} day${days === 1 ? "" : "s"} ago`}</span>
+            <span className="print-dark" style={{ fontSize: 14, fontWeight: 700, color: WHITE }}>{name}</span>
+                        <span className="print-dark" style={{ fontSize: 13, color: MUTED }}>{days === null ? "" : `${days} day${days === 1 ? "" : "s"} ago`}</span>
             {badge && (
               <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase", padding: "2px 8px", borderRadius: 20, color: badge.color, background: badge.bg, border: `1px solid ${badge.border}` }}>{badge.label}</span>
             )}
           </div>
           {note && (
-            <p style={{ fontSize: 15, fontStyle: "italic", color: WHITE, lineHeight: 1.65, margin: "5px 0 0", paddingLeft: 12, borderLeft: `2px solid ${BORDER}` }}>`
+            <p style={{ fontSize: 15, fontStyle: "italic", color: WHITE, lineHeight: 1.65, margin: "5px 0 0", paddingLeft: 12, borderLeft: `2px solid ${BORDER}` }}>
               "{note}"
               <span style={{ display: "block", fontSize: 12.5, fontStyle: "normal", color: MUTED, marginTop: 4 }}>Reply to what they said.</span>
             </p>
