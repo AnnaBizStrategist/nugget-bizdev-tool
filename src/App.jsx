@@ -2673,7 +2673,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
         <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(2,8,18,0.97)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: 24 }}>
                     <div style={{ background: `linear-gradient(160deg, #0f2040 0%, #0a1628 100%)`, border: `1px solid ${BLUE_BRIGHT}66`, borderRadius: 22, padding: "52px 56px", maxWidth: 520, width: "100%", boxShadow: `0 0 80px rgba(65,161,232,0.15), 0 24px 60px rgba(0,0,0,0.8)`, animation: "fadeIn 0.2s ease-out" }}>
                     <h2 style={{ fontSize: 25, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, textAlign: "center", marginBottom: 14, lineHeight: 1.35 }}>Welcome to Nugget!</h2>
-                        <p style={{ fontSize: 15.5, color: WHITE, textAlign: "center", marginBottom: 36, lineHeight: 1.7 }}>Enter your name and email to unlock your free reports below. Save each report as a PDF before you close this tab — so you can refer to them after.</p>
+                        <p style={{ fontSize: 15.5, color: WHITE, textAlign: "center", marginBottom: 36, lineHeight: 1.7 }}>Enter your name and email to unlock your free reports below. They'll be saved in this browser, never on our servers.</p>
                         <div style={{ display: "flex", flexDirection: "column", gap: 20, marginBottom: 30 }}>
               <div>
                                 <label style={{ fontSize: 12.5, color: MUTED, display: "block", marginBottom: 8, letterSpacing: "0.06em", textTransform: "uppercase" }}>First Name</label>
@@ -2696,14 +2696,28 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
         </div>
       )}
 
-            {/* ── Exit-intent save reminder ── */}
+            {/* ── Clear my saved reports: in-app confirmation (Step C1) ── */}
+      {showClearConfirm && (
+        <div className="no-print" style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(2,8,18,0.97)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: 24 }}>
+          <div style={{ background: `linear-gradient(160deg, #0f2040 0%, #0a1628 100%)`, border: `1px solid ${BLUE_BRIGHT}66`, borderRadius: 20, padding: "40px 44px", maxWidth: 460, width: "100%", boxShadow: `0 0 80px rgba(65,161,232,0.15), 0 24px 60px rgba(0,0,0,0.8)`, animation: "fadeIn 0.2s ease-out", textAlign: "center" }}>
+            <h2 style={{ fontSize: 21, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 14, lineHeight: 1.35 }}>Clear your saved reports from this browser?</h2>
+            <p style={{ fontSize: 15, color: WHITE, lineHeight: 1.65, marginBottom: 26 }}>This removes your current reports, your past runs and your Field Report from this browser. It doesn't affect your runs or credits. Want a copy first? Save your PDFs before clearing.</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <button onClick={clearSavedReports} style={{ width: "100%", padding: "14px 22px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", borderRadius: 10, color: WHITE, fontSize: 14.5, fontWeight: 700, cursor: "pointer" }}>Clear them</button>
+              <button onClick={() => setShowClearConfirm(false)} style={{ width: "100%", padding: "14px 22px", background: "transparent", border: `1px solid ${BORDER}`, borderRadius: 10, color: MUTED, fontSize: 14.5, fontWeight: 700, cursor: "pointer" }}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Exit-intent save reminder ── */}
       {showExitModal && (
         <div className="no-print" style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(2,8,18,0.97)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: 24 }}>
           <div style={{ background: `linear-gradient(160deg, #0f2040 0%, #0a1628 100%)`, border: `1px solid ${BLUE_BRIGHT}66`, borderRadius: 20, padding: "40px 44px", maxWidth: 440, width: "100%", boxShadow: `0 0 80px rgba(65,161,232,0.15), 0 24px 60px rgba(0,0,0,0.8)`, animation: "fadeIn 0.2s ease-out", textAlign: "center" }}>
             <div style={{ width: 46, height: 46, margin: "0 auto 18px", borderRadius: "50%", background: pdfSaveClicked ? "rgba(65,161,232,0.16)" : "rgba(201,168,76,0.14)", border: pdfSaveClicked ? "1px solid rgba(65,161,232,0.5)" : "1px solid rgba(201,168,76,0.4)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, color: pdfSaveClicked ? BLUE_LIGHT : "inherit" }}>{pdfSaveClicked ? "✓" : "↓"}</div>
-            <h2 style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 10, lineHeight: 1.3 }}>Don't lose this.</h2>
-            <p style={{ fontSize: 15, color: WHITE, lineHeight: 1.65, marginBottom: 14 }}>Nugget never stores a copy of your reports — everything's processed right here in your browser, so your network's data stays private.</p>
-            <p style={{ fontSize: 15, color: WHITE, lineHeight: 1.65, marginBottom: 26 }}>That also means once you close this tab, they're gone for good — getting them back means starting a fresh run and using another credit.</p>
+            <h2 style={{ fontSize: 22, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 10, lineHeight: 1.3 }}>Want to keep a copy of your report?</h2>
+            <p style={{ fontSize: 15, color: WHITE, lineHeight: 1.65, marginBottom: 14 }}>Your reports are saved in this browser, never on our servers, so your network's data stays private.</p>
+            <p style={{ fontSize: 15, color: WHITE, lineHeight: 1.65, marginBottom: 26 }}>Come back on this browser to pick them up again. For a permanent copy, or to read them on another device, save a PDF.</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               <button onClick={() => { printAs(`Nugget - ${activeReportMeta?.name || "Report"} - ${pdfDate()}`); setPdfSaveClicked(true); }} style={{ width: "100%", padding: "14px 22px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", borderRadius: 10, color: WHITE, fontSize: 14.5, fontWeight: 700, cursor: "pointer", opacity: pdfSaveClicked ? 0.6 : 1 }}>↓ Save as PDF</button>
               {pdfSaveClicked && (
