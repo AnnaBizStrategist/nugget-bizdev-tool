@@ -2562,7 +2562,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
                       <div style={{ fontSize: 38, marginBottom: 14, fontFamily: "Georgia, serif", background: `linear-gradient(90deg, #E8A000, #f5c842)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", fontWeight: 700 }}>GN</div>
                       <div style={{ fontSize: 16, color: WHITE, fontWeight: 600, marginBottom: 8 }}>Complete the 4 paid reports first</div>
-                      <p style={{ fontSize: 13, color: MUTED, lineHeight: 1.7 }}>Generate all 5 reports to unlock your BizDev Readiness Score.</p>
+                      <p style={{ fontSize: 13, color: MUTED, lineHeight: 1.7 }}>Generate the Warm List, Hidden Nuggets, Inbound and Outbound to unlock your BizDev Readiness Score.</p>
                     </div>
                   )}
                 </>
@@ -2591,24 +2591,30 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
                       <div style={{ width: 36, height: 36, border: `3px solid ${BORDER}`, borderTop: `3px solid ${BLUE_BRIGHT}`, borderRadius: "50%", animation: "spin 1s linear infinite", margin: "0 auto 16px" }} />
                       <div style={{ color: MUTED, fontSize: 14 }}>
-    {retryMessage || "Mining your data for gold..."}
+    {retryMessage || goldPrep || "Mining your data for gold..."}
 </div>
                     </div>
                   ) : reports[activeReport] ? (
                     <>
                       <IntroBlock reportId={activeReport} />
                                             <>
+                        {activeReport === "field" && fieldIsStale && (
+                          <div className="no-print" style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
+                            <button onClick={() => runReport("field")} disabled={!!generating} style={{ padding: "9px 18px", background: "transparent", border: `1px solid ${BLUE_BRIGHT}`, color: BLUE_BRIGHT, borderRadius: 8, fontSize: 13, fontWeight: 700, cursor: generating ? "not-allowed" : "pointer" }}>Refresh with your latest data</button>
+                          </div>
+                        )}
                         <ReportContent text={reports[activeReport]} />
                         {activeReport === "field" && !isBeta && !creditStatus?.canRun && (
                           <UpgradeCTA text="This shows you what's in your network. The Warm List tells you who to reach out to first, and why." />
                         )}
                       </>
                     </>
-                                    ) : doneEarlier(activeReport) ? (
+                                    ) : (doneEarlier(activeReport) || connCount === 0) ? (
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
-                      <div style={{ fontSize: 34, marginBottom: 14, color: "#C9A84C" }}>✓</div>
-                      <div style={{ color: WHITE, fontSize: 15, fontWeight: 600, marginBottom: 8 }}>You generated this on an earlier visit.</div>
-                      <p style={{ color: MUTED, fontSize: 13.5, lineHeight: 1.7, maxWidth: 380, margin: "0 auto" }}>Once saving is live, it'll appear here automatically.</p>
+                      <div style={{ fontSize: 38, marginBottom: 14 }}>📂</div>
+                      <div style={{ color: WHITE, fontSize: 15, fontWeight: 600, marginBottom: 8 }}>Drop your LinkedIn file to {doneEarlier(activeReport) ? "see" : "generate"} this report.</div>
+                      <p style={{ color: MUTED, fontSize: 13.5, lineHeight: 1.7, maxWidth: 380, margin: "0 auto" }}>Your saved reports stay right where they are.</p>
+                      <button onClick={() => { setStep("upload"); setTimeout(() => scrollToUpload(), 50); }} style={{ marginTop: 20, padding: "10px 24px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: "pointer" }}>Drop my file →</button>
                     </div>
                   ) : (
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
