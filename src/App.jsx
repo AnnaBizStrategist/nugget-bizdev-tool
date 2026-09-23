@@ -2369,14 +2369,14 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                            {activeReport === "lineup" ? (
                 <>
                   <LineUpReport connections={parsedData["Connections"] || []} />
-                  {!isBeta && (
+                  {!isBeta && !creditStatus?.canRun && (
                     <UpgradeCTA text="You've sorted your network by role. The Warm List sorts it by opportunity." />
                   )}
                 </>
               ) : activeReport === "opendoor" ? (
                 <>
                   <OpenDoorReport invitations={parsedData["Invitations"] || []} />
-                  {!isBeta && (
+                  {!isBeta && !creditStatus?.canRun && (
                     <UpgradeCTA text="You've seen who's just outside your network. The Warm List tells you who inside it to reach out to first." />
                   )}
                 </>
@@ -2394,7 +2394,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                       <IntroBlock reportId={activeReport} />
                                             <>
                         <ReportContent text={reports[activeReport]} />
-                        {activeReport === "field" && !isBeta && (
+                        {activeReport === "field" && !isBeta && !creditStatus?.canRun && (
                           <UpgradeCTA text="This shows you what's in your network. The Warm List tells you who to reach out to first, and why." />
                         )}
                       </>
