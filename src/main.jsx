@@ -1,18 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import ProfileStep from './onboarding/ProfileStep.jsx'
+import React from "react"
+import ReactDOM from "react-dom/client"
+import App from "./App.jsx"
+import ProfileStep from "./onboarding/ProfileStep.jsx"
+import ExportStep from "./onboarding/ExportStep.jsx"
+import { readSession } from "./onboarding/session.js"
 
-// Hidden test door: getnugget.ca/?start=1 shows the new onboarding screens.
-// Everyone else still sees the normal site.
-const showNewOnboarding = new URLSearchParams(window.location.search).get('start') === '1'
+const start = new URLSearchParams(window.location.search).get("start")
+const session = readSession()
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    {showNewOnboarding ? (
-      <ProfileStep onDone={(result) => console.log('Profile step done:', result.name, result.isNew)} />
-    ) : (
-      <App />
-    )}
-  </React.StrictMode>
-)
+let root = <App />
+if (start === "1") {
+  root = <ProfileStep onDone={(result) => console.log("Profile step done:", result.name, result.isNew)} />
+} else if (start === "2" && session) {
+  root = <ExportStep email={session.email} token={session.token} onDone={(choice) => console.log("Export step done:", choice)} />
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<React.StrictMode>{root}</React.StrictMode>)
