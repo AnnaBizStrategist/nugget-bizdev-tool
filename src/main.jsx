@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client"
 import App from "./App.jsx"
 import ProfileStep from "./onboarding/ProfileStep.jsx"
 import ExportStep from "./onboarding/ExportStep.jsx"
+import QuestionsIntro from "./onboarding/QuestionsIntro.jsx"
 import { readSession } from "./onboarding/session.js"
 
 const start = new URLSearchParams(window.location.search).get("start")
