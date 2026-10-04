@@ -440,9 +440,9 @@ function parseLinkedInCSV(file, onComplete) {
 function getFileKey(name) {
   const lower = name.toLowerCase().replace(/[-_ ]/g, "");
   if (lower.includes("connection"))  return "Connections";
-  if (lower.includes("message"))     return "Messages";
-  if (lower.includes("recommendation_received")) return "Recommendations_Received";
-  if (lower.includes("recommendation_given")) return "Recommendations_Given";
+    if (lower.includes("message"))     return lower === "messages.csv" ? "Messages" : name.replace(".csv", "");
+    if (lower.includes("recommendation") && lower.includes("received")) return "Recommendations_Received";
+  if (lower.includes("recommendation") && lower.includes("given")) return "Recommendations_Given";
   if (lower.includes("recommendation")) return "Recommendations_Received";
   if (lower.includes("endorsementgiven")) return "Endorsements_Given";
   if (lower.includes("endorsementreceived")) return "Endorsements_Received";
