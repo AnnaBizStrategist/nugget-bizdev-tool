@@ -11,7 +11,7 @@
 
 import crypto from "crypto";
 
-const TOKEN_LIFETIME_MS = 1000 * 60 * 60 * 24 * 7; // 7 days
+const TOKEN_LIFETIME_MS = 1000 * 60 * 60 * 24 * 30; // 30 days
 
 function sign(payload) {
   return crypto
