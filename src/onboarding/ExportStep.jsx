@@ -78,7 +78,7 @@ export default function ExportStep({ email, token, onDone }) {
           <li style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
             <span style={stepNumberStyle}>2</span>
             <span style={{ fontSize: 15.5, lineHeight: 1.6, paddingTop: 2 }}>
-              Choose <strong>Complete</strong> (not Basic), then click <strong>Request archive</strong>.
+              Choose <strong>Download larger data archive</strong> (the first option), then click <strong>Request archive</strong>.
             </span>
           </li>
         </ol>
