@@ -305,7 +305,7 @@ export default function ProfileStep({ onDone }) {
       <OnboardingShell step={1}>
         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            <h1 style={ui.h1}>{`Welcome back, ${name}`}</h1>
+            <h1 style={ui.h1}>{`Welcome back, ${(name || "").split(" ")[0]}`}</h1>
             <p style={ui.lead}>
               {total > 0
                 ? `Good news – you have ${total === 1 ? "a credit" : "credits"} waiting for you!`
