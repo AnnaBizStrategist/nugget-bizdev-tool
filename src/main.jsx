@@ -16,4 +16,8 @@ if (start === "1") {
   root = <ExportStep email={session.email} token={session.token} onDone={(choice) => console.log("Export step done:", choice)} />
 }
 
+if (start === "3") {
+  root = <QuestionsIntro waiting={new URLSearchParams(window.location.search).get("waiting") === "1"} onDone={() => console.log("Intro done")} />
+}
+
 ReactDOM.createRoot(document.getElementById("root")).render(<React.StrictMode>{root}</React.StrictMode>)
