@@ -4,6 +4,7 @@ import App from "./App.jsx"
 import ProfileStep from "./onboarding/ProfileStep.jsx"
 import ExportStep from "./onboarding/ExportStep.jsx"
 import QuestionsIntro from "./onboarding/QuestionsIntro.jsx"
+import QuestionFlow from "./onboarding/QuestionFlow.jsx"
 import { readSession } from "./onboarding/session.js"
 
 const start = new URLSearchParams(window.location.search).get("start")
@@ -14,6 +15,10 @@ if (start === "1") {
   root = <ProfileStep onDone={(result) => console.log("Profile step done:", result.name, result.isNew)} />
 } else if (start === "2" && session) {
   root = <ExportStep email={session.email} token={session.token} onDone={(choice) => console.log("Export step done:", choice)} />
+}
+
+if (start === "4" && session) {
+  root = <QuestionFlow email={session.email} token={session.token} initialAnswers={{}} onDone={(a) => console.log("Questions done:", a)} />
 }
 
 if (start === "3") {
