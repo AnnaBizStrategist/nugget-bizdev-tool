@@ -1902,7 +1902,8 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 <a style={{ fontSize: 13, color: MUTED, fontWeight: 600, cursor: "pointer", textDecoration: "none" }} onClick={() => { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>Pricing</a>
                 <a style={{ fontSize: 13, color: MUTED, fontWeight: 600, cursor: "pointer", textDecoration: "none" }} onClick={() => { const el = document.getElementById("about"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>About</a>
               </div>
-                            <button className={showStatusPill ? "hide-on-mobile" : undefined} style={{ ...primaryBtn, padding: "8px 20px", fontSize: 13 }} onClick={scrollToUpload}>Find My Next Client →</button>
+                            <a href="/?start=flow" className="hide-on-mobile" style={{ fontSize: 13, color: BLUE_LIGHT, fontWeight: 600, textDecoration: "none", marginRight: 14, whiteSpace: "nowrap" }}>See my saved reports</a>
+<a href="/?start=flow" style={{ padding: "7px 16px", borderRadius: 8, border: `1px solid ${BORDER}`, background: "transparent", color: WHITE, fontSize: 13, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>Log in</a>
             </>
           ) : (
             <>
