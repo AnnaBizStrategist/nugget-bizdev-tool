@@ -2613,7 +2613,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                         Your complete BD action plan — prioritized targets, warm paths into companies, missed conversations that are still warm, and outreach sequences ready to go.<br /><br />
                         The free reports show you where the opportunity is. The Gold Nugget hands you a map to go get it.
                       </p>
-                      <button style={{ padding: "12px 32px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "Georgia, serif" }} onClick={() => { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>Upgrade to Gold Nugget →</button>
+                      <button style={{ padding: "12px 32px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "Georgia, serif" }} onClick={goPricing}>See pricing and unlock →</button>
                     </div>
                   ) : (priorReportsComplete && connCount === 0) ? (
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
@@ -2682,7 +2682,12 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                         )}
                       </>
                     </>
-                                    ) : (doneEarlier(activeReport) || connCount === 0) ? (
+                                    ) : (!activeReportMeta?.free && !isBeta && !creditStatus?.canRun && !doneEarlier(activeReport)) ? (
+                    <div style={{ textAlign: "center", padding: "48px 32px" }}>
+                      <p style={{ fontSize: 15.5, color: MUTED, lineHeight: 1.7, maxWidth: 440, margin: "0 auto 28px" }}>{activeReportMeta?.description}</p>
+                      <button style={{ padding: "12px 32px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, color: WHITE, border: "none", borderRadius: 8, fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: "Georgia, serif" }} onClick={goPricing}>See pricing and unlock →</button>
+                    </div>
+                  ) : (doneEarlier(activeReport) || connCount === 0) ? (
                     <div style={{ textAlign: "center", padding: "60px 32px" }}>
                       <div style={{ fontSize: 38, marginBottom: 14 }}>📂</div>
                       <div style={{ color: WHITE, fontSize: 15, fontWeight: 600, marginBottom: 8 }}>Drop your LinkedIn file to {doneEarlier(activeReport) ? "see" : "generate"} this report.</div>
