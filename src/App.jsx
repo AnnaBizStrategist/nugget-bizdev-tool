@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import Papa from "papaparse";
 import JSZip from "jszip";
+import PricingPage from "./PricingPage";
 
 // ── Design tokens ─────────────────────────────────────────────────────────────
 const BLUE_DEEP   = "#0d2d6b";
@@ -805,11 +806,11 @@ function ReportContent({ text }) {
   );
 }
 // ── Upgrade CTA card (shown at the bottom of free reports) ────────────────────
-function UpgradeCTA({ text }) {
+function UpgradeCTA({ text, onPricing }) {
   return (
     <div className="no-print" style={{ background: `linear-gradient(135deg, #1a1200, ${DARK_CARD})`, border: "1px solid #C9A84C66", borderRadius: 12, padding: "24px 28px", marginTop: 28, textAlign: "center" }}>
       <p style={{ fontSize: 14, color: WHITE, lineHeight: 1.7, marginBottom: 18 }}>{text}</p>
-            <button onClick={() => { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ display: "inline-block", padding: "12px 28px", background: "linear-gradient(135deg, #C9A84C, #f5c842)", color: "#0a1628", borderRadius: 8, fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer" }}>Unlock all 5 reports →</button>
+            <button onClick={() => { if (onPricing) { onPricing(); } else { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); } }} style={{ display: "inline-block", padding: "12px 28px", background: "linear-gradient(135deg, #C9A84C, #f5c842)", color: "#0a1628", borderRadius: 8, fontSize: 14, fontWeight: 700, border: "none", cursor: "pointer" }}>Unlock all 5 reports →</button>
     </div>
   );
 }
@@ -1807,6 +1808,14 @@ const submitICP = () => {
 
     useEffect(() => { setError(null); setClearedNotice(false); }, [activeReport]);
 
+  const goPricing = () => {
+    if (!emailSubmitted) { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); return; }
+    setShowStatusCard(false);
+    setStatusCardPending(null);
+    setStep("pricing");
+    window.scrollTo({ top: 0 });
+  };
+
   const scrollToUpload = () => {
     uploadRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -2630,7 +2639,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 <>
                   <LineUpReport connections={parsedData["Connections"] || []} />
                   {!isBeta && !creditStatus?.canRun && (
-                    <UpgradeCTA text="You've sorted your network by role. The Warm List sorts it by opportunity." />
+                    <UpgradeCTA onPricing={goPricing} text="You've sorted your network by role. The Warm List sorts it by opportunity." />
                   )}
                 </>
               ) : activeReport === "opendoor" ? (
@@ -2639,7 +2648,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     <div style={{ textAlign: "center", padding: "48px 32px", color: MUTED, fontSize: 14 }}>No invitations loaded yet — upload your LinkedIn data to see The Open Door.</div>
                   )}
                   {!isBeta && !creditStatus?.canRun && (
-                    <UpgradeCTA text="You've seen who's just outside your network. The Warm List tells you who inside it to reach out to first." />
+                    <UpgradeCTA onPricing={goPricing} text="You've seen who's just outside your network. The Warm List tells you who inside it to reach out to first." />
                   )}
                 </>
               ) : activeReport !== "gold" && (
