@@ -12,7 +12,7 @@ async function completeOnboarding(email, token) {
   const data = await res.json().catch(() => ({}))
   if (!res.ok || !data.success || !data.scorecard) throw new Error(data.error || "Something went wrong.")
   return data.scorecard
-}F
+}
 
 const cardStyle = {
   background: "#0f2040",
