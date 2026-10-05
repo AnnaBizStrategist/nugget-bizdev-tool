@@ -7,7 +7,7 @@ import QuestionsIntro from "./onboarding/QuestionsIntro.jsx"
 import QuestionFlow from "./onboarding/QuestionFlow.jsx"
 import ScorecardStep from "./onboarding/ScorecardStep.jsx"
 import UploadStep from "./onboarding/UploadStep.jsx"
-import OnboardingFlow from "./onboarding/OnboardingFlow.jsx"
+import OnboardingGate from "./onboarding/OnboardingGate.jsx"
 import { readSession } from "./onboarding/session.js"
 
 const start = new URLSearchParams(window.location.search).get("start")
@@ -21,7 +21,7 @@ if (start === "1") {
 }
 
 if (start === "flow") {
-  root = <OnboardingFlow onFinished={(r) => console.log("Onboarding finished:", r.email, Object.keys(r.uploadedFiles))} />
+  root = <OnboardingGate />
 }
 
 if (start === "6") {
