@@ -1927,7 +1927,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                           {/* ── Hero ── */}
                                     <div style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, padding: "36px 24px 73px", borderRadius: "0 0 24px 24px", textAlign: "center", marginBottom: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>
                             {/* Product Hunt badge — launch week, revisit removing/relocating once the push settles */}
-              <a href="https://www.producthunt.com/products/nugget-the-bizdev-tool-for-founders?utm_source=badge-follow&utm_medium=badge&utm_source=badge-nugget-the-bizdev-tool-for-founders" target="_blank" rel="noopener noreferrer" style={{ marginBottom: 20, animation: "fadeSlideUp 0.7s ease-out 0s both" }}>
+              <a href="https://www.producthunt.com/products/nugget-the-bizdev-tool-for-founders?utm_source=badge-follow&utm_medium=badge&utm_source=badge-nugget-the-bizdev-tool-for-founders" target="_blank" rel="noopener noreferrer" style={{ display: "none" }}>
                 <img src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=1246452&theme=light" alt='Nugget — LinkedIn Warm Outreach Tool - "Your next client is already in your LinkedIn network" | Product Hunt' width="220" height="48" style={{ width: 220, height: 48 }} />
               </a>
 
@@ -1944,22 +1944,22 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 You've built a solid LinkedIn network. Nugget shows you exactly who to talk to, what to say, and where your next opportunity is hiding.
               </p>
               <div style={{ display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap", marginBottom: 56, animation: "fadeSlideUp 0.7s ease-out 0.4s both" }}>
-                <button style={{ ...primaryBtn, fontSize: 17, padding: "17px 44px" }} onClick={scrollToUpload}>Find My Next Client →</button>
+                <button style={{ ...primaryBtn, fontSize: 17, padding: "17px 44px" }} onClick={() => { const el = document.getElementById("sound-familiar"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>Keep reading to find out how ↓</button>
               </div>
-              {hasSavedHere && !emailSubmitted && (
+              {false && hasSavedHere && !emailSubmitted && (
                 <button onClick={() => { setPendingReportId(OPEN_SAVED); setShowEmailModal(true); }} style={{ background: "transparent", border: "none", color: "rgba(255,255,255,0.85)", fontSize: 15, fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 4, cursor: "pointer", marginTop: -32, marginBottom: 40 }}>Open your saved reports →</button>
               )}
               <p style={{ fontSize: 30, fontFamily: "Georgia, serif", fontWeight: 700, color: "rgba(255,255,255,0.85)", letterSpacing: "-0.3px", marginTop: 20, animation: "fadeSlideUp 0.7s ease-out 0.5s both" }}>
                 NO scraping.&nbsp;&nbsp;NO cold outreach.&nbsp;&nbsp;NO guessing.
               </p>
-              <div style={{ marginTop: 44, fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>Scroll to see how ↓</div>
+              {null}
             </div>
 
             <div style={{ padding: "56px 0 0" }}>
 
               {/* ── The Problem ── */}
                             {/* ── The Problem ── */}
-              <div className="scroll-reveal" style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "108px 64px", marginBottom: 0, textAlign: "center" }}>
+              <div id="sound-familiar" className="scroll-reveal" style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 16, padding: "108px 64px", marginBottom: 0, textAlign: "center" }}>
                 <div style={{ fontSize: 15, color: MUTED, letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 700, marginBottom: 32 }}>Sound familiar?</div>
                 <p style={{ fontSize: 22, color: WHITE, lineHeight: 1.85, maxWidth: 700, margin: "0 auto 28px", fontFamily: "Georgia, serif" }}>
                   Your LinkedIn network is full of connections who could refer you, hire you, or open a door. But LinkedIn doesn't show you who they are, how warm they are, or what to say.
