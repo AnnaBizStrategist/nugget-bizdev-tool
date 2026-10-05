@@ -2089,7 +2089,34 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               <Divider />
 
                                                         {/* ── How It Works ── */}
-              <div id="how-it-works" style={{ marginBottom: 0 }}>
+              <div id="how-it-works" style={{ marginBottom: 0, padding: "56px 0 24px" }}>
+                <div style={{ textAlign: "center", marginBottom: 44 }}>
+                  <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>Simple by design</div>
+                  <h2 style={{ fontSize: 34, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 14, lineHeight: 1.2 }}>How Nugget works</h2>
+                  <p style={{ fontSize: 16, color: MUTED, maxWidth: 520, margin: "0 auto", lineHeight: 1.7 }}>Four steps from a LinkedIn file to a warm conversation.</p>
+                </div>
+                <div className="fix-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
+                  {[
+                    { title: "Get your LinkedIn data", text: "Ask LinkedIn for a copy of your data. It's two clicks, and we show you where.", icon: <g><path d="M12 3v12" /><path d="M7 11l5 5 5-5" /><path d="M5 20h14" /></g> },
+                    { title: "Tell Nugget who you want", text: "Describe your ideal client and the problem you solve, in your own words.", icon: <g><circle cx="12" cy="8" r="4" /><path d="M4 21c1-4 4-6 8-6s7 2 8 6" /></g> },
+                    { title: "Get your reports", text: "See who to talk to, what to say, and where your next opportunity is hiding.", icon: <g><rect x="4" y="3" width="16" height="18" rx="2" /><path d="M8 8h8M8 12h8M8 16h5" /></g> },
+                    { title: "Start warm conversations", text: "Reach out to people who already know you. No cold pitches.", icon: <g><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.6A8 8 0 1 1 21 12z" /></g> },
+                  ].map((s, i) => (
+                    <div key={i} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 18, padding: "28px 20px 26px", textAlign: "center" }}>
+                      <div style={{ width: 64, height: 64, borderRadius: "50%", margin: "0 auto 16px", display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(65,161,232,0.12)", border: `1px solid ${BORDER}` }}>
+                        <svg viewBox="0 0 24 24" style={{ width: 30, height: 30, stroke: BLUE_BRIGHT, fill: "none", strokeWidth: 1.8, strokeLinecap: "round", strokeLinejoin: "round" }}>{s.icon}</svg>
+                      </div>
+                      <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", color: BLUE_BRIGHT, marginBottom: 6 }}>STEP {i + 1}</div>
+                      <div style={{ fontSize: 19, fontWeight: 700, color: WHITE, fontFamily: "Georgia, serif", lineHeight: 1.25, marginBottom: 10 }}>{s.title}</div>
+                      <div style={{ fontSize: 14, color: MUTED, lineHeight: 1.6 }}>{s.text}</div>
+                    </div>
+                  ))}
+                </div>
+                <p style={{ textAlign: "center", margin: "32px 0 0", fontSize: 14, color: MUTED }}>Your free reports are ready the moment your first file arrives.</p>
+              </div>
+
+              {false && (
+              <div id="how-it-works-old" style={{ marginBottom: 0 }}>
                 <p style={{ fontSize: 22, color: WHITE, fontWeight: 700, textAlign: "center", marginBottom: 32, fontFamily: "Georgia, serif", letterSpacing: "-0.3px" }}>
                   Your Nuggets are waiting — Just 3 easy steps to find them...
                 </p>
@@ -2148,6 +2175,8 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
 
                 </div>
               </div>
+
+              )}
 
               {/* ── Upload Zone ── */}
              <div id="upload-zone" ref={uploadRef} style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, borderRadius: 24, padding: "48px 32px", marginBottom: 0, marginTop: 32 }}>
