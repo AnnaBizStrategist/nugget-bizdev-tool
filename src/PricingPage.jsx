@@ -88,7 +88,7 @@ export default function PricingPage({ email, onBack }) {
             </span>
           )}
           <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: "0.08em", color: GOLD_TEXT }}>{t.name}</span>
-          <span style={{ fontFamily: "Georgia, serif", fontSize: 34, fontWeight: 700, lineHeight: 1, color: WHITE }}>{t.price}</span>
+          <span style={{ fontFamily: "Georgia, serif", fontSize: 34, fontWeight: 700, lineHeight: 1, color: WHITE }}>{t.price} <span style={{ fontSize: 14, fontWeight: 600, color: MUTED, fontFamily: "DM Sans, system-ui, sans-serif" }}>USD</span></span>
           <span style={{ fontSize: 13.5, color: MUTED }}>{t.sub}</span>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             {t.lines.map((l) => (
