@@ -2028,7 +2028,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     <span style={{ fontWeight: 700 }}>The Gold Nugget.</span>
                   </h2>
                   <p style={{ fontSize: 15, color: MUTED, maxWidth: 560, margin: "0 auto", lineHeight: 1.75 }}>
-                    Seven reports tell you who's worth your time and why. The Gold Nugget tells you what to actually do about it.
+                    Seven reports tell you who's worth your time and why.<br />The Gold Nugget tells you what to actually do about it.
                   </p>
                 </div>
 
@@ -2037,7 +2037,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   <div style={{ fontSize: 30, fontWeight: 700, fontFamily: "Georgia, serif", marginBottom: 6, background: "linear-gradient(90deg, #E8A000, #f5c842)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>The Gold Nugget</div>
                   <div style={{ fontSize: 11.5, color: MUTED, marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.06em" }}>Full Business Development Action Plan</div>
                   <p style={{ fontSize: 15, color: WHITE, maxWidth: 520, margin: "0 auto 28px", lineHeight: 1.75 }}>
-                    Your complete pipeline — prioritized targets, the warm relationships already in your corner, and outreach sequences ready to send. The treasure map, not just the reports.
+                    Your complete pipeline — prioritized targets, the warm relationships already in your corner, and outreach sequences ready to send. <br />The treasure map, not just the reports.
                   </p>
                   <div style={{ fontSize: 13, color: "#f5c842", marginTop: -8, marginBottom: 24, fontWeight: 600 }}>Included with Connector and Closer</div>
                   <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 8 }}>
