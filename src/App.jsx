@@ -1993,7 +1993,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                                 {[
                   { cols: 3, items: [
                     { name: "The Open Door", free: true, pain: "You've got pending invites sitting in limbo — no idea who's still waiting on a yes from you, or who you reached out to and never heard back from." },
-                    { name: "The Line-Up", free: true, pain: "You've got hundreds of connections and no idea who's actually a Founder, a decision-maker, or just noise." },
+                    { name: "The Line-Up", free: true, pain: "You've got hundreds of connections and no idea who's actually a Founder, a decision-maker, or just noise. This sorts them for you." },
                     { name: "The Field Report", free: true, pain: "You don't actually know who's in your network and how many match who you're trying to reach." },
                   ] },
                   { cols: 2, items: [
@@ -2039,6 +2039,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   <p style={{ fontSize: 15, color: WHITE, maxWidth: 520, margin: "0 auto 28px", lineHeight: 1.75 }}>
                     Your complete pipeline — prioritized targets, the warm relationships already in your corner, and outreach sequences ready to send. The treasure map, not just the reports.
                   </p>
+                  <div style={{ fontSize: 13, color: "#f5c842", marginTop: -8, marginBottom: 24, fontWeight: 600 }}>Included with Connector and Closer</div>
                   <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 8 }}>
                     <span style={{ fontSize: 11.5, fontWeight: 600, color: "#f5c842", background: "rgba(201,168,76,0.1)", border: "1px solid rgba(201,168,76,0.4)", borderRadius: 20, padding: "6px 14px" }}>Warm List</span>
                     <span style={{ fontSize: 11.5, fontWeight: 600, color: "#f5c842", background: "rgba(201,168,76,0.1)", border: "1px solid rgba(201,168,76,0.4)", borderRadius: 20, padding: "6px 14px" }}>Hidden Nuggets</span>
