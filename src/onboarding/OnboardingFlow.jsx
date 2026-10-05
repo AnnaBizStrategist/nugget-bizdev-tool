@@ -59,7 +59,7 @@ export default function OnboardingFlow({ onFinished }) {
       setProfile(p)
       if (p.completedAt) setScored(true)
       const next = screenFor(p)
-      if (next === "finished") finish(u)
+      if (next === "finished") finish(u, p.answers)
       else setScreen(next)
     } catch (e) {
       setLoadError(e.message || "Something went wrong.")
@@ -68,16 +68,32 @@ export default function OnboardingFlow({ onFinished }) {
   }
 
   function handleProfileDone(result) {
-    const u = { email: result.email, token: result.token, name: result.name }
+        const u = { email: result.email, token: result.token, name: result.name }
     setUser(u)
+    if (result.isNew) {
+      // Feeds the Kit newsletter list, same as the old sign-up pop-up did.
+      fetch("https://hook.us2.make.com/xu7d06pva2t2hhyccr86ddar7msqm4zl", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: result.name, email: result.email, source: "nugget-free-user" }),
+      }).catch((err) => console.log("Webhook error:", err))
+    }
     loadProfile(u)
   }
 
-  function finish(u, filesNow) {
-    const f = filesNow || files
+    function finish(u, answersNow) {
+    const answers = answersNow || (profile && profile.answers) || {}
     setScreen("finished")
     if (u) saveStep(u, "reports")
-    if (onFinished) onFinished({ ...(u || user), uploadedFiles: f.uploadedFiles, parsedData: f.parsedData })
+    if (onFinished) {
+      onFinished({
+        ...(u || user),
+        uploadedFiles: files.uploadedFiles,
+        parsedData: files.parsedData,
+        idealClient: answers.ideal_client || "",
+        clientProblem: answers.client_problem || "",
+      })
+    }
   }
 
   function goToQuestions() {
