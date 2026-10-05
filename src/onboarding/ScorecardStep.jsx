@@ -12,7 +12,7 @@ async function completeOnboarding(email, token) {
   const data = await res.json().catch(() => ({}))
   if (!res.ok || !data.success || !data.scorecard) throw new Error(data.error || "Something went wrong.")
   return data.scorecard
-}
+}F
 
 const cardStyle = {
   background: "#0f2040",
@@ -167,8 +167,9 @@ export default function ScorecardStep({ email, token, name, waiting, onDone }) {
           <h2 style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: 20, fontWeight: 700 }}>What happens next</h2>
           {waiting ? (
             <p style={{ margin: 0, fontSize: 15, lineHeight: 1.65, color: "#c9dcf3" }}>
-              Watch your inbox for an email from LinkedIn. Your archive can take anywhere from a few minutes to 24
-              hours. When it arrives, drop the file into Nugget.
+                            Watch your inbox for LinkedIn. The <strong style={{ color: "#e8f0fe" }}>Basic</strong> email usually lands
+              within minutes, and the <strong style={{ color: "#e8f0fe" }}>Complete</strong> one within 24 hours. Drop
+              each file into Nugget as it arrives.
             </p>
           ) : (
             <p style={{ margin: 0, fontSize: 15, lineHeight: 1.65, color: "#c9dcf3" }}>
