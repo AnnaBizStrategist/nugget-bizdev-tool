@@ -183,12 +183,32 @@ export default function UploadStep({ initialFiles, onFiles, onDone, onSkip }) {
           <p style={ui.lead}>{lead}</p>
         </div>
 
-                {!basic && <DropZone busy={busy} onFiles={handle} />}
-        {!basic && onSkip && (
-          <button type="button" style={{ ...ui.linkButton, alignSelf: "center" }} onClick={onSkip}>
-            Open my saved reports instead
-          </button>
-        )}
+                {!basic && onSkip && (
+  <>
+    <button
+      type="button"
+      onClick={onSkip}
+      style={{
+        width: "100%",
+        padding: "14px 18px",
+        fontSize: 16,
+        fontWeight: 700,
+        color: "#e8f0fe",
+        background: "#0d2a52",
+        border: "1px solid #41a1e8",
+        borderRadius: 12,
+        cursor: "pointer",
+      }}
+    >
+      Open my saved reports →
+    </button>
+    <p style={{ margin: 0, fontSize: 13, color: "#9fc4e8", textAlign: "center" }}>
+      or add new LinkedIn files below
+    </p>
+  </>
+)}
+{!basic && <DropZone busy={busy} onFiles={handle} />}
+        
         {error && <p style={ui.error}>{error}</p>}
 
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
