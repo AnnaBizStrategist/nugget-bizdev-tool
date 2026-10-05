@@ -2303,7 +2303,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 24 }}>
                     Start free. Then unlock the <span style={{ color: "#C9A84C" }}>Gold.</span>
                   </h2>
-                  <p style={{ fontSize: 13, color: "#E8A000", fontWeight: 700, marginBottom: 48 }}>Founder pricing — lock it in before Oct 9.</p>
+                  <div style={{ marginBottom: 48 }} />
                                                                                          <div className="free-banner-wide" style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 14, padding: "20px 28px", display: "flex", alignItems: "flex-start", flexWrap: "wrap", rowGap: 16, gap: 24, maxWidth: 1040, margin: "0 auto 40px" }}>
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 4, flexShrink: 0, minWidth: 160 }}>
                       <div style={{ display: "flex", alignItems: "center", gap: 10, height: 30 }}>
