@@ -2066,18 +2066,17 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 </div>
 
                 {/* Five dimensions */}
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 12 }}>
+                <div className="fix-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
                   {[
-                    { label: "Network", desc: "Who's in your network and how ICP-aligned they are" },
-                    { label: "Profile", desc: "How ready your profile is to convert a visitor into a client" },
-                    { label: "Content", desc: "What your content says when you're not in the room" },
-                    { label: "Relationship", desc: "The warmth and depth of your active relationships" },
-                    { label: "Advocate", desc: "How many advocates are ready to go to bat for you" },
+                                        { label: "Week 1: Fix the foundation", desc: "Tighten the top of your profile|Send your first reactivation message|Post one diagnostic post" },
+                    { label: "Week 2: Start reaching out", desc: "Ask a warm advocate for a referral|Open a strategic partner conversation|Close the loop on a yes you never followed up" },
+                    { label: "Week 3: Keep the momentum going", desc: "Pick up where a promising conversation stopped|Invite an enthusiast to collaborate|Write your next five posts" },
+                    { label: "Week 4: Build the habit", desc: "Reconnect with people who drifted|Find five more ideal-client contacts|Set your monthly rhythm" },
                   ].map((d, i) => (
                     <div key={i} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderRadius: 12, padding: "20px 16px", textAlign: "center" }}>
                       <div style={{ width: 26, height: 26, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, background: BLUE_BRIGHT, color: WHITE, margin: "0 auto 12px" }}>{i + 1}</div>
-                      <div style={{ fontSize: 13, fontWeight: 700, color: WHITE, marginBottom: 8, lineHeight: 1.3 }}>{d.label}</div>
-                      <div style={{ fontSize: 11, color: MUTED, lineHeight: 1.6 }}>{d.desc}</div>
+                      <div style={{ fontSize: 16, fontWeight: 700, color: WHITE, marginBottom: 14, lineHeight: 1.3, fontFamily: "Georgia, serif" }}>{d.label}</div>
+                      <div style={{ fontSize: 14, color: MUTED, lineHeight: 1.6 }}>{d.desc.split("|").map((x, k) => <div key={k} style={{ marginBottom: 10 }}>{x}</div>)}</div>
                     </div>
                   ))}
                 </div>
