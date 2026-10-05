@@ -1925,23 +1925,22 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
           <>
               {/* ── Hero ── */}
                           {/* ── Hero ── */}
-                                    <div style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, padding: "48px 24px", borderRadius: "0 0 24px 24px", textAlign: "center", marginBottom: 0, minHeight: "88vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-
+                                    <div style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, padding: "36px 24px 73px", borderRadius: "0 0 24px 24px", textAlign: "center", marginBottom: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start" }}>
                             {/* Product Hunt badge — launch week, revisit removing/relocating once the push settles */}
               <a href="https://www.producthunt.com/products/nugget-the-bizdev-tool-for-founders?utm_source=badge-follow&utm_medium=badge&utm_source=badge-nugget-the-bizdev-tool-for-founders" target="_blank" rel="noopener noreferrer" style={{ marginBottom: 20, animation: "fadeSlideUp 0.7s ease-out 0s both" }}>
                 <img src="https://api.producthunt.com/widgets/embed-image/v1/follow.svg?product_id=1246452&theme=light" alt='Nugget — LinkedIn Warm Outreach Tool - "Your next client is already in your LinkedIn network" | Product Hunt' width="220" height="48" style={{ width: 220, height: 48 }} />
               </a>
 
-              <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: 5, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.22)", borderRadius: 26, padding: "12px 28px", marginBottom: 44, animation: "fadeSlideUp 0.7s ease-out 0s both" }}>
+              <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: 5, background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.22)", borderRadius: 26, padding: "12px 28px", marginBottom: 84, animation: "fadeSlideUp 0.7s ease-out 0s both" }}>
                 <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#ffffff" }}>Nugget <span style={{ color: BLUE_LIGHT }}>·</span> LinkedIn Warm Outreach Tool</div>
                 <div style={{ fontSize: 11.5, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "rgba(255,255,255,0.62)" }}>for Founders and Solopreneurs who hate cold outreach</div>
               </div>
 
-        <h1 style={{ fontSize: 60, fontFamily: "Georgia, serif", fontWeight: 700, color: "#ffffff", marginBottom: 40, lineHeight: 1.15, animation: "fadeSlideUp 0.7s ease-out 0.1s both" }}>
+        <h1 style={{ fontSize: "clamp(40px, 7vw, 76px)", fontFamily: "Georgia, serif", fontWeight: 700, color: "#ffffff", marginBottom: 48, lineHeight: 1.1, animation: "fadeSlideUp 0.7s ease-out 0.1s both" }}>
                 Your next client is already<br />
                 <span style={{ background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>in your network.</span>
               </h1>
-              <p style={{ fontSize: 19, color: "rgba(255,255,255,0.85)", maxWidth: 600, margin: "0 auto 52px", lineHeight: 1.8, animation: "fadeSlideUp 0.7s ease-out 0.2s both" }}>
+              <p style={{ fontSize: 19, color: "rgba(255,255,255,0.85)", maxWidth: 620, margin: "0 auto 64px", lineHeight: 1.8, animation: "fadeSlideUp 0.7s ease-out 0.2s both" }}>
                 You've built a solid LinkedIn network. Nugget shows you exactly who to talk to, what to say, and where your next opportunity is hiding.
               </p>
               <div style={{ display: "flex", gap: 8, justifyContent: "center", flexWrap: "wrap", marginBottom: 56, animation: "fadeSlideUp 0.7s ease-out 0.4s both" }}>
