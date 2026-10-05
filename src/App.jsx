@@ -2257,7 +2257,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                               {generating === r.id ? "⏳ Mining..." : "Generate Report"}
                             </button>
                       ) : (
-                                                <button style={{ padding: "10px 18px", background: "transparent", border: `1px solid ${BORDER}`, color: MUTED, borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { if (!emailSubmitted) { setPendingReportId(r.id); setShowEmailModal(true); return; } const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }}>🔒 Buy credits to unlock</button>
+                                                <button style={{ padding: "10px 18px", background: "transparent", border: `1px solid ${BORDER}`, color: MUTED, borderRadius: 7, fontSize: 14, fontWeight: 700, cursor: "pointer", width: "100%" }} onClick={() => { if (!emailSubmitted) { setPendingReportId(r.id); setShowEmailModal(true); return; } goPricing(); }}>🔒 Buy credits to unlock</button>
                       )}
                     </div>
                     );
@@ -2287,7 +2287,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                                                 onClick={() => {
                           if (goldUnlocked) { setActiveReport("gold"); setStep("reports"); }
                           else if (!emailSubmitted) { setShowEmailModal(true); }
-                          else { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }
+                          else { goPricing(); }
                         }}>
                         {goldUnlocked ? "View The Gold Nugget →" : "🔒 Buy credits to unlock"}
                       </button>
@@ -2495,6 +2495,13 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
         {/* ══════════════════════════════════════════════════════════════════
             SCORE REVEAL STEP
         ══════════════════════════════════════════════════════════════════ */}
+        {step === "pricing" && (
+          <PricingPage
+            email={emailAddress}
+            onBack={() => setStep(connCount > 0 || reportsReady > 0 ? "reports" : "upload")}
+          />
+        )}
+
         {step === "score" && scores && (
           <div style={{ paddingTop: 48 }}>
             <ScoreReveal scores={scores} onContinue={() => { setActiveReport("gold"); setStep("reports"); }} />
@@ -2671,7 +2678,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                         )}
                         <ReportContent text={reports[activeReport]} />
                         {activeReport === "field" && !isBeta && !creditStatus?.canRun && (
-                          <UpgradeCTA text="This shows you what's in your network. The Warm List tells you who to reach out to first, and why." />
+                          <UpgradeCTA onPricing={goPricing} text="This shows you what's in your network. The Warm List tells you who to reach out to first, and why." />
                         )}
                       </>
                     </>
@@ -2734,7 +2741,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               <>
                 <div style={{ fontSize: 15, color: WHITE, fontWeight: 700, marginBottom: 8 }}>You've used all your runs (credits).</div>
                 <div style={{ fontSize: 14, color: MUTED, lineHeight: 1.7, marginBottom: 28 }}>Top up any time to start a new one.</div>
-                <button style={{ ...primaryBtn, width: "100%", marginBottom: 10 }} onClick={() => { setShowStatusCard(false); setStatusCardPending(null); setStep("upload"); setTimeout(() => { const el = document.getElementById("pricing-section"); if (el) el.scrollIntoView({ behavior: "smooth" }); }, 50); }}>See pricing →</button>
+                <button style={{ ...primaryBtn, width: "100%", marginBottom: 10 }} onClick={() => { setShowStatusCard(false); setStatusCardPending(null); goPricing(); }}>See pricing →</button>
                 <button style={{ width: "100%", padding: "10px 16px", background: "transparent", border: `1px solid ${BORDER}`, color: MUTED, borderRadius: 8, fontSize: 13, fontWeight: 600, cursor: "pointer" }} onClick={closeStatusCard}>Not now</button>
               </>
             )}
