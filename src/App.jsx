@@ -2055,13 +2055,13 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
 
               <div style={{ marginBottom: 0 }}>
                 <div style={{ textAlign: "center", padding: "64px 24px 56px" }}>
-                  <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 24 }}>Nugget's Signature Metric</div>
-                  <h2 style={{ fontSize: 34, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 28, lineHeight: 1.2 }}>Meet Your BizDev Readiness Score.</h2>
+                  <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 24 }}>Your 30-Day Plan</div>
+                  <h2 style={{ fontSize: 34, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 28, lineHeight: 1.2 }}>Lots of insight. Now what?</h2>
                   <p style={{ fontSize: 16, color: MUTED, maxWidth: 560, margin: "0 auto 24px", lineHeight: 1.75 }}>
-                    Every time you run The Gold Nugget, you get a score out of 100 that shows you exactly where you stand — and what to do to raise it.
+                    Data on its own is a firehose. The Gold Nugget turns it into a plan: your next 25 people, outreach messages written and ready to send, and a week-by-week checklist for your first 30 days.
                   </p>
                   <div style={{ fontSize: 13, color: BLUE_BRIGHT, letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 700 }}>
-                    Your score is built from these five strengths
+                    Here's what a real plan looks like
                   </div>
                 </div>
 
