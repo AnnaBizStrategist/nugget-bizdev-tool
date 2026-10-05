@@ -176,7 +176,7 @@ export default function ScorecardStep({ email, token, name, waiting, onDone }) {
             </p>
           )}
           <button type="button" style={ui.primaryButton} onClick={onDone}>
-            {waiting ? "My LinkedIn file is here. Take me to upload →" : "Build my reports →"}
+            {waiting ? "Take me to upload" : "Build my reports"}
           </button>
         </div>
       </div>
