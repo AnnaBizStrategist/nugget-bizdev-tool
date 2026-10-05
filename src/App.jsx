@@ -2427,7 +2427,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                         <div style={{ fontSize: 11.5, color: MUTED, lineHeight: 1.4, textAlign: "left" }}>Who's in your network, and what it's worth.</div>
                       </div>
                     </div>
-                    <button onClick={() => { const el = document.getElementById("upload-zone"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ padding: "15px 34px", background: "transparent", border: `1px solid ${BLUE_BRIGHT}`, color: BLUE_BRIGHT, borderRadius: 8, fontSize: 14, fontWeight: 700, whiteSpace: "nowrap", flexShrink: 0, marginLeft: "auto", cursor: "pointer" }}>
+                    <button onClick={() => { const el = document.getElementById("upload-zone"); if (el) el.scrollIntoView({ behavior: "smooth" }); else window.location.href = "/?start=flow"; }} style={{ padding: "15px 34px", background: "transparent", border: `1px solid ${BLUE_BRIGHT}`, color: BLUE_BRIGHT, borderRadius: 8, fontSize: 14, fontWeight: 700, whiteSpace: "nowrap", flexShrink: 0, marginLeft: "auto", cursor: "pointer" }}>
                       Get Started For Free Right Now
                     </button>
                   </div>
@@ -2467,7 +2467,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                           <span style={{ fontSize: 11.5, color: MUTED, whiteSpace: "nowrap" }}>No credit card required</span>
                         </div>
                       </div>
-                      <button onClick={() => { const el = document.getElementById("upload-zone"); if (el) el.scrollIntoView({ behavior: "smooth" }); }} style={{ padding: "15px 34px", background: "transparent", border: `1px solid ${BLUE_BRIGHT}`, color: BLUE_BRIGHT, borderRadius: 8, fontSize: 14, fontWeight: 700, whiteSpace: "nowrap", cursor: "pointer" }}>
+                      <button onClick={() => { const el = document.getElementById("upload-zone"); if (el) el.scrollIntoView({ behavior: "smooth" }); else window.location.href = "/?start=flow"; }} style={{ padding: "15px 34px", background: "transparent", border: `1px solid ${BLUE_BRIGHT}`, color: BLUE_BRIGHT, borderRadius: 8, fontSize: 14, fontWeight: 700, whiteSpace: "nowrap", cursor: "pointer" }}>
                         Get Started For Free Right Now
                       </button>
                     </div>
@@ -2557,7 +2557,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   <div style={{ fontSize: 11, color: BLUE_BRIGHT, letterSpacing: "0.12em", textTransform: "uppercase", fontWeight: 700, marginBottom: 16 }}>The human behind it</div>
                   <h2 style={{ fontSize: 28, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 20, lineHeight: 1.2 }}>Hi, I'm Anna.</h2>
                   <p style={{ fontSize: 15, color: MUTED, lineHeight: 1.8, marginBottom: 16 }}>
-                    I'm a founder with 33 years of business experience — and I've lived every bizdev challenge in my career personally. The cold leads. The missed opportunities. The warm network sitting right there, completely untouched.
+                    I'm a founder with 34 years of business experience — and I've lived every bizdev challenge in my career personally. The cold leads. The missed opportunities. The warm network sitting right there, completely untouched.
                   </p>
                   <p style={{ fontSize: 15, color: MUTED, lineHeight: 1.8, marginBottom: 16 }}>
                     I still see it today with my Clients as a Business Strategist. Smart, capable Founders leaving money behind not because they don't know how to sell — but because they don't know how to use the data they already have.
@@ -2576,7 +2576,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                   Your next client is already<br />in your network.
                 </h2>
                 
-                <button style={{ ...primaryBtn, fontSize: 17, padding: "16px 44px", animation: "pulseCTA 2.5s ease-in-out infinite", marginTop: 24 }} onClick={scrollToUpload}>
+                <button style={{ ...primaryBtn, fontSize: 17, padding: "16px 44px", animation: "pulseCTA 2.5s ease-in-out infinite", marginTop: 24 }} onClick={() => { window.location.href = "/?start=flow"; }}>
                                     Find My Next Client →
                 </button>
               </div>
