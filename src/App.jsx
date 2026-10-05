@@ -1967,14 +1967,14 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 <p style={{ fontSize: 22, color: WHITE, lineHeight: 1.85, maxWidth: 700, margin: "0 auto 28px", fontFamily: "Georgia, serif" }}>
                   So you either throw spaghetti hoping something sticks — or you do nothing and wonder why your pipeline is dry.
                 </p>
-                <p style={{ fontSize: 33, fontFamily: "Georgia, serif", fontWeight: 700, maxWidth: 700, margin: "12px auto 0", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                <p style={{ fontSize: 33, fontFamily: "Georgia, serif", fontWeight: 700, maxWidth: 700, margin: "72px auto 72px", background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                   Either way you're leaving money behind.
                 </p>
                 <div style={{ maxWidth: 700, margin: "56px auto 0", borderLeft: `3px solid ${BLUE_BRIGHT}`, padding: "6px 0 6px 24px", textAlign: "left" }}>
                   <p style={{ fontSize: 20, color: WHITE, lineHeight: 1.75, margin: 0, fontFamily: "Georgia, serif" }}>
                     I've been in business for 34 years, and I've done the spaghetti thing. It didn't work. What does work is knowing exactly who to talk to, what to say, and having a tool that makes it easy enough to keep doing.
                   </p>
-                  <div style={{ fontSize: 14, color: MUTED, marginTop: 12 }}>Anna, founder of Nugget</div>
+                  <div style={{ fontSize: 14, color: MUTED, marginTop: 12 }}>Anna Ludwinowski, founder of Nugget</div>
                 </div>
                 <p style={{ display: "none" }}>
                 </p>
