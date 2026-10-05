@@ -2646,7 +2646,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 <>
                   <LineUpReport connections={parsedData["Connections"] || []} />
                   {!isBeta && !creditStatus?.canRun && (
-                    <UpgradeCTA onPricing={goPricing} text="You've sorted your network by role. The Warm List sorts it by opportunity." />
+                    <div className="no-print" style={{ textAlign: "center", marginTop: 28 }}><button style={{ padding: "12px 28px", background: "transparent", border: `1px solid ${BLUE_BRIGHT}`, color: BLUE_BRIGHT, borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: "pointer" }} onClick={() => { setActiveReport("field"); window.scrollTo({ top: 0 }); }}>Next: The Field Report →</button></div>
                   )}
                 </>
               ) : activeReport === "opendoor" ? (
@@ -2655,7 +2655,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     <div style={{ textAlign: "center", padding: "48px 32px", color: MUTED, fontSize: 14 }}>No invitations loaded yet — upload your LinkedIn data to see The Open Door.</div>
                   )}
                   {!isBeta && !creditStatus?.canRun && (
-                    <UpgradeCTA onPricing={goPricing} text="You've seen who's just outside your network. The Warm List tells you who inside it to reach out to first." />
+                    <div className="no-print" style={{ textAlign: "center", marginTop: 28 }}><button style={{ padding: "12px 28px", background: "transparent", border: `1px solid ${BLUE_BRIGHT}`, color: BLUE_BRIGHT, borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: "pointer" }} onClick={() => { setActiveReport("lineup"); window.scrollTo({ top: 0 }); }}>Next: The Line-Up →</button></div>
                   )}
                 </>
               ) : activeReport !== "gold" && (
@@ -2678,7 +2678,25 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                         )}
                         <ReportContent text={reports[activeReport]} />
                         {activeReport === "field" && !isBeta && !creditStatus?.canRun && (
-                          <UpgradeCTA onPricing={goPricing} text="This shows you what's in your network. The Warm List tells you who to reach out to first, and why." />
+                          <div className="no-print" style={{ background: DARK_CARD, border: "1px solid #b8892a", borderRadius: 20, padding: "32px 36px", marginTop: 28, display: "flex", flexDirection: "column", gap: 18 }}>
+                            <span style={{ fontSize: 13, color: "#f2c14e", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" }}>Your next step</span>
+                            <h2 style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: 24, lineHeight: 1.35, fontWeight: 700, color: WHITE }}>You've seen who's in your network. Next: who to talk to first.</h2>
+                            {icpClient.trim() && (
+                              <div style={{ background: DARK, border: `1px solid ${BORDER}`, borderRadius: 12, padding: "12px 16px", display: "flex", flexDirection: "column", gap: 4 }}>
+                                <span style={{ fontSize: 12, color: MUTED, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase" }}>Who you want to reach</span>
+                                <span style={{ fontSize: 15, lineHeight: 1.55, color: WHITE }}>“{icpClient.trim()}”</span>
+                              </div>
+                            )}
+                            {icpProblem.trim() && (
+                              <div style={{ background: DARK, border: `1px solid ${BORDER}`, borderRadius: 12, padding: "12px 16px", display: "flex", flexDirection: "column", gap: 4 }}>
+                                <span style={{ fontSize: 12, color: MUTED, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase" }}>The problem you solve</span>
+                                <span style={{ fontSize: 15, lineHeight: 1.55, color: WHITE }}>“{icpProblem.trim()}”</span>
+                              </div>
+                            )}
+                            <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.65, color: MUTED }}>{(icpClient.trim() || icpProblem.trim()) ? "That's what you told us. " : ""}The Warm List goes through your connections and ranks them by fit and by how long it's been since you spoke, so you know exactly who to message first.</p>
+                            <button style={{ ...primaryBtn, width: "100%" }} onClick={goPricing}>Compare the options →</button>
+                            <button style={{ width: "100%", padding: "10px 16px", background: "transparent", border: `1px solid ${BORDER}`, color: MUTED, borderRadius: 8, fontSize: 14, fontWeight: 600, cursor: "pointer" }} onClick={() => { setActiveReport("opendoor"); window.scrollTo({ top: 0 }); }}>Back to my free reports</button>
+                          </div>
                         )}
                       </>
                     </>
