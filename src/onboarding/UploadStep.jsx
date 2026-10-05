@@ -134,7 +134,7 @@ function DropZone({ compact, busy, onFiles }) {
 // initialFiles: { uploadedFiles, parsedData } already read this session (optional)
 // onFiles({ uploadedFiles, parsedData }): called every time new files are read, with everything so far
 // onDone(): they clicked the button to see their reports
-export default function UploadStep({ initialFiles, onFiles, onDone }) {
+export default function UploadStep({ initialFiles, onFiles, onDone, onSkip }) {
   const [uploadedFiles, setUploadedFiles] = useState((initialFiles && initialFiles.uploadedFiles) || {})
   const [parsedData, setParsedData] = useState((initialFiles && initialFiles.parsedData) || {})
   const [busy, setBusy] = useState(false)
@@ -183,7 +183,12 @@ export default function UploadStep({ initialFiles, onFiles, onDone }) {
           <p style={ui.lead}>{lead}</p>
         </div>
 
-        {!basic && <DropZone busy={busy} onFiles={handle} />}
+                {!basic && <DropZone busy={busy} onFiles={handle} />}
+        {!basic && onSkip && (
+          <button type="button" style={{ ...ui.linkButton, alignSelf: "center" }} onClick={onSkip}>
+            Open my saved reports instead
+          </button>
+        )}
         {error && <p style={ui.error}>{error}</p>}
 
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
