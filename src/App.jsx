@@ -1936,7 +1936,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 <div style={{ fontSize: 11.5, fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", color: "rgba(255,255,255,0.62)" }}>for Founders and Solopreneurs who hate cold outreach</div>
               </div>
 
-        <h1 style={{ fontSize: "clamp(40px, 7vw, 76px)", fontFamily: "Georgia, serif", fontWeight: 700, color: "#ffffff", marginBottom: 48, lineHeight: 1.1, animation: "fadeSlideUp 0.7s ease-out 0.1s both" }}>
+        <h1 style={{ fontSize: "clamp(34px, 6vw, 64px)", fontFamily: "Georgia, serif", fontWeight: 700, color: "#ffffff", marginBottom: 48, lineHeight: 1.1, animation: "fadeSlideUp 0.7s ease-out 0.1s both" }}>
                 Your next client is already<br />
                 <span style={{ background: `linear-gradient(90deg, ${BLUE_BRIGHT}, ${BLUE_LIGHT})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>in your network.</span>
               </h1>
