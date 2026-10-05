@@ -31,7 +31,7 @@ async function saveStep(user, step) {
 // Which screen should a person see, given what the server has saved?
 function screenFor(profile) {
   const step = (profile && profile.currentStep) || "profile"
-  if (step === "reports") return "finished"
+    if (step === "reports") return "upload" // came back after finishing: files aren't stored, so ask again
   if (step === "upload") return "upload"
   if (step === "questions") return profile.completedAt ? "scorecard" : "intro"
   return "export"
@@ -45,7 +45,8 @@ export default function OnboardingFlow({ onFinished }) {
   const [profile, setProfile] = useState(null) // saved profile from the server
   const [scored, setScored] = useState(false)
   const [files, setFiles] = useState({ uploadedFiles: {}, parsedData: {} })
-  const [loadError, setLoadError] = useState("")
+    const [loadError, setLoadError] = useState("")
+  const [returning, setReturning] = useState(false) // finished onboarding on an earlier visit
 
   const hasBasic = basicReceived(files.uploadedFiles)
   const isScored = scored || Boolean(profile && profile.completedAt)
@@ -57,7 +58,8 @@ export default function OnboardingFlow({ onFinished }) {
       const data = await callApi(u, { action: "load" })
       const p = data.profile || {}
       setProfile(p)
-      if (p.completedAt) setScored(true)
+            if (p.completedAt) setScored(true)
+      if (p.currentStep === "reports") setReturning(true)
       const next = screenFor(p)
       if (next === "finished") finish(u, p.answers)
       else setScreen(next)
@@ -182,7 +184,14 @@ export default function OnboardingFlow({ onFinished }) {
   }
 
   if (screen === "upload") {
-    return <UploadStep initialFiles={files} onFiles={setFiles} onDone={handleUploadDone} />
+        return (
+      <UploadStep
+        initialFiles={files}
+        onFiles={setFiles}
+        onDone={handleUploadDone}
+        onSkip={returning ? () => finish(user) : undefined}
+      />
+    )
   }
 
   // "finished": the app takes over from here (wired up in a later step)
