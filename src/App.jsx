@@ -2205,6 +2205,8 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 </p>
               </div>
 
+              {(emailSubmitted || hasFiles) && (
+              <>
               {/* ── Upload Zone ── */}
              <div id="upload-zone" ref={uploadRef} style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, borderRadius: 24, padding: "48px 32px", marginBottom: 0, marginTop: 32 }}>
                 <div
@@ -2365,7 +2367,21 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
 
               <Divider />
 
-               {/* ── Pricing section ── */}
+               </>
+              )}
+
+              {!(emailSubmitted || hasFiles) && (
+                <div style={{ background: "linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)", borderRadius: 24, padding: "72px 24px", textAlign: "center", margin: "72px 0 56px" }}>
+                  <h2 style={{ fontSize: 34, fontFamily: "Georgia, serif", fontWeight: 700, color: "#fff", marginBottom: 14, lineHeight: 1.2 }}>Ready to find your next client?</h2>
+                  <p style={{ fontSize: 18, color: "rgba(255,255,255,0.88)", maxWidth: 520, margin: "0 auto 32px", lineHeight: 1.7 }}>It takes a few minutes to get started. Your first reports are free.</p>
+                  <a href="/?start=flow" style={{ display: "inline-block", background: "#fff", color: BLUE_DEEP, fontFamily: "Georgia, serif", fontWeight: 700, fontSize: 17, padding: "17px 44px", borderRadius: 10, textDecoration: "none" }}>Find My Next Client →</a>
+                  <div style={{ marginTop: 20, fontSize: 14 }}>
+                    <a href="/?start=flow" style={{ color: "rgba(255,255,255,0.85)", textDecoration: "underline", textUnderlineOffset: 4 }}>Already started? Open your saved reports</a>
+                  </div>
+                </div>
+              )}
+
+              {/* ── Pricing section ── */}
                <div id="pricing-section" style={{ textAlign: "center", padding: "64px 24px 56px" }}>
                   <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 24 }}>Pricing</div>
                   <h2 style={{ fontSize: 32, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 24 }}>
