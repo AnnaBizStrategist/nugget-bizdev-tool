@@ -2374,10 +2374,17 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               {!(emailSubmitted || hasFiles) && (
                 <div style={{ background: "linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)", borderRadius: 24, padding: "72px 24px", textAlign: "center", margin: "72px 0 56px" }}>
                   <h2 style={{ fontSize: 34, fontFamily: "Georgia, serif", fontWeight: 700, color: "#fff", marginBottom: 14, lineHeight: 1.2 }}>Ready to find your next client?</h2>
-                  <p style={{ fontSize: 18, color: "rgba(255,255,255,0.88)", maxWidth: 520, margin: "0 auto 32px", lineHeight: 1.7 }}>It takes a few minutes to get started. Your first reports are free.</p>
-                  <a href="/?start=flow" style={{ display: "inline-block", background: "#fff", color: BLUE_DEEP, fontFamily: "Georgia, serif", fontWeight: 700, fontSize: 17, padding: "17px 44px", borderRadius: 10, textDecoration: "none" }}>Find My Next Client →</a>
-                  <div style={{ marginTop: 20, fontSize: 14 }}>
-                    <a href="/?start=flow" style={{ color: "rgba(255,255,255,0.85)", textDecoration: "underline", textUnderlineOffset: 4 }}>Already started? Open your saved reports</a>
+                  <p style={{ fontSize: 18, color: "rgba(255,255,255,0.88)", maxWidth: 520, margin: "0 auto 40px", lineHeight: 1.7 }}>Your first reports are free.</p>
+                  {null}
+                  <div className="fix-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, maxWidth: 640, margin: "0 auto", alignItems: "start" }}>
+                    <a href="/?start=flow" style={{ textDecoration: "none", color: "#fff", textAlign: "center" }}>
+                      <span style={{ display: "block", background: "#fff", color: BLUE_DEEP, fontFamily: "Georgia, serif", fontWeight: 700, fontSize: 17, padding: "17px 20px", borderRadius: 10, marginBottom: 12 }}>I'm new here →</span>
+                      <span style={{ display: "block", fontSize: 14, lineHeight: 1.5, color: "rgba(255,255,255,0.82)" }}>Get your first reports free.<br />It takes a few minutes.</span>
+                    </a>
+                    <a href="/?start=flow" style={{ textDecoration: "none", color: "#fff", textAlign: "center" }}>
+                      <span style={{ display: "block", background: "transparent", border: "2px solid rgba(255,255,255,0.65)", color: "#fff", fontFamily: "Georgia, serif", fontWeight: 700, fontSize: 17, padding: "15px 20px", borderRadius: 10, marginBottom: 12 }}>I'm returning</span>
+                      <span style={{ display: "block", fontSize: 14, lineHeight: 1.5, color: "rgba(255,255,255,0.82)" }}>Open your saved reports.</span>
+                    </a>
                   </div>
                 </div>
               )}
