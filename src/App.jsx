@@ -1333,9 +1333,17 @@ const hasSavedRunReports = (run) => !!run && Object.keys(run.reports || {}).leng
 const reportsFromFolder = (folder) => {
   const out = {};
   Object.entries(folder?.current?.reports || {}).forEach(([id, r]) => { if (r?.text) out[id] = r.text; });
-  if (folder?.field?.text) out.field = folder.field.text;
+    if (folder?.field?.text) out.field = folder.field.text;
   return out;
 };
+// Only the columns the Open Door and Line-Up actually use, so the browser copy stays small.
+const SNAP_CONN_KEYS = ["First Name", "Last Name", "Company", "Position", "Connected On", "URL"];
+const SNAP_INV_KEYS = ["Direction", "Sent At", "From", "To", "Message", "inviterProfileUrl", "inviteeProfileUrl"];
+const slimRows = (rows, keys) => (rows || []).map(r => {
+  const o = {};
+  keys.forEach(k => { if (r[k] !== undefined && r[k] !== "") o[k] = r[k]; });
+  return o;
+});
 
 // ── Main App ──────────────────────────────────────────────────────────────────
 export default function App({ onboarded } = {}) {
@@ -1426,9 +1434,35 @@ export default function App({ onboarded } = {}) {
     folderKeyRef.current = key;
     folderRef.current = readFolder(key);
     setReports(reportsFromFolder(folderRef.current));
-    setScores(folderRef.current?.current?.scores || null);
+        setScores(folderRef.current?.current?.scores || null);
+    const snap = folderRef.current?.snapshot;
+    if (snap) {
+      // Bring back the data behind the Open Door and Line-Up, unless fresh files are already loaded.
+      setParsedData(prev => (prev["Connections"]?.length || prev["Invitations"]?.length)
+        ? prev
+        : { Connections: snap.Connections || [], Invitations: snap.Invitations || [] });
+    }
     setFolderReady(true);
   };
+
+  // Keep a browser-only copy of the data behind the two calculated reports.
+  useEffect(() => {
+    if (!folderReady || isBeta) return;
+    const conns = parsedData["Connections"] || [];
+    const inv = parsedData["Invitations"] || [];
+    if (!conns.length && !inv.length) return;
+    const snap = folderRef.current?.snapshot;
+    if (snap && sameDataStamp(snap.dataStamp, dataStampOf(conns)) && (snap.Invitations || []).length === inv.length) return;
+    updateFolder(f => ({
+      ...f,
+      snapshot: {
+        savedAt: new Date().toISOString(),
+        dataStamp: dataStampOf(conns),
+        Connections: slimRows(conns, SNAP_CONN_KEYS),
+        Invitations: slimRows(inv, SNAP_INV_KEYS),
+      },
+    }));
+  }, [folderReady, parsedData]);
 
   const saveRunReport = (reportId, text, startsNewRun, extra = {}) => {
     const now = new Date().toISOString();
@@ -2530,7 +2564,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
               {clearedNotice && (
                 <div className="no-print" style={{ background: BLUE_DEEP, border: `1px solid ${BORDER}`, borderRadius: 9, padding: "13px 18px", marginBottom: 16, fontSize: 13.5, color: WHITE }}>Your saved reports have been cleared from this browser.</div>
               )}
-              {reports[activeReport] || (activeReport === "opendoor" && hasFiles) ? (
+              {reports[activeReport] || (activeReport === "opendoor" && (hasFiles || parsedData["Invitations"]?.length > 0)) ? (
                 <div className="no-print" style={{ display: "flex", justifyContent: "flex-end", marginBottom: 16 }}>
                                     <button onClick={() => printAs(`Nugget - ${activeReportMeta?.name || "Report"} - ${pdfDate()}`)} style={{ padding: "11px 24px", background: `linear-gradient(135deg, ${BLUE_MID}, ${BLUE_BRIGHT})`, border: "none", color: WHITE, borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
                     <span>↓</span> Save as PDF
@@ -2601,7 +2635,7 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                 </>
               ) : activeReport === "opendoor" ? (
                 <>
-{hasFiles ? <OpenDoorReport invitations={parsedData["Invitations"] || []} /> : (
+{(hasFiles || parsedData["Invitations"]?.length > 0) ? <OpenDoorReport invitations={parsedData["Invitations"] || []} /> : (
                     <div style={{ textAlign: "center", padding: "48px 32px", color: MUTED, fontSize: 14 }}>No invitations loaded yet — upload your LinkedIn data to see The Open Door.</div>
                   )}
                   {!isBeta && !creditStatus?.canRun && (
