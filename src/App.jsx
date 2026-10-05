@@ -2180,6 +2180,31 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
 
               )}
 
+              {/* ── Privacy ── */}
+              <div id="privacy" style={{ padding: "72px 0 24px" }}>
+                <div style={{ textAlign: "center", marginBottom: 44 }}>
+                  <div style={{ fontSize: 14, color: BLUE_BRIGHT, letterSpacing: "0.06em", textTransform: "uppercase", fontWeight: 700, marginBottom: 18 }}>Privacy</div>
+                  <h2 style={{ fontSize: 34, fontFamily: "Georgia, serif", fontWeight: 700, color: WHITE, marginBottom: 14, lineHeight: 1.2 }}>How we protect your privacy</h2>
+                  <p style={{ fontSize: 16, color: MUTED, maxWidth: 520, margin: "0 auto", lineHeight: 1.7 }}>Your LinkedIn data is personal, so here's exactly what happens to it.</p>
+                </div>
+                <div className="fix-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 16, maxWidth: 820, margin: "0 auto" }}>
+                  {[
+                    { title: "Your LinkedIn file stays on your device", text: "It's read in your browser. The file itself is never uploaded to our servers and never saved. Close the tab and it's gone." },
+                    { title: "What we do keep", text: "Your name and email, your answers to the setup questions, your purchases, and which reports you've run so your credits work. We never store the reports themselves." },
+                    { title: "What gets sent out", text: "A condensed summary of your data goes to Anthropic's Claude to write your reports. Anthropic doesn't use it to train its models by default. Payments go through Stripe, and we never see your card." },
+                    { title: "You're in control", text: "Your finished reports live in your own browser, and you can clear them any time. We don't sell your data. Ask us to delete your information whenever you like." },
+                  ].map((p, i) => (
+                    <div key={i} style={{ background: DARK_CARD, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${BLUE_BRIGHT}`, borderRadius: 14, padding: "26px 26px 24px" }}>
+                      <div style={{ fontSize: 17, fontWeight: 700, color: WHITE, fontFamily: "Georgia, serif", lineHeight: 1.3, marginBottom: 10 }}>{p.title}</div>
+                      <div style={{ fontSize: 14.5, color: MUTED, lineHeight: 1.7 }}>{p.text}</div>
+                    </div>
+                  ))}
+                </div>
+                <p style={{ textAlign: "center", margin: "32px 0 0", fontSize: 14 }}>
+                  <a href="/privacy.html" style={{ color: BLUE_LIGHT, fontWeight: 600, textDecoration: "none" }}>Read the full Privacy Policy →</a>
+                </p>
+              </div>
+
               {/* ── Upload Zone ── */}
              <div id="upload-zone" ref={uploadRef} style={{ background: `linear-gradient(160deg, #061022 0%, #0d2d6b 40%, #1149ac 70%, #41a1e8 100%)`, borderRadius: 24, padding: "48px 32px", marginBottom: 0, marginTop: 32 }}>
                 <div
