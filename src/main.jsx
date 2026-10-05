@@ -6,6 +6,7 @@ import ExportStep from "./onboarding/ExportStep.jsx"
 import QuestionsIntro from "./onboarding/QuestionsIntro.jsx"
 import QuestionFlow from "./onboarding/QuestionFlow.jsx"
 import ScorecardStep from "./onboarding/ScorecardStep.jsx"
+import UploadStep from "./onboarding/UploadStep.jsx"
 import { readSession } from "./onboarding/session.js"
 
 const start = new URLSearchParams(window.location.search).get("start")
@@ -16,6 +17,10 @@ if (start === "1") {
   root = <ProfileStep onDone={(result) => console.log("Profile step done:", result.name, result.isNew)} />
 } else if (start === "2" && session) {
   root = <ExportStep email={session.email} token={session.token} onDone={(choice) => console.log("Export step done:", choice)} />
+}
+
+if (start === "6") {
+  root = <UploadStep onFiles={(f) => console.log("Files read:", Object.keys(f.uploadedFiles))} onDone={() => console.log("Upload done")} />
 }
 
 if (start === "5" && session) {
