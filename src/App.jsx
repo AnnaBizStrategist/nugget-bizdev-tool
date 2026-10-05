@@ -2080,6 +2080,10 @@ header, footer, nav, .no-print, .print-hide-sidebar { display: none !important; 
                     </div>
                   ))}
                 </div>
+                <div style={{ textAlign: "center", marginTop: 36 }}>
+                  <p style={{ fontSize: 13, color: MUTED, marginBottom: 28, fontStyle: "italic" }}>Based on a real Gold Nugget report. Names and details removed.</p>
+                  <a href="/?start=flow" style={{ ...primaryBtn, display: "inline-block", textDecoration: "none", padding: "14px 36px", fontSize: 16 }}>Find My Next Client →</a>
+                </div>
               </div>
 
               <Divider />
