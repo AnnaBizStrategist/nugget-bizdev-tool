@@ -1338,7 +1338,7 @@ const reportsFromFolder = (folder) => {
 };
 
 // ── Main App ──────────────────────────────────────────────────────────────────
-export default function App() {
+export default function App({ onboarded } = {}) {
   const isBeta   = new URLSearchParams(window.location.search).get("beta") === "true";
   const isTest   = new URLSearchParams(window.location.search).get("test") === "true";
 
@@ -1642,6 +1642,29 @@ export default function App() {
     } catch (err) { setError(err.message); }
     finally { setGenerating(null); setRetryMessage(null); }
   };
+
+    // New onboarding flow hands over here: logged in, files loaded, ideal client answered.
+  const onboardedApplied = useRef(false);
+  useEffect(() => {
+    if (!onboarded || onboardedApplied.current) return;
+    onboardedApplied.current = true;
+    setEmailName((onboarded.name || "").trim());
+    setEmailAddress(onboarded.email);
+    setAccessToken(onboarded.token);
+    setEmailSubmitted(true);
+    setUploadedFiles(onboarded.uploadedFiles || {});
+    setParsedData(onboarded.parsedData || {});
+    setICPClient(onboarded.idealClient || "");
+    setICPProblem(onboarded.clientProblem || "");
+    setICPSubmitted(true);
+    loadSavedReports(onboarded.email);
+    fetch(`/api/check-credits?email=${encodeURIComponent(onboarded.email)}&token=${encodeURIComponent(onboarded.token || "")}`)
+      .then(res => res.json())
+      .then(status => setCreditStatus(status))
+      .catch(err => console.log("check-credits error:", err));
+    setActiveReport("opendoor");
+    setStep("reports");
+  }, [onboarded]);
 
   const submitEmail = async () => {
   if (!emailName.trim() || !emailAddress.trim()) return;
