@@ -8,7 +8,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import OnboardingShell, { COLORS, ui } from "./OnboardingShell.jsx"
-import { saveSession, clearSession } from "./session.js"
+import { saveSession, clearSession, readSession } from "./session.js"
 
 const EMPTY_CODE = ["", "", "", "", "", ""]
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -59,6 +59,21 @@ export default function ProfileStep({ onDone }) {
   const [notice, setNotice] = useState("")
   const [resendIn, setResendIn] = useState(0)
   const boxes = useRef([])
+
+useEffect(() => {
+  const s = readSession()
+  if (!s) return undefined
+  let cancelled = false
+  setPhase("checking")
+  ;(async () => {
+    const c = await loadCredits(s.email, s.token)
+    if (cancelled) return
+    if (!c) { clearSession(); setPhase("email"); return }
+    setEmail(s.email); setToken(s.token); setName(s.name || null); setCredits(c)
+    setPhase(s.name ? "welcome" : "name")
+  })()
+  return () => { cancelled = true }
+}, [])
 
   useEffect(() => {
     if (resendIn <= 0) return undefined
@@ -198,7 +213,15 @@ export default function ProfileStep({ onDone }) {
     </p>
   )
 
-  if (phase === "code") {
+  if (phase === "checking") {
+  return (
+    <OnboardingShell step={1}>
+      <p style={ui.lead}>One moment...</p>
+    </OnboardingShell>
+  )
+}
+
+if (phase === "code") {
     return (
       <OnboardingShell step={1} footer="Not seeing it? Check your spam or promotions folder for an email from Nugget.">
         <form
