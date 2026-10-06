@@ -221,6 +221,14 @@ useEffect(() => {
   )
 }
 
+if (phase === "checking") {
+  return (
+    <OnboardingShell step={1}>
+      <p style={ui.lead}>One moment...</p>
+    </OnboardingShell>
+  )
+}
+
 if (phase === "code") {
     return (
       <OnboardingShell step={1} footer="Not seeing it? Check your spam or promotions folder for an email from Nugget.">
